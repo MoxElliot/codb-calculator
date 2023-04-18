@@ -1,5 +1,10 @@
 import { defineStore } from 'pinia'
 
+type State = {
+    companyName: string
+    fixedCosts: FixedCosts[]
+    totalCosts: number
+}
 
 type FixedCosts = {
     name: string
@@ -7,11 +12,6 @@ type FixedCosts = {
     amount: number
 }
 
-type State = {
-    companyName: string
-    fixedCosts: FixedCosts[]
-    totalCosts: number
-}
 
 export const useReportStore = defineStore('reportStore', {
     state: (): State => ({
@@ -23,13 +23,22 @@ export const useReportStore = defineStore('reportStore', {
         totalCosts: 100
     }),
     getters: {
-        totalFixedCosts({ fixedCosts }) {
+        totalFixedCosts({ fixedCosts }): number {
 
             const sum = fixedCosts.map(item => item.amount).reduce((a,b) => {
                 return a + b
             });
             return sum
      }
+    },
+    actions: {
+        addFixedCost(fixedCost: FixedCosts) {  //fixedCost here is arbitrary but setting it to the types within FixedCosts array
+            this.fixedCosts.push(fixedCost)  //fixedCosts here refer to the state item to which I want to push fixedCost into
+        },
+        addCompanyName(companyName : string) {
+            console.log("in reportStore actions addCompanyName")
+            this.companyName = companyName
+        }
     }
 })
 
