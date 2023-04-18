@@ -10,21 +10,18 @@ export default {
         return { reportStore }
     }
 }
-//import Company from '../types/Company'
-// interface Company {
-//     // name: string
-//     required: true
-// }
-// const props = defineProps<Company>()
-//v-for="fixedCost in reportStore.fixedCosts"
-// 
 </script>
 
+
+<!-- in v-for "fixedCost in reportStore.fixedCosts" the "fixedCost" name is arbitrary but then must flow down through the subcomponent. the "reportStore" is the store name within reportStore.ts -> defineStore('reportStore', ....) "fixedCosts" in reportStore.fixedCosts must match the state name in the store-->
 <template>
     <form class="m-2 flex flex-col">
         <p class="font-bold">Fixed Cost Details</p>
-        <div v-for="fixedCost in reportStore.fixedCosts">
+        <div v-for="fixedCost in reportStore.fixedCosts"> 
             <FixedCostDetails :fixedCost="fixedCost"/>
+        </div>
+        <div>
+            <p> {{ reportStore.totalFixedCosts }} - what? </p>
         </div>
     </form>
 </template>

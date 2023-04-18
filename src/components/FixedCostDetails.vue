@@ -8,7 +8,7 @@
 
 <script lang="ts">
     export default {
-        props: ['fixedCost']
+        props: ['fixedCost']  //this prop name comes from the v-for in FixedCosts.vue, imported with v-bind (:fixedCosts="fixedCost")
     }
 </script>
 
