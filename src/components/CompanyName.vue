@@ -24,3 +24,7 @@ export default {
     </form>
 </template>
 
+<style scoped>
+
+</style>
+

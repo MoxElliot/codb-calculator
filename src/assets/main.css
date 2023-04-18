@@ -516,8 +516,8 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.m-3 {
-  margin: 0.75rem;
+.fixed {
+  position: fixed;
 }
 
 .m-2 {
@@ -528,14 +528,18 @@ video {
   display: flex;
 }
 
-.flex-row {
-  flex-direction: row;
-}
-
 .flex-col {
   flex-direction: column;
 }
 
 .border {
   border-width: 1px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-bold {
+  font-weight: 700;
 }
