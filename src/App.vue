@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { defineComponent } from 'vue';
 import CompanyName from './components/CompanyName.vue'
-
+import FixedCosts from './components/FixedCosts.vue';
 // export default defineComponent({
 //   name: 'App',
 //   components: {},
@@ -17,6 +17,9 @@ import CompanyName from './components/CompanyName.vue'
 <template>
   <div class="app">
     <CompanyName />
+  </div>
+  <div class="fixed-costs">
+    <FixedCosts />
   </div>
   <footer>
     <button class="btn btn-previous">Previous</button>
