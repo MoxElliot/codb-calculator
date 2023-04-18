@@ -23,11 +23,12 @@ export const useReportStore = defineStore('reportStore', {
         totalCosts: 100
     }),
     getters: {
-        totalFixedCosts({ fixedCosts }): number {
+        totalFixedCosts({ fixedCosts }) {
 
-            fixedCosts.reduce((a , b) => {
-                return a.amount + b.amount
-            })
+            const sum = fixedCosts.map(item => item.amount).reduce((a,b) => {
+                return a + b
+            });
+            return sum
      }
     }
 })
