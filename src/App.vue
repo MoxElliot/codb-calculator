@@ -1,18 +1,15 @@
+<script setup lang="ts">
+  import CostOfDoingBusiness from './components/views/CostOfDoingBusiness.vue';
+</script>
+
 <template>
   <div class="app">
-    This is an app.
+    <cost-of-doing-business />
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent} from 'vue';
-
-export default defineComponent({
-  name: 'App',
-  components: {}
-});
-</script>
 
 <style scoped>
 
 </style>
+
+
