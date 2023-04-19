@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import FixedCostDetails from './FixedCostDetails.vue';
+    import FixedCostDetails from './FixedCosts/FixedCostDetails.vue';
     import CodbHeader from './CodbHeader.vue';
     import CodbFooter from './CodbFooter.vue';
     import { useReportStore } from '../stores/reportStore';
@@ -7,7 +7,7 @@
     import { ref } from 'vue';
     
     const inputCompanyName = ref('');
-    const { fixedCosts, totalFixedCosts } = storeToRefs(useReportStore());
+    // const { fixedCosts, totalFixedCosts } = storeToRefs(useReportStore());
     const { addCompanyNameAction } = useReportStore();
 </script>
 
@@ -23,13 +23,16 @@
                     @click="addCompanyNameAction(inputCompanyName)"
                 >Add</button>
             </div>
-            <p class="font-bold">Fixed Cost Details</p>
+            <div>
+                <fixed-cost-details />
+            </div>
+            <!-- <p class="font-bold">Fixed Cost Details</p>
             <div v-for="fixedCost in fixedCosts" :key="fixedCost.id"> 
                 <fixed-cost-details :fixedCost="fixedCost"/>
-            </div>
-            <div>
+            </div> -->
+            <!-- <div>
                 <p> Total: {{ totalFixedCosts }} </p>
-            </div>
+            </div> -->
         </div>
         <codb-footer />
     </div>

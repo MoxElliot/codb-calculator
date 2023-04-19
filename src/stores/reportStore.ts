@@ -7,10 +7,11 @@ type State = {
 }
 
 type FixedCosts = {
-    id: number,
+    id: number
     name: string
     category: string
     amount: number
+    payPeriod: string
 }
 
 
@@ -18,8 +19,8 @@ export const useReportStore = defineStore('reportStore', {
     state: (): State => ({
         companyName: 'PhotoBomb',
         fixedCosts: [
-            {id: 1, name: 'Rent', category: 'Overhead', amount: 1000},
-            {id: 2, name: 'Bills', category: 'Overhead', amount: 800},
+            {id: 1, name: 'Rent', category: 'Overhead', amount: 1000, payPeriod: 'monthly'},
+            {id: 2, name: 'Parking', category: 'Overhead', amount: 80, payPeriod: 'weekly'},
         ],
         totalCosts: 100
     }),
@@ -34,7 +35,10 @@ export const useReportStore = defineStore('reportStore', {
     },
     actions: {
         addFixedCostAction(fixedCost: FixedCosts) {  //fixedCost here is arbitrary but setting it to the types within FixedCosts array
-            this.fixedCosts.push(fixedCost)  //fixedCosts here refer to the state item to which I want to push fixedCost into
+            console.log(this.fixedCosts)
+            console.log("in reportStore actions addFixedExpense")
+            this.fixedCosts.push(fixedCost)  //fixedCosts here refer to the state item to which I want to push fixedCost into4
+            console.log(this.fixedCosts)
         },
         addCompanyNameAction(companyName : string) {
             console.log(this.companyName)
