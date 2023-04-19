@@ -7,6 +7,7 @@ type State = {
 }
 
 type FixedCosts = {
+    id: number,
     name: string
     category: string
     amount: number
@@ -17,8 +18,8 @@ export const useReportStore = defineStore('reportStore', {
     state: (): State => ({
         companyName: 'PhotoBomb',
         fixedCosts: [
-            {name: 'Rent', category: 'Overhead', amount: 1000},
-            {name: 'Bills', category: 'Overhead', amount: 800},
+            {id: 1, name: 'Rent', category: 'Overhead', amount: 1000},
+            {id: 2, name: 'Bills', category: 'Overhead', amount: 800},
         ],
         totalCosts: 100
     }),

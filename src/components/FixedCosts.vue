@@ -17,7 +17,7 @@ export default {
 <template>
     <form class="m-2 flex flex-col">
         <p class="font-bold">Fixed Cost Details</p>
-        <div v-for="fixedCost in reportStore.fixedCosts" > 
+        <div v-for="fixedCost in reportStore.fixedCosts" :key="fixedCost.id"> 
             <FixedCostDetails :fixedCost="fixedCost"/>
         </div>
         <div>
