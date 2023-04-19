@@ -24,11 +24,11 @@ export default {
 </script>
 
 <template>
-    <form class="m-2 flex flex-col" @submit.prevent="handleSubmit()">
-    <label for="company-name">Company Name:</label>
-    <input class="border" id="company-name" name="company-name" type="text" placeholder= "Enter Company Name" v-model="companyName"/>
-    <p>{{ reportStore.companyName }}</p>
-    <button>Add</button>
+    <form class="m-2 flex flex-col m-3" @submit.prevent="handleSubmit()">
+    <label for="company-name m-1">Company Name:</label>
+    <input class="border border-black p-1 m-1 w-64" id="company-name" name="company-name" type="text" placeholder= "Enter Company Name" v-model="companyName"/>
+    
+    <button class="border border-black w-32 rounded-full m-1 bg-cyan-500">Add</button>
     </form>
 </template>
 
