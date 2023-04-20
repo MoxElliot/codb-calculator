@@ -1,21 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import steps from '../assets/stepsArray'
 
 // What each map item looks like
+//  {
 //     path: '/company-name-step',
 //     name: 'Company Name Step',
 //     component: () =>
-//       import(/* webpackChunkName: "about" */ '../components/views/CompanyNameStep.vue')
+//       import('../components/views/CompanyNameStep.vue')
 //   },
-
-const steps = [
-  { path: '/', name: 'Home' },
-  { path: '/company-name-step', name: 'Company Name Step' },
-  { path: '/fixed-cost-step', name: 'Fixed Cost Step' },
-  { path: '/variable-cost-step', name: 'Variable Cost Step' },
-  { path: '/booking-income-step', name: 'Booking Income Step' },
-  { path: '/owner-draw-step', name: 'Owner Draw Step' },
-  { path: '/final-report-step', name: 'Final Report Step' }
-]
 
 const routes = steps.map((step) =>
   step.path === '/'

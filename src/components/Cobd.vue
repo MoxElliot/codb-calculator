@@ -5,7 +5,6 @@ import CodbFooter from './CoBDComponents/CodbFooter.vue'
 </script>
 
 <template>
-  
   <codb-header />
   <div class="codb-form">
     <codb-form />
