@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import FixedCostDetails from './FixedCosts/FixedCostDetails.vue'
+import FixedCostDetails from './views/FixedCostStep.vue'
 import CompanyNameStep from './views/CompanyNameStep.vue'
-import CodbHeader from './CodbHeader.vue'
-import CodbFooter from './CodbFooter.vue'
-
-
-
+import CodbHeader from './CoBDComponents/CodbHeader.vue'
+import CodbFooter from './CoBDComponents/CodbFooter.vue'
 </script>
 
 <template>

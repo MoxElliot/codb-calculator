@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CostOfDoingBusiness from './components/views/CostOfDoingBusiness.vue';
+import CostOfDoingBusiness from './components/Cobd.vue'
 </script>
 
 <template>
@@ -8,8 +8,4 @@
   </div>
 </template>
 
-<style scoped>
-
-</style>
-
-
+<style scoped></style>

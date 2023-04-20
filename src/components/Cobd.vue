@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CodbForm from '../CodbForm.vue';
+import CodbForm from './CodbForm.vue'
 </script>
 
 <template>
@@ -8,6 +8,4 @@ import CodbForm from '../CodbForm.vue';
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

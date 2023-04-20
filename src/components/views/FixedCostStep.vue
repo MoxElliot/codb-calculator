@@ -13,9 +13,9 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
-import FixedCostDataInput from './FixedCostDataInput.vue'
-import FixedCostTable from './FixedCostTable.vue'
-import { ref } from 'vue'
+import FixedCostDataInput from '../FixedCostsComponents/FixedCostDataInput.vue'
+import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
+
 defineProps(['fixedCost']) //this prop name comes from the v-for in FixedCosts.vue, imported with v-bind (:fixedCosts="fixedCost")
 
 const { fixedCosts, totalFixedCosts } = storeToRefs(useReportStore())
