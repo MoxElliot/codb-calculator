@@ -3,8 +3,9 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 
 import './assets/main.css'
+import router from './router'
 
-const app = createApp(App)
+const app = createApp(App).use(router)
 
 app.use(createPinia())
 
