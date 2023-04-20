@@ -7,6 +7,14 @@ import CodbFooter from './CoBDComponents/CodbFooter.vue'
 
 <template>
   <div>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/company-name-step">Company Name Step</router-link>
+      <router-link to='/fixed-cost-step'>Fixed Cost Step</router-link>
+    </div>
+    <router-view />
+  </div>
+  <div>
     <codb-header />
     <div class="m-2 flex flex-col">
       <div>
