@@ -1,4 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+const stepsArr:string[] = ["company-name-step", "fixed-cost-step"]
+
+const step:number = 1
+const stepCount:number = 1
+
+const onClick  = ():string => {
+  let stepLink: string = '' 
+  step === 1 ? stepLink = stepsArr[0] : stepsArr[1]
+
+  return stepLink
+}
+
+</script>
+
 
 <template>
   <div>
