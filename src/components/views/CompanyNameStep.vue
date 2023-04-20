@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore';
-import { ref } from 'vue';  //ref here becomes state properties
+import { ref } from 'vue';
 
 
-const inputCompanyName = ref('');
-const { addCompanyNameAction } = useReportStore();
+const inputCompanyName = ref('')
+// const { fixedCosts, totalFixedCosts } = storeToRefs(useReportStore());
+const { addCompanyNameAction } = useReportStore()
+
 </script>
 
 <template>
