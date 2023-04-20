@@ -18,13 +18,6 @@ import CodbFooter from './CodbFooter.vue'
       <div>
         <fixed-cost-details />
       </div>
-      <!-- <p class="font-bold">Fixed Cost Details</p>
-            <div v-for="fixedCost in fixedCosts" :key="fixedCost.id"> 
-                <fixed-cost-details :fixedCost="fixedCost"/>
-            </div> -->
-      <!-- <div>
-                <p> Total: {{ totalFixedCosts }} </p>
-            </div> -->
     </div>
     <codb-footer />
   </div>
