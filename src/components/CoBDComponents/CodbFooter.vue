@@ -8,7 +8,6 @@ const stepCount:number = 1
 const onClick  = ():string => {
   let stepLink: string = '' 
   step === 1 ? stepLink = stepsArr[0] : stepsArr[1]
-
   return stepLink
 }
 
