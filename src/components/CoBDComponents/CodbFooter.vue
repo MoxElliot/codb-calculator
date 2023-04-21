@@ -3,6 +3,8 @@ import { ref } from 'vue';
 import { useStepStore } from '../../stores/stepStore'
 
 const stepStore = useStepStore()
+const step = ref<number>(0)
+
 
 </script>
 
@@ -12,9 +14,7 @@ const stepStore = useStepStore()
       Company Name Step
       <button 
         class="border border-black w-32 rounded-full m-1 bg-cyan-500"
-        @click="stepStore.backStepAction({
-          step: step.stepStore
-        })"
+        @click="stepStore.backStepAction(step)"
       >
           Previous
       </button>
@@ -23,9 +23,7 @@ const stepStore = useStepStore()
       Fixed Cost Step
       <button 
         class="border border-black w-32 rounded-full m-1 bg-cyan-500"
-        @click="stepStore.forwardStepAction({
-          step: step.stepStore
-        })"
+        @click="stepStore.forwardStepAction(step)"
       >
           Next
       </button>

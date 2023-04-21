@@ -3,17 +3,19 @@ import type StepStoreState from '../types/StepStoreState'
 
 export const useStepStore = defineStore('stepStore', {
   state: (): StepStoreState => ({
-    step: 0,
+    step: 0
   }),
-  getters: {
-   
-  },
+  getters: {},
   actions: {
-    forwardStepAction(step: StepStoreState) {
-
+    forwardStepAction(step: number) {
+      console.log('in StepStoreActions forward', this.step)
+      step === this.step++
+      console.log('in StepStoreActions forward', this.step)
     },
-    backStepAction(step: StepStoreState) {
-
-    },
+    backStepAction(step: number) {
+      console.log('in StepStoreActions back', this.step)
+      step === this.step--
+      console.log('in StepStoreActions back', this.step)
+    }
   }
 })
