@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "vite",
     "build": "run-p type-check build-only",
-    "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "build-only": "vite build",
+    "dev": "vite",
+    "format": "prettier --write src/",
+    "preview": "vite preview",
+    "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
     "pinia": "^2.0.32",
@@ -19,8 +19,10 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
-    "@types/node": "^18.14.2",
+    "@types/node": "^18.15.12",
     "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-service": "^5.0.8",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.2",
     "@vue/tsconfig": "^0.1.3",
