@@ -5,12 +5,13 @@ import fixedCostCategoryOptions from '../../assets/fixedCostCategoryOptions'
 import fixedCostPeriodOptions from '../../assets/fixedCostPeriodOptions'
 import firstLetterUpperCase from '../../assets/utility_functions/firstLetterUpperCase'
 
+const reportStore = useReportStore()
+
 const fixedCostName = ref<string>('')
 const fixedCostCategory = ref<string>('')
 const fixedCostAmount = ref<number>(0)
 const fixedCostPeriod = ref<string>('')
 
-const reportStore = useReportStore()
 </script>
 
 <template>
