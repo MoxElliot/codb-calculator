@@ -23,15 +23,10 @@ export const useReportStore = defineStore('reportStore', {
   },
   actions: {
     addFixedCostAction(fixedCost: FixedCosts) {
-      //fixedCost here is arbitrary but setting it to the types within FixedCosts array
-      this.fixedCosts.push(fixedCost) //fixedCosts here refer to the state item to which I want to push fixedCost into
+      this.fixedCosts.push(fixedCost) 
     },
     addCompanyNameAction(companyName: string) {
-      this.companyName = companyName // sets the states 'this.copanyName' with the companyName pulled in by the action
+      this.companyName = companyName 
     }
   }
 })
-
-//to generate report once report array is built
-// <div v-for="report in reportStore.reportArray">
-// <p>{{ report.companyName }} </p>

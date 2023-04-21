@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useReportStore } from '../../stores/reportStore'
-import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
-
-// const addFixedCostAction = useReportStore();
+import fixedCostCategoryOptions from '../../assets/fixedCostCategoryOptions'
+import fixedCostPeriodOptions from '../../assets/fixedCostPeriodOptions'
+import firstLetterUpperCase from '../../assets/utility_functions/firstLetterUpperCase'
 
 const fixedCostName = ref<string>('')
 const fixedCostCategory = ref<string>('')
@@ -14,30 +14,29 @@ const reportStore = useReportStore()
 </script>
 
 <template>
-  <form class="fixed-cost-input" @submit.prevent>
-    <fieldset name="fixed-cost-fieldset">
+  <form class="fixed-cost-input border border-black" @submit.prevent>
+    <fieldset class="fixed-cost-fieldset">
       <div class="fixed-cost-dataset">
-        <label class="label expense-name-label" for="expense-name">Expense Name</label>
+        <label class="label expense-name-label m-1" for="expense-name">Expense Name</label>
         <input
-          class="input expense-name-input"
+          class="input expense-name-input border border-black m-1"
           type="input"
           id="expense-name"
           v-model="fixedCostName"
         />
       </div>
       <div class="fixed-cost-dataset">
-        <label class="label category-label" for="category">Category</label>
-        <select class="input category-select" id="category" v-model="fixedCostCategory">
-          <option value="marketing">Marketing</option>
-          <option value="operations">Operations</option>
-          <option value="incidental">Incidental</option>
-          <option value="overhead">Overhead</option>
+        <label class="label category-label m-1" for="category">Category</label>
+        <select class="input category-select m-1" id="category" v-model="fixedCostCategory">
+          <option value="option" v-for="option in fixedCostCategoryOptions">
+            {{ firstLetterUpperCase(option) }}
+          </option>
         </select>
       </div>
       <div class="fixed-cost-dataset">
-        <label class="label expense-amount-label" for="expense-amount">Expense Amount</label>
+        <label class="label expense-amount-label m-1" for="expense-amount">Expense Amount</label>
         <input
-          class="input expense-amount-input"
+          class="input expense-amount-input border border-black m-1"
           id="expense-amount"
           type="number"
           min="0"
@@ -46,26 +45,22 @@ const reportStore = useReportStore()
         />
       </div>
       <div class="fixed-cost-period">
-        <label class="label period-label" for="period">Pay Period</label>
-        <select class="input period-select" id="period" v-model="fixedCostPeriod">
-          <option value="advertising">Weekly</option>
-          <option value="bi-monthly">Bi-Monthly</option>
-          <option value="monthly">monthly</option>
-          <option value="yearly">Yearly</option>
+        <label class="label period-label m-1" for="period">Pay Period</label>
+        <select class="input period-select m-1" id="period" v-model="fixedCostPeriod">
+          <option value="option" v-for="option in fixedCostPeriodOptions">
+            {{ firstLetterUpperCase(option) }}
+          </option>
         </select>
       </div>
     </fieldset>
     <button
       class="border border-black w-32 rounded-full m-1 bg-cyan-500"
-      @click="
-        reportStore.addFixedCostAction({
+      @click="reportStore.addFixedCostAction({
           id: reportStore.fixedCosts.length + 1,
           name: fixedCostName,
           category: fixedCostCategory,
           amount: fixedCostAmount,
-          payPeriod: fixedCostPeriod
-        })
-      "
+          payPeriod: fixedCostPeriod})"
     >
       Add
     </button>
@@ -73,19 +68,6 @@ const reportStore = useReportStore()
 </template>
 
 <style scoped>
-.expense-name-input,
-.expense-amount-input {
-  border: 1px solid black;
-}
-.input,
-.label {
-  margin-right: 0.5rem;
-}
-.fixed-cost-input {
-  border: 1px solid black;
-}
-.fixed-cost-fieldset {
-  display: flex;
-  flex-direction: column;
-}
+
+
 </style>

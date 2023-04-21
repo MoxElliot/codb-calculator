@@ -12,6 +12,7 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "lodash.uniqueid": "^4.0.1",
     "pinia": "^2.0.32",
     "vee-validate": "^4.8.6",
     "vue": "^3.2.47",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
+    "@types/lodash.uniqueid": "^4.0.7",
     "@types/node": "^18.15.12",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/cli-plugin-router": "~5.0.0",

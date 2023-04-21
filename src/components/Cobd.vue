@@ -11,5 +11,3 @@ import CodbFooter from './CoBDComponents/CodbFooter.vue'
   </div>
   <codb-footer />
 </template>
-
-<style scoped></style>

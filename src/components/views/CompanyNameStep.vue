@@ -3,7 +3,6 @@ import { useReportStore } from '@/stores/reportStore'
 import { ref } from 'vue'
 
 const inputCompanyName = ref('')
-// const { fixedCosts, totalFixedCosts } = storeToRefs(useReportStore());
 const { addCompanyNameAction } = useReportStore()
 </script>
 
@@ -26,5 +25,3 @@ const { addCompanyNameAction } = useReportStore()
     </button>
   </div>
 </template>
-
-<style scoped></style>

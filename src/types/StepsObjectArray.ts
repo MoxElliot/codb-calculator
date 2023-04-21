@@ -1,7 +1,7 @@
 type StepsObjectArray = {
+    id: any
     path: string
     name: string
-    component: any
   }
   
   export default StepsObjectArray
