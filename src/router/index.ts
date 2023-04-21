@@ -1,14 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import steps from '../assets/stepsArray'
 
-// What each map item looks like
-//  {
-//     path: '/company-name-step',
-//     name: 'Company Name Step',
-//     component: () =>
-//       import('../components/views/CompanyNameStep.vue')
-//   },
-
 const routes = steps.map((step) =>
   step.path === '/'
     ? {
@@ -19,7 +11,7 @@ const routes = steps.map((step) =>
     : {
         path: <string>`${step.path}`,
         name: <string>`${step.name}`,
-        component: () => import(`../components/views/${step.name.replace(/\s/g, '')}.vue`)
+        component: () => import(`../components/views/${step.name.replace(/\s/g, '')}.vue`) //Regex to remove all whitespace
       }
 )
 
