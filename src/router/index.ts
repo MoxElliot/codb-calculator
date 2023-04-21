@@ -14,7 +14,7 @@ const routes = steps.map((step) =>
     ? {
         path: <string>`${step.path}`,
         name: <string>`${step.name}`,
-        component: <any>`${step.name.replace(/\s/g, '')}`
+        component: <any>`${step.name}`
       }
     : {
         path: <string>`${step.path}`,

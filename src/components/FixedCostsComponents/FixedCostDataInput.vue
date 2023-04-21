@@ -2,7 +2,7 @@
 import { useReportStore } from '../../stores/reportStore'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
-
+import fixedCostCategoryOptions from '../../assets/fixedCostCategoryOptions'
 // const addFixedCostAction = useReportStore();
 
 const fixedCostName = ref<string>('')
@@ -27,11 +27,8 @@ const reportStore = useReportStore()
       </div>
       <div class="fixed-cost-dataset">
         <label class="label category-label" for="category">Category</label>
-        <select class="input category-select" id="category" v-model="fixedCostCategory">
-          <option value="marketing">Marketing</option>
-          <option value="operations">Operations</option>
-          <option value="incidental">Incidental</option>
-          <option value="overhead">Overhead</option>
+        <select class="input category-select" id="category" v-model="fixedCostCategory" >
+          <option value="option" v-for="option in fixedCostCategoryOptions">{{option}}</option>
         </select>
       </div>
       <div class="fixed-cost-dataset">
