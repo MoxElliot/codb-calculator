@@ -15,24 +15,13 @@ export const useStepStore = defineStore('stepStore', {
   //   }
   // },
   actions: {
-    forwardStepAction(stepNum: number) {
-      // let stepChange = this.stepNum
-      console.log('in StepStoreActions forward stepNum', this.stepNum)
-      console.log('in StepStoreActions forward stepName', this.stepName)
-      stepNum === this.stepNum++
+    forwardStepAction() {
+      this.stepNum >= stepsArray.length-1 ? this.stepNum : this.stepNum++ 
       this.stepName = stepsArray[this.stepNum].path
-      // stepChange = this.stepNum
-      console.log('in StepStoreActions forward', this.stepNum)
-      // this.stepName === stepsArray[stepChange].path
-      console.log('in StepStoreActions forward stepName', this.stepName)
     },
-    backStepAction(stepNum: number) {
-      console.log('in StepStoreActions back', this.stepNum)
-      console.log('in StepStoreActions forward stepName', this.stepName)
-      stepNum === this.stepNum--
+    backStepAction() {
+      this.stepNum <= 0 ? this.stepNum : this.stepNum-- 
       this.stepName = stepsArray[this.stepNum].path
-      // this.stepName === stepsArray[this.stepNum].path
-      console.log('in StepStoreActions back', this.stepNum)
     }
   }
 })
