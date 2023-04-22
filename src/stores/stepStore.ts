@@ -7,19 +7,20 @@ export const useStepStore = defineStore('stepStore', {
     stepNum: 0,
     stepName: ''
   }),
-  getters: {
-    updateStep(state): any {
-      console.log("in getter updateState, stepNum, stepName", state.stepNum, state.stepName)
-      return state.stepName = stepsArray[state.stepNum].path
-    }
-  },
+  // getters: {
+  //   updateStep(state):any{
+  //     state.stepName = stepsArray[state.stepNum].path
+  //     console.log("in getter updateState, stepNum, stepName", state.stepNum, state.stepName)
+  //     return  state.stepName
+  //   }
+  // },
   actions: {
     forwardStepAction(stepNum: number) {
       // let stepChange = this.stepNum
       console.log('in StepStoreActions forward stepNum', this.stepNum)
       console.log('in StepStoreActions forward stepName', this.stepName)
       stepNum === this.stepNum++
-      this.updateStep(this.stepNum)
+      this.stepName = stepsArray[this.stepNum].path
       // stepChange = this.stepNum
       console.log('in StepStoreActions forward', this.stepNum)
       // this.stepName === stepsArray[stepChange].path
@@ -29,7 +30,7 @@ export const useStepStore = defineStore('stepStore', {
       console.log('in StepStoreActions back', this.stepNum)
       console.log('in StepStoreActions forward stepName', this.stepName)
       stepNum === this.stepNum--
-      this.updateStep(this.stepNum)
+      this.stepName = stepsArray[this.stepNum].path
       // this.stepName === stepsArray[this.stepNum].path
       console.log('in StepStoreActions back', this.stepNum)
     }
