@@ -3,14 +3,15 @@ import { ref } from 'vue';
 import { useStepStore } from '../../stores/stepStore'
 
 const stepStore = useStepStore()
-const step = ref<number>(0)
+const step = ref<number>(stepStore.stepNum)
+
 
 //Next make a state to hold an array of pathnames for each step. that will be what the router-link to=" " is responding too.
 </script>
 
 <template>
   <div>
-    <router-link to="/company-name-step">
+    <router-link :to='stepStore.stepName'>
       Footer
      <p>
        {{ stepStore.stepName }}
@@ -22,8 +23,8 @@ const step = ref<number>(0)
           Previous
       </button>
     </router-link>
-    <router-link to="/fixed-cost-step">
-      Fixed Cost Step
+    <router-link :to='stepStore.stepName'>
+      
       <button 
         class="border border-black w-32 rounded-full m-1 bg-cyan-500"
         @click="stepStore.forwardStepAction(step)"
