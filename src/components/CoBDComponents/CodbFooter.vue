@@ -12,6 +12,9 @@ const step = ref<number>(0)
   <div>
     <router-link to="/company-name-step">
       Company Name Step
+     <p>
+       {{ stepStore.stepName }}
+     </p> 
       <button 
         class="border border-black w-32 rounded-full m-1 bg-cyan-500"
         @click="stepStore.backStepAction(step)"
