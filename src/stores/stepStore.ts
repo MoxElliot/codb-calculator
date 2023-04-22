@@ -1,21 +1,25 @@
 import { defineStore } from 'pinia'
 import type StepStoreState from '../types/StepStoreState'
+import stepsArray from '@/assets/stepsArray'
 
 export const useStepStore = defineStore('stepStore', {
   state: (): StepStoreState => ({
-    step: 0
+    stepNum: 0
   }),
   getters: {},
   actions: {
-    forwardStepAction(step: number) {
-      console.log('in StepStoreActions forward', this.step)
-      step === this.step++
-      console.log('in StepStoreActions forward', this.step)
+    forwardStepAction(stepNum: number) {
+      console.log('in StepStoreActions forward', this.stepNum)
+      stepNum === this.stepNum++
+      console.log('in StepStoreActions forward', this.stepNum)
     },
-    backStepAction(step: number) {
-      console.log('in StepStoreActions back', this.step)
-      step === this.step--
-      console.log('in StepStoreActions back', this.step)
+    backStepAction(stepNum: number) {
+      console.log('in StepStoreActions back', this.stepNum)
+      stepNum === this.stepNum--
+      console.log('in StepStoreActions back', this.stepNum)
     }
   }
 })
+
+
+//when button is pushed, check what step we are on, pass what step to the store and either increment or decrement step

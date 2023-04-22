@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import steps from '../assets/stepsArray'
+import stepsArray from '../assets/stepsArray'
 
-const routes = steps.map((step) =>
+const routes = stepsArray.map((step) =>
   step.path === '/'
     ? {
         path: <string>`${step.path}`,

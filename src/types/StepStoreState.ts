@@ -1,5 +1,5 @@
 type StepStoreState = {
-    step: number
+    stepNum: number
 }
 
 export default StepStoreState

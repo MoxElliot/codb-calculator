@@ -5,7 +5,7 @@ import { useStepStore } from '../../stores/stepStore'
 const stepStore = useStepStore()
 const step = ref<number>(0)
 
-
+//Next make a state to hold an array of pathnames for each step. that will be what the router-link to=" " is responding too.
 </script>
 
 <template>
