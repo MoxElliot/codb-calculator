@@ -1,7 +1,7 @@
 import uniqueId from 'lodash.uniqueid'
 
 const stepsArray: {id: string, path: string, name: string }[] = [
-    {id:uniqueId("steps-"), path: '/', name: 'Home' },
+    {id:uniqueId("steps-"), path: '', name: 'Home' },
     {id:uniqueId("steps-"), path: '/company-name-step', name: 'Company Name Step' },
     {id:uniqueId("steps-"), path: '/fixed-cost-step', name: 'Fixed Cost Step' },
     {id:uniqueId("steps-"), path: '/variable-cost-step', name: 'Variable Cost Step' },

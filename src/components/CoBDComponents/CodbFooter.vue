@@ -11,7 +11,7 @@ const step = ref<number>(0)
 <template>
   <div>
     <router-link to="/company-name-step">
-      Company Name Step
+      Footer
      <p>
        {{ stepStore.stepName }}
      </p> 
