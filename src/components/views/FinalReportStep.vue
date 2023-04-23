@@ -1,5 +1,18 @@
-s<template>
-    <div>
-        <h4>Final Report Step</h4>
-    </div>
+<script setup lang="ts">
+import { useReportStore } from '@/stores/reportStore'
+import { storeToRefs } from 'pinia'
+import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue';
+
+const { companyName } = storeToRefs(useReportStore())
+</script>
+<template>
+  <div>
+    <h4>Final Report Step</h4>
+  </div>
+  <div class="companyName">
+    <p>Company Name: {{ companyName }}</p>
+  </div>
+  <div class="fixedCostsTable">
+    <fixed-cost-table />
+  </div>
 </template>
