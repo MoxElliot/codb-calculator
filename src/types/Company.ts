@@ -1,5 +1,5 @@
 interface Company {
-    name: string
+    companyName: string
 }
 
 export default Company
