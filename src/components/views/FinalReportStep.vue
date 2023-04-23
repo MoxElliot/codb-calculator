@@ -12,7 +12,5 @@ const { companyName } = storeToRefs(useReportStore())
   <div class="companyName">
     <p>Company Name: {{ companyName }}</p>
   </div>
-  <div class="fixedCostsTable">
-    <!-- <fixed-cost-table /> -->
-  </div>
+  <fixed-cost-table />
 </template>
