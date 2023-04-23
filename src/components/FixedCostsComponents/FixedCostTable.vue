@@ -1,13 +1,20 @@
 <script setup lang="ts">
+import { useReportStore } from '@/stores/reportStore'
+import { storeToRefs } from 'pinia'
+
 defineProps(['fixedCost'])
+
+const { fixedCosts } = storeToRefs(useReportStore())
 </script>
 
 <template>
-  <div class="fixed-cost-table">
-    <p>Expense Name: {{ fixedCost.name }}</p>
-    <p>Category: {{ fixedCost.category }}</p>
-    <p>Amount: {{ fixedCost.amount }}</p>
-    <p>Pay Period: {{ fixedCost.payPeriod }}</p>
+  <div class="fixed-cost-table" v-for="fixedCost in fixedCosts" :key="fixedCost.id">
+    <div class="fixed-cost-row">
+      <p>Expense Name: {{ fixedCost.name }}</p>
+      <p>Category: {{ fixedCost.category }}</p>
+      <p>Amount: {{ fixedCost.amount }}</p>
+      <p>Pay Period: {{ fixedCost.payPeriod }}</p>
+    </div>
   </div>
 </template>
 
