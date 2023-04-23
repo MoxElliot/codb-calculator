@@ -1,20 +1,38 @@
-<script setup lang='ts'>
-    const props = defineProps({
-        label: {
-            type: String,
-            default: '',
-        },
-    })
+<script setup lang="ts">
+defineProps({
+  label: {
+    type: String,
+    default: ''
+  },
+  id: {
+    type: String,
+    default: ''
+  },
+  modelValue: {
+    type: [String, Number],
+    default: ''
+  }
+})
+
+defineEmits(['update:modelValue'])
+
+const handleInputChange = (event: Event) => {
+  (event.target as HTMLInputElement).value
+
+  return handleInputChange
+}
+
 </script>
 
-
 <template>
-    <label class="label expense-name-label m-1" for="expense-name">{{ label }}</label>
-        <input
-          :placeholder="label"
-          class="input expense-name-input border border-black m-1"
-          id="expense-name"
-        />
+  <label :for="label" class="label expense-name-label m-1" >
+    {{ label }}
+  </label>
+  <input
+    class="input expense-name-input border border-black m-1"
+    v-bind="$attrs"
+    :placeholder="label"
+    :value="modelValue"
+    @input="$emit('update:modalValue', handleInputChange($event))"
+  />
 </template>
-
-

@@ -23,6 +23,7 @@ export const useReportStore = defineStore('reportStore', {
   },
   actions: {
     addFixedCostAction(fixedCost: FixedCosts) {
+      console.log("inside Store, fixedCostName, fixedCostAmount", fixedCost.name, fixedCost.amount)
       this.fixedCosts.push(fixedCost) 
     },
     addCompanyNameAction(companyName: string) {
