@@ -12,35 +12,18 @@ const fixedCostName = ref<string>('')
 const fixedCostCategory = ref<string>('')
 const fixedCostAmount = ref<number>(0)
 const fixedCostPeriod = ref<string>('')
-
 </script>
 
 <template>
   <form class="fixed-cost-input border border-black" @submit.prevent>
     <fieldset class="fixed-cost-fieldset">
       <div class="fixed-cost-dataset">
-        <data-input 
-          v-model="fixedCostName"
-          label="Expense Name"
-          type="input"
-          id="expense-name"
-        />
-        <p>
-          Hello! 
-          {{ fixedCostName }}
-        </p>
-        <!-- <label class="label expense-name-label m-1" for="expense-name">Expense Name</label>
-        <input
-          class="input expense-name-input border border-black m-1"
-          type="input"
-          id="expense-name"
-          v-model="fixedCostName"
-        /> -->
+        <data-input v-model="fixedCostName" label="Expense Name" type="input" id="expense-name" />
       </div>
       <div class="fixed-cost-dataset">
         <label class="label category-label m-1" for="category">Category</label>
         <select class="input category-select m-1" id="category" v-model="fixedCostCategory">
-          <option value="option" v-for="option in fixedCostCategoryOptions">
+          <option v-for="option in fixedCostCategoryOptions" :value="option" >
             {{ firstLetterUpperCase(option) }}
           </option>
         </select>
@@ -59,7 +42,7 @@ const fixedCostPeriod = ref<string>('')
       <div class="fixed-cost-period">
         <label class="label period-label m-1" for="period">Pay Period</label>
         <select class="input period-select m-1" id="period" v-model="fixedCostPeriod">
-          <option value="option" v-for="option in fixedCostPeriodOptions">
+          <option v-for="option in fixedCostPeriodOptions" :value="option">
             {{ firstLetterUpperCase(option) }}
           </option>
         </select>
@@ -67,19 +50,19 @@ const fixedCostPeriod = ref<string>('')
     </fieldset>
     <button
       class="border border-black w-32 rounded-full m-1 bg-cyan-500"
-      @click="reportStore.addFixedCostAction({
+      @click="
+        reportStore.addFixedCostAction({
           id: reportStore.fixedCosts.length + 1,
           name: fixedCostName,
           category: fixedCostCategory,
           amount: fixedCostAmount,
-          payPeriod: fixedCostPeriod})"
+          payPeriod: fixedCostPeriod
+        })
+      "
     >
       Add
     </button>
   </form>
 </template>
 
-<style scoped>
-
-
-</style>
+<style scoped></style>
