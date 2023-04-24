@@ -11,7 +11,7 @@ const props = defineProps({
   modelValue: {
     type: [String, Number],
     default: ''
-  }
+  },
 })
 
 // const emit = defineEmits(['update:modelValue'])
@@ -21,10 +21,10 @@ const emit = defineEmits<{
   (event: 'update', value: string): void
 }>()
 
-const handleInputChange = (event: Event) => {
+const handleInputChange = (event: any) => {
   (event.target as HTMLInputElement).value
   console.log('in DataInput modelValue',  (event.target as HTMLInputElement).value)
-  return handleInputChange
+  return event.target.value
 }
 </script>
 
@@ -37,6 +37,6 @@ const handleInputChange = (event: Event) => {
     v-bind="$attrs"
     :placeholder="label"
     :value="modelValue"
-    @input="$emit('update:modalValue')"
+    @input="$emit('update:modelValue', handleInputChange($event))"
   />
 </template>
