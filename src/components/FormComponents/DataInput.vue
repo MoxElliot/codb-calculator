@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
   label: {
     type: String,
     default: ''
@@ -14,18 +14,22 @@ defineProps({
   }
 })
 
-defineEmits(['update:modelValue'])
+// const emit = defineEmits(['update:modelValue'])
+
+const emit = defineEmits<{
+  (event: 'change', id: number): void
+  (event: 'update', value: string): void
+}>()
 
 const handleInputChange = (event: Event) => {
   (event.target as HTMLInputElement).value
-
+  console.log('in DataInput modelValue',  (event.target as HTMLInputElement).value)
   return handleInputChange
 }
-
 </script>
 
 <template>
-  <label :for="label" class="label expense-name-label m-1" >
+  <label :for="label" class="label expense-name-label m-1">
     {{ label }}
   </label>
   <input
@@ -33,6 +37,6 @@ const handleInputChange = (event: Event) => {
     v-bind="$attrs"
     :placeholder="label"
     :value="modelValue"
-    @input="$emit('update:modalValue', handleInputChange($event))"
+    @input="$emit('update:modalValue')"
   />
 </template>

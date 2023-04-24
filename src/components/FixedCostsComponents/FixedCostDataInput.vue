@@ -25,6 +25,10 @@ const fixedCostPeriod = ref<string>('')
           type="input"
           id="expense-name"
         />
+        <p>
+          Hello! 
+          {{ fixedCostName }}
+        </p>
         <!-- <label class="label expense-name-label m-1" for="expense-name">Expense Name</label>
         <input
           class="input expense-name-input border border-black m-1"
