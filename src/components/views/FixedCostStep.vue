@@ -6,7 +6,7 @@ import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
 
 defineProps(['fixedCost'])
 
-const { totalFixedCosts } = storeToRefs(useReportStore())
+// const { totalFixedCosts } = storeToRefs(useReportStore())
 </script>
 
 <template>
@@ -14,7 +14,7 @@ const { totalFixedCosts } = storeToRefs(useReportStore())
     <fixed-cost-data-input />
   </div>
   <fixed-cost-table />
-  <div>
+  <!-- <div>
     <p>Total: {{ totalFixedCosts }}</p>
-  </div>
+  </div> -->
 </template>
