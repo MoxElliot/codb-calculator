@@ -11,17 +11,15 @@ defineProps({
   modelValue: {
     type: [String, Number],
     default: ''
-  },
+  }
 })
 
 defineEmits<{
-  // (event: 'change', id: number): void
   (event: 'update', value: string): void
 }>()
 
 const handleInputChange = (event: any) => {
-  (event.target as HTMLInputElement).value
-  console.log('in DataInput modelValue',  (event.target as HTMLInputElement).value)
+  ;(event.target as HTMLInputElement).value
   return event.target.value
 }
 </script>

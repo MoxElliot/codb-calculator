@@ -3,7 +3,6 @@ import { useReportStore } from '../../stores/reportStore'
 import { ref } from 'vue'
 import fixedCostCategoryOptions from '../../assets/fixedCostCategoryOptions'
 import fixedCostPeriodOptions from '../../assets/fixedCostPeriodOptions'
-import firstLetterUpperCase from '../../assets/utility_functions/firstLetterUpperCase'
 import DataInput from '../FormComponents/DataInput.vue'
 import DataSelect from '../FormComponents/DataSelect.vue'
 
@@ -28,7 +27,8 @@ const fixedCostPeriod = ref<string>('')
       <data-select
         v-model="fixedCostCategory"
         label="Category"
-        :optionArray=fixedCostCategoryOptions />
+        :optionArray="fixedCostCategoryOptions"
+      />
       <data-input
         v-model="fixedCostAmount"
         label="Expense Amount"
@@ -41,7 +41,8 @@ const fixedCostPeriod = ref<string>('')
       <data-select
         v-model="fixedCostPeriod"
         label="Pay Period"
-        :optionArray=fixedCostPeriodOptions />
+        :optionArray="fixedCostPeriodOptions"
+      />
     </fieldset>
     <button
       class="border border-black w-32 rounded-full m-1 bg-cyan-500"
