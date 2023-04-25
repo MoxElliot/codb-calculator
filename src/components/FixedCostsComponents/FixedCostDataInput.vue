@@ -5,6 +5,7 @@ import fixedCostCategoryOptions from '../../assets/fixedCostCategoryOptions'
 import fixedCostPeriodOptions from '../../assets/fixedCostPeriodOptions'
 import firstLetterUpperCase from '../../assets/utility_functions/firstLetterUpperCase'
 import DataInput from '../FormComponents/DataInput.vue'
+import DataSelect from '../FormComponents/DataSelect.vue'
 
 const reportStore = useReportStore()
 
@@ -17,36 +18,30 @@ const fixedCostPeriod = ref<string>('')
 <template>
   <form class="fixed-cost-input border border-black" @submit.prevent>
     <fieldset class="fixed-cost-fieldset">
-      <div class="fixed-cost-dataset">
-        <data-input v-model="fixedCostName" label="Expense Name" type="input" id="expense-name" />
-      </div>
-      <div class="fixed-cost-dataset">
-        <label class="label category-label m-1" for="category">Category</label>
-        <select class="input category-select m-1" id="category" v-model="fixedCostCategory">
-          <option v-for="option in fixedCostCategoryOptions" :value="option" >
-            {{ firstLetterUpperCase(option) }}
-          </option>
-        </select>
-      </div>
-      <div class="fixed-cost-dataset">
-        <label class="label expense-amount-label m-1" for="expense-amount">Expense Amount</label>
-        <input
-          class="input expense-amount-input border border-black m-1"
-          id="expense-amount"
-          type="number"
-          min="0"
-          step="0.01"
-          v-model="fixedCostAmount"
-        />
-      </div>
-      <div class="fixed-cost-period">
-        <label class="label period-label m-1" for="period">Pay Period</label>
-        <select class="input period-select m-1" id="period" v-model="fixedCostPeriod">
-          <option v-for="option in fixedCostPeriodOptions" :value="option">
-            {{ firstLetterUpperCase(option) }}
-          </option>
-        </select>
-      </div>
+      <data-input
+        v-model="fixedCostName"
+        label="Expense Name"
+        type="input"
+        id="expense-name"
+        class="fixed-cost-dataset"
+      />
+      <data-select
+        v-model="fixedCostCategory"
+        label="Category"
+        :optionArray=fixedCostCategoryOptions />
+      <data-input
+        v-model="fixedCostAmount"
+        label="Expense Amount"
+        type="number"
+        id="expense-amount"
+        class="fixed-cost-dataset"
+        min="0"
+        step="0.01"
+      />
+      <data-select
+        v-model="fixedCostPeriod"
+        label="Pay Period"
+        :optionArray=fixedCostPeriodOptions />
     </fieldset>
     <button
       class="border border-black w-32 rounded-full m-1 bg-cyan-500"
