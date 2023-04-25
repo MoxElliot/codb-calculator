@@ -12,21 +12,22 @@ export const useReportStore = defineStore('reportStore', {
     totalCosts: 100
   }),
   getters: {
-    totalFixedCosts({ fixedCosts }): number {
-      const sum = fixedCosts
-        .map((item) => item.amount)
-        .reduce((a, b) => {
-          return a + b
-        })
-      return sum
-    }
+    // totalFixedCosts({ fixedCosts }): number {
+    //   const sum = fixedCosts
+    //     .map((item) => item.amount)
+    //     .reduce((a, b) => {
+    //       return a + b
+    //     })
+    //     console.log("in reportStore", typeof sum)
+    //   return sum
+    // }
   },
   actions: {
     addFixedCostAction(fixedCost: FixedCosts) {
-      this.fixedCosts.push(fixedCost) 
+      this.fixedCosts.push(fixedCost)
     },
     addCompanyNameAction(companyName: string) {
-      this.companyName = companyName 
+      this.companyName = companyName
     }
   }
 })
