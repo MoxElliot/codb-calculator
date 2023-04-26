@@ -4,6 +4,7 @@ type FixedCosts = {
   category: string
   amount: number
   payPeriod: string
+  total: number
 }
 
 export default FixedCosts

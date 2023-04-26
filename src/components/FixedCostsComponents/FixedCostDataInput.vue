@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useReportStore } from '../../stores/reportStore'
 import { ref } from 'vue'
-import fixedCostCategoryOptions from '../../assets/fixedCostCategoryOptions'
-import fixedCostPeriodOptions from '../../assets/fixedCostPeriodOptions'
+import costCategoryOptions from '../../assets/costCategoryOptions'
+import costPeriodOptions from '../../assets/costPeriodOptions'
 import DataInput from '../FormComponents/DataInput.vue'
 import DataSelect from '../FormComponents/DataSelect.vue'
 
@@ -12,6 +12,8 @@ const fixedCostName = ref<string>('')
 const fixedCostCategory = ref<string>('')
 const fixedCostAmount = ref<number>(0)
 const fixedCostPeriod = ref<string>('')
+const fixedCostTotal = ref<number>(0)
+
 </script>
 
 <template>
@@ -27,7 +29,7 @@ const fixedCostPeriod = ref<string>('')
       <data-select
         v-model="fixedCostCategory"
         label="Category"
-        :optionArray="fixedCostCategoryOptions"
+        :optionArray="costCategoryOptions"
       />
       <data-input
         v-model="fixedCostAmount"
@@ -41,7 +43,7 @@ const fixedCostPeriod = ref<string>('')
       <data-select
         v-model="fixedCostPeriod"
         label="Pay Period"
-        :optionArray="fixedCostPeriodOptions"
+        :optionArray="costPeriodOptions"
       />
     </fieldset>
     <button
@@ -52,7 +54,8 @@ const fixedCostPeriod = ref<string>('')
           name: fixedCostName,
           category: fixedCostCategory,
           amount: fixedCostAmount,
-          payPeriod: fixedCostPeriod
+          payPeriod: fixedCostPeriod,
+          total: fixedCostTotal
         })
       "
     >

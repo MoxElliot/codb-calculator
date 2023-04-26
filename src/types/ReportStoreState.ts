@@ -1,9 +1,11 @@
 import type FixedCosts from './FixedCosts'
+import type VariableCosts from './VariableCosts'
 
 type ReportStoreState = {
   companyName: string
   fixedCosts: FixedCosts[]
-  totalCosts: number
+  totalFixedCosts: number
+  variableCosts:VariableCosts[]
 }
 
 export default ReportStoreState

@@ -14,6 +14,7 @@ const { fixedCosts } = storeToRefs(useReportStore())
       <p>Category: {{ fixedCost.category }}</p>
       <p>Amount: {{ fixedCost.amount }}</p>
       <p>Pay Period: {{ fixedCost.payPeriod }}</p>
+      <p>Yearly Total: {{ fixedCost.total }}</p>
     </div>
   </div>
 </template>
