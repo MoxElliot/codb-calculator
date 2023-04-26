@@ -61,6 +61,8 @@ const fixedCostTotal = ref<number>(0)
     >
       Add
     </button>
+
+    //computed, get, set 
   </form>
 </template>
 
