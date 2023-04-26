@@ -7,10 +7,6 @@ const stepStore = useStepStore()
 <template>
   <div>
     <router-link :to="stepStore.stepName">
-      Footer
-      <p>
-        {{ stepStore.stepName }}
-      </p>
       <button
         class="border border-black w-32 rounded-full m-1 bg-cyan-500"
         @click="stepStore.backStepAction()"
