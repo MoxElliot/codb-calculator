@@ -13,6 +13,7 @@ const fixedCostCategory = ref<string>('')
 const fixedCostAmount = ref<number>(0)
 const fixedCostPeriod = ref<string>('')
 const fixedCostTotal = ref<number>(0)
+
 </script>
 
 <template>
@@ -39,7 +40,11 @@ const fixedCostTotal = ref<number>(0)
         min="0"
         step="0.01"
       />
-      <data-select v-model="fixedCostPeriod" label="Pay Period" :optionArray="costPeriodOptions" />
+      <data-select
+        v-model="fixedCostPeriod"
+        label="Pay Period"
+        :optionArray="costPeriodOptions"
+      />
     </fieldset>
     <button
       class="border border-black w-32 rounded-full m-1 bg-cyan-500"
