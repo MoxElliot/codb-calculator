@@ -1,27 +1,18 @@
 <script setup lang="ts">
-import { useReportStore } from '@/stores/reportStore'
+import { useCompanyStore } from '@/stores/companyStore'
 import { ref } from 'vue'
+import DataInput from '../FormComponents/DataInput.vue'
 
 const inputCompanyName = ref('')
-const { addCompanyNameAction } = useReportStore()
+const companyStore = useCompanyStore()
 </script>
 
 <template>
-  <div class="flex">
-    <p class="company-name_p font-bold">Company Name:</p>
-    <input
-      class="border border-black p-1 m-1 w-64"
-      id="company-name"
-      name="company-name"
-      type="text"
-      placeholder="Enter Company Name"
-      v-model="inputCompanyName"
-    />
-    <button
-      class="border border-black w-32 rounded-full m-1 bg-cyan-500"
-      @click="addCompanyNameAction(inputCompanyName)"
-    >
-      Add
-    </button>
-  </div>
+  <data-input
+    v-model="inputCompanyName"
+    label="Company Name:"
+    type="input"
+    id="price-average-per-booking"
+    @blur="companyStore.addCompanyNameAction($event.target.value)"
+  />
 </template>

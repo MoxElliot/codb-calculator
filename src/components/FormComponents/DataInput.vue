@@ -13,27 +13,26 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits<{
-  (e: 'update', value: string | number): void
+const $emit = defineEmits<{
+  (e: 'update:modelValue', value: string | number): void
 }>()
 
-const handleInputChange = (event: any) => {
-  (event.target as HTMLInputElement).value
-  return event.target.value
+const handleInputChange = (e: any) => {
+  (e.target as HTMLInputElement).value
+  return e.target.value
 }
 </script>
 
 <template>
   <div>
     <label :for="label" class="label m-1">
-    {{ label }}
-  </label>
-  <input
-    class="input border border-black m-1"
-    v-bind="$attrs"
-    :value="modelValue"
-    @input="emit('update', handleInputChange($event))"
-  />
+      {{ label }}
+    </label>
+    <input
+      class="input border border-black m-1"
+      v-bind="$attrs"
+      :value="modelValue"
+      @input="$emit('update:modelValue', handleInputChange($event))"
+    />
   </div>
-  
 </template>
