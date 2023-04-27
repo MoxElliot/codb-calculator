@@ -16,7 +16,7 @@ const variableCostTotal = ref<number>(0)
   <form class="variable-cost-input border border-black" @submit.prevent>
     <fieldset class="variable-cost-fieldset">
       <data-input
-        v-model="variableCostName"
+        v-model=variableCostName
         label="Expense Name"
         type="input"
         id="expense-name"
@@ -28,7 +28,7 @@ const variableCostTotal = ref<number>(0)
         :optionArray="costCategoryOptions"
       />
       <data-input
-        v-model="variableCostTotal"
+        v-model=variableCostTotal
         label="Expense Amount"
         type="number"
         id="expense-amount"

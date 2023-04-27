@@ -19,7 +19,7 @@ const fixedCostTotal = ref<number>(0)
   <form class="fixed-cost-input border border-black" @submit.prevent>
     <fieldset class="fixed-cost-fieldset">
       <data-input
-        v-model="fixedCostName"
+        v-model=fixedCostName
         label="Expense Name"
         type="input"
         id="expense-name"
@@ -31,7 +31,7 @@ const fixedCostTotal = ref<number>(0)
         :optionArray="costCategoryOptions"
       />
       <data-input
-        v-model="fixedCostAmount"
+        v-model=fixedCostAmount
         label="Expense Amount"
         type="number"
         id="expense-amount"

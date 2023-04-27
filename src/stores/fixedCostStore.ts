@@ -19,7 +19,9 @@ export const useFixedCostStore = defineStore('fixedCostStore', {
   }),
   actions: {
     addFixedCostAction(fixedCost: FixedCostObj) {
+      console.log("in FixedCostStore before", this.fixedCosts)
       this.fixedCosts.push(fixedCost)
+      console.log("in FixedCostStore after", this.fixedCosts)
     },
   }
 })
