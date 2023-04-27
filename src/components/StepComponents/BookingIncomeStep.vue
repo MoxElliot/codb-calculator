@@ -40,7 +40,7 @@ const hoursAveragePerBooking = ref<number>()
       <h4>How many hours do you work per booking? (Including editing time, meetings, etc.)</h4>
       <data-input
         v-model="hoursAveragePerBooking"
-        label="$"
+        label=""
         type="number"
         id="hour-average-per-booking"
         @blur="bookingIncomeStore.addHoursPerBookingAction($event.target.value)"
