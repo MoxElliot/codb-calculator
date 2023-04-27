@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
-import type FixedCosts from '../types/FixedCosts'
+import type FixedCosts from '../types/FixedCostObj'
 import type VariableCosts from '../types/VariableCosts'
 import type ReportStoreState from '../types/ReportStoreState'
-import payPeriodObject from '../assets/payPeriodObject'
 
 export const useReportStore = defineStore('reportStore', {
   state: (): ReportStoreState => ({

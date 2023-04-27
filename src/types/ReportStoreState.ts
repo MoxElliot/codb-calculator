@@ -1,4 +1,4 @@
-import type FixedCosts from './FixedCosts'
+import type FixedCosts from './FixedCostObj'
 import type VariableCosts from './VariableCosts'
 
 type ReportStoreState = {

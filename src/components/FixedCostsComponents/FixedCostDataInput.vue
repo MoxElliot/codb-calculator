@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useReportStore } from '../../stores/reportStore'
+import { useFixedCostStore } from '../../stores/fixedCostStore'
 import { ref } from 'vue'
 import costCategoryOptions from '../../assets/costCategoryOptions'
 import costPeriodOptions from '../../assets/costPeriodOptions'
 import DataInput from '../FormComponents/DataInput.vue'
 import DataSelect from '../FormComponents/DataSelect.vue'
 
-const reportStore = useReportStore()
+const fixedCostStore = useFixedCostStore()
 
 const fixedCostName = ref<string>('')
 const fixedCostCategory = ref<string>('')
@@ -44,8 +44,8 @@ const fixedCostTotal = ref<number>(0)
     <button
       class="border border-black w-32 rounded-full m-1 bg-cyan-500"
       @click="
-        reportStore.addFixedCostAction({
-          id: reportStore.fixedCosts.length + 1,
+        fixedCostStore.addFixedCostAction({
+          id: fixedCostStore.fixedCosts.length + 1,
           name: fixedCostName,
           category: fixedCostCategory,
           amount: fixedCostAmount,
