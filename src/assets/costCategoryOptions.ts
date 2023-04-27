@@ -1,6 +1,3 @@
+const costCategoryOptions: string[] = ['marketing', 'operations', 'incidentals', 'overhead']
 
-const costCategoryOptions:string[] = [
-    "marketing", "operations", "incidentals", "overhead",
-  ]
-
-  export default costCategoryOptions
+export default costCategoryOptions

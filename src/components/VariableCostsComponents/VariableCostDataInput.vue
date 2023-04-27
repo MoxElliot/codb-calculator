@@ -10,7 +10,6 @@ const reportStore = useReportStore()
 const variableCostName = ref<string>('')
 const variableCostCategory = ref<string>('')
 const variableCostTotal = ref<number>(0)
-
 </script>
 
 <template>
@@ -37,7 +36,8 @@ const variableCostTotal = ref<number>(0)
         min="0"
         step="0.01"
       />
-    </fieldset><button
+    </fieldset>
+    <button
       class="border border-black w-32 rounded-full m-1 bg-cyan-500"
       @click="
         reportStore.addVariableCostAction({
@@ -50,6 +50,5 @@ const variableCostTotal = ref<number>(0)
     >
       Add
     </button>
-
   </form>
 </template>

@@ -5,7 +5,7 @@ type ReportStoreState = {
   companyName: string
   fixedCosts: FixedCosts[]
   totalFixedCosts: number
-  variableCosts:VariableCosts[]
+  variableCosts: VariableCosts[]
 }
 
 export default ReportStoreState

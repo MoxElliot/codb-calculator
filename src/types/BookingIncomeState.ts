@@ -1,4 +1,3 @@
-
 type BookingIncomeState = {
   bookingsPerMonth: number
   priceAveragePerBooking: number

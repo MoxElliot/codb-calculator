@@ -18,7 +18,7 @@ const emit = defineEmits<{
 }>()
 
 const handleInputChange = (event: any) => {
-  (event.target as HTMLInputElement).value
+  ;(event.target as HTMLInputElement).value
   return event.target.value
 }
 </script>
@@ -26,14 +26,13 @@ const handleInputChange = (event: any) => {
 <template>
   <div>
     <label :for="label" class="label m-1">
-    {{ label }}
-  </label>
-  <input
-    class="input border border-black m-1"
-    v-bind="$attrs"
-    :value="modelValue"
-    @input="emit('update', handleInputChange($event))"
-  />
+      {{ label }}
+    </label>
+    <input
+      class="input border border-black m-1"
+      v-bind="$attrs"
+      :value="modelValue"
+      @input="emit('update', handleInputChange($event))"
+    />
   </div>
-  
 </template>

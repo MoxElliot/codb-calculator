@@ -5,7 +5,7 @@ export const useBookingIncomeStore = defineStore('bookingIncomeStore', {
   state: (): BookingIncomeState => ({
     bookingsPerMonth: 0,
     priceAveragePerBooking: 0,
-    hoursAveragePerBooking: 0,
+    hoursAveragePerBooking: 0
   }),
   actions: {
     addBookingsPerMonthAction(bookingsPerMonth: number) {

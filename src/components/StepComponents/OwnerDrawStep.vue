@@ -7,7 +7,6 @@ const ownersDrawStore = useOwnersDrawStore()
 
 const incomePerMonth = ref<number>()
 const savingsPerMonth = ref<number>()
-
 </script>
 
 <template>
@@ -17,21 +16,21 @@ const savingsPerMonth = ref<number>()
   <div>
     <h4>On average, how much will you be paying yourself per month?</h4>
     <data-input
-        v-model="incomePerMonth"
-        label="$"
-        type="number"
-        id="income-per-month"
-        @blur="ownersDrawStore.addIncomePerMonthAction($event.target.value)"
-      />
+      v-model="incomePerMonth"
+      label="$"
+      type="number"
+      id="income-per-month"
+      @blur="ownersDrawStore.addIncomePerMonthAction($event.target.value)"
+    />
   </div>
   <div>
     <h4>On average, how much do you plan to save per month?</h4>
     <data-input
-        v-model="savingsPerMonth"
-        label="$"
-        type="number"
-        id="savings-per-month"
-        @blur="ownersDrawStore.addSavingsPerMonthAction($event.target.value)"
-      />
+      v-model="savingsPerMonth"
+      label="$"
+      type="number"
+      id="savings-per-month"
+      @blur="ownersDrawStore.addSavingsPerMonthAction($event.target.value)"
+    />
   </div>
 </template>
