@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useReportStore } from '@/stores/reportStore'
+import { useVariableCostStore } from '@/stores/variableCostStore'
 import { storeToRefs } from 'pinia'
 
 defineProps(['variableCost'])
 
-const { variableCosts } = storeToRefs(useReportStore())
+const { variableCosts } = storeToRefs(useVariableCostStore())
 </script>
 
 <template>

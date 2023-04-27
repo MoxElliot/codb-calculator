@@ -1,6 +1,6 @@
 type StepStoreState = {
-    stepNum: number
-    stepName: string
+  stepNum: number
+  stepName: string
 }
 
 export default StepStoreState

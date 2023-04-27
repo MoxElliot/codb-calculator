@@ -1,4 +1,4 @@
-type FixedCosts = {
+type FixedCostObj = {
   id: number
   name: string
   category: string
@@ -7,4 +7,4 @@ type FixedCosts = {
   total: number
 }
 
-export default FixedCosts
+export default FixedCostObj

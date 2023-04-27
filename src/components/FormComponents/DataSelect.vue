@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import firstLetterUpperCase from '../../assets/utility_functions/firstLetterUpperCase'
 
-defineProps({
+const props = defineProps({
   label: {
     type: String,
     default: ''
@@ -20,13 +20,14 @@ defineProps({
   },
   value: null
 })
-defineEmits<{
-  (event: 'update', value: string): void
+
+const $emit = defineEmits<{
+  (e: 'update:modelValue', value: string): void
 }>()
 
-const handleInputChange = (event: any) => {
-  ;(event.target as HTMLInputElement).value
-  return event.target.value
+const handleInputChange = (e: any) => {
+  ;(e.target as HTMLInputElement).value
+  return e.target.value
 }
 </script>
 

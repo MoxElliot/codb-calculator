@@ -1,26 +1,25 @@
 <script setup lang="ts">
-import { useReportStore } from '../../stores/reportStore'
+import { useFixedCostStore } from '../../stores/fixedCostStore'
 import { ref } from 'vue'
 import costCategoryOptions from '../../assets/costCategoryOptions'
 import costPeriodOptions from '../../assets/costPeriodOptions'
 import DataInput from '../FormComponents/DataInput.vue'
 import DataSelect from '../FormComponents/DataSelect.vue'
 
-const reportStore = useReportStore()
+const fixedCostStore = useFixedCostStore()
 
 const fixedCostName = ref<string>('')
 const fixedCostCategory = ref<string>('')
 const fixedCostAmount = ref<number>(0)
 const fixedCostPeriod = ref<string>('')
 const fixedCostTotal = ref<number>(0)
-
 </script>
 
 <template>
   <form class="fixed-cost-input border border-black" @submit.prevent>
     <fieldset class="fixed-cost-fieldset">
       <data-input
-        v-model="fixedCostName"
+        v-model=fixedCostName
         label="Expense Name"
         type="input"
         id="expense-name"
@@ -32,7 +31,7 @@ const fixedCostTotal = ref<number>(0)
         :optionArray="costCategoryOptions"
       />
       <data-input
-        v-model="fixedCostAmount"
+        v-model=fixedCostAmount
         label="Expense Amount"
         type="number"
         id="expense-amount"
@@ -40,17 +39,13 @@ const fixedCostTotal = ref<number>(0)
         min="0"
         step="0.01"
       />
-      <data-select
-        v-model="fixedCostPeriod"
-        label="Pay Period"
-        :optionArray="costPeriodOptions"
-      />
+      <data-select v-model="fixedCostPeriod" label="Pay Period" :optionArray="costPeriodOptions" />
     </fieldset>
     <button
       class="border border-black w-32 rounded-full m-1 bg-cyan-500"
       @click="
-        reportStore.addFixedCostAction({
-          id: reportStore.fixedCosts.length + 1,
+        fixedCostStore.addFixedCostAction({
+          id: fixedCostStore.fixedCosts.length + 1,
           name: fixedCostName,
           category: fixedCostCategory,
           amount: fixedCostAmount,
