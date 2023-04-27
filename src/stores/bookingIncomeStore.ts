@@ -4,16 +4,20 @@ import type BookingIncomeState from '../types/BookingIncomeState'
 export const useBookingIncomeStore = defineStore('bookingIncomeStore', {
   state: (): BookingIncomeState => ({
     bookingsPerMonth: 0,
-    averagePricePerBooking: 0,
-    averageHoursPerBooking: 0,
+    priceAveragePerBooking: 0,
+    hoursAveragePerBooking: 0,
   }),
   actions: {
-    // addFixedCostAction(fixedCost: FixedCosts) {
-    //   this.fixedCosts.push(fixedCost)
-    // },
-    updateBookingsPerMonth(bookingsPerMonth: number) {
+    addBookingsPerMonthAction(bookingsPerMonth: number) {
       this.bookingsPerMonth = bookingsPerMonth
       console.log(this.bookingsPerMonth)
+    },
+    addPricePerBookingAction(priceAveragePerBooking: number) {
+      this.priceAveragePerBooking = priceAveragePerBooking
+      console.log(this.priceAveragePerBooking)
+    },
+    addHoursPerBookingAction(hoursAveragePerBooking: number) {
+      this.hoursAveragePerBooking = hoursAveragePerBooking
     }
   }
 })

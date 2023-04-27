@@ -1,8 +1,8 @@
 
 type BookingIncomeState = {
   bookingsPerMonth: number
-  averagePricePerBooking: number
-  averageHoursPerBooking: Number
+  priceAveragePerBooking: number
+  hoursAveragePerBooking: Number
 }
 
 export default BookingIncomeState
