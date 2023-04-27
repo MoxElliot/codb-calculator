@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useReportStore } from '../../stores/reportStore'
+import { useVariableCostStore } from '../../stores/variableCostStore'
 import { ref } from 'vue'
 import costCategoryOptions from '../../assets/costCategoryOptions'
 import DataInput from '../FormComponents/DataInput.vue'
 import DataSelect from '../FormComponents/DataSelect.vue'
 
-const reportStore = useReportStore()
+const variableCostStore = useVariableCostStore()
 
 const variableCostName = ref<string>('')
 const variableCostCategory = ref<string>('')
@@ -40,8 +40,8 @@ const variableCostTotal = ref<number>(0)
     <button
       class="border border-black w-32 rounded-full m-1 bg-cyan-500"
       @click="
-        reportStore.addVariableCostAction({
-          id: reportStore.variableCosts.length + 1,
+        variableCostStore.addVariableCostAction({
+          id: variableCostStore.variableCosts.length + 1,
           name: variableCostName,
           category: variableCostCategory,
           total: variableCostTotal
