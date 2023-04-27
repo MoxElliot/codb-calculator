@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
 import { useBookingIncomeStore } from '@/stores/bookingIncomeStore'
+import { useOwnersDrawStore } from '@/stores/ownersDrawStore'
 import { storeToRefs } from 'pinia'
 import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
 
 const bookingIncomeStore = useBookingIncomeStore() //The below data is temporary code to test the pinia store data flow for each data item.
+const ownersDrawStore = useOwnersDrawStore()
 const { companyName } = storeToRefs(useReportStore())
 </script>
 <template>
@@ -29,6 +31,14 @@ const { companyName } = storeToRefs(useReportStore())
     <div>
       <p>Average Hours Worked Per Booking</p>
       <p>${{ bookingIncomeStore.hoursAveragePerBooking }}</p>
+    </div>
+    <div>
+      <p>Personal Income Per Month</p>
+      <p>${{ ownersDrawStore.incomePerMonth }}</p>
+    </div>
+    <div>
+      <p>Personal Savings Per Month</p>
+      <p>${{ ownersDrawStore.savingsPerMonth }}</p>
     </div>
   </div>
 </template>

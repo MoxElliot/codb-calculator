@@ -37,7 +37,7 @@ const hoursAveragePerBooking = ref<number>()
       />
     </div>
     <div>
-      <h4>How many howurs do you work per booking? (Including editing time, meetings, etc.)</h4>
+      <h4>How many hours do you work per booking? (Including editing time, meetings, etc.)</h4>
       <data-input
         v-model="hoursAveragePerBooking"
         label="$"
