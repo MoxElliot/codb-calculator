@@ -38,7 +38,7 @@ const variableCostTotal = ref<number>(0)
         step="0.01"
       />
     </fieldset>
-    <div class="flex flex-col w-24">
+    <div class="flex flex-col w-16 justify-center">
       <button
         class="border border-black rounded-full bg-cyan-500"
         @click="

@@ -620,3 +620,7 @@ video {
 .font-bold {
   font-weight: 700;
 }
+
+.justify-center {
+  justify-content: center;
+}
