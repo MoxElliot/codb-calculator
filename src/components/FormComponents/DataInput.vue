@@ -24,7 +24,7 @@ const handleInputChange = (e: any) => {
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col">
     <label :for="label" class="label m-1">
       {{ label }}
     </label>

@@ -13,42 +13,45 @@ const variableCostTotal = ref<number>(0)
 </script>
 
 <template>
-  <form class="variable-cost-input border border-black" @submit.prevent>
-    <fieldset class="variable-cost-fieldset">
+  <form class="variable-cost-input border border-black flex flex-row" @submit.prevent>
+    <fieldset class="variable-cost-fieldset flex flex-row flex-1">
       <data-input
-        v-model=variableCostName
+        v-model="variableCostName"
         label="Expense Name"
         type="input"
         id="expense-name"
-        class="variable-cost-dataset"
+        class="variable-cost-dataset basis-1/3 flex-1"
       />
       <data-select
         v-model="variableCostCategory"
         label="Category"
         :optionArray="costCategoryOptions"
+        class="basis-1/3 flex-1"
       />
       <data-input
-        v-model=variableCostTotal
+        v-model="variableCostTotal"
         label="Expense Amount"
         type="number"
         id="expense-amount"
-        class="variable-cost-dataset"
+        class="variable-cost-dataset basis-1/3 flex-1"
         min="0"
         step="0.01"
       />
     </fieldset>
-    <button
-      class="border border-black w-32 rounded-full m-1 bg-cyan-500"
-      @click="
-        variableCostStore.addVariableCostAction({
-          id: variableCostStore.variableCosts.length + 1,
-          name: variableCostName,
-          category: variableCostCategory,
-          total: variableCostTotal
-        })
-      "
-    >
-      Add
-    </button>
+    <div class="flex flex-col w-24">
+      <button
+        class="border border-black rounded-full bg-cyan-500"
+        @click="
+          variableCostStore.addVariableCostAction({
+            id: variableCostStore.variableCosts.length + 1,
+            name: variableCostName,
+            category: variableCostCategory,
+            total: variableCostTotal
+          })
+        "
+      >
+        Add
+      </button>
+    </div>
   </form>
 </template>
