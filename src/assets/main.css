@@ -579,7 +579,7 @@ video {
 }
 
 .basis-32 {
-  flex-basis: 8rem/* 128px */;
+  flex-basis: 8rem;
 }
 
 .rounded-full {

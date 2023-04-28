@@ -13,6 +13,17 @@ const fixedCostCategory = ref<string>('')
 const fixedCostAmount = ref<number>(0)
 const fixedCostPeriod = ref<string>('')
 const fixedCostTotal = ref<number>(0)
+
+// const handleClick = () => {
+//   fixedCostStore.addFixedCostAction({
+//             id: fixedCostStore.fixedCosts.length + 1,
+//             name: fixedCostName,
+//             category: fixedCostCategory,
+//             amount: fixedCostAmount,
+//             payPeriod: fixedCostPeriod,
+//             individualTotal: fixedCostTotal
+//           })
+// }
 </script>
 
 <template>
@@ -57,7 +68,7 @@ const fixedCostTotal = ref<number>(0)
             category: fixedCostCategory,
             amount: fixedCostAmount,
             payPeriod: fixedCostPeriod,
-            total: fixedCostTotal
+            individualTotal: fixedCostTotal
           })
         "
       >

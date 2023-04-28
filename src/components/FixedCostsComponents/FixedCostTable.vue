@@ -5,6 +5,8 @@ import { storeToRefs } from 'pinia'
 defineProps(['fixedCost'])
 
 const { fixedCosts } = storeToRefs(useFixedCostStore())
+const fixedCostStore = useFixedCostStore()
+
 </script>
 
 <template>
@@ -18,9 +20,10 @@ const { fixedCosts } = storeToRefs(useFixedCostStore())
       <p class="flex-1">{{ fixedCost.category }}</p>
       <p class="flex-1">${{ fixedCost.amount }}</p>
       <p class="flex-1">{{ fixedCost.payPeriod }}</p>
-      <p class="flex-1">${{ fixedCost.total }}</p>
+      <p class="flex-1">${{ fixedCost.individualTotal }}</p>
     </div>
   </div>
+  <p>Total fixed Costs {{  fixedCostStore.totalFixedCosts }}</p>
 </template>
 
 <style scoped></style>
