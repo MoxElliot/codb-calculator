@@ -11,6 +11,7 @@ export const useVariableCostStore = defineStore('variableCostStore', {
   actions: {
     addVariableCostAction(variableCost: VariableCostObj) {
       this.variableCosts.push(variableCost)
-    }
+    },
+    
   }
 })

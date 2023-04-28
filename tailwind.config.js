@@ -3,7 +3,6 @@ module.exports = {
   content: [
     './**/*.{html,js,vue,ts}',
     './src/components/**/*.{html,js,vue,ts}',
-    './src/components/VariableCostsComponents/**/*.{html,js,vue,ts}',
   ],
   theme: {
     extend: {}

@@ -578,6 +578,10 @@ video {
   flex-direction: column;
 }
 
+.basis-32 {
+  flex-basis: 8rem/* 128px */;
+}
+
 .rounded-full {
   border-radius: 9999px;
 }

@@ -9,7 +9,7 @@ const variableCostStore = useVariableCostStore()
 
 const variableCostName = ref<string>('')
 const variableCostCategory = ref<string>('')
-const variableCostTotal = ref<number>(0)
+const variableCostAmount = ref<number>(0)
 </script>
 
 <template>
@@ -29,7 +29,7 @@ const variableCostTotal = ref<number>(0)
         class="basis-1/3 flex-1"
       />
       <data-input
-        v-model="variableCostTotal"
+        v-model="variableCostAmount"
         label="Expense Amount"
         type="number"
         id="expense-amount"
@@ -46,7 +46,7 @@ const variableCostTotal = ref<number>(0)
             id: variableCostStore.variableCosts.length + 1,
             name: variableCostName,
             category: variableCostCategory,
-            total: variableCostTotal
+            amount: variableCostAmount
           })
         "
       >
