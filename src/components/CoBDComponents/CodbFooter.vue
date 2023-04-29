@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useStepStore } from '../../stores/stepStore'
 
+// for Tomorrow Make Cancel bring user back to previous step, updated stepStore.name and stepStore.Num. Make Submit trigger report calculation action (to be coded), and bring user to final report step, update stepStore.name and stepStore.Num
+
 const stepStore = useStepStore()
 </script>
 
