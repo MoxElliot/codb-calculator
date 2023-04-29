@@ -5,7 +5,7 @@ const stepStore = useStepStore()
 </script>
 
 <template>
-  <div>
+  <div v-if="stepStore.stepName !== '/user-email-step'">
     <router-link :to="stepStore.stepName">
       <button
         class="border border-black w-32 rounded-full m-1 bg-cyan-500"
@@ -23,11 +23,11 @@ const stepStore = useStepStore()
       </button>
     </router-link>
   </div>
-  <div>
-    <button class="border border-black w-32 rounded-full m-1 bg-cyan-500" @onClick="">
+  <div  v-if="stepStore.stepName === '/user-email-step'">
+    <button class="border border-black w-32 rounded-full m-1 bg-cyan-500" @click="">
       Cancel
     </button>
-    <button class="border border-black w-32 rounded-full m-1 bg-cyan-500" @onClick="">
+    <button class="border border-black w-32 rounded-full m-1 bg-cyan-500" @click="">
       Submit
     </button>
   </div>
