@@ -4,7 +4,7 @@ import type OwnersDrawState from '../types/OwnersDrawState'
 export const useOwnersDrawStore = defineStore('ownersDrawStore', {
   state: (): OwnersDrawState => ({
     incomePerMonth: 0,
-    savingsPerMonth: 0
+    savingsPerMonth: 0,
   }),
   actions: {
     addIncomePerMonthAction(incomePerMonth: number) {
@@ -12,6 +12,6 @@ export const useOwnersDrawStore = defineStore('ownersDrawStore', {
     },
     addSavingsPerMonthAction(savingsPerMonth: number) {
       this.savingsPerMonth = savingsPerMonth
-    }
+    },
   }
 })
