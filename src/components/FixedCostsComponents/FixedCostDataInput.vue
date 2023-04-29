@@ -13,49 +13,68 @@ const fixedCostCategory = ref<string>('')
 const fixedCostAmount = ref<number>(0)
 const fixedCostPeriod = ref<string>('')
 const fixedCostTotal = ref<number>(0)
+
+// const handleClick = () => {
+//   fixedCostStore.addFixedCostAction({
+//             id: fixedCostStore.fixedCosts.length + 1,
+//             name: fixedCostName,
+//             category: fixedCostCategory,
+//             amount: fixedCostAmount,
+//             payPeriod: fixedCostPeriod,
+//             individualTotal: fixedCostTotal
+//           })
+// }
 </script>
 
 <template>
-  <form class="fixed-cost-input border border-black" @submit.prevent>
-    <fieldset class="fixed-cost-fieldset">
+  <form class="fixed-cost-input border border-black flex flex-row" @submit.prevent>
+    <fieldset class="fixed-cost-fieldset flex flex-row flex-1">
       <data-input
-        v-model=fixedCostName
+        v-model="fixedCostName"
         label="Expense Name"
         type="input"
         id="expense-name"
-        class="fixed-cost-dataset"
+        class="fixed-cost-dataset basis-1/4 flex-1"
       />
       <data-select
         v-model="fixedCostCategory"
         label="Category"
         :optionArray="costCategoryOptions"
+        class="basis-1/4 flex-1"
       />
       <data-input
-        v-model=fixedCostAmount
+        v-model="fixedCostAmount"
         label="Expense Amount"
         type="number"
         id="expense-amount"
-        class="fixed-cost-dataset"
+        class="fixed-cost-dataset basis-1/4 flex-1"
         min="0"
         step="0.01"
       />
-      <data-select v-model="fixedCostPeriod" label="Pay Period" :optionArray="costPeriodOptions" />
+      <data-select 
+      v-model="fixedCostPeriod" 
+      label="Pay Period" 
+      :optionArray="costPeriodOptions" 
+      class="basis-1/4 flex-1"
+      />
     </fieldset>
-    <button
-      class="border border-black w-32 rounded-full m-1 bg-cyan-500"
-      @click="
-        fixedCostStore.addFixedCostAction({
-          id: fixedCostStore.fixedCosts.length + 1,
-          name: fixedCostName,
-          category: fixedCostCategory,
-          amount: fixedCostAmount,
-          payPeriod: fixedCostPeriod,
-          total: fixedCostTotal
-        })
-      "
-    >
-      Add
-    </button>
+    <div class="flex flex-col w-16 justify-center">
+      <button
+        class="border border-black w-16 rounded-full m-1 bg-cyan-500"
+        @click="
+          fixedCostStore.addFixedCostAction({
+            id: fixedCostStore.fixedCosts.length + 1,
+            name: fixedCostName,
+            category: fixedCostCategory,
+            amount: fixedCostAmount,
+            payPeriod: fixedCostPeriod,
+            individualTotal: fixedCostTotal
+          })
+        "
+      >
+        Add
+      </button>
+    </div>
   </form>
 </template>
 

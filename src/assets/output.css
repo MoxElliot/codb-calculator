@@ -558,6 +558,10 @@ video {
   width: 8rem;
 }
 
+.w-16 {
+  width: 4rem;
+}
+
 .w-64 {
   width: 16rem;
 }
@@ -572,6 +576,10 @@ video {
 
 .flex-col {
   flex-direction: column;
+}
+
+.basis-32 {
+  flex-basis: 8rem;
 }
 
 .rounded-full {
@@ -615,4 +623,8 @@ video {
 
 .font-bold {
   font-weight: 700;
+}
+
+.justify-center {
+  justify-content: center;
 }

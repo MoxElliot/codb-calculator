@@ -4,7 +4,7 @@ type FixedCostObj = {
   category: string
   amount: number
   payPeriod: string
-  total: number
+  individualTotal: number
 }
 
 export default FixedCostObj
