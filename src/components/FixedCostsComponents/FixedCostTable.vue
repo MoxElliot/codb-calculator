@@ -23,7 +23,7 @@ const fixedCostStore = useFixedCostStore()
       <p class="flex-1">${{ fixedCost.individualTotal }}</p>
     </div>
   </div>
-  <p>Total fixed Costs {{  fixedCostStore.totalFixedCosts }}</p>
+  <p>Total fixed Costs ${{  fixedCostStore.totalFixedCosts }}</p>
 </template>
 
 <style scoped></style>

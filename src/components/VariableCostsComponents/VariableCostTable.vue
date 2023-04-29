@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia'
 defineProps(['variableCost'])
 
 const { variableCosts } = storeToRefs(useVariableCostStore())
+const variableCostStore = useVariableCostStore()
 </script>
 
 <template>
@@ -19,6 +20,7 @@ const { variableCosts } = storeToRefs(useVariableCostStore())
       <p class="flex-1">$ {{ variableCost.amount }}</p>
     </div>
   </div>
+  <p>Total Variable Costs ${{ variableCostStore.totalVariableCosts }}</p>
 </template>
 
 <style scoped></style>
