@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import CodbForm from '../CodbForm.vue';
 </script>
 
@@ -10,4 +10,4 @@ import CodbForm from '../CodbForm.vue';
 
 <style scoped>
 
-</style>
+</style> -->
