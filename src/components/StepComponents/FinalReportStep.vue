@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { useCompanyStore } from '@/stores/companyStore'
-import { useBookingIncomeStore } from '@/stores/bookingIncomeStore'
 import { useOwnersDrawStore } from '@/stores/ownersDrawStore'
+import { useReportStore } from '@/stores/reportStore'
 import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
 import VariableCostTable from '../VariableCostsComponents/VariableCostTable.vue'
 
-//The below data is temporary code to test the pinia store data flow for each data item.
-const bookingIncomeStore = useBookingIncomeStore()
 const ownersDrawStore = useOwnersDrawStore()
 const companyStore = useCompanyStore()
+const reportStore = useReportStore()
 </script>
 <template>
   <div class="m-3">
@@ -25,24 +24,38 @@ const companyStore = useCompanyStore()
   </div>
   <div class="m-3">
     <div>
-      <p>Bookings per Month</p>
-      <p>{{ bookingIncomeStore.bookingsPerMonth }}</p>
+      <p>Your Yearly Savings</p>
+      <p>${{ ownersDrawStore.savingsYearly }}</p>
     </div>
     <div>
-      <p>Average Price Per Booking</p>
-      <p>${{ bookingIncomeStore.priceAveragePerBooking }}</p>
+      <p>Owners Draw (Yearly Salary)</p>
+      <p>${{ ownersDrawStore.incomeYearly }}</p>
     </div>
     <div>
-      <p>Average Hours Worked Per Booking</p>
-      <p>{{ bookingIncomeStore.hoursAveragePerBooking }}</p>
+      <p>{{ companyStore.companyName }}'s Cost of Doing Business'</p>
+      <p>${{ reportStore.costOfDoingBusiness }}</p>
+    </div>
+  </div>
+  <div>
+    <div>
+      <p>Number of Bookings to Break Even</p>
+      <p>{{ reportStore.bookingsToBreakEven }}</p>
     </div>
     <div>
-      <p>Personal Income Per Month</p>
-      <p>${{ ownersDrawStore.incomePerMonth }}</p>
+      <p>Average Yearly Bookings</p>
+      <p>{{ reportStore.averageYearlyBookings }}</p>
     </div>
     <div>
-      <p>Personal Savings Per Month</p>
-      <p>${{ ownersDrawStore.savingsPerMonth }}</p>
+      <p>Average Hours Worked Per Year</p>
+      <p>{{ reportStore.hoursWorkedYearly }}</p>
+    </div>
+    <div>
+      <p>Your Hourly Rate</p>
+      <p>${{ reportStore.averageHourlyRate }}</p>
+    </div>
+    <div>
+      <p>Your Average Yearly Income</p>
+      <p>${{ reportStore.averageYearlyIncome }}</p>
     </div>
   </div>
 </template>

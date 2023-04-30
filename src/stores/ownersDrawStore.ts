@@ -13,5 +13,13 @@ export const useOwnersDrawStore = defineStore('ownersDrawStore', {
     addSavingsPerMonthAction(savingsPerMonth: number) {
       this.savingsPerMonth = savingsPerMonth
     }
+  },
+  getters: {
+    savingsYearly(state) {
+      return state.savingsPerMonth * 12
+    },
+    incomeYearly(state) {
+      return state.incomePerMonth * 12
+    }
   }
 })
