@@ -16,7 +16,7 @@ const userEmail = ref<string>('')
     <data-input
       v-model="userEmail"
       label="Email Address"
-      type="string"
+      type="email"
       id="user-email-address"
       @blur="userEmailStore.addUserEmailAction($event.target.value)"
     />
