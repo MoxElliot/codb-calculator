@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="fixedCost">
         <h1>Expense Name: {{ fixedCost.name }}</h1>
         <p>Category: {{ fixedCost.category }}</p>
@@ -14,4 +14,4 @@
 
 <style scoped>
 
-</style>
+</style> -->
