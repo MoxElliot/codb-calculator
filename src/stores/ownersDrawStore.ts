@@ -7,7 +7,7 @@ export const useOwnersDrawStore = defineStore('ownersDrawStore', {
     savingsPerMonth: 0
   }),
   actions: {
-    addpayPerMonthAction(payPerMonth: number) {
+    addPayPerMonthAction(payPerMonth: number) {
       this.payPerMonth = payPerMonth
     },
     addSavingsPerMonthAction(savingsPerMonth: number) {

@@ -20,7 +20,7 @@ const savingsPerMonth = ref<number>()
       label="$"
       type="number"
       id="pay-per-month"
-      @blur="ownersDrawStore.addpayPerMonthAction($event.target.value)"
+      @blur="ownersDrawStore.addPayPerMonthAction($event.target.value)"
     />
   </div>
   <div>
