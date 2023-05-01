@@ -3,23 +3,23 @@ import type OwnersDrawState from '../types/OwnersDrawState'
 
 export const useOwnersDrawStore = defineStore('ownersDrawStore', {
   state: (): OwnersDrawState => ({
-    incomePerMonth: 0,
+    payPerMonth: 0,
     savingsPerMonth: 0
   }),
   actions: {
-    addIncomePerMonthAction(incomePerMonth: number) {
-      this.incomePerMonth = incomePerMonth
+    addpayPerMonthAction(payPerMonth: number) {
+      this.payPerMonth = payPerMonth
     },
     addSavingsPerMonthAction(savingsPerMonth: number) {
       this.savingsPerMonth = savingsPerMonth
     }
   },
-  getters: {
-    savingsYearly(state) {
-      return state.savingsPerMonth * 12
-    },
-    incomeYearly(state) {
-      return state.incomePerMonth * 12
-    }
-  }
+  // getters: {
+  //   savingsYearly(state) {
+  //     return state.savingsPerMonth * 12
+  //   },
+  //   payYearly(state) {
+  //     return state.payPerMonth * 12
+  //   }
+  // }
 })

@@ -25,11 +25,11 @@ const reportStore = useReportStore()
   <div class="m-3">
     <div>
       <p>Your Yearly Savings</p>
-      <p>${{ ownersDrawStore.savingsYearly }}</p>
+      <p>${{ reportStore.avereageYearlySavings }}</p>
     </div>
     <div>
       <p>Owners Draw (Yearly Salary)</p>
-      <p>${{ ownersDrawStore.incomeYearly }}</p>
+      <p>${{ reportStore.averageYearlyPay }}</p>
     </div>
     <div>
       <p>{{ companyStore.companyName }}'s Cost of Doing Business'</p>
