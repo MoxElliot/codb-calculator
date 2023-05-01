@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useStepStore } from '../../stores/stepStore'
 
-const handleSubmit = () => {
-  stepStore.forwardStepAction()
-}
+// const handleSubmit = () => {
+//   stepStore.forwardStepAction()
+// }
 const stepStore = useStepStore()
 </script>
 

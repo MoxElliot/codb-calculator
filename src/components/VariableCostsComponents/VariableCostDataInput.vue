@@ -9,7 +9,27 @@ const variableCostStore = useVariableCostStore()
 
 const variableCostName = ref<string>('')
 const variableCostCategory = ref<string>('')
-const variableCostAmount = ref<number>(0)
+const variableCostAmount = ref<number>()
+
+const resetVaraiable = () => {
+  variableCostName.value = ''
+  variableCostCategory.value = ''
+  variableCostAmount.value = undefined
+}
+
+const handleAdd = (
+  variableCostName: string,
+  variableCostCategory: string,
+  variableCostAmount: number | undefined
+) => {
+  variableCostStore.addVariableCostAction({
+    id: variableCostStore.variableCosts.length + 1,
+    name: variableCostName,
+    category: variableCostCategory,
+    amount: variableCostAmount
+  })
+  resetVaraiable()
+}
 </script>
 
 <template>
@@ -41,14 +61,7 @@ const variableCostAmount = ref<number>(0)
     <div class="flex flex-col w-16 justify-center">
       <button
         class="border border-black rounded-full bg-cyan-500"
-        @click="
-          variableCostStore.addVariableCostAction({
-            id: variableCostStore.variableCosts.length + 1,
-            name: variableCostName,
-            category: variableCostCategory,
-            amount: variableCostAmount
-          })
-        "
+        @click="handleAdd(variableCostName, variableCostCategory, variableCostAmount)"
       >
         Add
       </button>
