@@ -9,7 +9,19 @@ const variableCostStore = useVariableCostStore()
 
 const variableCostName = ref<string>('')
 const variableCostCategory = ref<string>('')
-const variableCostAmount = ref<number>(0)
+const variableCostAmount = ref<number>()
+
+const handleAddCost = () => {
+  variableCostStore.addVariableCostAction({
+    id: variableCostStore.variableCosts.length + 1,
+    name: variableCostName.value,
+    category: variableCostCategory.value,
+    amount: variableCostAmount.value
+  })
+  variableCostName.value = ''
+  variableCostCategory.value = ''
+  variableCostAmount.value = undefined
+}
 </script>
 
 <template>
@@ -39,19 +51,7 @@ const variableCostAmount = ref<number>(0)
       />
     </fieldset>
     <div class="flex flex-col w-16 justify-center">
-      <button
-        class="border border-black rounded-full bg-cyan-500"
-        @click="
-          variableCostStore.addVariableCostAction({
-            id: variableCostStore.variableCosts.length + 1,
-            name: variableCostName,
-            category: variableCostCategory,
-            amount: variableCostAmount
-          })
-        "
-      >
-        Add
-      </button>
+      <button class="border border-black rounded-full bg-cyan-500" @click="handleAddCost">Add</button>
     </div>
   </form>
 </template>

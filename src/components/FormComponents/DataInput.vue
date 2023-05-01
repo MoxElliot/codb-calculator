@@ -10,6 +10,9 @@ const props = defineProps({
   },
   modelValue: {
     type: [String, Number]
+  },
+  ref: {
+    type: [String, Number]
   }
 })
 
@@ -32,7 +35,8 @@ const handleInputChange = (e: any) => {
       class="input border border-black m-1"
       v-bind="$attrs"
       :value="modelValue"
-      @input="$emit('update:modelValue', handleInputChange($event))"
+      @input="$emit('update:modelValue', handleInputChange($event), ref)"
+      
     />
   </div>
 </template>
