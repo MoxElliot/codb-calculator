@@ -10,20 +10,25 @@ const fixedCostStore = useFixedCostStore()
 
 const fixedCostName = ref<string>('')
 const fixedCostCategory = ref<string>('')
-const fixedCostAmount = ref<number>(0)
+const fixedCostAmount = ref<number>()
 const fixedCostPeriod = ref<string>('')
-const fixedCostTotal = ref<number>(0)
+const fixedCostTotal = ref<number>()
 
-// const handleClick = () => {
-//   fixedCostStore.addFixedCostAction({
-//             id: fixedCostStore.fixedCosts.length + 1,
-//             name: fixedCostName,
-//             category: fixedCostCategory,
-//             amount: fixedCostAmount,
-//             payPeriod: fixedCostPeriod,
-//             individualTotal: fixedCostTotal
-//           })
-// }
+const handleAddCost = () => {
+  fixedCostStore.addFixedCostAction({
+    id: fixedCostStore.fixedCosts.length + 1,
+    name: fixedCostName.value,
+    category: fixedCostCategory.value,
+    amount: fixedCostAmount.value,
+    payPeriod: fixedCostPeriod.value,
+    individualTotal: fixedCostTotal.value
+  })
+  fixedCostName.value = ''
+  fixedCostCategory.value = ''
+  fixedCostAmount.value = undefined
+  fixedCostPeriod.value = ''
+  fixedCostTotal.value = undefined
+}
 </script>
 
 <template>
@@ -51,27 +56,15 @@ const fixedCostTotal = ref<number>(0)
         min="0"
         step="0.01"
       />
-      <data-select 
-      v-model="fixedCostPeriod" 
-      label="Pay Period" 
-      :optionArray="costPeriodOptions" 
-      class="basis-1/4 flex-1"
+      <data-select
+        v-model="fixedCostPeriod"
+        label="Pay Period"
+        :optionArray="costPeriodOptions"
+        class="basis-1/4 flex-1"
       />
     </fieldset>
     <div class="flex flex-col w-16 justify-center">
-      <button
-        class="border border-black w-16 rounded-full m-1 bg-cyan-500"
-        @click="
-          fixedCostStore.addFixedCostAction({
-            id: fixedCostStore.fixedCosts.length + 1,
-            name: fixedCostName,
-            category: fixedCostCategory,
-            amount: fixedCostAmount,
-            payPeriod: fixedCostPeriod,
-            individualTotal: fixedCostTotal
-          })
-        "
-      >
+      <button class="border border-black w-16 rounded-full m-1 bg-cyan-500" @click="handleAddCost">
         Add
       </button>
     </div>

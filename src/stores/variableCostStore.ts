@@ -19,9 +19,6 @@ export const useVariableCostStore = defineStore('variableCostStore', {
     addVariableCostAction(variableCost: VariableCostObj) {
       this.variableCosts.push(variableCost)
       this.totalVariableCostAction()
-      // variableCost.name = ''
-      // variableCost.category = ''
-      // variableCost.amount = 0
     }
   }
 })

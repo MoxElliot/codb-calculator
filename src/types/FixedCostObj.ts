@@ -2,9 +2,9 @@ type FixedCostObj = {
   id: number
   name: string
   category: string
-  amount: number
+  amount: number | undefined
   payPeriod: string
-  individualTotal: number
+  individualTotal: number | undefined
 }
 
 export default FixedCostObj
