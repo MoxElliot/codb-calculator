@@ -4,21 +4,31 @@ import { useVariableCostStore } from '@/stores/variableCostStore'
 import { useBookingIncomeStore } from '@/stores/bookingIncomeStore'
 import { useOwnersDrawStore } from '@/stores/ownersDrawStore'
 
-
 export const useReportStore = defineStore('reportStore', {
-  state: () => ({
-  }),
+  state: () => ({}),
   getters: {
-    costOfDoingBusiness(): number {
-      const fixedCostStore = useFixedCostStore()
-      const variableCostStore = useVariableCostStore()
+    averageYearlyPay(): number {
       const ownersDrawStore = useOwnersDrawStore()
-
+      return ownersDrawStore.payPerMonth * 12
+    },
+    avereageYearlySavings(): number {
+      const ownersDrawStore = useOwnersDrawStore()
+      return ownersDrawStore.savingsPerMonth * 12
+    },
+    averageYearlyFixedCosts(): number {
+      const fixedCostStore = useFixedCostStore()
+      return fixedCostStore.totalFixedCosts * 12
+    },
+    averageYearlyVariableCosts(): number {
+      const variableCostStore = useVariableCostStore()
+      return variableCostStore.totalVariableCosts * 12
+    },
+    costOfDoingBusiness(): number {
       return (
-        fixedCostStore.totalFixedCosts +
-        variableCostStore.totalVariableCosts +
-        ownersDrawStore.savingsYearly +
-        ownersDrawStore.incomeYearly
+        this.averageYearlyFixedCosts +
+        this.averageYearlyVariableCosts +
+        this.avereageYearlySavings +
+        this.averageYearlyPay
       )
     },
     bookingsToBreakEven(): number | string {
@@ -38,12 +48,13 @@ export const useReportStore = defineStore('reportStore', {
     averageHourlyRate(): any {
       return this.hoursWorkedYearly === 0 //prevents divide by 0 error
         ? 'Cannot Determine without Hours Worked Yearly'
-        : this.averageYearlyBookings / this.hoursWorkedYearly
+        : this.averageYearlyPay / this.hoursWorkedYearly
     },
     averageYearlyIncome(): number | string {
-        return this.hoursWorkedYearly === 0 //prevents divide by 0 error
+      const bookingIncomeStore = useBookingIncomeStore()
+      return this.hoursWorkedYearly === 0 //prevents divide by 0 error
         ? 'Cannot Determine without Hours Worked Yearly'
-        : this.hoursWorkedYearly * this.averageHourlyRate
+        : (this.averageYearlyBookings * bookingIncomeStore.priceAveragePerBooking) - this.costOfDoingBusiness
     }
   },
   actions: {}

@@ -22,7 +22,7 @@ export const useFixedCostStore = defineStore('fixedCostStore', {
       )
       const payPeriodMultiplier: any = payPeriodMultiplierElement?.multiplier
 
-      fixedCost.individualTotal = fixedCost.amount * payPeriodMultiplier
+      fixedCost.individualTotal = (fixedCost.amount as number) * payPeriodMultiplier
       this.fixedCosts.push(fixedCost)
       this.totalFixedCostAction()
     }

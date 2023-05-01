@@ -17,26 +17,26 @@ const reportStore = useReportStore()
     <p>Company Name: {{ companyStore.companyName }}</p>
   </div>
   <div class="m-3">
-    <fixed-cost-table />
-  </div>
-  <div class="m-3">
-    <variable-cost-table />
+    <p>Your Yearly Variable Costs</p>
+    <p>${{ reportStore.averageYearlyVariableCosts }}</p>
+    <p>Your Yearly Fixed Costs</p>
+    <p>${{ reportStore.averageYearlyFixedCosts }}</p>
   </div>
   <div class="m-3">
     <div>
       <p>Your Yearly Savings</p>
-      <p>${{ ownersDrawStore.savingsYearly }}</p>
+      <p>${{ reportStore.avereageYearlySavings }}</p>
     </div>
     <div>
       <p>Owners Draw (Yearly Salary)</p>
-      <p>${{ ownersDrawStore.incomeYearly }}</p>
+      <p>${{ reportStore.averageYearlyPay }}</p>
     </div>
     <div>
       <p>{{ companyStore.companyName }}'s Cost of Doing Business'</p>
       <p>${{ reportStore.costOfDoingBusiness }}</p>
     </div>
   </div>
-  <div>
+  <div class="m-3">
     <div>
       <p>Number of Bookings to Break Even</p>
       <p>{{ reportStore.bookingsToBreakEven }}</p>

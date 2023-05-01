@@ -5,7 +5,7 @@ import DataInput from '../FormComponents/DataInput.vue'
 
 const ownersDrawStore = useOwnersDrawStore()
 
-const incomePerMonth = ref<number>()
+const payPerMonth = ref<number>()
 const savingsPerMonth = ref<number>()
 </script>
 
@@ -16,11 +16,11 @@ const savingsPerMonth = ref<number>()
   <div>
     <h4>On average, how much will you be paying yourself per month?</h4>
     <data-input
-      v-model="incomePerMonth"
+      v-model="payPerMonth"
       label="$"
       type="number"
-      id="income-per-month"
-      @blur="ownersDrawStore.addIncomePerMonthAction($event.target.value)"
+      id="pay-per-month"
+      @blur="ownersDrawStore.addpayPerMonthAction($event.target.value)"
     />
   </div>
   <div>
