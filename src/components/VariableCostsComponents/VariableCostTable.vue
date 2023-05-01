@@ -20,7 +20,7 @@ const variableCostStore = useVariableCostStore()
       <p class="flex-1">$ {{ variableCost.amount }}</p>
     </div>
   </div>
-  <p>Total Variable Costs ${{ variableCostStore.totalVariableCosts }}</p>
+  <p>Total Monthly Variable Costs ${{ variableCostStore.totalVariableCosts }}</p>
 </template>
 
 <style scoped></style>

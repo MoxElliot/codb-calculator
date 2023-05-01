@@ -9,14 +9,20 @@ export const useReportStore = defineStore('reportStore', {
   state: () => ({
   }),
   getters: {
-    costOfDoingBusiness(): number {
+    averageYearlyFixedCosts(): number {
       const fixedCostStore = useFixedCostStore()
+      return fixedCostStore.totalFixedCosts * 12
+    },
+    averageYearlyVariableCosts(): number {
       const variableCostStore = useVariableCostStore()
+      return variableCostStore.totalVariableCosts * 12
+    },
+    costOfDoingBusiness(): number {
       const ownersDrawStore = useOwnersDrawStore()
 
       return (
-        fixedCostStore.totalFixedCosts +
-        variableCostStore.totalVariableCosts +
+        this.averageYearlyFixedCosts +
+        this.averageYearlyVariableCosts +
         ownersDrawStore.savingsYearly +
         ownersDrawStore.incomeYearly
       )
