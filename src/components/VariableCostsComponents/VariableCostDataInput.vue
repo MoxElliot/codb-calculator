@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import costCategoryOptions from '../../assets/costCategoryOptions'
 import DataInput from '../FormComponents/DataInput.vue'
 import DataSelect from '../FormComponents/DataSelect.vue'
+import FormButton from '../FormComponents/FormButton.vue'
 
 const variableCostStore = useVariableCostStore()
 
@@ -51,7 +52,10 @@ const handleAddCost = () => {
       />
     </fieldset>
     <div class="flex flex-col w-16 justify-center">
-      <button class="border border-black rounded-full bg-cyan-500" @click="handleAddCost">Add</button>
+      <form-button
+        label="Add"
+        @click="handleAddCost"
+      />
     </div>
   </form>
 </template>

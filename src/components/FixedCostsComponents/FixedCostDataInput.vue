@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import costCategoryOptions from '../../assets/costCategoryOptions'
 import costPeriodOptions from '../../assets/costPeriodOptions'
 import DataInput from '../FormComponents/DataInput.vue'
+import FormButton from '../FormComponents/FormButton.vue'
 import DataSelect from '../FormComponents/DataSelect.vue'
 
 const fixedCostStore = useFixedCostStore()
@@ -64,9 +65,11 @@ const handleAddCost = () => {
       />
     </fieldset>
     <div class="flex flex-col w-16 justify-center">
-      <button class="border border-black w-16 rounded-full m-1 bg-cyan-500" @click="handleAddCost">
-        Add
-      </button>
+      <form-button 
+        label="Add"
+        @click="handleAddCost"
+        class="font-bold"
+        />
     </div>
   </form>
 </template>
