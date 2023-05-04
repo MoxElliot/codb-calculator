@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import { useVariableCostStore } from '../../stores/variableCostStore'
 import { useReportStore } from '@/stores/reportStore'
 import { ref } from 'vue'
 import costCategoryOptions from '../../assets/costCategoryOptions'
@@ -7,7 +6,6 @@ import DataInput from '../FormComponents/DataInput.vue'
 import DataSelect from '../FormComponents/DataSelect.vue'
 import FormButton from '../FormComponents/FormButton.vue'
 
-// const variableCostStore = useVariableCostStore()
 const reportStore = useReportStore()
 
 const variableCostName = ref<string>('')
@@ -23,7 +21,7 @@ const handleAddCost = () => {
   })
   variableCostName.value = ''
   variableCostCategory.value = ''
-  variableCostAmount.value = 0.00
+  variableCostAmount.value = 0.0
 }
 </script>
 
@@ -54,10 +52,7 @@ const handleAddCost = () => {
       />
     </fieldset>
     <div class="flex flex-col w-16 justify-center">
-      <form-button
-        label="Add"
-        @click="handleAddCost"
-      />
+      <form-button label="Add" @click="handleAddCost" />
     </div>
   </form>
 </template>

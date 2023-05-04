@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import { useFixedCostStore } from '../../stores/fixedCostStore'
 import { useReportStore } from '@/stores/reportStore'
 import { ref } from 'vue'
 import costCategoryOptions from '../../assets/costCategoryOptions'
@@ -8,7 +7,6 @@ import DataInput from '../FormComponents/DataInput.vue'
 import FormButton from '../FormComponents/FormButton.vue'
 import DataSelect from '../FormComponents/DataSelect.vue'
 
-// const fixedCostStore = useFixedCostStore()
 const reportStore = useReportStore()
 
 const fixedCostName = ref<string>('')

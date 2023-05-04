@@ -1,8 +1,4 @@
 import { defineStore } from 'pinia'
-// import { useFixedCostStore } from '@/stores/fixedCostStore'
-// import { useVariableCostStore } from '@/stores/variableCostStore'
-// import { useBookingIncomeStore } from '@/stores/bookingIncomeStore'
-// import { useOwnersDrawStore } from '@/stores/ownersDrawStore'
 import type FixedCostObj from '../types/FixedCostObj'
 import type VariableCostObj from '../types/VariableCostObj'
 import type reportState from '@/types/reportState'
@@ -28,15 +24,12 @@ export const useReportStore = defineStore('reportStore', {
       return this.payPerMonth * 12
     },
     averageYearlySavings(): number {
-      // const ownersDrawStore = useOwnersDrawStore()
       return this.savingsPerMonth * 12
     },
     averageYearlyFixedCosts(): number {
-      // const fixedCostStore = useFixedCostStore()
       return this.totalFixedCosts * 12
     },
     averageYearlyVariableCosts(): number {
-      // const variableCostStore = useVariableCostStore()
       return this.totalVariableCosts * 12
     },
     costOfDoingBusiness(): number {
@@ -48,17 +41,14 @@ export const useReportStore = defineStore('reportStore', {
       )
     },
     bookingsToBreakEven(): number | string {
-      // const bookingIncomeStore = useBookingIncomeStore()
       return this.priceAveragePerBooking === 0 //prevents divide by 0 error
         ? 'Cannot Determine without Average Price Per Booking'
         : this.costOfDoingBusiness / this.priceAveragePerBooking
     },
     averageYearlyBookings(): number {
-      // const bookingIncomeStore = useBookingIncomeStore()
       return this.bookingsPerMonth * 12
     },
     hoursWorkedYearly(): number {
-      // const bookingIncomeStore = useBookingIncomeStore()
       return this.hoursAveragePerBooking * this.bookingsPerMonth * 12
     },
     averageHourlyRate(): any {
@@ -67,11 +57,9 @@ export const useReportStore = defineStore('reportStore', {
         : this.averageYearlyPay / this.hoursWorkedYearly
     },
     averageYearlyIncome(): number | string {
-      // const bookingIncomeStore = useBookingIncomeStore()
       return this.hoursWorkedYearly === 0 //prevents divide by 0 error
         ? 'Cannot Determine without Hours Worked Yearly'
-        : this.averageYearlyBookings * this.priceAveragePerBooking -
-            this.costOfDoingBusiness
+        : this.averageYearlyBookings * this.priceAveragePerBooking - this.costOfDoingBusiness
     }
   },
   actions: {
@@ -96,7 +84,7 @@ export const useReportStore = defineStore('reportStore', {
       fixedCost.individualTotal = formatMoney(totalNum)
       this.fixedCosts.push(fixedCost)
       this.totalFixedCostAction()
-    }, 
+    },
     addBookingsPerMonthAction(bookingsPerMonth: number) {
       this.bookingsPerMonth = bookingsPerMonth
     },
@@ -111,7 +99,7 @@ export const useReportStore = defineStore('reportStore', {
     },
     addSavingsPerMonthAction(savingsPerMonth: number) {
       this.savingsPerMonth = savingsPerMonth
-    }, 
+    },
     addUserEmailAction(userEmail: string) {
       this.userEmail = userEmail
     },

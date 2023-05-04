@@ -1,13 +1,10 @@
 <script setup lang="ts">
-// import { useFixedCostStore } from '@/stores/fixedCostStore'
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 
 defineProps(['fixedCost'])
 
-// const fixedCostStore = useFixedCostStore()
 const reportStore = useReportStore()
-// const { fixedCosts } = storeToRefs(fixedCostStore)
 const { fixedCosts } = storeToRefs(reportStore)
 </script>
 

@@ -1,10 +1,6 @@
 <script setup lang="ts">
-// import { useCompanyStore } from '@/stores/companyStore'
-// import { useOwnersDrawStore } from '@/stores/ownersDrawStore'
 import { useReportStore } from '@/stores/reportStore'
 
-// const ownersDrawStore = useOwnersDrawStore()
-// const companyStore = useCompanyStore()
 const reportStore = useReportStore()
 </script>
 <template>

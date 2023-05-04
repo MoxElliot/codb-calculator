@@ -1,10 +1,8 @@
 <script setup lang="ts">
-// import { useBookingIncomeStore } from '../../stores/bookingIncomeStore'
 import { useReportStore } from '../../stores/reportStore'
 import { ref } from 'vue'
 import DataInput from '../FormComponents/DataInput.vue'
 
-// const bookingIncomeStore = useBookingIncomeStore()
 const reportStore = useReportStore()
 
 const bookingsPerMonth = ref<number>()

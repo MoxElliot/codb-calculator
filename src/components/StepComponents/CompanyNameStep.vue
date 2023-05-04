@@ -1,11 +1,9 @@
 <script setup lang="ts">
-// import { useCompanyStore } from '@/stores/companyStore'
 import { useReportStore } from '@/stores/reportStore'
 import { ref } from 'vue'
 import DataInput from '../FormComponents/DataInput.vue'
 
 const inputCompanyName = ref('')
-// const companyStore = useCompanyStore()
 const reportStore = useReportStore()
 </script>
 
