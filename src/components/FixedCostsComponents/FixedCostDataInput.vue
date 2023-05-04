@@ -26,9 +26,9 @@ const handleAddCost = () => {
   })
   fixedCostName.value = ''
   fixedCostCategory.value = ''
-  fixedCostAmount.value = undefined
+  fixedCostAmount.value = 0.00
   fixedCostPeriod.value = ''
-  fixedCostTotal.value = undefined
+  fixedCostTotal.value = 0.00
 }
 </script>
 

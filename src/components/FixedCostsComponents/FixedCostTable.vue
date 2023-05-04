@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useFixedCostStore } from '@/stores/fixedCostStore'
 import { storeToRefs } from 'pinia'
+import formatMoney from '../../assets/utility_functions/formatMoney'
 
 defineProps(['fixedCost'])
 
-const { fixedCosts } = storeToRefs(useFixedCostStore())
 const fixedCostStore = useFixedCostStore()
+const { fixedCosts } = storeToRefs(fixedCostStore)
 
 </script>
 
