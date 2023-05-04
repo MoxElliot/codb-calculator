@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { useUserEmailStore } from '../../stores/userEmailStore'
+// import { useUserEmailStore } from '../../stores/userEmailStore'
+import { useReportStore } from '../../stores/reportStore'
 import { ref } from 'vue'
 import DataInput from '../FormComponents/DataInput.vue'
 
-const userEmailStore = useUserEmailStore()
+// const userEmailStore = useUserEmailStore()
+const reportStore = useReportStore()
 
 const userEmail = ref<string>('')
 </script>
@@ -18,7 +20,7 @@ const userEmail = ref<string>('')
       label="Email Address"
       type="email"
       id="user-email-address"
-      @blur="userEmailStore.addUserEmailAction($event.target.value)"
+      @blur="reportStore.addUserEmailAction($event.target.value)"
     />
   </div>
 </template>

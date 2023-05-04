@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { useOwnersDrawStore } from '@/stores/ownersDrawStore'
+// import { useOwnersDrawStore } from '@/stores/ownersDrawStore'
+import { useReportStore } from '@/stores/reportStore'
 import { ref } from 'vue'
 import DataInput from '../FormComponents/DataInput.vue'
 
-const ownersDrawStore = useOwnersDrawStore()
+// const ownersDrawStore = useOwnersDrawStore()
+const reportStore = useReportStore()
 
 const payPerMonth = ref<number>()
 const savingsPerMonth = ref<number>()
@@ -20,7 +22,7 @@ const savingsPerMonth = ref<number>()
       label="$"
       type="number"
       id="pay-per-month"
-      @blur="ownersDrawStore.addPayPerMonthAction($event.target.value)"
+      @blur="reportStore.addPayPerMonthAction($event.target.value)"
     />
   </div>
   <div>
@@ -30,7 +32,7 @@ const savingsPerMonth = ref<number>()
       label="$"
       type="number"
       id="savings-per-month"
-      @blur="ownersDrawStore.addSavingsPerMonthAction($event.target.value)"
+      @blur="reportStore.addSavingsPerMonthAction($event.target.value)"
     />
   </div>
 </template>

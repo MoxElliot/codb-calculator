@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useCompanyStore } from '@/stores/companyStore'
-import { useOwnersDrawStore } from '@/stores/ownersDrawStore'
+// import { useCompanyStore } from '@/stores/companyStore'
+// import { useOwnersDrawStore } from '@/stores/ownersDrawStore'
 import { useReportStore } from '@/stores/reportStore'
-import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
-import VariableCostTable from '../VariableCostsComponents/VariableCostTable.vue'
 
-const ownersDrawStore = useOwnersDrawStore()
-const companyStore = useCompanyStore()
+// const ownersDrawStore = useOwnersDrawStore()
+// const companyStore = useCompanyStore()
 const reportStore = useReportStore()
 </script>
 <template>
@@ -14,7 +12,7 @@ const reportStore = useReportStore()
     <h4>Final Report Step</h4>
   </div>
   <div class="m-3">
-    <p>Company Name: {{ companyStore.companyName }}</p>
+    <p>Company Name: {{ reportStore.companyName }}</p>
   </div>
   <div class="m-3">
     <p>Your Yearly Variable Costs</p>
@@ -25,14 +23,14 @@ const reportStore = useReportStore()
   <div class="m-3">
     <div>
       <p>Your Yearly Savings</p>
-      <p>${{ reportStore.avereageYearlySavings }}</p>
+      <p>${{ reportStore.averageYearlySavings }}</p>
     </div>
     <div>
       <p>Owners Draw (Yearly Salary)</p>
       <p>${{ reportStore.averageYearlyPay }}</p>
     </div>
     <div>
-      <p>{{ companyStore.companyName }}'s Cost of Doing Business'</p>
+      <p>{{ reportStore.companyName }}'s Cost of Doing Business'</p>
       <p>${{ reportStore.costOfDoingBusiness }}</p>
     </div>
   </div>

@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { useCompanyStore } from '@/stores/companyStore'
+// import { useCompanyStore } from '@/stores/companyStore'
+import { useReportStore } from '@/stores/reportStore'
 import { ref } from 'vue'
 import DataInput from '../FormComponents/DataInput.vue'
 
 const inputCompanyName = ref('')
-const companyStore = useCompanyStore()
+// const companyStore = useCompanyStore()
+const reportStore = useReportStore()
 </script>
 
 <template>
@@ -13,6 +15,6 @@ const companyStore = useCompanyStore()
     label="Company Name:"
     type="input"
     id="price-average-per-booking"
-    @blur="companyStore.addCompanyNameAction($event.target.value)"
+    @blur="reportStore.addCompanyNameAction($event.target.value)"
   />
 </template>
