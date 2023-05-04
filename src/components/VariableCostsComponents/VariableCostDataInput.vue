@@ -21,7 +21,7 @@ const handleAddCost = () => {
   })
   variableCostName.value = ''
   variableCostCategory.value = ''
-  variableCostAmount.value = undefined
+  variableCostAmount.value = 0.00
 }
 </script>
 

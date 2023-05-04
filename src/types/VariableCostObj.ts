@@ -2,7 +2,7 @@ type VariableCostObj = {
   id: number
   name: string
   category: string
-  amount: number | undefined
+  amount: number | any
 }
 
 export default VariableCostObj

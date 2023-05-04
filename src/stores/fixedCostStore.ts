@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import type FixedCostObj from '../types/FixedCostObj'
 import type FixedCostState from '../types/FixedCostState'
 import payPeriodOptionsArray from '@/assets/payPeriodOptionsArray'
+import formatMoney from '../assets/utility_functions/formatMoney'
 
 export const useFixedCostStore = defineStore('fixedCostStore', {
   state: (): FixedCostState => ({
@@ -14,7 +15,8 @@ export const useFixedCostStore = defineStore('fixedCostStore', {
       Object.entries(this.fixedCosts).forEach(([key, val]) => {
         costArr.push(Number(val.individualTotal)) //Unsure why amount is a string, my data-input is typed to number
       })
-      this.totalFixedCosts = costArr.reduce((a, b) => a + b)
+      const totalNum: number = costArr.reduce((a, b) => a + b)
+      this.totalFixedCosts = formatMoney(totalNum)
     },
     addFixedCostAction(fixedCost: FixedCostObj) {
       const payPeriodMultiplierElement = payPeriodOptionsArray.find(
@@ -22,7 +24,8 @@ export const useFixedCostStore = defineStore('fixedCostStore', {
       )
       const payPeriodMultiplier: any = payPeriodMultiplierElement?.multiplier
 
-      fixedCost.individualTotal = (fixedCost.amount as number) * payPeriodMultiplier
+      const totalNum: number = (fixedCost.amount as number) * payPeriodMultiplier
+      fixedCost.individualTotal = formatMoney(totalNum)
       this.fixedCosts.push(fixedCost)
       this.totalFixedCostAction()
     }
