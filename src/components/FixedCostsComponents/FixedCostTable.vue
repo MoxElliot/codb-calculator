@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { useFixedCostStore } from '@/stores/fixedCostStore'
+import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
-import formatMoney from '../../assets/utility_functions/formatMoney'
 
 defineProps(['fixedCost'])
 
-const fixedCostStore = useFixedCostStore()
-const { fixedCosts } = storeToRefs(fixedCostStore)
-
+const reportStore = useReportStore()
+const { fixedCosts } = storeToRefs(reportStore)
 </script>
 
 <template>
@@ -24,7 +22,7 @@ const { fixedCosts } = storeToRefs(fixedCostStore)
       <p class="flex-1">${{ fixedCost.individualTotal }}</p>
     </div>
   </div>
-  <p>Total Monthly Fixed Costs ${{  fixedCostStore.totalFixedCosts }}</p>
+  <p>Total Monthly Fixed Costs ${{ reportStore.totalFixedCosts }}</p>
 </template>
 
 <style scoped></style>

@@ -1,4 +1,4 @@
-type FixedCostObj = {
+interface FixedCostObj {
   id: number
   name: string
   category: string
