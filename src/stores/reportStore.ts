@@ -8,15 +8,15 @@ import formatMoney from '../assets/utility_functions/formatMoney'
 export const useReportStore = defineStore('reportStore', {
   state: (): reportState => ({
     companyName: '',
-    bookingsPerMonth: 4,
-    priceAveragePerBooking: 500.0,
-    hoursAveragePerBooking: 10,
+    bookingsPerMonth: 0,
+    priceAveragePerBooking: 0.0,
+    hoursAveragePerBooking: 0,
     variableCosts: [],
-    totalVariableCosts: 500.0,
+    totalVariableCosts: 0.00,
     fixedCosts: [],
-    totalFixedCosts: 500.0,
-    payPerMonth: 500.0,
-    savingsPerMonth: 500.0,
+    totalFixedCosts: 0.00,
+    payPerMonth: 0.00,
+    savingsPerMonth: 0.00,
     userEmail: ''
   }),
   actions: {
