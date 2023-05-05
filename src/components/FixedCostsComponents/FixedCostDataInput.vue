@@ -1,13 +1,21 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
-import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { ref, type WritableComputedRef, computed, reactive } from 'vue'
 import costCategoryOptions from '../../assets/costCategoryOptions'
 import costPeriodOptions from '../../assets/costPeriodOptions'
 import DataInput from '../FormComponents/DataInput.vue'
 import FormButton from '../FormComponents/FormButton.vue'
 import DataSelect from '../FormComponents/DataSelect.vue'
 
+
 const reportStore = useReportStore()
+// const { fixedCosts.name, fixedCosts.category, fixedCosts.amount, fixedCosts.period, fixedCosts.individualTotal } = storeToRefs(reportStore)
+
+const {  fixedCosts } = storeToRefs(reportStore) 
+//computed 
+const fixedCostObj = computed(() => fixedCosts)
+
 
 const fixedCostName = ref<string>('')
 const fixedCostCategory = ref<string>('')
@@ -26,9 +34,10 @@ const handleAddCost = () => {
   })
   fixedCostName.value = ''
   fixedCostCategory.value = ''
-  fixedCostAmount.value = 0.00
+  fixedCostAmount.value = 0.0
   fixedCostPeriod.value = ''
-  fixedCostTotal.value = 0.00
+  fixedCostTotal.value = 0.0
+  console.log("hello", fixedCostObj)
 }
 </script>
 
@@ -65,11 +74,7 @@ const handleAddCost = () => {
       />
     </fieldset>
     <div class="flex flex-col w-16 justify-center">
-      <form-button 
-        label="Add"
-        @click="handleAddCost"
-        class="font-bold"
-        />
+      <form-button label="Add" @click="handleAddCost" class="font-bold" />
     </div>
   </form>
 </template>
