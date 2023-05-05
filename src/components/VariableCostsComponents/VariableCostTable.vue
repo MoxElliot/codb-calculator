@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useVariableCostStore } from '@/stores/variableCostStore'
+import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 
 defineProps(['variableCost'])
 
-const { variableCosts } = storeToRefs(useVariableCostStore())
-const variableCostStore = useVariableCostStore()
+const reportStore = useReportStore()
+const { variableCosts } = storeToRefs(useReportStore())
 </script>
 
 <template>
@@ -20,7 +20,7 @@ const variableCostStore = useVariableCostStore()
       <p class="flex-1">$ {{ variableCost.amount }}</p>
     </div>
   </div>
-  <p>Total Monthly Variable Costs ${{ variableCostStore.totalVariableCosts }}</p>
+  <p>Total Monthly Variable Costs ${{ reportStore.totalVariableCosts }}</p>
 </template>
 
 <style scoped></style>
