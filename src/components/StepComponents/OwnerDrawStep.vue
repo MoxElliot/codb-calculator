@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
-import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
 import DataInput from '../FormComponents/DataInput.vue'
 
 const reportStore = useReportStore()
-
-const payPerMonth = ref<number>()
-const savingsPerMonth = ref<number>()
+const { payPerMonth, savingsPerMonth } = storeToRefs(reportStore)
+const { addPayPerMonthAction, addSavingsPerMonthAction } = reportStore
 </script>
 
 <template>
@@ -20,7 +19,7 @@ const savingsPerMonth = ref<number>()
       label="$"
       type="number"
       id="pay-per-month"
-      @blur="reportStore.addPayPerMonthAction($event.target.value)"
+      @blur="addPayPerMonthAction($event.target.value)"
     />
   </div>
   <div>
@@ -30,7 +29,7 @@ const savingsPerMonth = ref<number>()
       label="$"
       type="number"
       id="savings-per-month"
-      @blur="reportStore.addSavingsPerMonthAction($event.target.value)"
+      @blur="addSavingsPerMonthAction($event.target.value)"
     />
   </div>
 </template>
