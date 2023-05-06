@@ -5,7 +5,21 @@ import { storeToRefs } from 'pinia'
 defineProps(['fixedCost'])
 
 const reportStore = useReportStore()
-const { fixedCosts } = storeToRefs(reportStore)
+const { fixedCosts, totalFixedCosts } = storeToRefs(reportStore)
+const { totalFixedCostAction } = reportStore
+
+const deleteCost = (fixedCost: {
+  id: number
+  name: string
+  category: string
+  amount: number | undefined
+  payPeriod: string
+  individualTotal: number | undefined
+}) => {
+  const filtersList = reportStore.fixedCosts.filter((el) => el !== fixedCost)
+  reportStore.fixedCosts = filtersList
+  totalFixedCostAction()
+}
 </script>
 
 <template>
@@ -20,9 +34,8 @@ const { fixedCosts } = storeToRefs(reportStore)
       <p class="flex-1">${{ fixedCost.amount }}</p>
       <p class="flex-1">{{ fixedCost.payPeriod }}</p>
       <p class="flex-1">${{ fixedCost.individualTotal }}</p>
+      <button class="mx-2 border border-black" @click="deleteCost(fixedCost)">X</button>
     </div>
   </div>
-  <p>Total Monthly Fixed Costs ${{ reportStore.totalFixedCosts }}</p>
+  <p>Total Monthly Fixed Costs ${{ totalFixedCosts }}</p>
 </template>
-
-<style scoped></style>
