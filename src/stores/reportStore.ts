@@ -7,19 +7,19 @@ import formatMoney from '../assets/utility_functions/formatMoney'
 
 export const useReportStore = defineStore('reportStore', {
   state: (): reportState => ({
-    companyName: 'PhotoBomb',
-    bookingsPerMonth: 4,
-    priceAveragePerBooking: 1000.00,
-    hoursAveragePerBooking: 15,
+    companyName: '',
+    bookingsPerMonth: 0,
+    priceAveragePerBooking: 0.00,
+    hoursAveragePerBooking: 0,
     variableCosts: [] as VariableCostObj[],
-    totalVariableCosts: 1000.00,
+    totalVariableCosts: 0.00,
     fixedCosts: [
       // { id: 1, name: 'Rent', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },
       // { id: 2, name: 'Parking', category: 'Overhead', amount: 80, payPeriod: 'weekly', individualTotal: 320 }
     ] as FixedCostObj[],
-    totalFixedCosts: 1500.00,
-    payPerMonth: 250.00,
-    savingsPerMonth: 250.00,
+    totalFixedCosts: 0.00,
+    payPerMonth: 0.00,
+    savingsPerMonth: 0.00,
     userEmail: ''
   }),
   actions: {
@@ -34,7 +34,7 @@ export const useReportStore = defineStore('reportStore', {
       Object.entries(this.fixedCosts).forEach(([key, val]) => {
         costArr.push(Number(val.individualTotal)) //Unsure why amount is a string, my data-input is typed to number
       })
-      const totalNum: number = costArr.reduce((a, b) => a + b)
+      const totalNum: number = costArr.reduce((a, b) => a + b, 0)
       this.totalFixedCosts = formatMoney(totalNum)
     },
     addFixedCostAction(fixedCost: FixedCostObj) {
@@ -71,13 +71,13 @@ export const useReportStore = defineStore('reportStore', {
       Object.entries(this.variableCosts).forEach(([key, val]) => {
         costArr.push(Number(val.amount)) //Unsure why amount is a string, my data-input is typed to number
       })
-      const totalNum: number = costArr.reduce((a, b) => a + b)
+      const totalNum: number = costArr.reduce((a, b) => a + b, 0)
       this.totalVariableCosts = formatMoney(totalNum)
     },
     addVariableCostAction(variableCost: VariableCostObj) {
       this.variableCosts.push(variableCost)
       this.totalVariableCostAction()
-    }
+    },
   },
 
   getters: {

@@ -5,7 +5,19 @@ import { storeToRefs } from 'pinia'
 defineProps(['variableCost'])
 
 const reportStore = useReportStore()
-const { variableCosts } = storeToRefs(useReportStore())
+const { variableCosts, totalVariableCosts } = storeToRefs(reportStore)
+const { totalVariableCostAction } = reportStore
+
+const deleteCost = (variableCost: {
+  id: number
+  name: string
+  category: string
+  amount: number | undefined
+}) => {
+  const filtersList = reportStore.variableCosts.filter((el) => el !== variableCost)
+  reportStore.variableCosts = filtersList
+  totalVariableCostAction()
+}
 </script>
 
 <template>
@@ -18,9 +30,10 @@ const { variableCosts } = storeToRefs(useReportStore())
       <p class="flex-1">{{ variableCost.name }}</p>
       <p class="flex-1">{{ variableCost.category }}</p>
       <p class="flex-1">$ {{ variableCost.amount }}</p>
+      <button class="mx-2 border border-black" @click="deleteCost(variableCost)">X</button>
     </div>
   </div>
-  <p>Total Monthly Variable Costs ${{ reportStore.totalVariableCosts }}</p>
+  <p>Total Monthly Variable Costs ${{ totalVariableCosts }}</p>
 </template>
 
 <style scoped></style>
