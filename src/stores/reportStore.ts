@@ -23,7 +23,7 @@ export const useReportStore = defineStore('reportStore', {
     userEmail: ''
   }),
   actions: {
-    averageYearly(num: number) {
+    averageYearlyAction(num: number) {
       return num * 12
     },
     addCompanyNameAction(companyName: string) {
