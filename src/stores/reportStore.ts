@@ -90,27 +90,15 @@ export const useReportStore = defineStore('reportStore', {
       )
     },
     bookingsToBreakEven(): number {
-      // return this.priceAveragePerBooking === 0 //prevents divide by 0 error
-      //   ? 'Cannot Determine without Average Price Per Booking'
-      //   : this.monthlyCostOfDoingBusiness / this.priceAveragePerBooking
-      console.log("break even codb",this.costOfDoingBusiness )
-      console.log("break even priceAve", this.priceAveragePerBooking )
-      console.log("break even total", Math.ceil(this.costOfDoingBusiness / this.priceAveragePerBooking) )
       return (Math.ceil(this.costOfDoingBusiness / this.priceAveragePerBooking))
     },
     monthlyHoursWorked(): number {
       return this.hoursAveragePerBooking * this.bookingsPerMonth
     },
     averageMonthlyHourlyRate(): number {
-      // return this.monthlyHoursWorked === 0 //prevents divide by 0 error
-      //   ? 'Cannot Determine without Hours Worked Yearly'
-      //   : this.payPerMonth / this.monthlyHoursWorked
       return this.payPerMonth / this.monthlyHoursWorked
     },
     averageYearlyIncome(): number {
-      // return this.monthlyHoursWorked === 0 //prevents divide by 0 error
-      //   ? 'Cannot Determine without Hours Worked Yearly'
-      //   : formatMoney(this.bookingsPerMonth * this.priceAveragePerBooking - (this.costOfDoingBusiness/12))
       return formatMoney(
         (this.bookingsPerMonth * this.priceAveragePerBooking * 12) - (this.costOfDoingBusiness)
       )

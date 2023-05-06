@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { useReportStore } from '../../stores/reportStore'
-// import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import DataInput from '../FormComponents/DataInput.vue'
 
 const reportStore = useReportStore()
 const { userEmail } = storeToRefs(reportStore)
 const { addUserEmailAction } = reportStore
-
-// const userEmail = ref<string>('')
-
 </script>
 <template>
   <div>

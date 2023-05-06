@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useReportStore } from '../../stores/reportStore'
-// import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import DataInput from '../FormComponents/DataInput.vue'
 
@@ -9,10 +8,6 @@ const { bookingsPerMonth, priceAveragePerBooking, hoursAveragePerBooking } =
   storeToRefs(reportStore)
 const { addBookingsPerMonthAction, addPricePerBookingAction, addHoursPerBookingAction } =
   reportStore
-
-// const bookingsPerMonth = ref<number>()
-// const priceAveragePerBooking = ref<number>()
-// const hoursAveragePerBooking = ref<number>()
 </script>
 
 <template>

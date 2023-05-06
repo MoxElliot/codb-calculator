@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
-// import { ref } from 'vue'
 import DataInput from '../FormComponents/DataInput.vue'
 
 const reportStore = useReportStore()
 const { payPerMonth, savingsPerMonth } = storeToRefs(reportStore)
 const { addPayPerMonthAction, addSavingsPerMonthAction } = reportStore
-
-// const payPerMonth = ref<number>()
-// const savingsPerMonth = ref<number>()
 </script>
 
 <template>
