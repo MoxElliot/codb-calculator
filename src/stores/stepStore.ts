@@ -25,8 +25,8 @@ export const useStepStore = defineStore('stepStore', {
     }
   },
   getters: {
-    stepProgressPercent(): number {
-      return (this.stepProgress = this.stepNum / stepsArray.length)
+    stepProgressPercent(): number {  //+(...).toFixed(2) is temporary to keep the percentage as a number with two digits. Will remove once this number is not displayed and used for CSS Progress bar
+      return (this.stepProgress = +((this.stepNum / (stepsArray.length-1)) * 100).toFixed(2))
     }
   }
 })
