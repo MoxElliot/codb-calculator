@@ -17,7 +17,7 @@ const {
 } = storeToRefs(reportStore)
 
 const {
-  averageYearly,
+  averageYearlyAction,
   costOfDoingBusiness,
   bookingsToBreakEven,
   averageMonthlyHourlyRate,
@@ -36,16 +36,16 @@ const {
     <p>Your Yearly Variable Costs</p>
     <p>{{ totalVariableCosts }}</p>
     <p>Your Yearly Fixed Costs</p>
-    <p>{{ averageYearly(totalFixedCosts) }}</p>
+    <p>{{ averageYearlyAction(totalFixedCosts) }}</p>
   </div>
   <div class="m-3">
     <div>
       <p>Your Yearly Savings</p>
-      <p>{{ averageYearly(savingsPerMonth) }}</p>
+      <p>{{ averageYearlyAction(savingsPerMonth) }}</p>
     </div>
     <div>
       <p>Owners Draw (Yearly Salary)</p>
-      <p>{{ averageYearly(payPerMonth) }}</p>
+      <p>{{ averageYearlyAction(payPerMonth) }}</p>
     </div>
     <div>
       <p>{{ companyName }}'s Cost of Doing Business'</p>
@@ -59,17 +59,17 @@ const {
     </div>
     <div>
       <p>Average Yearly Bookings</p>
-      <p>{{ averageYearly(bookingsPerMonth) }}</p>
+      <p>{{ averageYearlyAction(bookingsPerMonth) }}</p>
     </div>
     <div>
       <p>Average Hours Worked Per Year</p>
       <p>
-        {{ averageYearly(hoursAveragePerBooking * bookingsPerMonth) }}
+        {{ averageYearlyAction(hoursAveragePerBooking * bookingsPerMonth) }}
       </p>
     </div>
     <div>
       <p>Your Hourly Rate</p>
-      <p>${{ averageYearly(averageMonthlyHourlyRate) }}</p>
+      <p>${{ averageYearlyAction(averageMonthlyHourlyRate) }}</p>
     </div>
     <div>
       <p>Your Average Yearly Income</p>
