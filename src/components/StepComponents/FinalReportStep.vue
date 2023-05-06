@@ -21,7 +21,7 @@ const {
   costOfDoingBusiness,
   bookingsToBreakEven,
   averageMonthlyHourlyRate,
-  averageMonthlyIncome
+  averageYearlyIncome
 } = reportStore
 </script>
 
@@ -34,9 +34,9 @@ const {
   </div>
   <div class="m-3">
     <p>Your Yearly Variable Costs</p>
-    <p>{{ averageYearly(totalVariableCosts) }}</p>
+    <p>{{ totalVariableCosts }}</p>
     <p>Your Yearly Fixed Costs</p>
-    <p>{{ totalFixedCosts }}</p>
+    <p>{{ averageYearly(totalFixedCosts) }}</p>
   </div>
   <div class="m-3">
     <div>
@@ -55,7 +55,7 @@ const {
   <div class="m-3">
     <div>
       <p>Number of Yearly Bookings to Break Even</p>
-      <p>{{ averageYearly(bookingsToBreakEven) }}</p>
+      <p>{{ bookingsToBreakEven }}</p>
     </div>
     <div>
       <p>Average Yearly Bookings</p>
@@ -73,7 +73,7 @@ const {
     </div>
     <div>
       <p>Your Average Yearly Income</p>
-      <p>${{ averageYearly(averageMonthlyIncome) }}</p>
+      <p>${{ averageYearlyIncome }}</p>
     </div>
   </div>
 </template>

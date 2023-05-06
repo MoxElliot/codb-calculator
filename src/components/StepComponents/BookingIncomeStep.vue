@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { useReportStore } from '../../stores/reportStore'
-import { ref } from 'vue'
+// import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
 import DataInput from '../FormComponents/DataInput.vue'
 
 const reportStore = useReportStore()
+const { bookingsPerMonth, priceAveragePerBooking, hoursAveragePerBooking } =
+  storeToRefs(reportStore)
+const { addBookingsPerMonthAction, addPricePerBookingAction, addHoursPerBookingAction } =
+  reportStore
 
-const bookingsPerMonth = ref<number>()
-const priceAveragePerBooking = ref<number>()
-const hoursAveragePerBooking = ref<number>()
+// const bookingsPerMonth = ref<number>()
+// const priceAveragePerBooking = ref<number>()
+// const hoursAveragePerBooking = ref<number>()
 </script>
 
 <template>
@@ -21,7 +26,7 @@ const hoursAveragePerBooking = ref<number>()
       label="In a month, I typicaly book"
       type="number"
       id="bookings-per-month"
-      @blur="reportStore.addBookingsPerMonthAction($event.target.value)"
+      @blur="addBookingsPerMonthAction($event.target.value)"
     />
     <p>shoots!</p>
   </div>
@@ -33,7 +38,7 @@ const hoursAveragePerBooking = ref<number>()
         label="$"
         type="number"
         id="price-average-per-booking"
-        @blur="reportStore.addPricePerBookingAction($event.target.value)"
+        @blur="addPricePerBookingAction($event.target.value)"
       />
     </div>
     <div>
@@ -43,7 +48,7 @@ const hoursAveragePerBooking = ref<number>()
         label="Hours"
         type="number"
         id="hour-average-per-booking"
-        @blur="reportStore.addHoursPerBookingAction($event.target.value)"
+        @blur="addHoursPerBookingAction($event.target.value)"
       />
     </div>
   </div>
