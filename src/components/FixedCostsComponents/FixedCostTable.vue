@@ -8,8 +8,16 @@ const reportStore = useReportStore()
 const { fixedCosts, totalFixedCosts } = storeToRefs(reportStore)
 const { totalFixedCostAction } = reportStore
 
-const deleteCost = (index:number) => {
-  reportStore.fixedCosts.splice(index, 1)
+const deleteCost = (fixedCost: {
+  id: number
+  name: string
+  category: string
+  amount: number | undefined
+  payPeriod: string
+  individualTotal: number | undefined
+}) => {
+  const filtersList = reportStore.fixedCosts.filter((el) => el !== fixedCost)
+  reportStore.fixedCosts = filtersList
   totalFixedCostAction()
 }
 </script>
@@ -17,7 +25,7 @@ const deleteCost = (index:number) => {
 <template>
   <div
     class="fixed-cost-table border border-black"
-    v-for="(fixedCost,index) in fixedCosts"
+    v-for="fixedCost in fixedCosts"
     :key="fixedCost.id"
   >
     <div class="fixed-cost-row flex flex-row flex-1">
@@ -26,7 +34,7 @@ const deleteCost = (index:number) => {
       <p class="flex-1">${{ fixedCost.amount }}</p>
       <p class="flex-1">{{ fixedCost.payPeriod }}</p>
       <p class="flex-1">${{ fixedCost.individualTotal }}</p>
-      <button class="mx-2 border border-black" @click="deleteCost(index)">X</button>
+      <button class="mx-2 border border-black" @click="deleteCost(fixedCost)">X</button>
     </div>
   </div>
   <p>Total Monthly Fixed Costs ${{ totalFixedCosts }}</p>

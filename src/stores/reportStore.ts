@@ -30,12 +30,11 @@ export const useReportStore = defineStore('reportStore', {
       this.companyName = companyName
     },
     totalFixedCostAction() {
-      console.log("In totalFixedCostAction")
       let costArr: number[] = []
       Object.entries(this.fixedCosts).forEach(([key, val]) => {
         costArr.push(Number(val.individualTotal)) //Unsure why amount is a string, my data-input is typed to number
       })
-      const totalNum: number = costArr.reduce((a, b) => a + b)
+      const totalNum: number = costArr.reduce((a, b) => a + b, 0)
       this.totalFixedCosts = formatMoney(totalNum)
     },
     addFixedCostAction(fixedCost: FixedCostObj) {
@@ -72,7 +71,7 @@ export const useReportStore = defineStore('reportStore', {
       Object.entries(this.variableCosts).forEach(([key, val]) => {
         costArr.push(Number(val.amount)) //Unsure why amount is a string, my data-input is typed to number
       })
-      const totalNum: number = costArr.reduce((a, b) => a + b)
+      const totalNum: number = costArr.reduce((a, b) => a + b, 0)
       this.totalVariableCosts = formatMoney(totalNum)
     },
     addVariableCostAction(variableCost: VariableCostObj) {
