@@ -2,10 +2,13 @@
 import { useStepStore } from '../../stores/stepStore'
 import { storeToRefs } from 'pinia'
 import FormButton from '../FormComponents/FormButton.vue'
+import { useReportStore } from '@/stores/reportStore'
 
 const stepStore = useStepStore()
+const reportStore = useReportStore()
 const { stepPath } = storeToRefs(stepStore)
 const { backStepAction, forwardStepAction } = stepStore
+const { inputValid } = storeToRefs(reportStore)
 
 </script>
 
@@ -23,6 +26,7 @@ const { backStepAction, forwardStepAction } = stepStore
         label="Next"
         @click="forwardStepAction()"
         class="w-32"
+        :disabled= "!inputValid"
       />
     </router-link>
   </div>

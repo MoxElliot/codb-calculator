@@ -8,6 +8,7 @@ const reportStore = useReportStore()
 
 const {
   companyName,
+  userEmail,
   bookingsPerMonth,
   hoursAveragePerBooking,
   totalVariableCosts,
@@ -31,6 +32,7 @@ const {
   </div>
   <div class="m-3">
     <p>Company Name: {{ companyName }}</p>
+    <p>Email Address: {{ userEmail }}</p>
   </div>
   <div class="m-3">
     <p>Your Yearly Variable Costs</p>

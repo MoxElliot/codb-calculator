@@ -13,6 +13,7 @@ interface reportState {
   payPerMonth: number
   savingsPerMonth: number
   userEmail: string
+  inputValid: boolean
 }
 
 export default reportState

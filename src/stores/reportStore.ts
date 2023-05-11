@@ -20,7 +20,8 @@ export const useReportStore = defineStore('reportStore', {
     totalFixedCosts: 0.00,
     payPerMonth: 0.00,
     savingsPerMonth: 0.00,
-    userEmail: ''
+    userEmail: '',
+    inputValid: true,
   }),
   actions: {
     averageYearlyAction(num: number) {
@@ -64,6 +65,7 @@ export const useReportStore = defineStore('reportStore', {
       this.savingsPerMonth = savingsPerMonth
     },
     addUserEmailAction(userEmail: string) {
+      console.log("addUserEmailAction", userEmail)
       this.userEmail = userEmail
     },
     totalVariableCostAction() {
@@ -78,6 +80,10 @@ export const useReportStore = defineStore('reportStore', {
       this.variableCosts.push(variableCost)
       this.totalVariableCostAction()
     },
+    updateInputValidAction(inputValid: boolean) {
+      this.inputValid = inputValid
+      console.log("updateInputValidAction", inputValid, this.inputValid)
+    }
   },
 
   getters: {

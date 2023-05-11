@@ -21,7 +21,7 @@ const $emit = defineEmits<{
 }>()
 
 const handleInputChange = (e: any) => {
-  (e.target as HTMLInputElement).value
+  ;(e.target as HTMLInputElement).value
   return e.target.value
 }
 </script>
@@ -36,7 +36,6 @@ const handleInputChange = (e: any) => {
       v-bind="$attrs"
       :value="modelValue"
       @input="$emit('update:modelValue', handleInputChange($event), ref)"
-      
     />
   </div>
 </template>
