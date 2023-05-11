@@ -28,7 +28,6 @@ const userEmailForm = useForm({
 })
 
 const { value: email, errorMessage: emailError } = useField('email')
-
 </script>
 <template>
   <div>
@@ -37,6 +36,7 @@ const { value: email, errorMessage: emailError } = useField('email')
   <Form :validation-schema="schema">
     <h4>Please Enter Your Email Address to Access the Final Report</h4>
     <data-input
+      validate-on-mount
       v-model="userEmail"
       name="email"
       label="Email Address"

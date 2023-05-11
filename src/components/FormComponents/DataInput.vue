@@ -21,7 +21,7 @@ const $emit = defineEmits<{
 }>()
 
 const handleInputChange = (e: any) => {
-  (e.target as HTMLInputElement).value
+  ;(e.target as HTMLInputElement).value
   return e.target.value
 }
 </script>
