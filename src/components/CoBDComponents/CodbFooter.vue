@@ -9,24 +9,20 @@ const reportStore = useReportStore()
 const { stepPath } = storeToRefs(stepStore)
 const { backStepAction, forwardStepAction } = stepStore
 const { inputValid } = storeToRefs(reportStore)
-
 </script>
 
 <template>
   <div>
     <router-link :to="stepPath">
-      <form-button 
-        label="Previous"
-        @click="backStepAction()"
-        class="w-32"
-      />
+      <form-button label="Previous" @click="backStepAction()" class="w-32" />
     </router-link>
     <router-link :to="stepPath">
-      <form-button 
+      <form-button
         label="Next"
         @click="forwardStepAction()"
         class="w-32"
-        :disabled= "!inputValid"
+        :disabled="!inputValid"
+        :class="{ 'border-2 border-red-700': !inputValid }"
       />
     </router-link>
   </div>
