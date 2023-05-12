@@ -23,6 +23,7 @@ const { inputValid } = storeToRefs(reportStore)
         class="w-32"
         :disabled="!inputValid"
         :class="{ 'border-2 border-red-700': !inputValid }"
+        type="submit"
       />
     </router-link>
   </div>

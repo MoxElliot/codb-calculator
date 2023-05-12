@@ -2,12 +2,20 @@
 import CodbForm from '../CoBDComponents/CodbForm.vue'
 import CodbHeader from '../CoBDComponents/CodbHeader.vue'
 import CodbFooter from '../CoBDComponents/CodbFooter.vue'
+import { useForm } from 'vee-validate'
+
+const { handleSubmit } = useForm()
+
+const onSubmit = handleSubmit(values => {
+  alert(JSON.stringify(values, null, 2))
+})
+
 </script>
 
 <template>
-  <codb-header />
-  <div class="codb-form">
+  <form @submit="onSubmit">
+    <codb-header />
     <codb-form />
-  </div>
-  <codb-footer />
+    <codb-footer />
+  </form>
 </template>
