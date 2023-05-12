@@ -13,19 +13,19 @@ onMounted(() => {
   updateInputValidAction(false)
 })
 
-const theForm = useForm({
-  validationSchema: validationSchema
-})
-
 const userEmail: WritableComputedRef<string> = computed({
   get: () => userEmail.value,
   set: async (text: string) => {
     email.value = text
-    const resp = await theForm.validate()
+    const resp = await userEmailForm.validate()
     console.log('in userEmail set', resp.valid)
     addUserEmailAction(text) //should replace blur
     updateInputValidAction(resp.valid)
   }
+})
+
+const userEmailForm = useForm({
+  validationSchema: validationSchema
 })
 
 const { value: email, errorMessage: emailError } = useField('email')
