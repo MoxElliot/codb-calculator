@@ -1,7 +1,8 @@
 import * as Yup from 'yup'
 
-const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Please Enter Valid Email Address').required('Required!')
+const validationSchema = Yup.object({
+    email: Yup.string().email('Please Enter Valid Email Address').required('Required!'),
+    company: Yup.string().required('Required!')
   })
 
   

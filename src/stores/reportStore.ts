@@ -29,6 +29,7 @@ export const useReportStore = defineStore('reportStore', {
     },
     addCompanyNameAction(companyName: string) {
       this.companyName = companyName
+      console.log("in addCompnayNameAction", this.companyName)
     },
     totalFixedCostAction() {
       let costArr: number[] = []
@@ -65,7 +66,6 @@ export const useReportStore = defineStore('reportStore', {
       this.savingsPerMonth = savingsPerMonth
     },
     addUserEmailAction(userEmail: string) {
-      console.log("addUserEmailAction", userEmail)
       this.userEmail = userEmail
     },
     totalVariableCostAction() {
@@ -82,7 +82,7 @@ export const useReportStore = defineStore('reportStore', {
     },
     updateInputValidAction(inputValid: boolean) {
       this.inputValid = inputValid
-      console.log("updateInputValidAction", inputValid, this.inputValid)
+      console.log("updateInputValidAction", this.inputValid)
     }
   },
 
@@ -108,6 +108,9 @@ export const useReportStore = defineStore('reportStore', {
       return formatMoney(
         (this.bookingsPerMonth * this.priceAveragePerBooking * 12) - (this.costOfDoingBusiness)
       )
+    },
+    getCompanyName(): string {
+      return this.companyName
     }
   }
 })

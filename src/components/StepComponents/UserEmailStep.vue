@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { useReportStore } from '../../stores/reportStore'
-import { useForm, useField, Form } from 'vee-validate'
-import validationSchema from '../../assets/validationSchema'
 import DataInput from '../FormComponents/DataInput.vue'
+import { useForm, useField } from 'vee-validate'
+import * as Yup from 'yup'
 import { computed, onMounted, type WritableComputedRef } from 'vue'
 
 const reportStore = useReportStore()
 const { addUserEmailAction, updateInputValidAction } = reportStore
 
 onMounted(() => {
-  email.value = ''
+  // email.value = ''
   updateInputValidAction(false)
 })
 
@@ -24,12 +24,15 @@ const userEmail: WritableComputedRef<string> = computed({
   }
 })
 
+const schema = Yup.object({
+  email: Yup.string().email('Please Enter Valid Email Address').required('Required!')
+})
+
 const userEmailForm = useForm({
-  validationSchema: validationSchema
+  validationSchema: schema
 })
 
 const { value: email, errorMessage: emailError } = useField('email')
-
 </script>
 <template>
   <div>
@@ -40,7 +43,7 @@ const { value: email, errorMessage: emailError } = useField('email')
     <data-input
       v-model="userEmail"
       name="email"
-      label="Email Address"
+      label="Email Address:"
       type="email"
       id="user-email-address"
     />
