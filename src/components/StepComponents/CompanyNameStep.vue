@@ -2,7 +2,7 @@
 import { useReportStore } from '@/stores/reportStore'
 import * as Yup from 'yup'
 import DataInput from '../FormComponents/DataInput.vue'
-import { computed, onMounted, type WritableComputedRef } from 'vue'
+import { computed, onMounted, onUpdated, type WritableComputedRef } from 'vue'
 import { useForm, useField } from 'vee-validate'
 import { storeToRefs } from 'pinia'
 
@@ -12,18 +12,17 @@ const { companyName } = storeToRefs(reportStore)
 
 onMounted(() => {
   company.value = ''
-  updateInputValidAction(companyName.value === '' ? false : true)
-  console.log("meta", meta.touched, meta.dirty)
 })
 
-//https://codesandbox.io/s/3mebq?file=/src/App.vue
+onUpdated(() => {
+  updateInputValidAction(companyName.value === '' ? false : true)
+})
 
 const companyNameInput: WritableComputedRef<string> = computed({
   get: () => companyNameInput.value,
   set: async (text: string) => {
     company.value = text
     const resp = await companyNameInputForm.validate()
-    // console.log('in companyNameInput set, text', resp.valid, text, companyNameInputForm.validate())
     addCompanyNameAction(text) //should replace blur
     updateInputValidAction(resp.valid)
   }
@@ -39,8 +38,7 @@ const companyNameInputForm = useForm({
 
 const { value: company, errorMessage: companyError, meta } = useField('company')
 
-//computed conditional v-model
-
+//computed
 const companyNameVModel = computed({
   get() {
     if (companyName.value === '') {
@@ -57,13 +55,11 @@ const companyNameVModel = computed({
     }
   }
 })
-
-console.log("In companyNameStep", companyNameInput.value)
 </script>
 
 <template>
   <data-input
-    v-model="companyNameVModel"
+    v-model.trim="companyNameVModel"
     name="company"
     label="Company Name:"
     type="text"
