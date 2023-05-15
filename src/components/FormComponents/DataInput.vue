@@ -8,8 +8,8 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  modelValue: {
-    type: [String, Number]
+  modelValue: {   //was [String, Number] but got error on CompanyNameStep Computed Type 'Ref<string>' is not assignable to type 'string | number | undefined'.ts(2322)
+    
   },
   ref: {
     type: [String, Number]
@@ -21,7 +21,7 @@ const $emit = defineEmits<{
 }>()
 
 const handleInputChange = (e: any) => {
-  ;(e.target as HTMLInputElement).value
+  (e.target as HTMLInputElement).value
   return e.target.value
 }
 </script>
