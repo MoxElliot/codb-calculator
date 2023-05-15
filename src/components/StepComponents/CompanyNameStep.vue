@@ -14,10 +14,6 @@ onMounted(() => {
   updateInputValidAction(companyName.value === '' ? false : true)
 })
 
-onUpdated(() => {
-  console.log('meta', meta.validated)
-})
-
 const companyNameInput: WritableComputedRef<string> = computed({
   get: () => companyName.value,
   set: async (text: string) => {
@@ -29,7 +25,7 @@ const companyNameInput: WritableComputedRef<string> = computed({
 })
 
 const schema = Yup.object({
-  company: Yup.string().required('Required!')
+  company: Yup.string().required('Company Name is Required')
 })
 
 const companyNameInputForm = useForm({
@@ -37,12 +33,10 @@ const companyNameInputForm = useForm({
   initialValues: {
     company: companyName
   },
-  initialErrors: {
-    company: ''
-  }
+  validateOnMount: true
 })
 
-const { value: company, errorMessage: companyError, meta } = useField('company')
+const { value: company, errorMessage: companyError } = useField('company')
 </script>
 
 <template>

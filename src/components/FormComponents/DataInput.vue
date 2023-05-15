@@ -8,7 +8,8 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  modelValue: {   //was [String, Number] but got error on CompanyNameStep Computed Type 'Ref<string>' is not assignable to type 'string | number | undefined'.ts(2322)
+  modelValue: {  
+    type: [String, Number]
     
   },
   ref: {

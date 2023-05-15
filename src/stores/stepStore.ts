@@ -5,8 +5,8 @@ import stepsArray from '@/assets/stepsArray'
 export const useStepStore = defineStore('stepStore', {
   state: (): StepStoreState => ({
     stepNum: 0,
-    stepName: '',
-    stepPath:'',
+    stepName: 'Home',
+    stepPath:'/',
     stepProgress: 0
   }),
   actions: {
