@@ -29,7 +29,6 @@ export const useReportStore = defineStore('reportStore', {
     },
     addCompanyNameAction(companyName: string) {
       this.companyName = companyName
-      console.log("in addCompnayNameAction", this.companyName)
     },
     totalFixedCostAction() {
       let costArr: number[] = []

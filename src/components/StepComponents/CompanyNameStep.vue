@@ -11,19 +11,19 @@ const { addCompanyNameAction, updateInputValidAction } = reportStore
 const { companyName } = storeToRefs(reportStore)
 
 onMounted(() => {
-  company.value = ''
-})
-
-onUpdated(() => {
   updateInputValidAction(companyName.value === '' ? false : true)
 })
 
+onUpdated(() => {
+  console.log('meta', meta.validated)
+})
+
 const companyNameInput: WritableComputedRef<string> = computed({
-  get: () => companyNameInput.value,
+  get: () => companyName.value,
   set: async (text: string) => {
     company.value = text
     const resp = await companyNameInputForm.validate()
-    addCompanyNameAction(text) //should replace blur
+    addCompanyNameAction(text)
     updateInputValidAction(resp.valid)
   }
 })
@@ -33,39 +33,25 @@ const schema = Yup.object({
 })
 
 const companyNameInputForm = useForm({
-  validationSchema: schema
+  validationSchema: schema,
+  initialValues: {
+    company: companyName
+  },
+  initialErrors: {
+    company: ''
+  }
 })
 
 const { value: company, errorMessage: companyError, meta } = useField('company')
-
-//computed
-const companyNameVModel = computed({
-  get() {
-    if (companyName.value === '') {
-      return companyNameInput.value
-    } else {
-      return companyName.value
-    }
-  },
-  set(val) {
-    if (companyName.value === '') {
-      companyNameInput.value = val
-    } else {
-      companyName.value = val
-    }
-  }
-})
 </script>
 
 <template>
   <data-input
-    v-model.trim="companyNameVModel"
+    v-model.trim="companyNameInput"
     name="company"
     label="Company Name:"
     type="text"
     id="company-name"
   />
-  <span class="text-red-700 font-semibold" v-if="companyError && meta.touched">{{
-    companyError
-  }}</span>
+  <span class="text-red-700 font-semibold">{{ companyError }}</span>
 </template>
