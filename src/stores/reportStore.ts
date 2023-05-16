@@ -7,7 +7,7 @@ import formatMoney from '../assets/utility_functions/formatMoney'
 
 export const useReportStore = defineStore('reportStore', {
   state: (): reportState => ({
-    companyName: '',
+    companyName: 'PhotoBomb',
     bookingsPerMonth: 0,
     priceAveragePerBooking: 0.00,
     hoursAveragePerBooking: 0,
