@@ -23,7 +23,11 @@ const {
   averageMonthlyHourlyRate,
   averageYearlyIncome
 } = reportStore
+
+
 </script>
+
+
 
 <template>
   <report-output 

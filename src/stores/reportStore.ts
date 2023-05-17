@@ -81,7 +81,7 @@ export const useReportStore = defineStore('reportStore', {
     },
     updateInputValidAction(inputValid: boolean) {
       this.inputValid = inputValid
-      console.log("updateInputValidAction", this.inputValid)
+      console.log("updateInputValidAction", this.inputValid)  ///this.$route
     }
   },
 

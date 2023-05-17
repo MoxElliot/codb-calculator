@@ -23,7 +23,7 @@ module.exports = {
     }
       
   },
-  colors: {
+  colors: {  ///create object notation for multiple colors
     'test': '#E8F5F3',
     'white':'#FFFFFF',  //main background, text on green
     'lt-blue': '#80bff61a', //message backgrond
