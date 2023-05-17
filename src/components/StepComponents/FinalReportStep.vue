@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
-
-//should fixed costs be multiplied by 12 as they are not reoccuring??
+import ReportOutput from '../FormComponents/ReportOutput.vue'
 
 const reportStore = useReportStore()
 
@@ -14,7 +13,7 @@ const {
   totalVariableCosts,
   totalFixedCosts,
   payPerMonth,
-  savingsPerMonth,
+  savingsPerMonth
 } = storeToRefs(reportStore)
 
 const {
@@ -27,55 +26,84 @@ const {
 </script>
 
 <template>
-  <div class="m-3">
-    <h4>Final Report Step</h4>
-  </div>
-  <div class="m-3">
-    <p>Company Name: {{ companyName }}</p>
-    <p>Email Address: {{ userEmail }}</p>
-  </div>
-  <div class="m-3">
-    <p>Your Yearly Variable Costs</p>
-    <p>{{ totalVariableCosts }}</p>
-    <p>Your Yearly Fixed Costs</p>
-    <p>{{ averageYearlyAction(totalFixedCosts) }}</p>
-  </div>
-  <div class="m-3">
-    <div>
-      <p>Your Yearly Savings</p>
-      <p>{{ averageYearlyAction(savingsPerMonth) }}</p>
-    </div>
-    <div>
-      <p>Owners Draw (Yearly Salary)</p>
-      <p>{{ averageYearlyAction(payPerMonth) }}</p>
-    </div>
-    <div>
-      <p>{{ companyName }}'s Cost of Doing Business'</p>
-      <p>${{ costOfDoingBusiness }}</p>
-    </div>
-  </div>
-  <div class="m-3">
-    <div>
-      <p>Number of Yearly Bookings to Break Even</p>
-      <p>{{ bookingsToBreakEven }}</p>
-    </div>
-    <div>
-      <p>Average Yearly Bookings</p>
-      <p>{{ averageYearlyAction(bookingsPerMonth) }}</p>
-    </div>
-    <div>
-      <p>Average Hours Worked Per Year</p>
-      <p>
-        {{ averageYearlyAction(hoursAveragePerBooking * bookingsPerMonth) }}
-      </p>
-    </div>
-    <div>
-      <p>Your Hourly Rate</p>
-      <p>${{ averageYearlyAction(averageMonthlyHourlyRate) }}</p>
-    </div>
-    <div>
-      <p>Your Average Yearly Income</p>
-      <p>${{ averageYearlyIncome }}</p>
-    </div>
-  </div>
+  <report-output 
+    class="text-xl" 
+    #="{ text }" 
+    label="Final Report"
+  >
+    {{ text }}
+  </report-output>
+  <report-output class="flex" 
+    #="{ text, text2 }" 
+    label="Company Name:" 
+    :variable="companyName"
+  >
+    {{ text }} {{ text2 }}
+  </report-output>
+  <report-output
+    #="{ text, text2 }"
+    label="Your Yearly Variable Costs"
+    :variable="averageYearlyAction(totalFixedCosts)"
+  >
+    {{ text }} {{ text2 }}
+  </report-output>
+  <report-output
+    #="{ text, text2 }"
+    label="Your Yearly Fixed Costs"
+    :variable="averageYearlyAction(totalVariableCosts)"
+  >
+    {{ text }} {{ text2 }}
+  </report-output>
+  <report-output
+    #="{ text, text2 }"
+    label="Owners Draw (Yearly Salary)"
+    :variable="averageYearlyAction(payPerMonth)"
+  >
+    {{ text }} {{ text2 }}
+  </report-output>
+  <report-output
+    #="{ text, text2 }"
+    label="Your Yearly Savings"
+    :variable="averageYearlyAction(savingsPerMonth)"
+  >
+    {{ text }} {{ text2 }}
+  </report-output>
+  <report-output #="{ text, text2 }" label="Cost of Doing Business" :variable="costOfDoingBusiness">
+    {{ text }} {{ text2 }}
+  </report-output>
+  <report-output
+    #="{ text, text2 }"
+    label="Number of Yearly Bookings to Break Even"
+    :variable="bookingsToBreakEven"
+  >
+    {{ text }} {{ text2 }}
+  </report-output>
+  <report-output
+    #="{ text, text2 }"
+    label="Average Yearly Bookings"
+    :variable="averageYearlyAction(bookingsPerMonth)"
+  >
+    {{ text }} {{ text2 }}
+  </report-output>
+  <report-output
+    #="{ text, text2 }"
+    label="Average Hours Worked Per Year"
+    :variable="averageYearlyAction(hoursAveragePerBooking * bookingsPerMonth)"
+  >
+    {{ text }} {{ text2 }}
+  </report-output>
+  <report-output
+    #="{ text, text2 }"
+    label="Your Hourly Rate"
+    :variable="averageYearlyAction(averageMonthlyHourlyRate)"
+  >
+    {{ text }} {{ text2 }}
+  </report-output>
+  <report-output
+    #="{ text, text2 }"
+    label="Your Average Yearly Income"
+    :variable="averageYearlyIncome"
+  >
+    {{ text }} {{ text2 }}
+  </report-output>
 </template>

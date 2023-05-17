@@ -9,23 +9,15 @@ const { inputValid } = storeToRefs(reportStore)
 const stepStore = useStepStore()
 const { stepPath, stepNum, stepName } = storeToRefs(stepStore)
 const { backStepAction, forwardStepAction } = stepStore
-
 </script>
 
 <template>
   <div v-if="stepName !== 'Home'">
     <router-link :to="stepPath">
-      <form-button label="Previous" @click="backStepAction()" class="w-32" />
+      <form-button class="btn-back" label="Back" @click="backStepAction()" />
     </router-link>
     <router-link :to="stepPath">
-      <form-button
-        label="Next"
-        @click="forwardStepAction()"
-        class="w-32"
-        :disabled="!inputValid"
-        :class="{ 'border-2 border-red-700': !inputValid }"
-        type="submit"
-      />
+      <form-button class="btn-next" label="Next Step" @click="forwardStepAction()" />
     </router-link>
     <p>
       hello {{ stepName }} stepNum: {{ stepNum }} stepPath:{{ stepPath }} inputValid:
