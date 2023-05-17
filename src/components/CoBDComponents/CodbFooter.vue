@@ -26,7 +26,7 @@ const { backStepAction, forwardStepAction } = stepStore
   </div>
   <div v-if="stepName === 'Home'">
     <router-link :to="'/company-name-step'">
-      <form-button label="Begin" @click="forwardStepAction()" class="w-32" />
+      <form-button label="Begin" @click="forwardStepAction()" class="btn-next"/>
     </router-link>
     <p>hello {{ stepName }} stepNum: {{ stepNum }} stepPath:{{ stepPath }}</p>
   </div>
