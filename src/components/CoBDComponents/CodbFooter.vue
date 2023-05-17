@@ -6,24 +6,15 @@ import FormButton from '../FormComponents/FormButton.vue'
 const stepStore = useStepStore()
 const { stepPath } = storeToRefs(stepStore)
 const { backStepAction, forwardStepAction } = stepStore
-
 </script>
 
 <template>
   <div>
     <router-link :to="stepPath">
-      <form-button 
-        label="Previous"
-        @click="backStepAction()"
-        class="w-32"
-      />
+      <form-button class="btn-back" label="Back" @click="backStepAction()" />
     </router-link>
     <router-link :to="stepPath">
-      <form-button 
-        label="Next"
-        @click="forwardStepAction()"
-        class="w-32"
-      />
+      <form-button class="btn-next" label="Next Step" @click="forwardStepAction()" />
     </router-link>
   </div>
 </template>

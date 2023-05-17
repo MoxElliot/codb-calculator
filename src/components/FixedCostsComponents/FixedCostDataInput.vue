@@ -67,7 +67,7 @@ const handleAddCost = () => {
         class="basis-1/4 flex-1"
       />
     </fieldset>
-    <div class="flex flex-col w-16 justify-center">
+    <div class="btn-add flex flex-col justify-center">
       <form-button label="Add" @click="handleAddCost" class="font-bold" />
     </div>
   </form>
