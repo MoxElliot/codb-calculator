@@ -11,12 +11,12 @@ const props = defineProps({
 <template>
   <div class="m-3">
     <p class="mr-2">
-      <slot name="top" :text="label">
+      <slot name="top" :1="label">
         {{ label }}
       </slot>
     </p>
     <p>
-      <slot name="bottom" :text2="variable">
+      <slot name="bottom" :2="variable">
         {{ variable }}
       </slot>
     </p>
