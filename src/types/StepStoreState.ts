@@ -1,7 +1,7 @@
 type StepStoreState = {
   stepNum: number
   stepName: string
-  stepPath: string
+  stepCurrent: string
   stepProgress: number
 }
 
