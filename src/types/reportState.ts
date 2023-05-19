@@ -1,5 +1,6 @@
 import type VariableCostObj from './VariableCostObj'
 import type FixedCostObj from './FixedCostObj'
+import type BookingIncomeState from './BookingIncomeState'
 
 interface reportState {
   companyName: string

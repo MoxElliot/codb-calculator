@@ -7,6 +7,20 @@ import formatMoney from '../assets/utility_functions/formatMoney'
 
 export const useReportStore = defineStore('reportStore', {
   state: (): reportState => ({
+    // companyName: 'PhotoBomb',
+    // bookingsPerMonth: 3,
+    // priceAveragePerBooking: 1000.00,
+    // hoursAveragePerBooking: 200,
+    // variableCosts: [{ id: 2, name: 'Parking', category: 'Overhead', amount: 80 }] as VariableCostObj[],
+    // totalVariableCosts: 80.00,
+    // fixedCosts: [
+    //   { id: 1, name: 'Rent', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  }
+    // ] as FixedCostObj[],
+    // totalFixedCosts: 1200.00,
+    // payPerMonth: 200.00,
+    // savingsPerMonth: 200.00,
+    // userEmail: 'e@e.com',
+    // inputValid: true,
     companyName: '',
     bookingsPerMonth: 0,
     priceAveragePerBooking: 0.00,
@@ -14,8 +28,6 @@ export const useReportStore = defineStore('reportStore', {
     variableCosts: [] as VariableCostObj[],
     totalVariableCosts: 0.00,
     fixedCosts: [
-      // { id: 1, name: 'Rent', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },
-      // { id: 2, name: 'Parking', category: 'Overhead', amount: 80, payPeriod: 'weekly', individualTotal: 320 }
     ] as FixedCostObj[],
     totalFixedCosts: 0.00,
     payPerMonth: 0.00,
@@ -24,9 +36,6 @@ export const useReportStore = defineStore('reportStore', {
     inputValid: true,
   }),
   actions: {
-    averageYearlyAction(num: number) {
-      return num * 12
-    },
     addCompanyNameAction(companyName: string) {
       this.companyName = companyName
     },
@@ -110,6 +119,27 @@ export const useReportStore = defineStore('reportStore', {
     },
     getCompanyName(): string {
       return this.companyName
-    }
+    }, 
+    fixedCostYearly(): number {
+      return this.totalFixedCosts * 12
+    },
+    variableCostYearly(): number {
+      return this.totalVariableCosts * 12
+    },
+    payYearly(): number {
+      return this.payPerMonth * 12
+    },
+    savingsYearly(): number {
+      return this.savingsPerMonth * 12
+    },
+    bookingsYearly(): number {
+      return this.bookingsPerMonth * 12
+    },
+    hoursWorkedYearly(): number {
+      return this.monthlyHoursWorked * 12
+    },
+    hourlyRateYearly(): number {
+      return this.averageMonthlyHourlyRate * 12
+    },
   }
 })
