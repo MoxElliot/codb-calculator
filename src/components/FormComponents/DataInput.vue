@@ -8,8 +8,9 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  modelValue: {
+  modelValue: {  
     type: [String, Number]
+    
   },
   ref: {
     type: [String, Number]
@@ -36,7 +37,6 @@ const handleInputChange = (e: any) => {
       v-bind="$attrs"
       :value="modelValue"
       @input="$emit('update:modelValue', handleInputChange($event), ref)"
-      
     />
   </div>
 </template>
