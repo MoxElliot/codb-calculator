@@ -8,17 +8,17 @@ const props = defineProps({
   }
 })
 </script>
-<template>
+<template class="m-3">
   <div class="m-3">
-    <p class="mr-2">
-      <slot name="top" :1="label">
-        {{ label }}
+    <h1 class="mr-2">
+      <slot name="top" >
+        
       </slot>
-    </p>
-    <p>
-      <slot name="bottom" :2="variable">
-        {{ variable }}
+    </h1>
+    <h3>
+      <slot name="bottom" >
+       
       </slot>
-    </p>
+    </h3>
   </div>
 </template>
