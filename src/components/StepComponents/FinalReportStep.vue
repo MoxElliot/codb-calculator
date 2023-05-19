@@ -4,7 +4,7 @@ import reportOutputsArray from '../../assets/reportOutputsArray'
 </script>
 
 <template>
-  <report-output v-for="output in reportOutputsArray" :class="output.class">
+  <report-output v-for="output in reportOutputsArray" :class="output.class" :key=output.id>
     <template #top> {{ output.label }}</template>
     <template #bottom> {{ output.variable }}</template>
   </report-output>
