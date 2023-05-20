@@ -12,7 +12,6 @@ export const useStepStore = defineStore('stepStore', {
     stepNum: index(),
     stepName: stepsArray[index()].name,
     stepCurrent: window.location.pathname,
-    stepProgress: 0
   }),
   actions: {
     forwardStepAction() {
