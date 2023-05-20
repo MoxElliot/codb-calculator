@@ -11,14 +11,32 @@ const stepStore = useStepStore()
 const { stepCurrent, stepNum, stepName } = storeToRefs(stepStore)
 const { backStepAction, forwardStepAction } = stepStore
 
-let currentStep = ''
-onMounted(() =>{
-   currentStep = window.location.pathname
-   console.log("onMounted currentstep", currentStep)
-})
+console.log("in footer", stepCurrent.value)
 </script>
 <template>
-  <div v-if="stepName !== 'Home'">
+  <!-- <div v-if="stepCurrent === '/'">
+    <router-link :to="'/company-name-step'">
+      <form-button label="Begin" @click="forwardStepAction()" class="btn-next" />
+    </router-link>
+  </div>
+  <div v-else-if="stepCurrent === '/company-name-step'">
+    <router-link :to="stepCurrent">
+      <form-button
+        label="Next Step"
+        @click="forwardStepAction()"
+        class="btn-next"
+        :disabled="!inputValid"
+        :class="{ 'border-2 border-red': !inputValid }"
+        type="submit"
+      />
+    </router-link>
+  </div>
+  <div v-else-if="stepCurrent === '/final-report-step'">
+    <router-link :to="stepCurrent">
+      <form-button label="Back" @click="backStepAction()" class="btn-back" />
+    </router-link>
+  </div> -->
+  <div >
     <router-link :to="stepCurrent">
       <form-button label="Back" @click="backStepAction()" class="btn-back" />
     </router-link>
@@ -33,9 +51,5 @@ onMounted(() =>{
       />
     </router-link>
   </div>
-  <div v-if="stepName === 'Home'">
-    <router-link :to="'/company-name-step'">
-      <form-button label="Begin" @click="forwardStepAction()" class="btn-next" />
-    </router-link>
-  </div>
+  
 </template>

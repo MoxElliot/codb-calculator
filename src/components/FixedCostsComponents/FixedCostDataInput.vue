@@ -7,8 +7,6 @@ import costPeriodOptions from '../../assets/costPeriodOptions'
 import DataInput from '../FormComponents/DataInput.vue'
 import FormButton from '../FormComponents/FormButton.vue'
 import DataSelect from '../FormComponents/DataSelect.vue'
-import type FixedCostObj from '../../types/FixedCostObj'
-import { watch, onMounted } from 'vue'
 import { useField } from 'vee-validate'
 import { storeToRefs } from 'pinia'
 
@@ -21,7 +19,6 @@ const fixedCostAmount = ref<number>()
 const fixedCostPeriod = ref<string>('')
 const fixedCostTotal = ref<number>()
 
-console.log('inFixedCostData INput', fixedCosts)
 
 const handleAddCost = () => {
   reportStore.addFixedCostAction({
@@ -39,13 +36,6 @@ const handleAddCost = () => {
   fixedCostTotal.value = 0.0
 }
 
-// const schema = Yup.object.shape({
-//   fixedCosts: Yup.array().of(
-//   name:Yup.string().required('Name is Required'),
-//   category:Yup.string().required('Category is Required'),
-//   amount: Yup.number().required('Value is Required').min(0),
-//   period:Yup.string().required('Period is Required')
-// })
 
 const schema = Yup.object().shape({
   fixedCosts: Yup.array()

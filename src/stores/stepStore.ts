@@ -2,44 +2,30 @@ import { defineStore } from 'pinia'
 import type StepStoreState from '../types/StepStoreState'
 import stepsArray from '@/assets/stepsArray'
 
+const index = () =>
+  stepsArray.findIndex((step) => {
+    return step.path === window.location.pathname
+  })
+
 export const useStepStore = defineStore('stepStore', {
   state: (): StepStoreState => ({
-    stepNum: 0,
-    stepName: 'Home',
-    stepCurrent:'/',
+    stepNum: index(),
+    stepName: stepsArray[index()].name,
+    stepCurrent: window.location.pathname,
     stepProgress: 0
   }),
   actions: {
-  //   forwardStepAction() {
-  //     this.stepNum >= stepsArray.length - 1 ? this.stepNum : this.stepNum++
-  //     this.stepCurrent = stepsArray[this.stepNum].Current
-  //     this.stepName = stepsArray[this.stepNum].name
-  //   },
-  //   backStepAction() {
-  //     this.stepNum <= 0 ? this.stepNum : this.stepNum--
-  //     this.stepCurrent = stepsArray[this.stepNum].Current
-  //     this.stepName = stepsArray[this.stepNum].name
-  //   }
-  // },
-  forwardStepAction() {
-    const thisStepName = window.location.pathname
-    const thisStepIndex = stepsArray.findIndex( (element) => element.current === thisStepName)
-    console.log("in forwardStepAction thisStepIndex", thisStepIndex)
-    console.log("in forwardStepAction thisStepName", thisStepName)
-    // let stepIndex = 0
-    // this.stepNum >= stepsArray.length - 1 ? this.stepNum : this.stepNum++
-    // this.stepCurrent = stepsArray[this.stepNum].current
-    // this.stepName = stepsArray[this.stepNum].name
-  },
-  backStepAction() {
-    this.stepNum <= 0 ? this.stepNum : this.stepNum--
-    this.stepCurrent = stepsArray[this.stepNum].current
-    this.stepName = stepsArray[this.stepNum].name
-  }
-},
-  getters: {
-    stepProgressPercent(): number {  //+(...).toFixed(2) is temporary to keep the percentage as a number with two digits. Will remove once this number is not displayed and used for CSS Progress bar
-      return (this.stepProgress = +((this.stepNum / (stepsArray.length-1)) * 100).toFixed(2))
+    forwardStepAction() {
+      const index = stepsArray.findIndex((path) => path.path === this.stepCurrent)
+      this.stepCurrent = stepsArray[index].next
+      this.stepName = stepsArray[index + 1].name
+      this.stepNum <= 7 ? index + 1 : index
+    },
+    backStepAction() {
+      const index = stepsArray.findIndex((path) => path.path === this.stepCurrent)
+      this.stepCurrent = stepsArray[index].previous
+      this.stepName = stepsArray[index - 1].name
+      this.stepNum >= 0 ? index - 1 : index
     }
   }
 })
