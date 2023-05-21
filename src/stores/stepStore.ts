@@ -1,13 +1,7 @@
 import { defineStore } from 'pinia'
 import type StepStoreState from '../types/StepStoreState'
 import stepsArray from '@/assets/stepsArray'
-
-const getIndex = () => {
-  let index = stepsArray.findIndex((step) => {
-    return step.path === window.location.pathname
-  })
-  return index
-}
+import getIndex from '@/assets/utility_functions/getIndex'
 
 export const useStepStore = defineStore('stepStore', {
   state: (): StepStoreState => ({
