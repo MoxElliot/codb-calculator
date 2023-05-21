@@ -2,29 +2,31 @@ import { defineStore } from 'pinia'
 import type StepStoreState from '../types/StepStoreState'
 import stepsArray from '@/assets/stepsArray'
 
-const index = () =>
-  stepsArray.findIndex((step) => {
+const getIndex = () => {
+  let index = stepsArray.findIndex((step) => {
     return step.path === window.location.pathname
   })
+  return index
+}
 
 export const useStepStore = defineStore('stepStore', {
   state: (): StepStoreState => ({
-    stepNum: index(),
-    stepName: stepsArray[index()].name,
-    stepCurrent: window.location.pathname,
+    stepNum: getIndex(),
+    stepName: stepsArray[getIndex()].name,
+    stepCurrent: window.location.pathname
   }),
   actions: {
     forwardStepAction() {
-      const index = stepsArray.findIndex((path) => path.path === this.stepCurrent)
-      this.stepCurrent = stepsArray[index].next
-      this.stepName = stepsArray[index + 1].name
-      this.stepNum <= 7 ? index + 1 : index
+      getIndex()
+      this.stepCurrent = stepsArray[this.stepNum].next
+      this.stepName = stepsArray[this.stepNum + 1].name
+      this.stepNum <= 7 ? (this.stepNum = this.stepNum + 1) : (this.stepNum = this.stepNum)
     },
     backStepAction() {
-      const index = stepsArray.findIndex((path) => path.path === this.stepCurrent)
-      this.stepCurrent = stepsArray[index].previous
-      this.stepName = stepsArray[index - 1].name
-      this.stepNum >= 0 ? index - 1 : index
+      getIndex()
+      this.stepCurrent = stepsArray[this.stepNum].previous
+      this.stepName = stepsArray[this.stepNum - 1].name
+      this.stepNum >= 0 ? (this.stepNum = this.stepNum - 1) : (this.stepNum = this.stepNum)
     }
   }
 })
