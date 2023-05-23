@@ -36,9 +36,6 @@ export const useReportStore = defineStore('reportStore', {
     inputValid: true,
   }),
   actions: {
-    averageYearlyAction(num: number) {
-      return num * 12
-    },
     addCompanyNameAction(companyName: string) {
       this.companyName = companyName
     },
@@ -123,26 +120,26 @@ export const useReportStore = defineStore('reportStore', {
     getCompanyName(): string {
       return this.companyName
     }, 
-    // fixedCostYearly(): number {
-    //   return this.totalFixedCosts * 12
-    // },
-    // variableCostYearly(): number {
-    //   return this.totalVariableCosts * 12
-    // },
-    // payYearly(): number {
-    //   return this.payPerMonth * 12
-    // },
-    // savingsYearly(): number {
-    //   return this.savingsPerMonth * 12
-    // },
-    // bookingsYearly(): number {
-    //   return this.bookingsPerMonth * 12
-    // },
-    // hoursWorkedYearly(): number {
-    //   return this.monthlyHoursWorked * 12
-    // },
-    // hourlyRateYearly(): number {
-    //   return this.averageMonthlyHourlyRate * 12
-    // },
+    fixedCostYearly(): number {
+      return this.totalFixedCosts * 12
+    },
+    variableCostYearly(): number {
+      return this.totalVariableCosts * 12
+    },
+    payYearly(): number {
+      return this.payPerMonth * 12
+    },
+    savingsYearly(): number {
+      return this.savingsPerMonth * 12
+    },
+    bookingsYearly(): number {
+      return this.bookingsPerMonth * 12
+    },
+    hoursWorkedYearly(): number {
+      return this.monthlyHoursWorked * 12
+    },
+    hourlyRateYearly(): number {
+      return this.averageMonthlyHourlyRate * 12
+    },
   }
 })
