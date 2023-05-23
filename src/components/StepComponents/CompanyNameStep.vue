@@ -10,16 +10,17 @@ const reportStore = useReportStore()
 const { addCompanyNameAction, updateInputValidAction } = reportStore
 const { companyName } = storeToRefs(reportStore)
 
-onMounted(() => {
-  updateInputValidAction(companyName.value === '' ? false : true )
-})
+// onMounted(() => {
+//   updateInputValidAction(companyName.value === '' ? false : true )
+// })
 
 const companyNameInput: WritableComputedRef<string> = computed<string>({
   get: () => companyName.value,  //Maintains data in field if user goes back
-  set:  (text:string) => {
+  set: async (text:string) => {
     company.value = text
+    const resp = await companyNameForm.validate()
     addCompanyNameAction(text)    // updates Pinia state
-    updateInputValidAction(true)  // enables the Next button
+    updateInputValidAction(resp.valid)  // enables the Next button
   }
 })
 
@@ -27,11 +28,8 @@ const schema = Yup.object({
   company: Yup.string().required('Company Name is Required')
 })
 
-useForm({
+const companyNameForm = useForm({
   validationSchema: schema,
-  initialErrors: {   //Turns off the errorMessage when user first navigates to the page
-    company: ''
-  },
 })
 
 const { value: company, errorMessage: companyError } = useField('company')

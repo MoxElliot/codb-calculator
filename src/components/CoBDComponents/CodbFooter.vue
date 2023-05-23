@@ -3,6 +3,7 @@ import { useStepStore } from '../../stores/stepStore'
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import FormButton from '../FormComponents/FormButton.vue'
+import { validate } from 'vee-validate'
 
 
 const reportStore = useReportStore()
@@ -10,6 +11,8 @@ const { inputValid } = storeToRefs(reportStore)
 const stepStore = useStepStore()
 const { stepCurrent, stepNum } = storeToRefs(stepStore)
 const { backStepAction, forwardStepAction } = stepStore
+
+
 
 </script>
 <template>
