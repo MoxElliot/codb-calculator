@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
+import { useStepStore } from '@/stores/stepStore'
 import * as Yup from 'yup'
 import DataInput from '../FormComponents/DataInput.vue'
 import { computed, onMounted, type WritableComputedRef } from 'vue'
@@ -9,16 +10,18 @@ import { storeToRefs } from 'pinia'
 const reportStore = useReportStore()
 const { addCompanyNameAction, updateInputValidAction } = reportStore
 const { companyName } = storeToRefs(reportStore)
+const stepStore = useStepStore()
+const { hasErrorMessage } = storeToRefs(stepStore)
+const { setHasErrorMessageAction } = stepStore
+
 
 onMounted(() => {
   console.log(
-    'on mount meta.valid, meta.touched, meta.intitalValue, meta.dirty',
-    meta.valid,
-    meta.touched,
-    meta.initialValue,
-    meta.dirty
+    'on mountcompanyError',
+ 
+    hasErrorMessage.value
   )
-  updateInputValidAction(false)
+  // updateInputValidAction(companyError.value === undefined ? false : true)
 })
 
 const companyNameInput: WritableComputedRef<string> = computed<string>({
@@ -28,7 +31,8 @@ const companyNameInput: WritableComputedRef<string> = computed<string>({
     const resp = await companyNameForm.validate()
     addCompanyNameAction(text) // updates Pinia state
     updateInputValidAction(resp.valid) // enables the Next button
-    console.log('in companyNameInput metaDirty meta.valid', meta.dirty, meta.valid)
+    setHasErrorMessageAction(true)
+    console.log('in companyNameInput hasErrorMessage', hasErrorMessage.value)
 
   }
 })
@@ -39,7 +43,9 @@ const schema = Yup.object({
 
 const companyNameForm = useForm({
   validationSchema: schema,
-  validateOnMount: true,
+  initialErrors: {
+    company: ''
+  }
 
 })
 
@@ -49,7 +55,7 @@ const { value: company, errorMessage: companyError, meta } = useField('company')
 </script>
 
 <template>
-  <Form >
+ 
     <data-input
       v-model.trim="companyNameInput"
       name="company"
@@ -58,7 +64,7 @@ const { value: company, errorMessage: companyError, meta } = useField('company')
       type="text"
       id="company-name"
     />
-  </Form>
+
 
   <span class="text-red font-semibold">{{ companyError }}</span>
 </template>
