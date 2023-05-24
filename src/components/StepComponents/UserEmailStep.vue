@@ -4,16 +4,18 @@ import DataInput from '../FormComponents/DataInput.vue'
 import { useForm, useField } from 'vee-validate'
 import * as Yup from 'yup'
 import { computed, onMounted, type WritableComputedRef } from 'vue'
+import { storeToRefs } from 'pinia'
 
 const reportStore = useReportStore()
 const { addUserEmailAction, updateInputValidAction } = reportStore
+const { userEmail } = storeToRefs(reportStore)
 
 onMounted(() => {
   // email.value = ''
   updateInputValidAction(false)
 })
 
-const userEmail: WritableComputedRef<string> = computed({
+const userEmailInput: WritableComputedRef<string> = computed({
   get: () => userEmail.value,
   set: async (text: string) => {
     email.value = text
@@ -41,7 +43,7 @@ const { value: email, errorMessage: emailError } = useField('email')
   <div>
     <h4>Please Enter Your Email Address to Access the Final Report</h4>
     <data-input
-      v-model="userEmail"
+      v-model="userEmailInput"
       name="email"
       label="Email Address:"
       type="email"
