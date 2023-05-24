@@ -18,6 +18,7 @@ onMounted(() => {
     meta.initialValue,
     meta.dirty
   )
+  updateInputValidAction(false)
 })
 
 const companyNameInput: WritableComputedRef<string> = computed<string>({
