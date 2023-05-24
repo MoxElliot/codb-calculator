@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { useOwnersDrawStore } from '@/stores/ownersDrawStore'
-import { ref } from 'vue'
+import { useReportStore } from '@/stores/reportStore'
+import { storeToRefs } from 'pinia'
 import DataInput from '../FormComponents/DataInput.vue'
 
-const ownersDrawStore = useOwnersDrawStore()
-
-const incomePerMonth = ref<number>()
-const savingsPerMonth = ref<number>()
+const reportStore = useReportStore()
+const { payPerMonth, savingsPerMonth } = storeToRefs(reportStore)
+const { addPayPerMonthAction, addSavingsPerMonthAction } = reportStore
 </script>
 
 <template>
@@ -16,11 +15,11 @@ const savingsPerMonth = ref<number>()
   <div>
     <h4>On average, how much will you be paying yourself per month?</h4>
     <data-input
-      v-model="incomePerMonth"
+      v-model="payPerMonth"
       label="$"
       type="number"
-      id="income-per-month"
-      @blur="ownersDrawStore.addIncomePerMonthAction($event.target.value)"
+      id="pay-per-month"
+      @blur="addPayPerMonthAction($event.target.value)"
     />
   </div>
   <div>
@@ -30,7 +29,7 @@ const savingsPerMonth = ref<number>()
       label="$"
       type="number"
       id="savings-per-month"
-      @blur="ownersDrawStore.addSavingsPerMonthAction($event.target.value)"
+      @blur="addSavingsPerMonthAction($event.target.value)"
     />
   </div>
 </template>

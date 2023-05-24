@@ -1,13 +1,18 @@
 <script setup lang="ts">
-import CodbForm from '../CodbForm.vue'
+import CodbForm from '../CoBDComponents/CodbForm.vue'
 import CodbHeader from '../CoBDComponents/CodbHeader.vue'
 import CodbFooter from '../CoBDComponents/CodbFooter.vue'
+import { Field, Form, useForm  } from 'vee-validate'
+
+const { meta } = useForm()
+
+console.log("in Cobd.vue meta", meta)
 </script>
 
 <template>
-  <codb-header />
-  <div class="codb-form">
+  <Form >
+    <codb-header />
     <codb-form />
-  </div>
-  <codb-footer />
+    <codb-footer />
+  </Form>
 </template>

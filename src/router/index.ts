@@ -6,6 +6,7 @@ import FixedCostStep from '../components/StepComponents/FixedCostStep.vue'
 import VariableCostStep from '../components/StepComponents/VariableCostStep.vue'
 import BookingIncomeStep from '../components/StepComponents/BookingIncomeStep.vue'
 import OwnerDrawStep from '../components/StepComponents/OwnerDrawStep.vue'
+import UserEmailStep from '../components/StepComponents/UserEmailStep.vue'
 import FinalReportStep from '../components/StepComponents/FinalReportStep.vue'
 
 const routes = [
@@ -19,6 +20,7 @@ const routes = [
       { path: '/variable-cost-step', component: VariableCostStep },
       { path: '/booking-income-step', component: BookingIncomeStep },
       { path: '/owner-draw-step', component: OwnerDrawStep },
+      { path: '/user-email-step', component: UserEmailStep },
       { path: '/final-report-step', component: FinalReportStep }
     ]
   }

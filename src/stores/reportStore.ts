@@ -1,51 +1,145 @@
 import { defineStore } from 'pinia'
-
-type State = {
-    companyName: string
-    fixedCosts: FixedCosts[]
-    totalCosts: number
-}
-
-type FixedCosts = {
-    id: number,
-    name: string
-    category: string
-    amount: number
-}
-
+import type FixedCostObj from '../types/FixedCostObj'
+import type VariableCostObj from '../types/VariableCostObj'
+import type reportState from '@/types/reportState'
+import payPeriodOptionsArray from '@/assets/payPeriodOptionsArray'
+import formatMoney from '../assets/utility_functions/formatMoney'
 
 export const useReportStore = defineStore('reportStore', {
-    state: (): State => ({
-        companyName: 'PhotoBomb',
-        fixedCosts: [
-            {id: 1, name: 'Rent', category: 'Overhead', amount: 1000},
-            {id: 2, name: 'Bills', category: 'Overhead', amount: 800},
-        ],
-        totalCosts: 100
-    }),
-    getters: {
-        totalFixedCosts({ fixedCosts }): number {
-
-            const sum = fixedCosts.map(item => item.amount).reduce((a,b) => {
-                return a + b
-            });
-            return sum
-     }
+  state: (): reportState => ({
+    // companyName: 'PhotoBomb',
+    // bookingsPerMonth: 3,
+    // priceAveragePerBooking: 1000.00,
+    // hoursAveragePerBooking: 200,
+    // variableCosts: [{ id: 2, name: 'Parking', category: 'Overhead', amount: 80 }] as VariableCostObj[],
+    // totalVariableCosts: 80.00,
+    // fixedCosts: [
+    //   { id: 1, name: 'Rent', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  }
+    // ] as FixedCostObj[],
+    // totalFixedCosts: 1200.00,
+    // payPerMonth: 200.00,
+    // savingsPerMonth: 200.00,
+    // userEmail: 'e@e.com',
+    // inputValid: true,
+    companyName: '',
+    bookingsPerMonth: 0,
+    priceAveragePerBooking: 0.00,
+    hoursAveragePerBooking: 0,
+    variableCosts: [] as VariableCostObj[],
+    totalVariableCosts: 0.00,
+    fixedCosts: [
+    ] as FixedCostObj[],
+    totalFixedCosts: 0.00,
+    payPerMonth: 0.00,
+    savingsPerMonth: 0.00,
+    userEmail: ' ',
+    inputValid: true,
+  }),
+  actions: {
+    addCompanyNameAction(companyName: string) {
+      this.companyName = companyName
     },
-    actions: {
-        addFixedCostAction(fixedCost: FixedCosts) {  //fixedCost here is arbitrary but setting it to the types within FixedCosts array
-            this.fixedCosts.push(fixedCost)  //fixedCosts here refer to the state item to which I want to push fixedCost into
-        },
-        addCompanyNameAction(companyName : string) {
-            console.log(this.companyName)
-            console.log("in reportStore actions addCompanyName")
-            this.companyName = companyName
-            console.log(this.companyName)
-        }
+    totalFixedCostAction() {
+      let costArr: number[] = []
+      Object.entries(this.fixedCosts).forEach(([key, val]) => {
+        costArr.push(Number(val.individualTotal)) //Unsure why amount is a string, my data-input is typed to number
+      })
+      const totalNum: number = costArr.reduce((a, b) => a + b, 0)
+      this.totalFixedCosts = formatMoney(totalNum)
+    },
+    addFixedCostAction(fixedCost: FixedCostObj) {
+      const payPeriodMultiplierElement = payPeriodOptionsArray.find(
+        (ele) => ele.day === fixedCost.payPeriod
+      )
+      const payPeriodMultiplier: any = payPeriodMultiplierElement?.multiplier
+
+      const totalNum: number = (fixedCost.amount as number) * payPeriodMultiplier
+      fixedCost.individualTotal = formatMoney(totalNum)
+      this.fixedCosts.push(fixedCost)
+      this.totalFixedCostAction()
+    },
+    addBookingsPerMonthAction(bookingsPerMonth: number) {
+      this.bookingsPerMonth = bookingsPerMonth
+    },
+    addPricePerBookingAction(priceAveragePerBooking: number) {
+      this.priceAveragePerBooking = priceAveragePerBooking
+    },
+    addHoursPerBookingAction(hoursAveragePerBooking: number) {
+      this.hoursAveragePerBooking = hoursAveragePerBooking
+    },
+    addPayPerMonthAction(payPerMonth: number) {
+      this.payPerMonth = payPerMonth
+    },
+    addSavingsPerMonthAction(savingsPerMonth: number) {
+      this.savingsPerMonth = savingsPerMonth
+    },
+    addUserEmailAction(userEmail: string) {
+      this.userEmail = userEmail
+    },
+    totalVariableCostAction() {
+      let costArr: number[] = []
+      Object.entries(this.variableCosts).forEach(([key, val]) => {
+        costArr.push(Number(val.amount)) //Unsure why amount is a string, my data-input is typed to number
+      })
+      const totalNum: number = costArr.reduce((a, b) => a + b, 0)
+      this.totalVariableCosts = formatMoney(totalNum)
+    },
+    addVariableCostAction(variableCost: VariableCostObj) {
+      this.variableCosts.push(variableCost)
+      this.totalVariableCostAction()
+    },
+    updateInputValidAction(inputValid: boolean) {
+      this.inputValid = inputValid
+      console.log("updateInputValidAction", this.inputValid)  ///this.$route
     }
+  },
+
+  getters: {
+    costOfDoingBusiness(): number {
+      return (
+        this.totalVariableCosts +
+        (this.totalFixedCosts * 12) +
+        (this.savingsPerMonth * 12) +
+        (this.payPerMonth * 12)
+      )
+    },
+    bookingsToBreakEven(): number {
+      return (Math.ceil(this.costOfDoingBusiness / this.priceAveragePerBooking))
+    },
+    monthlyHoursWorked(): number {
+      return this.hoursAveragePerBooking * this.bookingsPerMonth
+    },
+    averageMonthlyHourlyRate(): number {
+      return this.payPerMonth / this.monthlyHoursWorked
+    },
+    averageYearlyIncome(): number {
+      return formatMoney(
+        (this.bookingsPerMonth * this.priceAveragePerBooking * 12) - (this.costOfDoingBusiness)
+      )
+    },
+    getCompanyName(): string {
+      return this.companyName
+    }, 
+    fixedCostYearly(): number {
+      return this.totalFixedCosts * 12
+    },
+    variableCostYearly(): number {
+      return this.totalVariableCosts * 12
+    },
+    payYearly(): number {
+      return this.payPerMonth * 12
+    },
+    savingsYearly(): number {
+      return this.savingsPerMonth * 12
+    },
+    bookingsYearly(): number {
+      return this.bookingsPerMonth * 12
+    },
+    hoursWorkedYearly(): number {
+      return this.monthlyHoursWorked * 12
+    },
+    hourlyRateYearly(): number {
+      return this.averageMonthlyHourlyRate * 12
+    },
+  }
 })
-
-
-//to generate report once report array is built
-// <div v-for="report in reportStore.reportArray">
-// <p>{{ report.companyName }} </p> 

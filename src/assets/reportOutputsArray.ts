@@ -1,9 +1,12 @@
-<script setup lang="ts">
 import uniqueId from 'lodash.uniqueid'
-import ReportOutput from '../FormComponents/ReportOutput.vue'
+import { createPinia, storeToRefs } from 'pinia'
 import { useReportStore } from '@/stores/reportStore'
-import { storeToRefs } from 'pinia'
-// import reportOutputsArray from '../../assets/reportOutputsArray'
+import { createApp } from 'vue'
+import App from '../App.vue'
+
+const pinia = createPinia()
+const app = createApp(App)
+app.use(pinia)
 
 const reportStore = useReportStore()
 
@@ -96,12 +99,6 @@ const reportOutputsArray: { id: string; class: string; label: string; variable: 
     class: '',
     label: 'Your Average Yearly Income',
     variable: averageYearlyIncome
-  }]
-</script>
-
-<template>
-  <report-output v-for="output in reportOutputsArray" :class="output.class" :key=output.id>
-    <template #top> {{ output.label }}</template>
-    <template #bottom> {{ output.variable }}</template>
-  </report-output>
-</template>
+  }
+]
+export default reportOutputsArray

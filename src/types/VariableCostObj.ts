@@ -1,8 +1,8 @@
-type VariableCostObj = {
+interface VariableCostObj {
   id: number
   name: string
   category: string
-  total: number
+  amount: number | undefined
 }
 
 export default VariableCostObj

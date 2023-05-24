@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useBookingIncomeStore } from '../../stores/bookingIncomeStore'
-import { ref } from 'vue'
+import { useReportStore } from '../../stores/reportStore'
+import { storeToRefs } from 'pinia'
 import DataInput from '../FormComponents/DataInput.vue'
 
-const bookingIncomeStore = useBookingIncomeStore()
-
-const bookingsPerMonth = ref<number>()
-const priceAveragePerBooking = ref<number>()
-const hoursAveragePerBooking = ref<number>()
+const reportStore = useReportStore()
+const { bookingsPerMonth, priceAveragePerBooking, hoursAveragePerBooking } =
+  storeToRefs(reportStore)
+const { addBookingsPerMonthAction, addPricePerBookingAction, addHoursPerBookingAction } =
+  reportStore
 </script>
 
 <template>
@@ -21,7 +21,7 @@ const hoursAveragePerBooking = ref<number>()
       label="In a month, I typicaly book"
       type="number"
       id="bookings-per-month"
-      @blur="bookingIncomeStore.addBookingsPerMonthAction($event.target.value)"
+      @blur="addBookingsPerMonthAction($event.target.value)"
     />
     <p>shoots!</p>
   </div>
@@ -33,17 +33,17 @@ const hoursAveragePerBooking = ref<number>()
         label="$"
         type="number"
         id="price-average-per-booking"
-        @blur="bookingIncomeStore.addPricePerBookingAction($event.target.value)"
+        @blur="addPricePerBookingAction($event.target.value)"
       />
     </div>
     <div>
       <h4>How many hours do you work per booking? (Including editing time, meetings, etc.)</h4>
       <data-input
         v-model="hoursAveragePerBooking"
-        label=""
+        label="Hours"
         type="number"
         id="hour-average-per-booking"
-        @blur="bookingIncomeStore.addHoursPerBookingAction($event.target.value)"
+        @blur="addHoursPerBookingAction($event.target.value)"
       />
     </div>
   </div>

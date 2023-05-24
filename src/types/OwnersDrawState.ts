@@ -1,5 +1,5 @@
 type OwnersDrawState = {
-  incomePerMonth: number
+  payPerMonth: number
   savingsPerMonth: number
 }
 

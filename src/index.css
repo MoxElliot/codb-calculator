@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+}
+@layer components {
+  .btn-next {
+    @apply bg-aqua rounded-main text-white font-sans uppercase text-btn p-btn m-4 gap-2.5 w-204 h-48;
+  }
+  .btn-back {
+    @apply bg-white text-lt-grey font-sans uppercase text-btn p-btn m-4 gap-2 w-75 h-24;
+  }
+  .btn-add {
+    @apply bg-white rounded-main border-btn text-greeny-grey font-sans uppercase text-btn p-btn m-4 gap-2 w-228 h-48;
+  }
+}
+
+@layer utilities {
+  .border-full-blue {
+    @apply border border-blue;
+  }
+  .border-bottom-grey {
+    @apply border-b border-lt-grey;
+  }
+  .border-full-grey {
+    @apply border border-lt-grey;
+  }
+  .border-side-grey {
+    @apply border-r border-lt-grey;
+  }
+  .border-btn {
+    @apply border border-greeny-grey;
+  }
+  .border-error {
+    @apply border-b border-red;
+  }
+  .border-active {
+    @apply border-b border-aqua;
+  }
+}

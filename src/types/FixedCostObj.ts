@@ -1,10 +1,10 @@
-type FixedCostObj = {
+interface FixedCostObj {
   id: number
   name: string
   category: string
   amount: number
   payPeriod: string
-  total: number
+  individualTotal: number
 }
 
 export default FixedCostObj

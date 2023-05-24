@@ -32,17 +32,19 @@ const handleInputChange = (e: any) => {
 </script>
 
 <template>
-  <label :for="label" class="label m-1">
-    {{ label }}
-  </label>
-  <select
-    class="input m-1"
-    v-bind="$attrs"
-    :value="modelValue"
-    @input="$emit('update:modelValue', handleInputChange($event))"
-  >
-    <option v-for="option in optionArray" :value="firstLetterUpperCase(option)">
-      {{ firstLetterUpperCase(option) }}
-    </option>
-  </select>
+  <div class="flex flex-col">
+    <label :for="label" class="label m-1">
+      {{ label }}
+    </label>
+    <select
+      class="input m-1"
+      v-bind="$attrs"
+      :value="modelValue"
+      @input="$emit('update:modelValue', handleInputChange($event))"
+    >
+      <option v-for="option in optionArray" :value="firstLetterUpperCase(option)">
+        {{ firstLetterUpperCase(option) }}
+      </option>
+    </select>
+  </div>
 </template>

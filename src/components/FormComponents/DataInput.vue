@@ -8,7 +8,11 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  modelValue: {
+  modelValue: {  
+    type: [String, Number]
+    
+  },
+  ref: {
     type: [String, Number]
   }
 })
@@ -24,7 +28,7 @@ const handleInputChange = (e: any) => {
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col">
     <label :for="label" class="label m-1">
       {{ label }}
     </label>
@@ -32,7 +36,7 @@ const handleInputChange = (e: any) => {
       class="input border border-black m-1"
       v-bind="$attrs"
       :value="modelValue"
-      @input="$emit('update:modelValue', handleInputChange($event))"
+      @input="$emit('update:modelValue', handleInputChange($event), ref)"
     />
   </div>
 </template>
