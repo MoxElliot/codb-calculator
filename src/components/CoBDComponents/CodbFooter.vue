@@ -25,17 +25,27 @@ const checkValid = () => {
 }
 </script>
 <template>
-  <div >
+  <div v-show="(stepNum > 0)">
     <router-link :to="stepCurrent">
-      <form-button label="Back" @click="backStepAction()" class="btn-back" v-show="(stepNum > 1)"/>
+      <form-button label="Back" @click="backStepAction()" class="btn-back" />
     </router-link>
     <router-link :to="stepCurrent">
       <form-button
-        :label="stepNum === 0 ? 'Begin' : 'Next'"
+        label="Next"
         @click="checkValid()"
         class="btn-next"
         :disabled="!inputValid"
         :class="{ 'border-2 border-red': !inputValid }"
+        type="submit"
+      />
+    </router-link>
+  </div>
+  <div v-show="(stepNum === 0)">
+    <router-link :to="stepCurrent">
+      <form-button
+        label="Begin"
+        @click="forwardStepAction()"
+        class="btn-next"
         type="submit"
       />
     </router-link>
