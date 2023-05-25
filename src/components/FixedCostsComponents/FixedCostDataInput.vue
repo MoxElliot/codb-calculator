@@ -11,16 +11,9 @@ import { useField, useForm, Form } from 'vee-validate'
 import { storeToRefs } from 'pinia'
 
 const reportStore = useReportStore()
-
-// const fixedCostName = ref<string>('')
-// const fixedCostCategory = ref<string>('')
-// const fixedCostAmount = ref<number>(0)
-// const fixedCostPeriod = ref<string>('')
 const fixedCostTotal = ref<number>(0)
 
 const handleAddCost = (...values: any) => {
-  console.log(JSON.stringify([...values], null, 2))
-  // console.log('in handledAddCost allFilled validForm',allFilled)
   reportStore.addFixedCostAction({
     id: reportStore.fixedCosts.length + 1,
     name: fixedCostName.value,
@@ -35,42 +28,6 @@ const handleAddCost = (...values: any) => {
   fixedCostPeriod.value = ''
   fixedCostTotal.value = 0.0
 }
-
-// const allFilled = {name: false, category: false, amount: false, period: false}
-// const validForm = Object.values(allFilled).every(item => item === true)
-
-// const fixedCostNameInput: WritableComputedRef<string> = computed<string>({
-//   get: () => fixedCostName.value, //Maintains data in field if user goes back
-//   set: (text: string) => {
-//     name.value = text
-//     allFilled.name = true
-//     // updateInputValidAction(true) // enables the Next button
-//   }
-// })
-// const fixedCostCategoryInput: WritableComputedRef<string> = computed<string>({
-//   get: () => fixedCostCategory.value, //Maintains data in field if user goes back
-//   set: (text: string) => {
-//     category.value = text
-//     allFilled.category = true
-//     // updateInputValidAction(true) // enables the Next button
-//   }
-// })
-// const fixedCostAmountInput: WritableComputedRef<any> = computed<any>({
-//   get: () => fixedCostAmount.value, //Maintains data in field if user goes back
-//   set: (num: number) => {
-//     amount.value = num
-//     allFilled.amount = true
-//     // updateInputValidAction(true) // enables the Next button
-//   }
-// })
-// const fixedCostPeriodInput: WritableComputedRef<string> = computed<string>({
-//   get: () => fixedCostPeriod.value, //Maintains data in field if user goes back
-//   set: (text: string) => {
-//     period.value = text
-//     allFilled.period = true
-//     // updateInputValidAction(true) // enables the Next button
-//   }
-// })
 
 defineProps({
   // Must be defined
@@ -89,9 +46,6 @@ const schema = Yup.object({
 const { errors, values, meta } = useForm({
   validationSchema: schema,
 })
-// const [fixedCostName,fixedCostCategory, fixedCostAmount,fixedCostPeriod, ] = useFieldModel(['name', 'category', 'amount', 'period'])
-
-
 const { value: fixedCostName, errorMessage: nameError, } = useField('name', values, {
   initialValue: '',
 })
@@ -123,7 +77,6 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         class="fixed-cost-dataset basis-1/4 flex-1"
       />
       <span class="text-red font-semibold">{{ errors.name }}</span> 
-        <!--ALSO v-models = fixedCostNameInput...-->
       </div>
       <div>
         <data-select
@@ -162,7 +115,6 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
     </div>
     
   </Form>
-  <!-- <span class="text-red font-semibold">{{ errors }}</span> -->
 </template>
 
 <style scoped></style>
