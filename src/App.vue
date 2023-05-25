@@ -1,3 +1,6 @@
 <template>
-  <RouterView />
+  <div class="h-screen">
+
+    <RouterView />
+  </div>
 </template>
