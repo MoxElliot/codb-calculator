@@ -26,7 +26,7 @@
   .border-bottom-grey {
     @apply border-b border-grey-100;
   }
-  .border-full-grey-200 {
+  .border-full-grey {
     @apply border border-grey-100;
   }
   .border-side-grey {

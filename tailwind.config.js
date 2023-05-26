@@ -19,7 +19,7 @@ module.exports = {
       height: {
         24: '24px',
         48: '48px',
-        '1/20': '10%',
+        '1/10': '10%',
         '2/10': '20%',
         '25/100':'25%',
         '3/10':'30%',
@@ -32,6 +32,9 @@ module.exports = {
       },
       screens: {
         'xl': {'max': '1440'}
+      },
+      borderRadius: {
+        main: '36px'
       }
     },
     colors: {
@@ -133,9 +136,6 @@ module.exports = {
           fontWeight: '400'
         }
       ]
-    },
-    borderRadius: {
-      main: '36px'
     }
   },
   plugins: []
