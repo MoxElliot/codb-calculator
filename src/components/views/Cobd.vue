@@ -9,15 +9,15 @@ const { meta } = useForm()
 console.log('in Cobd.vue meta', meta)
 </script>
 
-<template>
-  <div class="flex flex-col h-full">
-    <div class=" h-1/10">
+<template class="h-screen">
+  <div class="grid grid-rows-3 h-screen">
+    <div class="">
       <codb-header />
     </div>
-    <div class="h-3/10">
-      <codb-form />
+    <div class="flex">
+      <codb-form class="flex basis-full"/>
     </div>
-    <div class="h-6/10 border flex align-center place-content-center">
+    <div class="flex align-center place-content-center">
       <codb-footer />
     </div>
   </div>

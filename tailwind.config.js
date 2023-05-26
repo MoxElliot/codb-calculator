@@ -13,14 +13,18 @@ module.exports = {
       width: {
         75: '75px',
         204: '204px',
-        228: '228px'
+        228: '228px',
+        '5/10':'50%',
       },
       height: {
         24: '24px',
         48: '48px',
         '1/20': '10%',
         '2/10': '20%',
+        '25/100':'25%',
         '3/10':'30%',
+        '35/100':'35%',
+        '5/10':'50%',
         '6/10': '60%',
       },
       padding: {
@@ -43,7 +47,7 @@ module.exports = {
       grey: {
         100: '#A4ABAA', //placeholder text, border
         200: '#F3F3F3', //border
-        300: '#485654' //main text, boarder
+        300: '#485654' //main text, boarder  "Greeney-Grey"
       },
       aqua: {
         100: '#E8F5F3', //active step icon background,
@@ -73,11 +77,27 @@ module.exports = {
           fontWeight: '400'
         }
       ],
+      heading2: [   // Home Page "Hey There"
+        '60px',
+        {
+          lineHeight: '72px',
+          letterSpacing: '-0.02em',
+          fontWeight: '400'
+        }
+      ],
       body: [
         '16px',
         {
           lineHeight: '26px',
           letterSpacing: '0em',
+          fontWeight: '400'
+        }
+      ],
+      body2: [
+        '20px',
+        {
+          lineHeight: '32px',
+          letterSpacing: '-0.02em',
           fontWeight: '400'
         }
       ],
