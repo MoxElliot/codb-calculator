@@ -35,7 +35,8 @@ module.exports = {
       },
       borderRadius: {
         main: '36px'
-      }
+      },
+    
     },
     colors: {
       ///create object notation for multiple colors
