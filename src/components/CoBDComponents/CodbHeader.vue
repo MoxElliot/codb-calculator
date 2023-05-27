@@ -7,6 +7,7 @@ import variableCostIcon from '../../images/variable-cost-step-icon-inactive.png'
 import bookingIncomeIcon from '../../images/booking-income-step-icon-inactive.png'
 import ownersDrawIcon from '../../images/owners-draw-step-icon-inactive.png'
 import finalReportIcon from '../../images/final-report-step-icon-inactive.png'
+import steps from '../../assets/stepsArray'
 
 const stepStore = useStepStore()
 const { stepName } = storeToRefs(stepStore)
@@ -29,7 +30,7 @@ const stepIconObj: { src: string }[] = [
   },
   {
     src: finalReportIcon
-  },
+  }
 ]
 </script>
 
@@ -44,27 +45,14 @@ const stepIconObj: { src: string }[] = [
     >
       <div
         class="flex justify-center items-center h-4/6 border-r border-grey-200"
-        v-for="icon in stepIconObj"
+        v-for="step in steps"
+        v-show="step.icon !== 'none'"
+        :key="step.id"
       >
-        <img :src="icon.src" class="w-6 h-6" />
-        <!-- <p class=" border border-black">{{ stepName }}</p> -->
+        <router-link :to="step.path">
+          <img :src="step.icon" class="w-6 h-6" />
+        </router-link>
       </div>
-      <!-- <div class="h-5/6 bg-red-100">
-        <p>{{ stepName }}</p>
-      </div>
-      <div class="h-5/6 bg-red-100">
-        <p>{{ stepName }}</p>
-      </div>
-      <div class="h-5/6 bg-red-100">
-        <p>{{ stepName }}</p>
-      </div>
-      <div class="h-5/6 bg-red-100">
-        <p>{{ stepName }}</p>
-      </div>
-      <div class="h-5/6 bg-red-100">
-        <p>{{ stepName }}</p>
-      </div> -->
-      <!-- <div class="w-0.5 h-5/6"></div> -->
     </div>
   </div>
 </template>
