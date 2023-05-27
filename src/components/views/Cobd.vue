@@ -12,10 +12,10 @@ console.log('in Cobd.vue meta', meta)
 <template class="h-screen">
   <div class="grid grid-rows-3 h-screen">
     <div class="flex">
-      <codb-header class="hello" />
+      <codb-header class="" />
     </div>
     <div class="flex">
-      <codb-form class="hello flex basis-full" />
+      <codb-form class="flex basis-full" />
     </div>
     <div class="flex align-center place-content-center">
       <codb-footer />
