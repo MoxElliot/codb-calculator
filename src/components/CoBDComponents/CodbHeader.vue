@@ -1,37 +1,10 @@
 <script setup lang="ts">
 import { useStepStore } from '../../stores/stepStore'
 import { storeToRefs } from 'pinia'
-import startHereIcon from '../../images/start-here-step-icon-inactive.png'
-import fixedCostIcon from '../../images/fixed-cost-step-icon-inactive.png'
-import variableCostIcon from '../../images/variable-cost-step-icon-inactive.png'
-import bookingIncomeIcon from '../../images/booking-income-step-icon-inactive.png'
-import ownersDrawIcon from '../../images/owners-draw-step-icon-inactive.png'
-import finalReportIcon from '../../images/final-report-step-icon-inactive.png'
 import steps from '../../assets/stepsArray'
 
 const stepStore = useStepStore()
 const { stepName } = storeToRefs(stepStore)
-
-const stepIconObj: { src: string }[] = [
-  {
-    src: startHereIcon
-  },
-  {
-    src: fixedCostIcon
-  },
-  {
-    src: variableCostIcon
-  },
-  {
-    src: bookingIncomeIcon
-  },
-  {
-    src: ownersDrawIcon
-  },
-  {
-    src: finalReportIcon
-  }
-]
 </script>
 
 <template>

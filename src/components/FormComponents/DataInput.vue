@@ -19,10 +19,19 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  class: {
+    type: String,
+    default: 'input border border-black m-1'
+  },
   parentClass: {
     type: String,
     default: 'flex flex-col'
+  },
+  placeholder: {
+    type: String,
+    default: ''
   }
+  
 })
 
 const $emit = defineEmits<{
@@ -41,9 +50,10 @@ const handleInputChange = (e: any) => {
       {{ label }}
     </label>
     <input
-      class="input border border-black m-1"
+      :class="class"
       v-bind="$attrs"
       :value="modelValue"
+      :placeholder="placeholder"
       @input="$emit('update:modelValue', handleInputChange($event), ref)"
     />
     <label :for="labelAfter" class="m-1">

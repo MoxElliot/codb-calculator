@@ -24,7 +24,7 @@
     @apply border border-blue-300;
   }
   .border-bottom-grey {
-    @apply border-b border-grey-100;
+    @apply border-b border-grey-400;
   }
   .border-full-grey {
     @apply border border-grey-100;

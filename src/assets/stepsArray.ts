@@ -6,17 +6,6 @@ import bookingIncomeIcon from '../images/booking-income-step-icon-inactive.png'
 import ownersDrawIcon from '../images/owners-draw-step-icon-inactive.png'
 import finalReportIcon from '../images/final-report-step-icon-inactive.png'
 
-// const stepsArray: {name: string; path:string}[] = [
-//   {name: 'Home', path: '/'},
-//   {name: 'Company Name', path:  '/company-name-step'},
-//   {name: 'Fixed Cost', path:  '/fixed-cost-step'},
-//   {name: 'Variable Cost', path: '/variable-cost-step'},
-//   {name: 'Booking Income', path: '/booking-income-step'},
-//   {name: 'Owner Draw', path: '/owner-draw-step'},
-//   {name: 'User Email', path: '/user-email-step'},
-//   {name: 'Final Report', path: '/final-report-step'},
-// ]
-
 const stepsArray: { id: string; path: string; name: string; next: string; previous: string; icon: string }[] = [
   {
     name: 'Home',

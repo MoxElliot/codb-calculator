@@ -14,29 +14,34 @@ module.exports = {
         75: '75px',
         204: '204px',
         228: '228px',
-        '5/10':'50%',
+        '1/10': '10%',
+        '2/10': '20%',
+        '25/100': '25%',
+        '3/10': '30%',
+        '35/100': '35%',
+        '5/10': '50%',
+        '6/10': '60%'
       },
       height: {
         24: '24px',
         48: '48px',
         '1/10': '10%',
         '2/10': '20%',
-        '25/100':'25%',
-        '3/10':'30%',
-        '35/100':'35%',
-        '5/10':'50%',
-        '6/10': '60%',
+        '25/100': '25%',
+        '3/10': '30%',
+        '35/100': '35%',
+        '5/10': '50%',
+        '6/10': '60%'
       },
       padding: {
         btn: '12px,44px,12px,44px'
       },
       screens: {
-        'xl': {'max': '1440'}
+        xl: { max: '1440' }
       },
       borderRadius: {
         main: '36px'
-      },
-    
+      }
     },
     colors: {
       ///create object notation for multiple colors
@@ -51,7 +56,8 @@ module.exports = {
       grey: {
         100: '#A4ABAA', //placeholder text, border
         200: '#F3F3F3', //border
-        300: '#485654' //main text, boarder  "Greeney-Grey"
+        300: '#485654', //main text, boarder  "Greeney-Grey"
+        400: '#E4E6E6', //input borders
       },
       aqua: {
         100: '#E8F5F3', //active step icon background,
@@ -73,6 +79,15 @@ module.exports = {
           fontWeight: '500'
         }
       ],
+      placeholder: [
+        //headline3 in placeholders in fields
+        '32px',
+        {
+          lineHeight: '40px',
+          letterSpacing: '-0.01em',
+          fontWeight: '300'
+        }
+      ],
       heading: [
         '48px',
         {
@@ -81,7 +96,8 @@ module.exports = {
           fontWeight: '400'
         }
       ],
-      heading2: [   // Home Page "Hey There"
+      heading2: [
+        // Home Page "Hey There"
         '60px',
         {
           lineHeight: '72px',
