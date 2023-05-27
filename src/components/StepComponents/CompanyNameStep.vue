@@ -14,11 +14,10 @@ const stepStore = useStepStore()
 const { hasErrorMessage } = storeToRefs(stepStore)
 const { setHasErrorMessageAction } = stepStore
 
-
 onMounted(() => {
   console.log(
     'on mountcompanyError',
- 
+
     hasErrorMessage.value
   )
   // updateInputValidAction(companyError.value === undefined ? false : true)
@@ -33,7 +32,6 @@ const companyNameInput: WritableComputedRef<string> = computed<string>({
     updateInputValidAction(resp.valid) // enables the Next button
     setHasErrorMessageAction(true)
     console.log('in companyNameInput hasErrorMessage', hasErrorMessage.value)
-
   }
 })
 
@@ -46,16 +44,13 @@ const companyNameForm = useForm({
   initialErrors: {
     company: ''
   }
-
 })
 
 const { value: company, errorMessage: companyError, meta } = useField('company')
-
-
 </script>
 
 <template>
- 
+  <div class="basis-full flex flex-col justify-center items-center">
     <data-input
       v-model.trim="companyNameInput"
       name="company"
@@ -65,6 +60,6 @@ const { value: company, errorMessage: companyError, meta } = useField('company')
       id="company-name"
     />
 
-
-  <span class="text-red font-semibold">{{ companyError }}</span>
+    <span class="text-red-100 font-semibold">{{ companyError }}</span>
+  </div>
 </template>
