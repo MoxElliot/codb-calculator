@@ -14,6 +14,14 @@ const props = defineProps({
   },
   ref: {
     type: [String, Number]
+  },
+  labelAfter: {
+    type: String,
+    default: ''
+  },
+  parentClass: {
+    type: String,
+    default: 'flex flex-col'
   }
 })
 
@@ -28,7 +36,7 @@ const handleInputChange = (e: any) => {
 </script>
 
 <template>
-  <div class="flex flex-col">
+  <div :class="parentClass">
     <label :for="label" class="label m-1">
       {{ label }}
     </label>
@@ -38,5 +46,8 @@ const handleInputChange = (e: any) => {
       :value="modelValue"
       @input="$emit('update:modelValue', handleInputChange($event), ref)"
     />
+    <label :for="labelAfter" class="m-1">
+      {{ labelAfter }}
+    </label>
   </div>
 </template>

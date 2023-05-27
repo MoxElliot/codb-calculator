@@ -27,7 +27,7 @@ const checkValid = () => {
 }
 </script>
 <template>
-  <div class="flex">
+  <div class="flex" v-show="(stepNum !== 7)">
     <router-link :to="stepCurrent">
       <form-button label="Back" @click="backStepAction()" class="btn-back" v-show="(stepNum > 1)"/>
     </router-link>
