@@ -8,81 +8,154 @@ module.exports = {
     './src/components/FixedCostComponents/**/*.{html,js,vue,ts}'
   ],
   theme: {
-    extend: {   //extends the default themes
-    width: {
-      '75':'75px',
-      '204': '204px',
-      '228':'228px',
+    extend: {
+      //extends the default themes
+      width: {
+        75: '75px',
+        204: '204px',
+        228: '228px',
+        '1/10': '10%',
+        '2/10': '20%',
+        '25/100': '25%',
+        '3/10': '30%',
+        '35/100': '35%',
+        '5/10': '50%',
+        '6/10': '60%'
+      },
+      height: {
+        24: '24px',
+        48: '48px',
+        '1/10': '10%',
+        '2/10': '20%',
+        '25/100': '25%',
+        '3/10': '30%',
+        '35/100': '35%',
+        '5/10': '50%',
+        '6/10': '60%'
+      },
+      padding: {
+        btn: '12px,44px,12px,44px'
+      },
+      screens: {
+        xl: { max: '1440' }
+      },
+      borderRadius: {
+        main: '36px'
+      }
     },
-    height: {
-      '24':'24px',
-      '48':'48px'
+    colors: {
+      ///create object notation for multiple colors
+      primary: {
+        white: '#FFFFFF' //main background, text on green
+      },
+      blue: {
+        100: '#80bff71a', //home message backgrond
+        200: '#80bff780', //home message border
+        300: '#80bff7' //text
+      },
+      grey: {
+        100: '#A4ABAA', //placeholder text, border
+        200: '#F3F3F3', //border
+        300: '#485654', //main text, boarder  "Greeney-Grey"
+        400: '#E4E6E6', //input borders
+      },
+      aqua: {
+        100: '#E8F5F3', //active step icon background,
+        200: '#7CC1B5' //text, button, step icons
+      },
+      red: {
+        100: '#eb5c5a'
+      }
     },
-    padding: {
-      'btn':'12px,44px,12px,44px'
+    fontFamily: {
+      sans: ['Avenir', 'sans-serif'],
+      serif: ['Cormorant', 'serif']
+    },
+    fontSize: {
+      btn: [
+        '16px',
+        {
+          lineHeight: '16px',
+          fontWeight: '500'
+        }
+      ],
+      placeholder: [
+        //headline3 in placeholders in fields
+        '32px',
+        {
+          lineHeight: '40px',
+          letterSpacing: '-0.01em',
+          fontWeight: '300'
+        }
+      ],
+      heading: [
+        '48px',
+        {
+          lineHeight: '56px',
+          letterSpacing: '-0.02em',
+          fontWeight: '400'
+        }
+      ],
+      heading2: [
+        // Home Page "Hey There"
+        '60px',
+        {
+          lineHeight: '72px',
+          letterSpacing: '-0.02em',
+          fontWeight: '400'
+        }
+      ],
+      body: [
+        '16px',
+        {
+          lineHeight: '26px',
+          letterSpacing: '0em',
+          fontWeight: '400'
+        }
+      ],
+      body2: [
+        '20px',
+        {
+          lineHeight: '32px',
+          letterSpacing: '-0.02em',
+          fontWeight: '400'
+        }
+      ],
+      caption: [
+        '14px',
+        {
+          lineHeight: '24px',
+          letterSpacing: '0em',
+          fontWeight: '400'
+        }
+      ],
+      'caption-bold': [
+        '14px',
+        {
+          lineHeight: '24px',
+          letterSpacing: '0em',
+          fontWeight: '900'
+        }
+      ],
+      'caption-2': [
+        '12px',
+        {
+          lineHeight: '20px',
+          letterSpacing: '0em',
+          fontWeight: '400'
+        }
+      ],
+      menu: [
+        '16px',
+        {
+          lineHeight: '42px',
+          letterSpacing: '0em',
+          fontWeight: '400'
+        }
+      ]
     }
-      
   },
-  colors: {  ///create object notation for multiple colors
-    'test': '#E8F5F3',
-    'white':'#FFFFFF',  //main background, text on green
-    'lt-blue': '#80bff61a', //message backgrond
-    'blue' : '#80bff6',  //text
-    'lt-grey':'#A4ABAA',  //placeholder text, border 
-    'grey':'#F3F3F3', //border
-    'greeny-grey':'#485654', //main text, boarder
-    'aqua':'#7CC1B5', //text, button, step icons
-    'lt-aqua':'#E8F5F3', //active step icon background,
-    'lt-blue': '#80bff680', //border
-    'red':'#eb5c5a',
-
-  },
-  fontFamily: {
-    'sans': ['Avenir', 'sans-serif'],
-    'serif':['Cormorant','serif'],
-  },
-  fontSize: {
-    'btn': ['16px', {
-      lineHeight: '16px',
-      fontWeight: '500',
-    }],
-    'heading':['48px', {
-      lineHeight: '56px',
-      letterSpacing: '-0.02em',
-      fontWeight: '400',
-    }],
-    'body':['16px', {
-      lineHeight: '26px',
-      letterSpacing: '0em',
-      fontWeight: '400',
-    }],
-    'caption':['14px', {
-      lineHeight: '24px',
-      letterSpacing: '0em',
-      fontWeight: '400',
-    }],
-    'caption-bold':['14px', {
-      lineHeight: '24px',
-      letterSpacing: '0em',
-      fontWeight: '900',
-    }],
-    'caption-2':['12px', {
-      lineHeight: '20px',
-      letterSpacing: '0em',
-      fontWeight: '400',
-    }],
-    'menu':['16px', {
-      lineHeight: '42px',
-      letterSpacing: '0em',
-      fontWeight: '400',
-    }],
-  }
-  ,
-  borderRadius: {
-    'main': '36px'
-  },
-  },
-  plugins: [],
+  plugins: []
 }
 
 //styleName: Headline 1 Cormorant;
@@ -90,6 +163,3 @@ module.exports = {
 //styleName: Caption 1;
 //styleName: Caption 1 (Bold);
 //styleName: Caption 2;
-
-
-

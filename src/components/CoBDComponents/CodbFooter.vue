@@ -6,6 +6,8 @@ import FormButton from '../FormComponents/FormButton.vue'
 import { validate } from 'vee-validate'
 
 
+
+
 const reportStore = useReportStore()
 const { inputValid } = storeToRefs(reportStore)
 const {updateInputValidAction} = reportStore
@@ -25,29 +27,20 @@ const checkValid = () => {
 }
 </script>
 <template>
-  <div v-show="(stepNum > 0)">
+  <div class="flex" v-show="(stepNum !== 7)">
     <router-link :to="stepCurrent">
-      <form-button label="Back" @click="backStepAction()" class="btn-back" />
+      <form-button label="Back" @click="backStepAction()" class="btn-back" v-show="(stepNum > 1)"/>
     </router-link>
     <router-link :to="stepCurrent">
       <form-button
-        label="Next"
-        @click="checkValid()"
-        class="btn-next"
+        :label="stepNum === 0 ? 'Let\'s Go!' : 'Next'"
+        @click="forwardStepAction()"
+        class="btn-next text-center"
         :disabled="!inputValid"
         :class="{ 'border-2 border-red': !inputValid }"
         type="submit"
       />
-    </router-link>
-  </div>
-  <div v-show="(stepNum === 0)">
-    <router-link :to="stepCurrent">
-      <form-button
-        label="Begin"
-        @click="forwardStepAction()"
-        class="btn-next"
-        type="submit"
-      />
+      
     </router-link>
   </div>
   

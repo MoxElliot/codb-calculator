@@ -6,36 +6,39 @@
 }
 @layer components {
   .btn-next {
-    @apply bg-aqua rounded-main text-white font-sans uppercase text-btn p-btn m-4 gap-2.5 w-204 h-48;
+    @apply bg-aqua-200 rounded-main text-primary-white font-sans uppercase text-btn p-btn m-4 gap-2.5 w-204 h-48;
   }
   .btn-back {
-    @apply bg-white text-lt-grey font-sans uppercase text-btn p-btn m-4 gap-2 w-75 h-24;
+    @apply bg-primary-white text-grey-100 font-sans uppercase text-btn p-btn m-4 gap-2 w-75 h-24;
   }
   .btn-add {
-    @apply bg-white rounded-main border-btn text-greeny-grey font-sans uppercase text-btn p-btn m-4 gap-2 w-228 h-48;
+    @apply bg-primary-white rounded-main border-btn text-grey-300 font-sans uppercase text-btn p-btn m-4 gap-2 w-228 h-48;
+  }
+  .info-blue {
+    @apply bg-blue-100 border border-blue-200 font-sans text-blue-300 text-body
   }
 }
 
 @layer utilities {
   .border-full-blue {
-    @apply border border-blue;
+    @apply border border-blue-300;
   }
   .border-bottom-grey {
-    @apply border-b border-lt-grey;
+    @apply border-b border-grey-400;
   }
   .border-full-grey {
-    @apply border border-lt-grey;
+    @apply border border-grey-100;
   }
   .border-side-grey {
-    @apply border-r border-lt-grey;
+    @apply border-r border-grey-100;
   }
   .border-btn {
-    @apply border border-greeny-grey;
+    @apply border border-grey-300;
   }
   .border-error {
-    @apply border-b border-red;
+    @apply border-b border-red-100;
   }
   .border-active {
-    @apply border-b border-aqua;
+    @apply border-b border-aqua-200;
   }
 }

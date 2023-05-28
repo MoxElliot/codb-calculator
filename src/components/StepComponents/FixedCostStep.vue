@@ -6,8 +6,8 @@ defineProps(['fixedCost'])
 </script>
 
 <template>
-  <div class="fixed-cost-data-input">
+  <div class="basis-full flex flex-col justify-center items-center">
     <fixed-cost-data-input />
+    <fixed-cost-table />
   </div>
-  <fixed-cost-table />
 </template>

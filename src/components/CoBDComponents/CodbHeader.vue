@@ -1,14 +1,31 @@
 <script setup lang="ts">
 import { useStepStore } from '../../stores/stepStore'
 import { storeToRefs } from 'pinia'
+import steps from '../../assets/stepsArray'
 
 const stepStore = useStepStore()
 const { stepName } = storeToRefs(stepStore)
 </script>
 
 <template>
-  <div class="flex flex-col items-center">
-    <h2>Cost of Doing Business Calculator</h2>
-    <p>{{ stepName }}</p>
+  <div class="flex flex-col basis-full items-center">
+    <div class="mt-8 mb-10">
+      <img src="../../images/cloudspot-logo.png" />
+    </div>
+    <div
+      class="grid grid-flow-col gap-2 basis-1/4 w-1/2 border border-grey-200 rounded-xl items-center justify-stretch"
+      v-show="stepName !== 'Home'"
+    >
+      <div
+        class="flex justify-center items-center h-4/6 border-r border-grey-200"
+        v-for="step in steps"
+        v-show="step.icon !== 'none'"
+        :key="step.id"
+      >
+        <router-link :to="step.path">
+          <img :src="step.icon" class="w-6 h-6" />
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>

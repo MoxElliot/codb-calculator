@@ -7,9 +7,7 @@ import { storeToRefs } from 'pinia'
 
 const reportStore = useReportStore()
 
-const {
-  companyName,
-} = storeToRefs(reportStore)
+const { companyName } = storeToRefs(reportStore)
 
 const {
   costOfDoingBusiness,
@@ -25,12 +23,12 @@ const {
 } = reportStore
 
 const reportOutputsArray: { id: string; class: string; label: string; variable: any }[] = [
-  {
-    id: uniqueId('output-'),
-    class: 'text-xl',
-    label: 'Final Report',
-    variable: ''
-  },
+  // {
+  //   id: uniqueId('output-'),
+  //   class: 'text-caption-bold',
+  //   label: 'Final Report',
+  //   variable: ''
+  // },
   {
     id: uniqueId('output-'),
     class: 'flex',
@@ -39,69 +37,80 @@ const reportOutputsArray: { id: string; class: string; label: string; variable: 
   },
   {
     id: uniqueId('output-'),
-    class: '',
-    label: 'Your Yearly Fixed Costs',
+    class: 'flex',
+    label: 'Your Yearly Fixed Costs:',
     variable: fixedCostYearly
   },
   {
     id: uniqueId('output-'),
-    class: '',
-    label: 'Your Yearly Variable Costs',
+    class: 'flex',
+    label: 'Your Yearly Variable Costs:',
     variable: variableCostYearly
   },
   {
     id: uniqueId('output-'),
-    class: '',
-    label: 'Owners Draw (Yearly Salary)',
+    class: 'flex',
+    label: 'Owners Draw (Yearly Salary):',
     variable: payYearly
   },
   {
     id: uniqueId('output-'),
-    class: '',
-    label: 'Your Yearly Savings',
+    class: 'flex',
+    label: 'Your Yearly Savings:',
     variable: savingsYearly
   },
   {
     id: uniqueId('output-'),
-    class: '',
-    label: 'Cost of Doing Business',
+    class: 'flex',
+    label: 'Cost of Doing Business:',
     variable: costOfDoingBusiness
   },
   {
     id: uniqueId('output-'),
-    class: '',
-    label: 'Number of Yearly Bookings to Break Even',
+    class: 'flex',
+    label: 'Number of Yearly Bookings to Break Even:',
     variable: bookingsToBreakEven
   },
   {
     id: uniqueId('output-'),
-    class: '',
-    label: 'Average Yearly Bookings',
-    variable:  bookingsYearly
+    class: 'flex',
+    label: 'Average Yearly Bookings:',
+    variable: bookingsYearly
   },
   {
     id: uniqueId('output-'),
-    class: '',
-    label: 'Average Hours Worked Per Year',
-    variable:  hoursWorkedYearly
+    class: 'flex',
+    label: 'Average Hours Worked Per Year:',
+    variable: hoursWorkedYearly
   },
   {
     id: uniqueId('output-'),
-    class: '',
-    label: 'Your Hourly Rate',
+    class: 'flex',
+    label: 'Your Hourly Rate:',
     variable: hourlyRateYearly
   },
   {
     id: uniqueId('output-'),
-    class: '',
-    label: 'Your Average Yearly Income',
+    class: 'flex',
+    label: 'Your Average Yearly Income:',
     variable: averageYearlyIncome
-  }]
+  }
+]
 </script>
 
 <template>
-  <report-output v-for="output in reportOutputsArray" :class="output.class" :key=output.id>
-    <template #top> {{ output.label }}</template>
-    <template #bottom> {{ output.variable }}</template>
-  </report-output>
+  
+  <div class="basis-full flex flex-col justify-center items-center">
+    <div class="text-caption-bold">
+    <p>
+      Final Report
+    </p> 
+  </div>
+    <div class="overflow-auto">
+      <report-output v-for="output in reportOutputsArray" :class="output.class" :key="output.id">
+        <template #top> {{ output.label }}</template>
+        <template #bottom> {{ output.variable }}</template>
+      </report-output>
+    </div>
+  </div>
 </template>

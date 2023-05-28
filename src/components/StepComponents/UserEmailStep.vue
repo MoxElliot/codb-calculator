@@ -37,18 +37,16 @@ const userEmailForm = useForm({
 const { value: email, errorMessage: emailError } = useField('email')
 </script>
 <template>
-  <div>
-    <h4>User Email Step</h4>
-  </div>
-  <div>
+  <div  class="basis-full flex flex-col justify-center items-center">
     <h4>Please Enter Your Email Address to Access the Final Report</h4>
     <data-input
       v-model="userEmailInput"
       name="email"
       label="Email Address:"
+      parentClass="flex flex-row"
       type="email"
       id="user-email-address"
     />
-    <span class="text-red-700 font-semibold">{{ emailError }}</span>
+    <span class="text-red-100 font-semibold">{{ emailError }}</span>
   </div>
 </template>
