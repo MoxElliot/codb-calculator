@@ -6,10 +6,8 @@ defineProps(['VariableCost'])
 </script>
 
 <template>
-  <div class="Variable-cost-data-input">
+  <div class="basis-full flex flex-col justify-center items-center">
     <variable-cost-data-input />
-  </div>
-  <div>
     <variable-cost-table />
   </div>
 </template>
