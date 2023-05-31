@@ -76,7 +76,7 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         name="name"
         class="fixed-cost-dataset basis-1/4 flex-1"
       />
-      <span class="text-red font-semibold">{{ errors.name }}</span> 
+      <span class="text-red-100 font-semibold">{{ errors.name }}</span> 
       </div>
       <div>
         <data-select
@@ -86,7 +86,7 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         :optionArray="costCategoryOptions"
         class="basis-1/4 flex-1"
       />
-      <span class="text-red font-semibold">{{ errors.category }}</span>
+      <span class="text-red-100 font-semibold">{{ errors.category }}</span>
       </div>
       <div>
         <data-input
@@ -95,7 +95,7 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         name="amount"
         class="fixed-cost-dataset basis-1/4 flex-1"
       />
-      <span class="text-red font-semibold">{{ amountError }}</span>
+      <span class="text-red-100 font-semibold">{{ amountError }}</span>
       </div>
       <div>
         <data-select
@@ -105,7 +105,7 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         :optionArray="costPeriodOptions"
         class="basis-1/4 flex-1"
       />
-      <span class="text-red font-semibold">{{ errors.period }}</span>
+      <span class="text-red-100 font-semibold">{{ errors.period }}</span>
       </div>
      
     </fieldset>

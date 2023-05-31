@@ -3,35 +3,40 @@ import { useReportStore } from '@/stores/reportStore'
 import { useStepStore } from '@/stores/stepStore'
 import * as Yup from 'yup'
 import DataInput from '../FormComponents/DataInput.vue'
-import { computed, onMounted, type WritableComputedRef } from 'vue'
+import { computed, onMounted, onUpdated, type WritableComputedRef } from 'vue'
 import { useForm, useField, Form } from 'vee-validate'
 import { storeToRefs } from 'pinia'
 
 const reportStore = useReportStore()
 const { addCompanyNameAction, updateInputValidAction } = reportStore
-const { companyName } = storeToRefs(reportStore)
+const { companyName, inputValid } = storeToRefs(reportStore)
 const stepStore = useStepStore()
 const { hasErrorMessage } = storeToRefs(stepStore)
 const { setHasErrorMessageAction } = stepStore
 
-onMounted(() => {
-  console.log(
-    'on mountcompanyError',
+// onUpdated(() => {
+//   console.log(
+//     'on mountcompanyError', companyError.value
+//   )
+//   setHasErrorMessageAction(companyError.value ? true : false)
+//   console.log("has errorMessage?", hasErrorMessage.value)
+//   updateInputValidAction(!hasErrorMessage.value)
+//   // updateInputValidAction(companyError.value === undefined ? false : true)
+// })
 
-    hasErrorMessage.value
-  )
-  // updateInputValidAction(companyError.value === undefined ? false : true)
+onMounted(() => {
+  updateInputValidAction(companyError.value === undefined ? false : true)
 })
 
 const companyNameInput: WritableComputedRef<string> = computed<string>({
   get: () => companyName.value, //Maintains data in field if user goes back
-  set: async (text: string) => {
+  set: (text: string) => {
     company.value = text
-    const resp = await companyNameForm.validate()
+    // const resp = await companyNameForm.validate()
     addCompanyNameAction(text) // updates Pinia state
-    updateInputValidAction(resp.valid) // enables the Next button
-    setHasErrorMessageAction(true)
-    console.log('in companyNameInput hasErrorMessage', hasErrorMessage.value)
+   // updateInputValidAction(resp.valid) // enables the Next button
+   updateInputValidAction(companyError.value === undefined ? true : false)
+    console.log('in companyNameInput hasErrorMessage, inputValid', companyError.value, inputValid.value)
   }
 })
 
@@ -41,9 +46,12 @@ const schema = Yup.object({
 
 const companyNameForm = useForm({
   validationSchema: schema,
+  validateOnMount:true,
   initialErrors: {
     company: ''
-  }
+  },
+  
+
 })
 
 const { value: company, errorMessage: companyError, meta } = useField('company')
@@ -64,7 +72,7 @@ const { value: company, errorMessage: companyError, meta } = useField('company')
           the name of it.
         </p>
       </div>
-      <div class="self-stretch">
+      <Form class="self-stretch">
         <data-input
           v-model.trim="companyNameInput"
           name="company"
@@ -76,7 +84,7 @@ const { value: company, errorMessage: companyError, meta } = useField('company')
         />
 
         <span class="text-red-100 font-semibold">{{ companyError }}</span>
-      </div>
+      </Form>
     </div>
   </div>
 </template>
