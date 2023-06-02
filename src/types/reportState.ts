@@ -15,7 +15,6 @@ interface reportState {
   savingsPerMonth: number
   userEmail: string
   inputValid: boolean
-  hasErrorMessage: boolean
   blankSubmitError: string
 }
 

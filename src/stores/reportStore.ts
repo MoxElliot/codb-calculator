@@ -32,10 +32,9 @@ export const useReportStore = defineStore('reportStore', {
     totalFixedCosts: 0.00,
     payPerMonth: 0.00,
     savingsPerMonth: 0.00,
-    userEmail: "",
+    userEmail: '',
     inputValid: true,
-    hasErrorMessage: false,
-    blankSubmitError: ""
+    blankSubmitError: '',
   }),
   actions: {
     addCompanyNameAction(companyName: string) {
@@ -94,12 +93,10 @@ export const useReportStore = defineStore('reportStore', {
       this.inputValid = inputValid
       console.log("updateInputValidAction", this.inputValid)  ///this.$route
     },
-    setHasErrorMessageAction(hasErrorMessage: boolean) {
-      this.hasErrorMessage = hasErrorMessage
-    },
     setblankSubmitErrorAction(blankSubmitError: string) {
       this.blankSubmitError = blankSubmitError
     }
+    
   },
 
   getters: {

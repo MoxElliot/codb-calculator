@@ -10,7 +10,6 @@ const props = defineProps({
   },
   modelValue: {  
     type: [String, Number]
-    
   },
   ref: {
     type: [String, Number]

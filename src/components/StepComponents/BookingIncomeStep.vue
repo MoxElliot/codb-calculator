@@ -2,22 +2,83 @@
 import { useReportStore } from '../../stores/reportStore'
 import { storeToRefs } from 'pinia'
 import DataInput from '../FormComponents/DataInput.vue'
-import { onMounted } from 'vue'
+import { useForm, useField } from 'vee-validate'
+import * as Yup from 'yup'
+import { computed, onMounted, type WritableComputedRef } from 'vue'
 
 const reportStore = useReportStore()
-const { bookingsPerMonth, priceAveragePerBooking, hoursAveragePerBooking } =
-  storeToRefs(reportStore)
-const { addBookingsPerMonthAction, addPricePerBookingAction, addHoursPerBookingAction, updateInputValidAction } =
-  reportStore
+const {
+  bookingsPerMonth,
+  priceAveragePerBooking,
+  hoursAveragePerBooking,
+  inputValid,
+  blankSubmitError
+} = storeToRefs(reportStore)
+const {
+  addBookingsPerMonthAction,
+  addPricePerBookingAction,
+  addHoursPerBookingAction,
+  updateInputValidAction
+} = reportStore
 
-// onMounted(() => {
-//   console.log('in onMounted', company.value)
-//   if (companyName.value === '') {
-//     updateInputValidAction(false)
-//     console.log('in OnMounted If', inputValid.value)
-//   }
-// })
+onMounted(() => {
+  if (
+    bookingsPerMonth.value === 0 ||
+    priceAveragePerBooking.value === 0 ||
+    hoursAveragePerBooking.value === 0
+  ) {
+    updateInputValidAction(false)
+    console.log('in OnMounted If', inputValid.value)
+  }
+})
 
+const bookingsPerMonthInput: WritableComputedRef<number> = computed<number>({
+  get: () => bookingsPerMonth.value, //Maintains data in field if user goes back
+  set: async (num: number) => {
+    bookings.value = num //take this out of the set, no validation will happen
+    addBookingsPerMonthAction(num) // updates Pinia state
+    const resp = await bookingIncomeForm.validate()
+    console.log('in BookingsInput', resp.errors.bookings)
+    updateInputValidAction(resp.valid) // enables the Next button
+  }
+})
+
+const priceAveragePerBookingInput: WritableComputedRef<number> = computed<number>({
+  get: () => priceAveragePerBooking.value, //Maintains data in field if user goes back
+  set: async (num: number) => {
+    price.value = num //take this out of the set, no validation will happen
+    addPricePerBookingAction(num) // updates Pinia state
+    const resp = await bookingIncomeForm.validate()
+    console.log('in BookingsInput', resp.errors.price)
+    updateInputValidAction(resp.valid) // enables the Next button
+  }
+})
+
+const hoursAveragePerBookingInput: WritableComputedRef<number> = computed<number>({
+  get: () => hoursAveragePerBooking.value, //Maintains data in field if user goes back
+  set: async (num: number) => {
+    hours.value = num //take this out of the set, no validation will happen
+    addHoursPerBookingAction(num) // updates Pinia state
+    const resp = await bookingIncomeForm.validate()
+    console.log('in BookingsInput', resp.errors.hours)
+    updateInputValidAction(resp.valid) // enables the Next button
+  }
+})
+
+const schema = Yup.object({
+  bookings: Yup.number(),
+  price: Yup.number(),
+  hours: Yup.number()
+}).typeError('Please Enter a Number').required('All Fields Required')
+
+const bookingIncomeForm = useForm({
+  validationSchema: schema,
+  
+})
+
+const { value: bookings, errorMessage: bookingsError, meta: bookingMeta } = useField('bookings')
+const { value: price, errorMessage: priceError, meta: priceMeta } = useField('price')
+const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('hours')
 </script>
 
 <template>
@@ -25,36 +86,39 @@ const { addBookingsPerMonthAction, addPricePerBookingAction, addHoursPerBookingA
     <h4>How many bookings do you take on per month?</h4>
     <div class="">
       <data-input
-        v-model="bookingsPerMonth"
+        v-model="bookingsPerMonthInput"
         label="In a month, I typicaly book"
         labelAfter="shoots!"
         parentClass="flex flex-row"
         type="number"
         id="bookings-per-month"
-        @blur="addBookingsPerMonthAction($event.target.value)"
       />
     </div>
 
     <div>
-      <h4>How Much do you charge per booking on average?</h4>
       <data-input
-        v-model="priceAveragePerBooking"
-        label="$"
+        v-model="priceAveragePerBookingInput"
+        label="How Much do you charge per booking on average?"
         parentClass="flex flex-row"
         type="number"
         id="price-average-per-booking"
-        @blur="addPricePerBookingAction($event.target.value)"
       />
-
-      <h4>How many hours do you work per booking? (Including editing time, meetings, etc.)</h4>
+    </div>
+    <div>
       <data-input
-        v-model="hoursAveragePerBooking"
+        v-model="hoursAveragePerBookingInput"
+        label="How many hours do you work per booking? (Including editing time, meetings, etc.)"
         labelAfter="Hours"
         parentClass="flex flex-row"
         type="number"
         id="hour-average-per-booking"
-        @blur="addHoursPerBookingAction($event.target.value)"
       />
     </div>
+    <span class="error-text">{{ bookingsError }}</span>
+    <span class="error-text">{{ priceError }}</span>
+    <span class="error-text">{{ hoursError }}</span>
+    <span class="error-text" v-show="!bookingMeta.dirty || !priceMeta.dirty || !hoursMeta.dirty">{{
+      blankSubmitError
+    }}</span>
   </div>
 </template>
