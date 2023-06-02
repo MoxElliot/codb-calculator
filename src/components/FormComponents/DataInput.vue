@@ -9,7 +9,6 @@ const props = defineProps({
     default: ''
   },
   modelValue: {  
-    type: [String, Number]
   },
   ref: {
     type: [String, Number]
@@ -34,7 +33,7 @@ const props = defineProps({
 })
 
 const $emit = defineEmits<{
-  (e: 'update:modelValue', value: string | number): void
+  (e: 'update:modelValue', value: string | number ): void
 }>()
 
 const handleInputChange = (e: any) => {

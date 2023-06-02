@@ -38,8 +38,6 @@ const userEmailForm = useForm({
 })
 
 const { value: email, errorMessage: emailError, meta } = useField('email')
-
-
 </script>
 <template>
   <div class="basis-full flex flex-col justify-center items-center">

@@ -11,51 +11,72 @@ import { useField, useForm, Form } from 'vee-validate'
 import { storeToRefs } from 'pinia'
 
 const reportStore = useReportStore()
+const { blankSubmitError } = storeToRefs(reportStore)
+const {
+  setblankSubmitErrorAction
+} = reportStore
+
+
 const fixedCostTotal = ref<number>(0)
 
-const handleAddCost = (...values: any) => {
+let fixedFormValid = ref<boolean>(true)
+
+const handleAddCost = (fixedCostName: string, fixedCostCategory: string, fixedCostAmount: null | number| undefined, fixedCostPeriod: string) => {
+  console.log("Metas", nameMeta.valid, categoryMeta.valid, amountMeta.valid, periodMeta.valid)
+
+  if(nameMeta.valid && categoryMeta.valid && amountMeta.valid && periodMeta.valid){
+    fixedFormValid.value = true
   reportStore.addFixedCostAction({
     id: reportStore.fixedCosts.length + 1,
-    name: fixedCostName.value,
-    category: fixedCostCategory.value,
-    amount: fixedCostAmount.value,
-    payPeriod: fixedCostPeriod.value,
+    name: fixedCostName,
+    category: fixedCostCategory,
+    amount: fixedCostAmount,
+    payPeriod: fixedCostPeriod,
     individualTotal: fixedCostTotal.value
   })
-  fixedCostName.value = ''
-  fixedCostCategory.value = ''
-  fixedCostAmount.value = 0.0
-  fixedCostPeriod.value = ''
+  fixedCostName = ''
+  fixedCostCategory = ''
+  fixedCostAmount = null
+  fixedCostPeriod = ''
   fixedCostTotal.value = 0.0
+} else {
+
+  fixedFormValid.value = false
+  setblankSubmitErrorAction("Enter a value for each Category")
+  console.log("not valid yet", fixedFormValid.value, blankSubmitError.value)
+}
 }
 
-defineProps({
-  // Must be defined
-  modelValue: {
-    type: [String, Number]
-  },
-});
+
+// defineProps({
+//   // Must be defined
+//   modelValue: {
+//     type: [String, Number]
+//   },
+// });
 
 const schema = Yup.object({
-  name: Yup.string().required('Name is Required'),
-  category: Yup.string().required('Category is Required'),
-  amount: Yup.number().required('Value is Required'),
-  period: Yup.string().required('Period is Required')
+  name: Yup.string().required(' '),
+  category: Yup.string().required(' '),
+  amount: Yup.number().typeError('Please Enter a Number').required(' '),
+  period: Yup.string().required(' ')
 })
 
-const { errors, values, meta } = useForm({
+const fixedCostForm = useForm({
   validationSchema: schema,
+  validateOnMount: true
 })
-const { value: fixedCostName, errorMessage: nameError, } = useField('name', values, {
+
+const { value: fixedCostName, errorMessage: nameError, meta: nameMeta } = useField('name', undefined, {
   initialValue: '',
 })
-const { value: fixedCostCategory, errorMessage: categoryError } = useField('category', values, {
+const { value: fixedCostCategory, errorMessage: categoryError, meta: categoryMeta } = useField('category', undefined, {
   initialValue: '',
 })
-const { value: fixedCostAmount, errorMessage: amountError } = useField('amount', values, {
-  initialValue: 0
+const { value: fixedCostAmount, errorMessage: amountError, meta: amountMeta } = useField('amount', undefined, {
+  initialValue: null
 })
-const { value: fixedCostPeriod, errorMessage: periodError } = useField('period', values, {
+const { value: fixedCostPeriod, errorMessage: periodError, meta: periodMeta } = useField('period', undefined, {
   initialValue: '',
 })
 </script>
@@ -76,7 +97,7 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         name="name"
         class="fixed-cost-dataset basis-1/4 flex-1"
       />
-      <span class="text-red-100 font-semibold">{{ errors.name }}</span> 
+      <span class="error-text">{{ nameError }}</span> 
       </div>
       <div>
         <data-select
@@ -86,7 +107,7 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         :optionArray="costCategoryOptions"
         class="basis-1/4 flex-1"
       />
-      <span class="text-red-100 font-semibold">{{ errors.category }}</span>
+      <span class="error-text">{{ categoryError }}</span>
       </div>
       <div>
         <data-input
@@ -95,7 +116,7 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         name="amount"
         class="fixed-cost-dataset basis-1/4 flex-1"
       />
-      <span class="text-red-100 font-semibold">{{ amountError }}</span>
+      <span class="error-text">{{ amountError }}</span>
       </div>
       <div>
         <data-select
@@ -105,16 +126,20 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         :optionArray="costPeriodOptions"
         class="basis-1/4 flex-1"
       />
-      <span class="text-red-100 font-semibold">{{ errors.period }}</span>
+      <span class="error-text">{{ periodError }}</span>
       </div>
      
     </fieldset>
+    
     
     <div class="btn-add flex flex-col justify-center">
       <form-button label="Add" type="submit" class="font-bold" />
     </div>
     
   </Form>
+  <span class="error-text" v-show="!fixedFormValid">{{
+      blankSubmitError
+    }}</span>
 </template>
 
 <style scoped></style>
