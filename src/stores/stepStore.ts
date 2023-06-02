@@ -7,8 +7,7 @@ export const useStepStore = defineStore('stepStore', {
   state: (): StepStoreState => ({
     stepNum: getIndex(),
     stepName: stepsArray[getIndex()].name,
-    stepCurrent: window.location.pathname,
-    hasErrorMessage: false
+    stepCurrent: window.location.pathname
   }),
   actions: {
     forwardStepAction() {
@@ -22,9 +21,6 @@ export const useStepStore = defineStore('stepStore', {
       this.stepCurrent = stepsArray[this.stepNum].previous
       this.stepName = stepsArray[this.stepNum - 1].name
       this.stepNum >= 0 ? (this.stepNum = this.stepNum - 1) : (this.stepNum = this.stepNum)
-    },
-    setHasErrorMessageAction(hasErrorMessage: boolean) {
-      this.hasErrorMessage = hasErrorMessage
     }
   }
 })

@@ -31,7 +31,7 @@ module.exports = {
         '3/10': '30%',
         '35/100': '35%',
         '5/10': '50%',
-        '6/10': '60%'
+        '6/10': '60%'  
       },
       padding: {
         btn: '12px,44px,12px,44px'
@@ -104,7 +104,7 @@ module.exports = {
           letterSpacing: '-0.02em',
           fontWeight: '400'
         }
-      ],
+      ],                        
       body: [
         '16px',
         {

@@ -9,11 +9,8 @@ import { storeToRefs } from 'pinia'
 
 const reportStore = useReportStore()
 const { addCompanyNameAction, updateInputValidAction } = reportStore
-const { companyName, inputValid } = storeToRefs(reportStore)
+const { companyName, inputValid, blankSubmitError } = storeToRefs(reportStore)
 const stepStore = useStepStore()
-const { hasErrorMessage } = storeToRefs(stepStore)
-const { setHasErrorMessageAction } = stepStore
-
 // onUpdated(() => {
 //   console.log(
 //     'on mountcompanyError', companyError.value
@@ -25,18 +22,21 @@ const { setHasErrorMessageAction } = stepStore
 // })
 
 onMounted(() => {
-  updateInputValidAction(companyError.value === undefined ? false : true)
+  console.log('in onMounted', company.value)
+  if (companyName.value === '') {
+    updateInputValidAction(false)
+    console.log('in OnMounted If', inputValid.value)
+  }
 })
 
 const companyNameInput: WritableComputedRef<string> = computed<string>({
   get: () => companyName.value, //Maintains data in field if user goes back
-  set: (text: string) => {
-    company.value = text
-    // const resp = await companyNameForm.validate()
+  set: async (text: string) => {
+    company.value = text //take this out of the set, no validation will happen
     addCompanyNameAction(text) // updates Pinia state
-   // updateInputValidAction(resp.valid) // enables the Next button
-   updateInputValidAction(companyError.value === undefined ? true : false)
-    console.log('in companyNameInput hasErrorMessage, inputValid', companyError.value, inputValid.value)
+    const resp = await companyNameForm.validate()
+    console.log('inCompanyName INput', resp.errors.company)
+    updateInputValidAction(resp.valid) // enables the Next button
   }
 })
 
@@ -46,24 +46,19 @@ const schema = Yup.object({
 
 const companyNameForm = useForm({
   validationSchema: schema,
-  validateOnMount:true,
   initialErrors: {
-    company: ''
-  },
-  
-
+    company: blankSubmitError.value
+  }
 })
 
-const { value: company, errorMessage: companyError, meta } = useField('company')
+const { value: company, errorMessage: companyError, meta } = useField('company', schema)
 </script>
 
 <template>
   <div class="flex flex-row justify-center basis-full">
     <div class="flex flex-col items-center justify-around basis-2/4">
       <div class="w-6/10">
-        <p class="font-serif text-grey-300 text-heading2">
-          What is the name of your business?
-        </p>
+        <p class="font-serif text-grey-300 text-heading2">What is the name of your business?</p>
       </div>
       <div class="">
         <p class="font-sans text-grey-300 text-body2 text-center">
@@ -72,7 +67,7 @@ const { value: company, errorMessage: companyError, meta } = useField('company')
           the name of it.
         </p>
       </div>
-      <Form class="self-stretch">
+      <div class="self-stretch">
         <data-input
           v-model.trim="companyNameInput"
           name="company"
@@ -82,9 +77,9 @@ const { value: company, errorMessage: companyError, meta } = useField('company')
           type="text"
           id="company-name"
         />
-
         <span class="text-red-100 font-semibold">{{ companyError }}</span>
-      </Form>
+        <span class="text-red-100 font-semibold" v-show="!meta.dirty">{{ blankSubmitError }}</span>
+      </div>
     </div>
   </div>
 </template>

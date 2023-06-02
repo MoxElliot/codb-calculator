@@ -34,6 +34,8 @@ export const useReportStore = defineStore('reportStore', {
     savingsPerMonth: 0.00,
     userEmail: ' ',
     inputValid: true,
+    hasErrorMessage: false,
+    blankSubmitError: ""
   }),
   actions: {
     addCompanyNameAction(companyName: string) {
@@ -91,6 +93,12 @@ export const useReportStore = defineStore('reportStore', {
     updateInputValidAction(inputValid: boolean) {
       this.inputValid = inputValid
       console.log("updateInputValidAction", this.inputValid)  ///this.$route
+    },
+    setHasErrorMessageAction(hasErrorMessage: boolean) {
+      this.hasErrorMessage = hasErrorMessage
+    },
+    setblankSubmitErrorAction(blankSubmitError: string) {
+      this.blankSubmitError = blankSubmitError
     }
   },
 

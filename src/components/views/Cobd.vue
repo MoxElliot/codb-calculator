@@ -2,11 +2,7 @@
 import CodbForm from '../CoBDComponents/CodbForm.vue'
 import CodbHeader from '../CoBDComponents/CodbHeader.vue'
 import CodbFooter from '../CoBDComponents/CodbFooter.vue'
-import { Field, Form, useForm } from 'vee-validate'
 
-const { meta } = useForm()
-
-console.log('in Cobd.vue meta', meta)
 </script>
 
 <template class="h-screen">
@@ -22,3 +18,5 @@ console.log('in Cobd.vue meta', meta)
     </div>
   </div>
 </template>
+
+

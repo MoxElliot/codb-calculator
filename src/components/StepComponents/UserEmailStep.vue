@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useReportStore } from '../../stores/reportStore'
 import DataInput from '../FormComponents/DataInput.vue'
-import { useForm, useField } from 'vee-validate'
+import { useForm, useField, ErrorMessage } from 'vee-validate'
 import * as Yup from 'yup'
 import { computed, onMounted, type WritableComputedRef } from 'vue'
 import { storeToRefs } from 'pinia'
@@ -11,30 +11,36 @@ const { addUserEmailAction, updateInputValidAction } = reportStore
 const { userEmail } = storeToRefs(reportStore)
 
 onMounted(() => {
-  // email.value = ''
-  updateInputValidAction(false)
+  console.log("onMounted", userEmail.value)
+  if(userEmail.value === ''){
+    console.log("In If", errorMessage.value)
+  updateInputValidAction(errorMessage.value === '' ? true : false)}
 })
 
 const userEmailInput: WritableComputedRef<string> = computed({
   get: () => userEmail.value,
-  set: async (text: string) => {
+  set:  (text: string) => {
     email.value = text
-    const resp = await userEmailForm.validate()
-    console.log('in userEmail set', resp.valid)
+    // const resp = await userEmailForm.validate()
+    // console.log('in userEmail set', resp.valid)
     addUserEmailAction(text) //should replace blur
-    updateInputValidAction(resp.valid)
+    updateInputValidAction(errorMessage === undefined ? true : false)
+    console.log("in userEmailInput", errorMessage)
   }
 })
 
 const schema = Yup.object({
-  email: Yup.string().email('Please Enter Valid Email Address').required('Required!')
+  email: Yup.string().email('Please Enter Valid Email Address').required('Required!')})
+
+useForm({
+  validationSchema: schema,
+  validateOnMount: true
 })
 
-const userEmailForm = useForm({
-  validationSchema: schema
-})
+const { value: email, errorMessage } = useField('email')
+console.log("userEmailStep, emailError", {errorMessage})
 
-const { value: email, errorMessage: emailError } = useField('email')
+
 </script>
 <template>
   <div  class="basis-full flex flex-col justify-center items-center">
@@ -47,6 +53,7 @@ const { value: email, errorMessage: emailError } = useField('email')
       type="email"
       id="user-email-address"
     />
-    <span class="text-red-100 font-semibold">{{ emailError }}</span>
+    <ErrorMessage name="email" class="text-red-100 font-semibold"/>
+    <!-- <span class="text-red-100 font-semibold">{{ emailError }}</span> -->
   </div>
 </template>

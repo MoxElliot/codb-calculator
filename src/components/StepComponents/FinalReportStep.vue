@@ -20,7 +20,9 @@ const {
   bookingsYearly,
   hoursWorkedYearly,
   hourlyRateYearly
-} = reportStore
+} = reportStore   
+
+//put this array in the store 
 
 const reportOutputsArray: { id: string; class: string; label: string; variable: any }[] = [
   // {
@@ -30,7 +32,7 @@ const reportOutputsArray: { id: string; class: string; label: string; variable: 
   //   variable: ''
   // },
   {
-    id: uniqueId('output-'),
+    id: uniqueId('output-'),   //pull out this and use the index or stepname
     class: 'flex',
     label: 'Company Name:',
     variable: companyName
