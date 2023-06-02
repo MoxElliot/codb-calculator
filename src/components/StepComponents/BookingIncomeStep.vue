@@ -66,10 +66,10 @@ const hoursAveragePerBookingInput: WritableComputedRef<number> = computed<number
 })
 
 const schema = Yup.object({
-  bookings: Yup.number(),
-  price: Yup.number(),
-  hours: Yup.number()
-}).typeError('Please Enter a Number').required('All Fields Required')
+  bookings: Yup.number().typeError('Please Enter a Number').required('All Fields Required'),
+  price: Yup.number().typeError('Please Enter a Number').required('All Fields Required'),
+  hours: Yup.number().typeError('Please Enter a Number').required('All Fields Required')
+})
 
 const bookingIncomeForm = useForm({
   validationSchema: schema,
