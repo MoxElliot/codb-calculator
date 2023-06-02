@@ -3,7 +3,6 @@ import { useStepStore } from '../../stores/stepStore'
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import FormButton from '../FormComponents/FormButton.vue'
-import { ref } from 'vue'
 
 const reportStore = useReportStore()
 const { inputValid } = storeToRefs(reportStore)
@@ -12,14 +11,10 @@ const stepStore = useStepStore()
 const { stepCurrent, stepNum } = storeToRefs(stepStore)
 const { backStepAction, forwardStepAction } = stepStore
 
-let toggleSubmit = ref(true)
-
 const checkValid = () => {
   if (!inputValid.value) {
-    toggleSubmit.value = false
     setblankSubmitErrorAction('Please fill out the form')
   } else if (inputValid.value) {
-    toggleSubmit.value = true
     setblankSubmitErrorAction('')
     forwardStepAction()
   }

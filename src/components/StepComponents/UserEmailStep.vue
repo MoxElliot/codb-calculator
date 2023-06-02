@@ -1,49 +1,48 @@
 <script setup lang="ts">
 import { useReportStore } from '../../stores/reportStore'
 import DataInput from '../FormComponents/DataInput.vue'
-import { useForm, useField, ErrorMessage } from 'vee-validate'
+import { useForm, useField } from 'vee-validate'
 import * as Yup from 'yup'
 import { computed, onMounted, type WritableComputedRef } from 'vue'
 import { storeToRefs } from 'pinia'
 
 const reportStore = useReportStore()
 const { addUserEmailAction, updateInputValidAction } = reportStore
-const { userEmail } = storeToRefs(reportStore)
+const { userEmail, inputValid, blankSubmitError } = storeToRefs(reportStore)
 
 onMounted(() => {
-  console.log("onMounted", userEmail.value)
-  if(userEmail.value === ''){
-    console.log("In If", errorMessage.value)
-  updateInputValidAction(errorMessage.value === '' ? true : false)}
+  console.log('in onMounted', email.value)
+  if (userEmail.value === '') {
+    updateInputValidAction(false)
+    console.log('in OnMounted If', inputValid.value)
+  }
 })
 
-const userEmailInput: WritableComputedRef<string> = computed({
-  get: () => userEmail.value,
-  set:  (text: string) => {
-    email.value = text
-    // const resp = await userEmailForm.validate()
-    // console.log('in userEmail set', resp.valid)
-    addUserEmailAction(text) //should replace blur
-    updateInputValidAction(errorMessage === undefined ? true : false)
-    console.log("in userEmailInput", errorMessage)
+const userEmailInput: WritableComputedRef<string> = computed<string>({
+  get: () => userEmail.value, //Maintains data in field if user goes back
+  set: async (text: string) => {
+    email.value = text //take this out of the set, no validation will happen
+    addUserEmailAction(text) // updates Pinia state
+    const resp = await userEmailForm.validate()
+    console.log('inCompanyName INput', resp.errors.company)
+    updateInputValidAction(resp.valid) // enables the Next button
   }
 })
 
 const schema = Yup.object({
-  email: Yup.string().email('Please Enter Valid Email Address').required('Required!')})
-
-useForm({
-  validationSchema: schema,
-  validateOnMount: true
+  email: Yup.string().email('Please Enter Valid Email Address').required('Required!')
 })
 
-const { value: email, errorMessage } = useField('email')
-console.log("userEmailStep, emailError", {errorMessage})
+const userEmailForm = useForm({
+  validationSchema: schema,
+})
+
+const { value: email, errorMessage: emailError, meta } = useField('email')
 
 
 </script>
 <template>
-  <div  class="basis-full flex flex-col justify-center items-center">
+  <div class="basis-full flex flex-col justify-center items-center">
     <h4>Please Enter Your Email Address to Access the Final Report</h4>
     <data-input
       v-model="userEmailInput"
@@ -53,7 +52,7 @@ console.log("userEmailStep, emailError", {errorMessage})
       type="email"
       id="user-email-address"
     />
-    <ErrorMessage name="email" class="text-red-100 font-semibold"/>
-    <!-- <span class="text-red-100 font-semibold">{{ emailError }}</span> -->
+    <span class="error-text">{{ emailError }}</span>
+    <span class="error-text" v-show="!meta.dirty">{{ blankSubmitError }}</span>
   </div>
 </template>

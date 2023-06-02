@@ -1,42 +1,22 @@
 <script setup lang="ts">
 import { useReportStore } from '../../stores/reportStore'
 import { storeToRefs } from 'pinia'
-import { useForm, useField } from 'vee-validate'
 import DataInput from '../FormComponents/DataInput.vue'
-import * as Yup from 'yup'
-import { computed, onMounted, type WritableComputedRef } from 'vue'
+import { onMounted } from 'vue'
 
 const reportStore = useReportStore()
 const { bookingsPerMonth, priceAveragePerBooking, hoursAveragePerBooking } =
   storeToRefs(reportStore)
-const { addBookingsPerMonthAction, addPricePerBookingAction, addHoursPerBookingAction, updateInputValidAction  } =
+const { addBookingsPerMonthAction, addPricePerBookingAction, addHoursPerBookingAction, updateInputValidAction } =
   reportStore
 
-  onMounted(() => {
-  // email.value = ''
-  updateInputValidAction(false)
-})
-
-// const userEmailInput: WritableComputedRef<string> = computed({
-//   get: () => userEmail.value,
-//   set: async (text: string) => {
-//     email.value = text
-//     const resp = await userEmailForm.validate()
-//     console.log('in userEmail set', resp.valid)
-//     addUserEmailAction(text) //should replace blur
-//     updateInputValidAction(resp.valid)
+// onMounted(() => {
+//   console.log('in onMounted', company.value)
+//   if (companyName.value === '') {
+//     updateInputValidAction(false)
+//     console.log('in OnMounted If', inputValid.value)
 //   }
 // })
-
-const schema = Yup.object({
-  email: Yup.number().required('Required!')
-})
-
-const userEmailForm = useForm({
-  validationSchema: schema
-})
-
-const { value: email, errorMessage: emailError } = useField('email')
 
 </script>
 

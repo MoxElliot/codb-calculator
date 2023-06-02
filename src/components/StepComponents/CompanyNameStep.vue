@@ -1,25 +1,14 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
-import { useStepStore } from '@/stores/stepStore'
 import * as Yup from 'yup'
 import DataInput from '../FormComponents/DataInput.vue'
-import { computed, onMounted, onUpdated, type WritableComputedRef } from 'vue'
-import { useForm, useField, Form } from 'vee-validate'
+import { computed, onMounted, type WritableComputedRef } from 'vue'
+import { useForm, useField } from 'vee-validate'
 import { storeToRefs } from 'pinia'
 
 const reportStore = useReportStore()
 const { addCompanyNameAction, updateInputValidAction } = reportStore
 const { companyName, inputValid, blankSubmitError } = storeToRefs(reportStore)
-const stepStore = useStepStore()
-// onUpdated(() => {
-//   console.log(
-//     'on mountcompanyError', companyError.value
-//   )
-//   setHasErrorMessageAction(companyError.value ? true : false)
-//   console.log("has errorMessage?", hasErrorMessage.value)
-//   updateInputValidAction(!hasErrorMessage.value)
-//   // updateInputValidAction(companyError.value === undefined ? false : true)
-// })
 
 onMounted(() => {
   console.log('in onMounted', company.value)
@@ -77,8 +66,8 @@ const { value: company, errorMessage: companyError, meta } = useField('company',
           type="text"
           id="company-name"
         />
-        <span class="text-red-100 font-semibold">{{ companyError }}</span>
-        <span class="text-red-100 font-semibold" v-show="!meta.dirty">{{ blankSubmitError }}</span>
+        <span class="error-text">{{ companyError }}</span>
+        <span class="error-text" v-show="!meta.dirty">{{ blankSubmitError }}</span>
       </div>
     </div>
   </div>
