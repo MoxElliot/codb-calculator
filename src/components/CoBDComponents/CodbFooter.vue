@@ -8,7 +8,7 @@ const reportStore = useReportStore()
 const { inputValid } = storeToRefs(reportStore)
 const { setBlankSubmitErrorAction } = reportStore
 const stepStore = useStepStore()
-const { stepCurrent, stepNum } = storeToRefs(stepStore)
+const { stepCurrent } = storeToRefs(stepStore)
 const { backStepAction, forwardStepAction } = stepStore
 
 const checkValid = () => {
@@ -21,13 +21,13 @@ const checkValid = () => {
 }
 </script>
 <template>
-  <div class="flex" v-show="stepNum !== 7">
+  <div class="flex" v-show="stepCurrent !== '/final-report-step'">
     <router-link :to="stepCurrent">
-      <form-button label="Back" @click="backStepAction()" class="btn-back" v-show="stepNum > 1" />
+      <form-button label="Back" @click="backStepAction()" class="btn-back" v-show="stepCurrent !== '/' || '/company-name-step'" />
     </router-link>
     <router-link :to="stepCurrent">
       <form-button
-        :label="stepNum === 0 ? 'Let\'s Go!' : 'Next'"
+        :label="stepCurrent === '/' ? 'Let\'s Go!' : 'Next'"
         @click="checkValid"
         class="btn-next text-center"
         type="submit"
