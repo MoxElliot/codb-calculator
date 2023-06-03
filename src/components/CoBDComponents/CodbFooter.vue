@@ -6,16 +6,16 @@ import FormButton from '../FormComponents/FormButton.vue'
 
 const reportStore = useReportStore()
 const { inputValid } = storeToRefs(reportStore)
-const { setblankSubmitErrorAction } = reportStore
+const { setBlankSubmitErrorAction } = reportStore
 const stepStore = useStepStore()
 const { stepCurrent, stepNum } = storeToRefs(stepStore)
 const { backStepAction, forwardStepAction } = stepStore
 
 const checkValid = () => {
   if (!inputValid.value) {
-    setblankSubmitErrorAction('Please fill out the form')
+    setBlankSubmitErrorAction('Please fill out the form')
   } else if (inputValid.value) {
-    setblankSubmitErrorAction('')
+    setBlankSubmitErrorAction('')
     forwardStepAction()
   }
 }

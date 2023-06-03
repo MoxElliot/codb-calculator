@@ -71,7 +71,6 @@ const schema = Yup.object({
 
 const bookingIncomeForm = useForm({
   validationSchema: schema,
-  
 })
 
 const { value: bookings, errorMessage: bookingsError, meta: bookingMeta } = useField('bookings')
@@ -92,7 +91,6 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
         id="bookings-per-month"
       />
     </div>
-
     <div>
       <data-input
         v-model="priceAveragePerBookingInput"
