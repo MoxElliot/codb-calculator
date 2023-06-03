@@ -2,7 +2,7 @@ interface FixedCostObj {
   id: number
   name: string
   category: string
-  amount: number
+  amount: number | null | undefined
   payPeriod: string
   individualTotal: number
 }

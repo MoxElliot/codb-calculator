@@ -8,21 +8,24 @@ import { storeToRefs } from 'pinia'
 
 const reportStore = useReportStore()
 const { addUserEmailAction, updateInputValidAction } = reportStore
-const { userEmail } = storeToRefs(reportStore)
+const { userEmail, inputValid, blankSubmitError } = storeToRefs(reportStore)
 
 onMounted(() => {
-  // email.value = ''
-  updateInputValidAction(false)
+  console.log('in onMounted', email.value)
+  if (userEmail.value === '') {
+    updateInputValidAction(false)
+    console.log('in OnMounted If', inputValid.value)
+  }
 })
 
-const userEmailInput: WritableComputedRef<string> = computed({
-  get: () => userEmail.value,
+const userEmailInput: WritableComputedRef<string> = computed<string>({
+  get: () => userEmail.value, //Maintains data in field if user goes back
   set: async (text: string) => {
-    email.value = text
+    email.value = text //take this out of the set, no validation will happen
+    addUserEmailAction(text) // updates Pinia state
     const resp = await userEmailForm.validate()
-    console.log('in userEmail set', resp.valid)
-    addUserEmailAction(text) //should replace blur
-    updateInputValidAction(resp.valid)
+    console.log('inCompanyName INput', resp.errors.company)
+    updateInputValidAction(resp.valid) // enables the Next button
   }
 })
 
@@ -31,13 +34,13 @@ const schema = Yup.object({
 })
 
 const userEmailForm = useForm({
-  validationSchema: schema
+  validationSchema: schema,
 })
 
-const { value: email, errorMessage: emailError } = useField('email')
+const { value: email, errorMessage: emailError, meta } = useField('email')
 </script>
 <template>
-  <div  class="basis-full flex flex-col justify-center items-center">
+  <div class="basis-full flex flex-col justify-center items-center">
     <h4>Please Enter Your Email Address to Access the Final Report</h4>
     <data-input
       v-model="userEmailInput"
@@ -47,6 +50,7 @@ const { value: email, errorMessage: emailError } = useField('email')
       type="email"
       id="user-email-address"
     />
-    <span class="text-red-100 font-semibold">{{ emailError }}</span>
+    <span class="error-text">{{ emailError }}</span>
+    <span class="error-text" v-show="!meta.dirty">{{ blankSubmitError }}</span>
   </div>
 </template>

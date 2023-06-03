@@ -32,8 +32,9 @@ export const useReportStore = defineStore('reportStore', {
     totalFixedCosts: 0.00,
     payPerMonth: 0.00,
     savingsPerMonth: 0.00,
-    userEmail: ' ',
+    userEmail: '',
     inputValid: true,
+    blankSubmitError: '',
   }),
   actions: {
     addCompanyNameAction(companyName: string) {
@@ -56,6 +57,8 @@ export const useReportStore = defineStore('reportStore', {
       const totalNum: number = (fixedCost.amount as number) * payPeriodMultiplier
       fixedCost.individualTotal = formatMoney(totalNum)
       this.fixedCosts.push(fixedCost)
+      
+      console.log("inAddFixedCostAction", this.fixedCosts)
       this.totalFixedCostAction()
     },
     addBookingsPerMonthAction(bookingsPerMonth: number) {
@@ -91,7 +94,11 @@ export const useReportStore = defineStore('reportStore', {
     updateInputValidAction(inputValid: boolean) {
       this.inputValid = inputValid
       console.log("updateInputValidAction", this.inputValid)  ///this.$route
+    },
+    setBlankSubmitErrorAction(blankSubmitError: string) {
+      this.blankSubmitError = blankSubmitError
     }
+    
   },
 
   getters: {
