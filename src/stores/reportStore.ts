@@ -95,7 +95,7 @@ export const useReportStore = defineStore('reportStore', {
       this.inputValid = inputValid
       console.log("updateInputValidAction", this.inputValid)  ///this.$route
     },
-    setblankSubmitErrorAction(blankSubmitError: string) {
+    setBlankSubmitErrorAction(blankSubmitError: string) {
       this.blankSubmitError = blankSubmitError
     }
     

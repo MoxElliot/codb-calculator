@@ -12,7 +12,7 @@ import { storeToRefs } from 'pinia'
 
 const reportStore = useReportStore()
 const { blankSubmitError } = storeToRefs(reportStore)
-const { setblankSubmitErrorAction } = reportStore
+const { setBlankSubmitErrorAction } = reportStore
 
 const fixedCostTotal = ref<number>(0)
 
@@ -49,7 +49,7 @@ const handleAddCost = (
     resetForm()
   } else {
     fixedFormValid.value = false
-    setblankSubmitErrorAction('Enter a value for each Category')
+    setBlankSubmitErrorAction('Enter a value in each field')
   }
 }
 

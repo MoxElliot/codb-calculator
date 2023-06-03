@@ -11,7 +11,6 @@ const {
   bookingsPerMonth,
   priceAveragePerBooking,
   hoursAveragePerBooking,
-  inputValid,
   blankSubmitError
 } = storeToRefs(reportStore)
 const {
@@ -28,7 +27,6 @@ onMounted(() => {
     hoursAveragePerBooking.value === 0
   ) {
     updateInputValidAction(false)
-    console.log('in OnMounted If', inputValid.value)
   }
 })
 
