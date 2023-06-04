@@ -3,25 +3,33 @@ import type StepStoreState from '../types/StepStoreState'
 import steps from '@/assets/stepsArray'
 // import getIndex from '@/assets/utility_functions/getIndex'
 
+const result = [...[steps]]
+
 export const useStepStore = defineStore('stepStore', {
   state: (): StepStoreState => ({
     // stepNum: getIndex(),
     // stepName: stepsArray[getIndex()].name,
     // stepCurrent: window.location.pathname
     stepCurrent: window.location.pathname,
-    stepNext: 'Next',
-    stepPrevious: 'Previous',
+    stepNext: '',
+    stepPrevious: '',
   }),
   actions: {
     forwardStepAction() {
-      console.log("forwardStepAction, steps", steps.Home.current)
-      console.log("forwardStepAction, stepCurrent", this.stepCurrent)
-      console.log("forwardStepAction, object keys", Object.keys(steps)[0])
-      for(let prop in steps) {
-        for( let current in steps[prop])
+        for( const results of Object.values(steps)) {
+          console.log("in for", `${results.current}`)
+
+          if( results.current === window.location.pathname) {
+          console.log("in IF ", `${results.current}`)
+          this.stepCurrent = `${results.current}`
+          this.stepNext = `${results.next}`
+          this.stepPrevious = `${results.previous}`
+          console.log("in If current, next, previous", this.stepCurrent, this.stepNext, this.stepPrevious)
+        }
       }
 
-      })
+   
+    
 
       // getIndex()
       // this.stepCurrent = stepsArray[this.stepNum].next
@@ -29,6 +37,17 @@ export const useStepStore = defineStore('stepStore', {
       // this.stepNum <= 7 ? (this.stepNum = this.stepNum + 1) : (this.stepNum = this.stepNum)
     },
     backStepAction() {
+      for( const results of Object.values(steps)) {
+        console.log("in for", `${results.current}`)
+
+        if( results.current === window.location.pathname) {
+        console.log("in IF ", `${results.current}`)
+        this.stepCurrent = `${results.current}`
+        this.stepNext = `${results.next}`
+        this.stepPrevious = `${results.previous}`
+        console.log("in If current, next, previous", this.stepCurrent, this.stepNext, this.stepPrevious)
+      }
+    }
       // getIndex()
       // this.stepCurrent = stepsArray[this.stepNum].previous
       // this.stepName = stepsArray[this.stepNum - 1].name

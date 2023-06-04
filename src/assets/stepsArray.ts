@@ -16,51 +16,54 @@ import finalReportIcon from '../images/final-report-step-icon-inactive.png'
 //    prev: 'nextOne',
 //   }
 //  }
+// let steps: {Home: any, CompanyName: any, FixedCost: any, VariableCost: any, BookingIncome: any, OwnerDraw: any, UserEmail: any, FinalReport: any};
 
-const steps = {
-  Home: {
+let steps: {[index: string]: {next: string, current:string, previous:string, icon:string}}
+
+steps = {
+  'Home': {
     next: '/company-name-step',
     current: '/',
     previous: 'none',
     icon: 'none'
   },
-  CompanyName: {
+  'CompanyName': {
     next: '/fixed-cost-step',
     current: '/company-name-step',
     previous: '/',
     icon: startHereIcon
   },
-  FixedCost: {
+  'FixedCost': {
     next: '/variable-cost-step',
     current: '/fixed-cost-step',
     previous: '/company-name-step',
     icon: fixedCostIcon
   },
-  VariableCost: {
+  'VariableCost': {
     next: '/booking-income-step',
     current: '/variable-cost-step',
     previous: '/fixed-cost-step',
     icon: variableCostIcon
   },
-  BookingIncome: {
+  'BookingIncome': {
     next: '/owner-draw-step',
     current: '/booking-income-step',
     previous: '/variable-cost-step',
     icon: bookingIncomeIcon
   },
-  OwnerDraw: {
+  'OwnerDraw': {
     next: '/user-email-step',
     current: '/owner-draw-step',
     previous: '/booking-income-step',
     icon: ownersDrawIcon
   },
-  UserEmail: {
+  'UserEmail': {
     next: '/final-report-step',
     current: '/user-email-step',
     previous: '/owner-draw-step',
     icon: 'none'
   },
-  FinalReport: {
+  'FinalReport': {
     next: 'none',
     current: '/final-report-step',
     previous: '/owner-draw-step',

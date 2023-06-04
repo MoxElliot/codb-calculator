@@ -23,7 +23,7 @@ const { stepCurrent } = storeToRefs(stepStore)
         v-show="step.icon !== 'none'"
       
       >
-        <router-link :to="step.next">
+        <router-link :to="step.current">
           <img :src="step.icon" class="w-6 h-6" />
         </router-link>
       </div>
