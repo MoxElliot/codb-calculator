@@ -1,3 +1,19 @@
+<script setup lang="ts">
+import { onMounted } from 'vue';
+import { useStepStore } from '../../stores/stepStore'
+import { storeToRefs } from 'pinia';
+
+
+const stepStore = useStepStore()
+const { stepCurrent, stepNext, stepPrevious, nextButtonLabel } = storeToRefs(stepStore)
+const { backStepAction, forwardStepAction, setNextButtonLabel} = stepStore
+
+
+onMounted(() => {
+  setNextButtonLabel
+})
+</script>
+
 <template >
   <div class="flex flex-row justify-center basis-full">
     <div class="flex flex-col items-center justify-around basis-2/4">

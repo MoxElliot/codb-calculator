@@ -21,7 +21,6 @@ const { stepCurrent } = storeToRefs(stepStore)
         class="flex justify-center items-center h-4/6 border-r border-grey-200"
         v-for="step in steps"
         v-show="step.icon !== 'none'"
-      
       >
         <router-link :to="step.current">
           <img :src="step.icon" class="w-6 h-6" />
