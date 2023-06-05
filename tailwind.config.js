@@ -1,5 +1,6 @@
 // @type {import('tailwindcss').Config}
 
+import bla from './src/images/home_background.png'
 module.exports = {
   content: [
     './index.html',
@@ -20,7 +21,10 @@ module.exports = {
         '3/10': '30%',
         '35/100': '35%',
         '5/10': '50%',
-        '6/10': '60%'
+        '6/10': '60%',
+        '7/10': '70%',
+        '8/10': '80%', 
+        '9/10': '90%'
       },
       height: {
         24: '24px',
@@ -31,7 +35,10 @@ module.exports = {
         '3/10': '30%',
         '35/100': '35%',
         '5/10': '50%',
-        '6/10': '60%'  
+        '6/10': '60%', 
+        '7/10': '70%',
+        '8/10': '80%', 
+        '9/10': '90%'
       },
       padding: {
         btn: '12px,44px,12px,44px'
@@ -41,6 +48,9 @@ module.exports = {
       },
       borderRadius: {
         main: '36px'
+      },
+      backgroundImage: {
+        'homeBackground': "url('./src/images/home_background.png')"
       }
     },
     colors: {
@@ -104,6 +114,15 @@ module.exports = {
           letterSpacing: '-0.02em',
           fontWeight: '400'
         }
+      ], 
+      heading2_xs: [
+        // Home Page "Hey There"
+        '40px',
+        {
+          lineHeight: '50px',
+          letterSpacing: '-0.02em',
+          fontWeight: '400'
+        }
       ],                        
       body: [
         '16px',
@@ -113,10 +132,26 @@ module.exports = {
           fontWeight: '400'
         }
       ],
+      body_xs: [
+        '15px',
+        {
+          lineHeight: '20px',
+          letterSpacing: '0em',
+          fontWeight: '400'
+        }
+      ],
       body2: [
         '20px',
         {
           lineHeight: '32px',
+          letterSpacing: '-0.02em',
+          fontWeight: '400'
+        }
+      ],
+      body2_xs: [
+        '16px',
+        {
+          lineHeight: '28px',
           letterSpacing: '-0.02em',
           fontWeight: '400'
         }
