@@ -14,21 +14,18 @@ const { setBlankSubmitErrorAction } = reportStore
 const stepStore = useStepStore()
 const { stepCurrent, stepNum } = storeToRefs(stepStore)
 const { backStepAction, forwardStepAction } = stepStore
-
 </script>
 
 <template>
-  <div class="bg-homeBackground bg-no-repeat bg-contain bg-center" v-show="stepNum === 0">
-    <div class="grid grid-flow-row auto-rows-max md:auto-rows-auto grid-rows-3 h-screen">
-      <div class="flex">
-        <codb-header class="" />
-      </div>
-      <div class="flex">
-        <codb-form class="flex basis-full" />
-      </div>
-      <div class="">
-        <codb-footer />
-      </div>
+  <div class="grid grid-flow-row auto-rows-max md:auto-rows-auto grid-rows-3 h-screen">
+    <div class="flex">
+      <codb-header class="" />
+    </div>
+    <div class="flex">
+      <codb-form class="flex basis-full" />
+    </div>
+    <div class="">
+      <codb-footer />
     </div>
   </div>
 </template>

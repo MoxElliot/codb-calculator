@@ -16,6 +16,7 @@ module.exports = {
         204: '204px',
         228: '228px',
         '1/10': '10%',
+        '15/100': '15%',
         '2/10': '20%',
         '25/100': '25%',
         '3/10': '30%',
@@ -23,21 +24,23 @@ module.exports = {
         '5/10': '50%',
         '6/10': '60%',
         '7/10': '70%',
-        '8/10': '80%', 
+        '8/10': '80%',
         '9/10': '90%'
       },
       height: {
         24: '24px',
         48: '48px',
         '1/10': '10%',
+        '15/100': '15%',
         '2/10': '20%',
         '25/100': '25%',
         '3/10': '30%',
         '35/100': '35%',
+        '4/10':'40%',
         '5/10': '50%',
-        '6/10': '60%', 
+        '6/10': '60%',
         '7/10': '70%',
-        '8/10': '80%', 
+        '8/10': '80%',
         '9/10': '90%'
       },
       padding: {
@@ -50,11 +53,23 @@ module.exports = {
         main: '36px'
       },
       backgroundImage: {
-        'homeBackground': "url('./src/images/home_background.png')"
+        homeBackground: "url('./src/images/home_background.png')",
+        homeBackgroundTL: "url('./src/images/home_background_tl.png')",
+        homeBackgroundTR: "url('./src/images/home_background_tr.png')",
+        homeBackgroundBL: "url('./src/images/home_background_bl.png')",
+        homeBackgroundBR: "url('./src/images/home_background_br.png')"
+      },
+      spacing: {
+        '2%': '2%',
+        '4%': '4%', //home background image bottom right
+        '7%': '7%', //home background image right & left
+        '9%': '9%', //home background image bottom left
+        '14%': '14%',
+        '18%':'18%',
+        '21%': '21%',
       }
     },
     colors: {
-      ///create object notation for multiple colors
       primary: {
         white: '#FFFFFF' //main background, text on green
       },
@@ -67,7 +82,7 @@ module.exports = {
         100: '#A4ABAA', //placeholder text, border
         200: '#F3F3F3', //border
         300: '#485654', //main text, boarder  "Greeney-Grey"
-        400: '#E4E6E6', //input borders
+        400: '#E4E6E6' //input borders
       },
       aqua: {
         100: '#E8F5F3', //active step icon background,
@@ -114,7 +129,7 @@ module.exports = {
           letterSpacing: '-0.02em',
           fontWeight: '400'
         }
-      ], 
+      ],
       heading2_xs: [
         // Home Page "Hey There"
         '40px',
@@ -123,7 +138,7 @@ module.exports = {
           letterSpacing: '-0.02em',
           fontWeight: '400'
         }
-      ],                        
+      ],
       body: [
         '16px',
         {
