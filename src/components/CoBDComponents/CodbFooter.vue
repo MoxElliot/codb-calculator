@@ -21,22 +21,20 @@ const checkValid = () => {
 }
 </script>
 <template>
-  <div
-    class="flex h-full justify-center items-end sm:items-center"
-    v-show="stepNum !== 7"
-  >
+  <div class="flex h-full justify-center items-end sm:items-center" v-show="stepNum !== 7">
     <div>
       <router-link :to="stepCurrent">
-        <form-button label="Back" @click="backStepAction()" class="btn-back" v-show="stepNum > 1" />
-      </router-link>
-      <router-link :to="stepCurrent">
-        <form-button
-          :label="stepNum === 0 ? 'Let\'s Go!' : 'Next'"
-          @click="checkValid"
-          class="btn-next mb-20 sm:mb-0 bg-nextButtonArrow bg-no-repeat bg-buttonArrow bg-15%"
-          type="submit"
-        />
-      </router-link>
+      <form-button label="Back" @click="backStepAction()" class="btn-back" v-show="stepNum > 1" />
+    </router-link>
+    <router-link :to="stepCurrent">
+      <form-button
+        :label="stepNum === 0 ? 'Let\'s Go!' : 'Next'"
+        @click="checkValid"
+        class="btn-next mb-20 sm:mb-0 bg-nextButtonArrow bg-no-repeat bg-buttonArrow bg-15%" 
+        type="submit"
+      />
+    </router-link>
     </div>
+   
   </div>
 </template>
