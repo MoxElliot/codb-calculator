@@ -1,5 +1,6 @@
 // @type {import('tailwindcss').Config}
 
+import bla from './src/images/home_background.png'
 module.exports = {
   content: [
     './index.html',
@@ -15,23 +16,33 @@ module.exports = {
         204: '204px',
         228: '228px',
         '1/10': '10%',
+        '15/100': '15%',
         '2/10': '20%',
         '25/100': '25%',
         '3/10': '30%',
         '35/100': '35%',
+        '4/10':'40%',
         '5/10': '50%',
-        '6/10': '60%'
+        '6/10': '60%',
+        '7/10': '70%',
+        '8/10': '80%',
+        '9/10': '90%'
       },
       height: {
         24: '24px',
         48: '48px',
         '1/10': '10%',
+        '15/100': '15%',
         '2/10': '20%',
         '25/100': '25%',
         '3/10': '30%',
         '35/100': '35%',
+        '4/10':'40%',
         '5/10': '50%',
-        '6/10': '60%'  
+        '6/10': '60%',
+        '7/10': '70%',
+        '8/10': '80%',
+        '9/10': '90%'
       },
       padding: {
         btn: '12px,44px,12px,44px'
@@ -41,10 +52,38 @@ module.exports = {
       },
       borderRadius: {
         main: '36px'
+      },
+      backgroundImage: {
+        homeBackground: "url('./src/images/home_background.png')",
+        homeBackgroundTL: "url('./src/images/home_background_tl.png')",
+        homeBackgroundTR: "url('./src/images/home_background_tr.png')",
+        homeBackgroundBL: "url('./src/images/home_background_bl.png')",
+        homeBackgroundBR: "url('./src/images/home_background_br.png')",
+        homeWavingHand:"url('./src/images/waving_hand.png')",
+        homeInfoQuestionMark:"url('./src/images/info-question-mark.png')",
+        nextButtonArrow:"url('./src/images/btn-arrow-right.png')"
+      },
+      backgroundPosition: {
+        infoQuesionMark: '4% 40%',
+        buttonArrow: '85%, 50%',
+      },
+      backgroundSize: {
+        '4%':'4%',
+        '15%':'15%',
+        '20%':'20%',
+        '25%':'25%',
+      },
+      spacing: {
+        '2%': '2%',
+        '4%': '4%', //home background image bottom right
+        '7%': '7%', //home background image right & left
+        '9%': '9%', //home background image bottom left
+        '14%': '14%',
+        '18%':'18%',
+        '21%': '21%',
       }
     },
     colors: {
-      ///create object notation for multiple colors
       primary: {
         white: '#FFFFFF' //main background, text on green
       },
@@ -57,7 +96,7 @@ module.exports = {
         100: '#A4ABAA', //placeholder text, border
         200: '#F3F3F3', //border
         300: '#485654', //main text, boarder  "Greeney-Grey"
-        400: '#E4E6E6', //input borders
+        400: '#E4E6E6' //input borders
       },
       aqua: {
         100: '#E8F5F3', //active step icon background,
@@ -104,7 +143,16 @@ module.exports = {
           letterSpacing: '-0.02em',
           fontWeight: '400'
         }
-      ],                        
+      ],
+      heading2_xs: [
+        // Home Page "Hey There"
+        '40px',
+        {
+          lineHeight: '50px',
+          letterSpacing: '-0.02em',
+          fontWeight: '400'
+        }
+      ],
       body: [
         '16px',
         {
@@ -113,10 +161,26 @@ module.exports = {
           fontWeight: '400'
         }
       ],
+      body_xs: [
+        '15px',
+        {
+          lineHeight: '20px',
+          letterSpacing: '0em',
+          fontWeight: '400'
+        }
+      ],
       body2: [
         '20px',
         {
           lineHeight: '32px',
+          letterSpacing: '-0.02em',
+          fontWeight: '400'
+        }
+      ],
+      body2_xs: [
+        '16px',
+        {
+          lineHeight: '28px',
           letterSpacing: '-0.02em',
           fontWeight: '400'
         }

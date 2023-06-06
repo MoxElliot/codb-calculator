@@ -45,18 +45,20 @@ const { value: company, errorMessage: companyError, meta } = useField('company',
 
 <template>
   <div class="flex flex-row justify-center basis-full">
-    <div class="flex flex-col items-center justify-around basis-2/4">
-      <div class="w-6/10">
-        <p class="font-serif text-grey-300 text-heading2">What is the name of your business?</p>
+    <div class="flex flex-col items-center justify-around lg:basis-2/4 basis-3/4">
+      <div class="xl:w-6/10 w-8/10 sm:w-7/10">
+        <p class="font-serif text-grey-300 sm:text-heading2 text-heading2_xs">
+          What is the name of your business?
+        </p>
       </div>
       <div class="">
-        <p class="font-sans text-grey-300 text-body2 text-center">
+        <p class="font-sans text-grey-300 sm:text-body2 text-body2_xs text-center mt-6">
           Any journey begins with defining a goal. So, as we want to help you better understand the
           financial picture of your photography business, it will be great to start by filling in
           the name of it.
         </p>
       </div>
-      <div class="self-stretch">
+      <div class="self-stretch mt-6">
         <data-input
           v-model.trim="companyNameInput"
           name="company"
@@ -66,8 +68,10 @@ const { value: company, errorMessage: companyError, meta } = useField('company',
           type="text"
           id="company-name"
         />
-        <span class="error-text">{{ companyError }}</span>
-        <span class="error-text" v-show="!meta.dirty">{{ blankSubmitError }}</span>
+        <div>
+          <span class="error-text">{{ companyError }}</span>
+          <span class="error-text" v-show="!meta.dirty">{{ blankSubmitError }}</span>
+        </div>
       </div>
     </div>
   </div>
