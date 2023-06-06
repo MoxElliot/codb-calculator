@@ -21,6 +21,7 @@ module.exports = {
         '25/100': '25%',
         '3/10': '30%',
         '35/100': '35%',
+        '4/10':'40%',
         '5/10': '50%',
         '6/10': '60%',
         '7/10': '70%',
@@ -57,7 +58,19 @@ module.exports = {
         homeBackgroundTL: "url('./src/images/home_background_tl.png')",
         homeBackgroundTR: "url('./src/images/home_background_tr.png')",
         homeBackgroundBL: "url('./src/images/home_background_bl.png')",
-        homeBackgroundBR: "url('./src/images/home_background_br.png')"
+        homeBackgroundBR: "url('./src/images/home_background_br.png')",
+        homeWavingHand:"url('./src/images/waving_hand.png')",
+        homeInfoQuestionMark:"url('./src/images/info-question-mark.png')",
+        nextButtonArrow:"url('./src/images/Arrow.png')"
+      },
+      backgroundPosition: {
+        infoQuesionMark: '4% 40%',
+        buttonArrow: '85%, 50%',
+      },
+      backgroundSize: {
+        '15%':'15%',
+        '20%':'20%',
+        '25%':'25%',
       },
       spacing: {
         '2%': '2%',
