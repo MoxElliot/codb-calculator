@@ -28,7 +28,7 @@
         </p>
       </div>
       <div
-        class="info-blue font-sans text-blue-300 sm:text-body text-body_xs m-6 sm:mt-2 md:py-6 md:pr-24 md:pl-16 sm:py-3 pr-12 pl-12 bg-homeInfoQuestionMark bg-no-repeat bg-infoQuesionMark bg-auto"
+        class="info-blue font-sans text-blue-300 sm:text-body text-body_xs m-6 sm:mt-2 md:py-6 md:pr-24 md:pl-16 sm:py-3 pr-12 pl-12 bg-homeInfoQuestionMark bg-no-repeat bg-infoQuesionMark bg-4%"
       >
         <p>This is a self-guided excercise, so don't feel rushed!</p>
         <p>Using the NEXT STEP button, navigate through each section until the end!</p>

@@ -61,13 +61,14 @@ module.exports = {
         homeBackgroundBR: "url('./src/images/home_background_br.png')",
         homeWavingHand:"url('./src/images/waving_hand.png')",
         homeInfoQuestionMark:"url('./src/images/info-question-mark.png')",
-        nextButtonArrow:"url('./src/images/Arrow.png')"
+        nextButtonArrow:"url('./src/images/btn-arrow-right.png')"
       },
       backgroundPosition: {
         infoQuesionMark: '4% 40%',
         buttonArrow: '85%, 50%',
       },
       backgroundSize: {
+        '4%':'4%',
         '15%':'15%',
         '20%':'20%',
         '25%':'25%',
