@@ -12,7 +12,7 @@ const deleteCost = (fixedCost: {
   id: number
   name: string
   category: string
-  amount: number | undefined
+  amount: number | null 
   payPeriod: string
   individualTotal: number | undefined
 }) => {
@@ -37,5 +37,5 @@ const deleteCost = (fixedCost: {
       <button class="mx-2 border border-black" @click="deleteCost(fixedCost)">X</button>
     </div>
   </div>
-  <p>Total Monthly Fixed Costs ${{ totalFixedCosts }}</p>
+  <!-- <p>Total Monthly Fixed Costs ${{ totalFixedCosts }}</p> -->
 </template>

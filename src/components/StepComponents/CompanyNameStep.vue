@@ -44,7 +44,6 @@ const { value: company, errorMessage: companyError, meta } = useField('company',
 </script>
 
 <template>
-  <div class="flex flex-row justify-center basis-full">
     <div class="flex flex-col items-center justify-around lg:basis-2/4 basis-3/4">
       <div class="xl:w-6/10 w-8/10 sm:w-7/10">
         <p class="font-serif text-grey-300 sm:text-heading2 text-heading2_xs">
@@ -74,5 +73,4 @@ const { value: company, errorMessage: companyError, meta } = useField('company',
         </div>
       </div>
     </div>
-  </div>
 </template>

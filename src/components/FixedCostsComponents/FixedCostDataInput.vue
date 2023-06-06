@@ -33,7 +33,7 @@ const { resetForm } = useForm({
 const handleAddCost = (
   fixedCostName: string,
   fixedCostCategory: string,
-  fixedCostAmount: null | number | undefined,
+  fixedCostAmount: number | null,
   fixedCostPeriod: string
 ) => {
   if (nameMeta.valid && categoryMeta.valid && amountMeta.valid && periodMeta.valid) {
