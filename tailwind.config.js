@@ -61,6 +61,7 @@ module.exports = {
         homeBackgroundBR: "url('./src/images/home_background_br.png')",
         homeWavingHand:"url('./src/images/waving_hand.png')",
         homeInfoQuestionMark:"url('./src/images/info-question-mark.png')",
+        costDelete:"url('./src/images/delete-cost.png')",
         fixedCostCalendar:"url('./src/images/fixed-cost-calandar.png')",
         nextButtonArrow:"url('./src/images/btn-arrow-right.png')",
         backButtonArrow:"url('./src/images/btn-arrow-left.png')",
@@ -84,6 +85,12 @@ module.exports = {
         '14%': '14%',
         '18%':'18%',
         '21%': '21%',
+      },
+      flexBasis: {
+        '1/22': '4.54%',
+        '3/22': '13.63%',
+        '6/22': '27.27%',
+
       }
     },
     colors: {
@@ -225,8 +232,3 @@ module.exports = {
   plugins: []
 }
 
-//styleName: Headline 1 Cormorant;
-//styleName: Body 3;
-//styleName: Caption 1;
-//styleName: Caption 1 (Bold);
-//styleName: Caption 2;
