@@ -9,7 +9,7 @@ const { stepCurrent } = storeToRefs(stepStore)
 </script>
 
 <template>
-  <div class="flex flex-col basis-full items-center">
+  <div class="flex flex-col basis-full items-center h-1/2">
     <div class="mt-8 mb-10">
       <img src="../../images/cloudspot-logo.png" />
     </div>

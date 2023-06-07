@@ -51,8 +51,9 @@ onMounted(() => {
 
 </script>
 <template>
-  <!-- <div class="flex" v-show="stepCurrent !== '/final-report-step'">
-    <router-link :to="stepPrevious">
+  <!-- <div class="flex h-full justify-center items-end sm:items-center" v-show="stepCurrent !== '/final-report-step'">
+    <div>
+      <router-link :to="stepPrevious">
       <form-button
         label="Back"
         @click="backStepAction()"
@@ -64,12 +65,12 @@ onMounted(() => {
       <form-button
         :label="stepCurrent === '/' ? 'Let\'s Go!' : 'Next'"
         @click="forwardStepAction()"
-        class="btn-next text-center"
+        class="btn-next mb-20 sm:mb-0 bg-nextButtonArrow bg-no-repeat bg-buttonArrow bg-15%" 
         type="submit"
       />
     </router-link>
   </div> -->
-  <div v-for="step in steps" v-show="step.current === stepCurrent">
+  <div  class="flex h-full justify-center items-end sm:items-center" v-for="step in steps" v-show="step.current === stepCurrent">
     <router-link :to="step.previous">
       <form-button
         label="Back"

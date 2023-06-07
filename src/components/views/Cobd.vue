@@ -3,20 +3,29 @@ import CodbForm from '../CoBDComponents/CodbForm.vue'
 import CodbHeader from '../CoBDComponents/CodbHeader.vue'
 import CodbFooter from '../CoBDComponents/CodbFooter.vue'
 
+import { useStepStore } from '../../stores/stepStore'
+import { useReportStore } from '@/stores/reportStore'
+import { storeToRefs } from 'pinia'
+import FormButton from '../FormComponents/FormButton.vue'
+
+const reportStore = useReportStore()
+const { inputValid } = storeToRefs(reportStore)
+const { setBlankSubmitErrorAction } = reportStore
+const stepStore = useStepStore()
+const { stepCurrent } = storeToRefs(stepStore)
+const { backStepAction, forwardStepAction } = stepStore
 </script>
 
-<template class="h-screen">
-  <div class="grid grid-rows-3 h-screen">
+<template>
+  <div class="grid grid-flow-row auto-rows-max md:auto-rows-auto grid-rows-3 h-screen">
     <div class="flex">
       <codb-header class="" />
     </div>
     <div class="flex">
-      <codb-form class="flex basis-full" />
+      <codb-form class="flex basis-full justify-center" />
     </div>
-    <div class="flex align-center place-content-center">
+    <div class="">
       <codb-footer />
     </div>
   </div>
 </template>
-
-

@@ -33,7 +33,7 @@ const { resetForm } = useForm({
 const handleAddCost = (
   fixedCostName: string,
   fixedCostCategory: string,
-  fixedCostAmount: null | number | undefined,
+  fixedCostAmount: number | null,
   fixedCostPeriod: string
 ) => {
   if (nameMeta.valid && categoryMeta.valid && amountMeta.valid && periodMeta.valid) {
@@ -86,11 +86,11 @@ const {
 
 <template>
   <Form
-    class="fixed-cost-input border border-black flex flex-row"
+    class="flex flex-row mt-4"
     :valiation-schema="schema"
     @submit="handleAddCost(fixedCostName, fixedCostCategory, fixedCostAmount, fixedCostPeriod)"
   >
-    <fieldset class="fixed-cost-fieldset flex flex-row flex-1">
+    <fieldset class="flex flex-row flex-1">
       <div>
         <data-input
           v-model="fixedCostName"

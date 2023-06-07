@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import uniqueId from 'lodash.uniqueid'
 import ReportOutput from '../FormComponents/ReportOutput.vue'
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
@@ -20,9 +19,9 @@ const {
   bookingsYearly,
   hoursWorkedYearly,
   hourlyRateYearly
-} = reportStore   
+} = reportStore
 
-//put this array in the store 
+//put this array in the store
 
 const reportOutputsArray: { id: string; class: string; label: string; variable: any }[] = [
   // {
@@ -32,67 +31,67 @@ const reportOutputsArray: { id: string; class: string; label: string; variable: 
   //   variable: ''
   // },
   {
-    id: uniqueId('output-'),   //pull out this and use the index or stepname
+    id: 'companyName', //pull out this and use the index or stepname
     class: 'flex',
     label: 'Company Name:',
     variable: companyName
   },
   {
-    id: uniqueId('output-'),
+    id: 'fixedCostYearly',
     class: 'flex',
     label: 'Your Yearly Fixed Costs:',
     variable: fixedCostYearly
   },
   {
-    id: uniqueId('output-'),
+    id: 'variableCostYearly',
     class: 'flex',
     label: 'Your Yearly Variable Costs:',
     variable: variableCostYearly
   },
   {
-    id: uniqueId('output-'),
+    id: 'payYearly',
     class: 'flex',
     label: 'Owners Draw (Yearly Salary):',
     variable: payYearly
   },
   {
-    id: uniqueId('output-'),
+    id: 'savingsYearly',
     class: 'flex',
     label: 'Your Yearly Savings:',
     variable: savingsYearly
   },
   {
-    id: uniqueId('output-'),
+    id: 'costOfDoingBusiness',
     class: 'flex',
     label: 'Cost of Doing Business:',
     variable: costOfDoingBusiness
   },
   {
-    id: uniqueId('output-'),
+    id: 'bookingsToBreakEven',
     class: 'flex',
     label: 'Number of Yearly Bookings to Break Even:',
     variable: bookingsToBreakEven
   },
   {
-    id: uniqueId('output-'),
+    id: 'bookingsYearly',
     class: 'flex',
     label: 'Average Yearly Bookings:',
     variable: bookingsYearly
   },
   {
-    id: uniqueId('output-'),
+    id: 'hoursWorkedYearly',
     class: 'flex',
     label: 'Average Hours Worked Per Year:',
     variable: hoursWorkedYearly
   },
   {
-    id: uniqueId('output-'),
+    id: 'hourlyRateYearly',
     class: 'flex',
     label: 'Your Hourly Rate:',
     variable: hourlyRateYearly
   },
   {
-    id: uniqueId('output-'),
+    id: 'averageYearlyIncome',
     class: 'flex',
     label: 'Your Average Yearly Income:',
     variable: averageYearlyIncome
@@ -101,13 +100,10 @@ const reportOutputsArray: { id: string; class: string; label: string; variable: 
 </script>
 
 <template>
-  
   <div class="basis-full flex flex-col justify-center items-center">
     <div class="text-caption-bold">
-    <p>
-      Final Report
-    </p> 
-  </div>
+      <p>Final Report</p>
+    </div>
     <div class="overflow-auto">
       <report-output v-for="output in reportOutputsArray" :class="output.class" :key="output.id">
         <template #top> {{ output.label }}</template>
