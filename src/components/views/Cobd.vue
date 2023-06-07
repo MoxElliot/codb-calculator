@@ -22,7 +22,7 @@ const { backStepAction, forwardStepAction } = stepStore
       <codb-header class="" />
     </div>
     <div class="flex">
-      <codb-form class="flex basis-full" />
+      <codb-form class="flex basis-full justify-center" />
     </div>
     <div class="">
       <codb-footer />

@@ -27,8 +27,7 @@ export const useReportStore = defineStore('reportStore', {
     hoursAveragePerBooking: 0,
     variableCosts: [] as VariableCostObj[],
     totalVariableCosts: 0.00,
-    fixedCosts: [
-    ] as FixedCostObj[],
+    fixedCosts: [ { id: 1, name: 'Rent', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 2, name: 'Test2', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 3, name: 'Test3', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  }, { id: 1, name: 'Rent', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 2, name: 'Test2', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 3, name: 'Test3', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 1, name: 'Rent', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 2, name: 'Test2', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 3, name: 'Test3', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  }, ] as FixedCostObj[],
     totalFixedCosts: 0.00,
     payPerMonth: 0.00,
     savingsPerMonth: 0.00,
