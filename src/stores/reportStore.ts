@@ -21,7 +21,7 @@ export const useReportStore = defineStore('reportStore', {
     // savingsPerMonth: 200.00,
     // userEmail: 'e@e.com',
     // inputValid: true,
-    companyName: 'PhotoBomb',
+    companyName: '',
     bookingsPerMonth: 0,
     priceAveragePerBooking: 0.00,
     hoursAveragePerBooking: 0,
