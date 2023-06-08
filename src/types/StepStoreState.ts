@@ -4,7 +4,6 @@ type StepStoreState = {
   stepCurrent: string
   stepNext: string
   stepPrevious: string
-  nextButtonLabel: string
 }
 
 export default StepStoreState

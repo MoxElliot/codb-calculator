@@ -1,40 +1,27 @@
 import { defineStore } from 'pinia'
 import type StepStoreState from '../types/StepStoreState'
-import steps from '@/assets/stepsArray'
-import { onUpdated } from 'vue'
+import steps from '@/assets/stepsObject'
+import router from '../router/index'
+import { useRouter, useRoute } from 'vue-router'
 
-
-let current = window.location.pathname
-onUpdated(()=>{
-  console.log("does this work/")
-  current = window.location.pathname
-})
 export const useStepStore = defineStore('stepStore', {
   state: (): StepStoreState => ({
-    stepCurrent: current,
-    stepNext: '',
-    stepPrevious: '',
-    nextButtonLabel: "Let's Go!"
+    stepCurrent: router.currentRoute.value.path,
+    stepNext: router.currentRoute.value.meta.next,
+    stepPrevious: router.currentRoute.value.meta.previous,
   }),
   actions: {
-    // updateStepAction() {
-    //   for (const results of Object.values(steps)) {
-    //     if (results.current === window.location.pathname) {
-    //       // this.stepCurrent = `${results.current}`
-    //       this.stepNext = `${results.next}`
-    //       this.stepPrevious = `${results.previous}`
-    //     }
-    //   }
-    // },
     forwardStepAction() {
-      for (const results of Object.values(steps)) {
-        if (results.current === window.location.pathname) {
-          console.log('in forwrd step results.current', results.current)
-          // this.stepCurrent = `${results.next}`
-          this.stepNext = `${results.next}`
-          // this.stepPrevious = `${results.current}`
-        }
-      }
+      // for (const results of Object.values(steps)) {
+      //   if (results.current === window.location.pathname) {
+      //     console.log('in forwrd step results.current', results.current)
+      //     // this.stepCurrent = `${results.next}`
+      //     this.stepNext = `${results.next}`
+      //     // this.stepPrevious = `${results.current}`
+      //   }
+      // }
+      // console.log("useRouter", router.currentRoute.value['name'])
+      console.log("useRoute", useRoute())
     },
     backStepAction() {
       for (const results of Object.values(steps)) {
@@ -54,15 +41,5 @@ export const useStepStore = defineStore('stepStore', {
     //   }
       
     //}
-  },
-  getters: {
-    setNextButtonLabel(): string {
-      console.log("in setNextbuttonlabel")
-      if (window.location.pathname === '/') {
-        return (this.nextButtonLabel = "Let's Go!")
-      } else {
-        return (this.nextButtonLabel = 'Next')
-      }
-    }
   }
 })

@@ -1,4 +1,4 @@
-import steps from '@/assets/stepsArray'
+import steps from '@/assets/stepsObject'
 
 const getIndex = () => {
     let index = steps.findIndex((step) => {

@@ -12,7 +12,7 @@ const deleteCost = (variableCost: {
   id: number
   name: string
   category: string
-  amount: number | undefined
+  amount: number | null | undefined
 }) => {
   const filtersList = reportStore.variableCosts.filter((el) => el !== variableCost)
   reportStore.variableCosts = filtersList
