@@ -1,3 +1,16 @@
+<script setup lang="ts">
+import { useReportStore } from '@/stores/reportStore'
+import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue'
+
+const reportStore = useReportStore()
+const { updateInputValidAction } = reportStore
+
+onMounted(() => {
+    updateInputValidAction(true)
+})
+</script>
+
 <template>
   <div
     class="absolute top-14% left-4% bg-homeBackgroundTL bg-no-repeat bg-contain bg-center h-35/100 w-35/100"
