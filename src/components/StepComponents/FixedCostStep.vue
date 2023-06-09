@@ -9,7 +9,6 @@ const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
 const { companyName } = storeToRefs(reportStore)
 
-
 onMounted(() => {
     updateInputValidAction(true)
 })

@@ -1,37 +1,34 @@
 import { defineStore } from 'pinia'
+import { useReportStore } from '@/stores/reportStore'
 import type StepStoreState from '../types/StepStoreState'
 import steps from '@/assets/stepsObject'
 import router from '../router/index'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 
 export const useStepStore = defineStore('stepStore', {
   state: (): StepStoreState => ({
     stepCurrent: router.currentRoute.value.path,
     stepNext: router.currentRoute.value.meta.next,
-    stepPrevious: router.currentRoute.value.meta.previous,
+    stepPrevious: router.currentRoute.value.meta.previous
   }),
   actions: {
-    forwardStepAction() {
-      // for (const results of Object.values(steps)) {
-      //   if (results.current === window.location.pathname) {
-      //     console.log('in forwrd step results.current', results.current)
-      //     // this.stepCurrent = `${results.next}`
-      //     this.stepNext = `${results.next}`
-      //     // this.stepPrevious = `${results.current}`
-      //   }
-      // }
-      // console.log("useRouter", router.currentRoute.value['name'])
-      console.log("useRoute", useRoute())
-    },
-    backStepAction() {
-      for (const results of Object.values(steps)) {
-        if (results.current === window.location.pathname) {
-          // this.stepCurrent = `${results.current}`
-          // this.stepNext = `${results.next}`
-          this.stepPrevious = `${results.previous}`
-        } 
+    nextStepAction() {
+      const reportStore = useReportStore()
+      const { inputValid } = storeToRefs(reportStore)
+      const nextStep = router.currentRoute.value.meta.next
+
+      if (!inputValid.value) {
+        reportStore.setBlankSubmitErrorAction('Please entered all required information')
+      } else if (inputValid.value) {
+        reportStore.setBlankSubmitErrorAction('')
+        router.push(nextStep)
       }
     },
+    backStepAction() {
+      const backStep = router.currentRoute.value.meta.previous
+      router.push(backStep)
+    }
     // nextButtonLabelAction() {
     //   console.log("in nextbuttonlabelAction")
     //   if (this.stepCurrent === '/') {
@@ -39,7 +36,7 @@ export const useStepStore = defineStore('stepStore', {
     //   } else {
     //     return this.nextButtonLabel = 'Next'
     //   }
-      
+
     //}
   }
 })
