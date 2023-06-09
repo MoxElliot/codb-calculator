@@ -56,7 +56,7 @@ export const useReportStore = defineStore('reportStore', {
 
       const totalNum: number = (fixedCost.amount as number) * payPeriodMultiplier
       fixedCost.individualTotal = formatMoney(totalNum)
-      this.fixedCosts.push(fixedCost)
+      this.fixedCosts.unshift(fixedCost)
       
       console.log("inAddFixedCostAction", this.fixedCosts)
       this.totalFixedCostAction()
