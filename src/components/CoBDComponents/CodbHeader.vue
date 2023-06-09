@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useStepStore } from '../../stores/stepStore'
 import { storeToRefs } from 'pinia'
-import steps from '../../assets/stepsArray'
+import steps from '../../assets/stepsObject'
+import router from '../../router/index'
+import { ref } from 'vue'
 
-const stepStore = useStepStore()
-const { stepName } = storeToRefs(stepStore)
+let current = ref(router.currentRoute.value.path)
+
 </script>
 
 <template>
@@ -14,15 +16,14 @@ const { stepName } = storeToRefs(stepStore)
     </div>
     <div
       class="grid grid-flow-col gap-2 basis-1/4 w-1/2 border border-grey-200 rounded-xl items-center justify-stretch"
-      v-show="stepName !== 'Home'"
+      v-show="current !== '/'"
     >
       <div
         class="flex justify-center items-center h-4/6 border-r border-grey-200"
         v-for="step in steps"
         v-show="step.icon !== 'none'"
-        :key="step.id"
       >
-        <router-link :to="step.path">
+        <router-link :to="step.current">
           <img :src="step.icon" class="w-6 h-6" />
         </router-link>
       </div>

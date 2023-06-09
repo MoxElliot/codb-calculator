@@ -1,8 +1,19 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import VariableCostDataInput from '../VariableCostsComponents/VariableCostDataInput.vue'
 import VariableCostTable from '../VariableCostsComponents/VariableCostTable.vue'
+import { useReportStore } from '@/stores/reportStore'
+import { storeToRefs } from 'pinia'
 
-defineProps(['VariableCost'])
+const reportStore = useReportStore()
+const { updateInputValidAction } = reportStore
+const { companyName } = storeToRefs(reportStore)
+
+
+onMounted(() => {
+    updateInputValidAction(true)
+})
+
 </script>
 
 <template>

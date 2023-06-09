@@ -1,26 +1,42 @@
 import { defineStore } from 'pinia'
+import { useReportStore } from '@/stores/reportStore'
 import type StepStoreState from '../types/StepStoreState'
-import stepsArray from '@/assets/stepsArray'
-import getIndex from '@/assets/utility_functions/getIndex'
+import steps from '@/assets/stepsObject'
+import router from '../router/index'
+import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 
 export const useStepStore = defineStore('stepStore', {
   state: (): StepStoreState => ({
-    stepNum: getIndex(),
-    stepName: stepsArray[getIndex()].name,
-    stepCurrent: window.location.pathname
+    stepCurrent: router.currentRoute.value.path,
+    stepNext: router.currentRoute.value.meta.next,
+    stepPrevious: router.currentRoute.value.meta.previous
   }),
   actions: {
-    forwardStepAction() {
-      getIndex()
-      this.stepCurrent = stepsArray[this.stepNum].next
-      this.stepName = stepsArray[this.stepNum + 1].name
-      this.stepNum <= 7 ? (this.stepNum = this.stepNum + 1) : (this.stepNum = this.stepNum)
+    nextStepAction() {
+      const reportStore = useReportStore()
+      const { inputValid } = storeToRefs(reportStore)
+      const nextStep = router.currentRoute.value.meta.next
+
+      if (!inputValid.value) {
+        reportStore.setBlankSubmitErrorAction('Please entered all required information')
+      } else if (inputValid.value) {
+        reportStore.setBlankSubmitErrorAction('')
+        router.push(nextStep)
+      }
     },
     backStepAction() {
-      getIndex()
-      this.stepCurrent = stepsArray[this.stepNum].previous
-      this.stepName = stepsArray[this.stepNum - 1].name
-      this.stepNum >= 0 ? (this.stepNum = this.stepNum - 1) : (this.stepNum = this.stepNum)
+      const backStep = router.currentRoute.value.meta.previous
+      router.push(backStep)
     }
+    // nextButtonLabelAction() {
+    //   console.log("in nextbuttonlabelAction")
+    //   if (this.stepCurrent === '/') {
+    //     return this.nextButtonLabel = "Let's Go!"
+    //   } else {
+    //     return this.nextButtonLabel = 'Next'
+    //   }
+
+    //}
   }
 })

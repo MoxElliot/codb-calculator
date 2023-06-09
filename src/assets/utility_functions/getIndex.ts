@@ -1,7 +1,7 @@
-import stepsArray from '@/assets/stepsArray'
+import steps from '@/assets/stepsObject'
 
 const getIndex = () => {
-    let index = stepsArray.findIndex((step) => {
+    let index = steps.findIndex((step) => {
       return step.path === window.location.pathname
     })
     return index

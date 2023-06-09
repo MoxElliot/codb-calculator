@@ -12,7 +12,7 @@ const reportStore = useReportStore()
 const { inputValid } = storeToRefs(reportStore)
 const { setBlankSubmitErrorAction } = reportStore
 const stepStore = useStepStore()
-const { stepCurrent, stepNum } = storeToRefs(stepStore)
+const { stepCurrent } = storeToRefs(stepStore)
 const { backStepAction, forwardStepAction } = stepStore
 </script>
 
