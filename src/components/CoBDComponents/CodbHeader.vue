@@ -7,12 +7,14 @@ import { ref } from 'vue'
 
 let current = ref(router.currentRoute.value.path)
 
+//this is the active/complete color for the icons: #7CC1B5
+
 </script>
 
 <template>
   <div class="flex flex-col basis-full items-center h-1/2">
     <div class="mt-8 mb-10">
-      <img src="../../images/cloudspot-logo.png" />
+      <img src="../../images/cloudspot-logo.svg" />
     </div>
     <div
       class="grid grid-flow-col gap-2 basis-1/4 w-1/2 border border-grey-200 rounded-xl items-center justify-stretch"

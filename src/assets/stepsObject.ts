@@ -1,9 +1,9 @@
-import startHereIcon from '../images/start-here-step-icon-inactive.png'
-import fixedCostIcon from '../images/fixed-cost-step-icon-inactive.png'
-import variableCostIcon from '../images/variable-cost-step-icon-inactive.png'
-import bookingIncomeIcon from '../images/booking-income-step-icon-inactive.png'
-import ownersDrawIcon from '../images/owners-draw-step-icon-inactive.png'
-import finalReportIcon from '../images/final-report-step-icon-inactive.png'
+import companyNameIcon from '../images/company-name-step-icon-inactive.svg'
+import fixedCostIcon from '../images/fixed-cost-step-icon-inactive.svg'
+import variableCostIcon from '../images/variable-cost-step-icon-inactive.svg'
+import bookingIncomeIcon from '../images/booking-income-step-icon-inactive.svg'
+import ownersDrawIcon from '../images/owners-draw-step-icon-inactive.svg'
+import finalReportIcon from '../images/final-report-step-icon-inactive.svg'
 
 let steps: {[index: string]: {next: string, current:string, previous:string, icon:string}}
 
@@ -18,7 +18,7 @@ steps = {
     next: '/fixed-cost-step',
     current: '/company-name-step',
     previous: '/',
-    icon: startHereIcon
+    icon: companyNameIcon
   },
   'FixedCost': {
     next: '/variable-cost-step',

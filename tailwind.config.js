@@ -1,6 +1,4 @@
 // @type {import('tailwindcss').Config}
-
-import bla from './src/images/home_background.png'
 module.exports = {
   content: [
     './index.html',
@@ -26,7 +24,8 @@ module.exports = {
         '6/10': '60%',
         '7/10': '70%',
         '8/10': '80%',
-        '9/10': '90%'
+        '9/10': '90%',
+        '100':'100%'
       },
       height: {
         24: '24px',
@@ -42,7 +41,8 @@ module.exports = {
         '6/10': '60%',
         '7/10': '70%',
         '8/10': '80%',
-        '9/10': '90%'
+        '9/10': '90%',
+        '100':"100%"
       },
       padding: {
         btn: '12px,44px,12px,44px'
@@ -54,17 +54,17 @@ module.exports = {
         main: '36px'
       },
       backgroundImage: {
-        homeBackground: "url('./src/images/home_background.png')",
-        homeBackgroundTL: "url('./src/images/home_background_tl.png')",
-        homeBackgroundTR: "url('./src/images/home_background_tr.png')",
-        homeBackgroundBL: "url('./src/images/home_background_bl.png')",
-        homeBackgroundBR: "url('./src/images/home_background_br.png')",
-        homeWavingHand:"url('./src/images/waving_hand.png')",
-        homeInfoQuestionMark:"url('./src/images/info-question-mark.png')",
-        costDelete:"url('./src/images/delete-cost.png')",
-        fixedCostCalendar:"url('./src/images/fixed-cost-calandar.png')",
-        nextButtonArrow:"url('./src/images/btn-arrow-right.png')",
-        backButtonArrow:"url('./src/images/btn-arrow-left.png')",
+        homeBackground: "url('./src/images/home_background.svg')",
+        homeBackgroundTL: "url('./src/images/home_background_tl.svg')",
+        homeBackgroundTR: "url('./src/images/home_background_tr.svg')",
+        homeBackgroundBL: "url('./src/images/home_background_bl.svg')",
+        homeBackgroundBR: "url('./src/images/home_background_br.svg')",
+        homeWavingHand:"url('./src/images/waving_hand.svg')",
+        homeInfoQuestionMark:"url('./src/images/info-question-mark.svg')",
+        costDelete:"url('./src/images/delete-cost.svg')",
+        fixedCostCalendar:"url('./src/images/fixed-cost-calandar.svg')",
+        nextButtonArrow:"url('./src/images/btn-arrow-right.svg')",
+        backButtonArrow:"url('./src/images/btn-arrow-left.svg')",
       },
       backgroundPosition: {
         infoQuesionMark: '4% 40%',
