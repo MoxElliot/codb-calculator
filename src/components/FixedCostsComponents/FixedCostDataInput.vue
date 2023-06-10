@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
-import { ref } from 'vue'
+import { onUpdated, ref } from 'vue'
 import * as Yup from 'yup'
 import costCategoryOptions from '../../assets/costCategoryOptions'
 import costPeriodOptions from '../../assets/costPeriodOptions'
@@ -10,8 +10,9 @@ import DataSelect from '../FormComponents/DataSelect.vue'
 import { useField, useForm, Form } from 'vee-validate'
 import { storeToRefs } from 'pinia'
 
+
 const reportStore = useReportStore()
-const { blankSubmitError } = storeToRefs(reportStore)
+const { blankSubmitError, fixedCosts } = storeToRefs(reportStore)
 const { setBlankSubmitErrorAction } = reportStore
 
 const fixedCostTotal = ref<number>(0)
@@ -30,6 +31,18 @@ const { resetForm } = useForm({
   validateOnMount: true
 })
 
+let top = fixedCosts.value.length.toString()
+ 
+
+// const scrollToNewCost = () => {
+//   let top = fixedCosts.value.length.toString()
+//   const cost = ref<null | HTMLElement>(document.getElementById(top))
+//   cost.value?.scrollIntoView({block: "start", inline: "nearest"})
+//   console.log("getelementbyID",cost.value)
+//   console.log('here whole thing, just 0', fixedCosts.value, fixedCosts.value[0].id, fixedCosts.value.length)
+  
+// }
+
 const handleAddCost = (
   fixedCostName: string,
   fixedCostCategory: string,
@@ -47,6 +60,7 @@ const handleAddCost = (
       individualTotal: fixedCostTotal.value
     })
     resetForm()
+    // scrollToNewCost()
   } else {
     fixedFormValid.value = false
     setBlankSubmitErrorAction('Enter a value in each field')
@@ -81,6 +95,7 @@ const {
 } = useField('period', undefined, {
   initialValue: ''
 })
+
 
 </script>
 

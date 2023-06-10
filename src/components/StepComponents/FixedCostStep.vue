@@ -4,6 +4,10 @@ import FixedCostDataInput from '../FixedCostsComponents/FixedCostDataInput.vue'
 import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
+import { ref, provide } from 'vue'
+
+
+const topCost = ref('Hello')
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
@@ -13,6 +17,8 @@ onMounted(() => {
     updateInputValidAction(true)
 })
 
+provide('topCost', topCost)
+
 </script>
 
 <template>
@@ -21,6 +27,7 @@ onMounted(() => {
       <p class="">
         Fixed Costs for <span >{{ companyName }}</span>
       </p>
+      <p>{{ topCost }}</p>
       <div class="bg-fixedCostCalendar bg-no-repeat h-10 w-10 bg-contain ml-3"> </div>
     </div>
     <div class="text-body text-grey-300 basis-1/6 w-6/10">

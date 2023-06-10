@@ -9,19 +9,92 @@ export const useReportStore = defineStore('reportStore', {
   state: (): reportState => ({
     companyName: 'PhotoBomb',
     bookingsPerMonth: 3,
-    priceAveragePerBooking: 1000.00,
+    priceAveragePerBooking: 1000.0,
     hoursAveragePerBooking: 200,
-    variableCosts: [{ id: 2, name: 'Parking', category: 'Overhead', amount: 80 }] as VariableCostObj[],
-    totalVariableCosts: 80.00,
+    variableCosts: [
+      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 }
+    ] as VariableCostObj[],
+    totalVariableCosts: 80.0,
     fixedCosts: [
-      { id: 1, name: 'Rent', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 2, name: 'Test2', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 3, name: 'Test3', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  }, { id: 1, name: 'Rent', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 2, name: 'Test2', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 3, name: 'Test3', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 1, name: 'Rent', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 2, name: 'Test2', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  },{ id: 3, name: 'Test3', category: 'Overhead', amount: 1000, payPeriod: 'monthly', individualTotal: 1000  }, 
+      {
+        id: 9,
+        name: 'Rent',
+        category: 'Overhead',
+        amount: 1000,
+        payPeriod: 'monthly',
+        individualTotal: 1000
+      },
+      {
+        id: 8,
+        name: 'Test2',
+        category: 'Overhead',
+        amount: 1000,
+        payPeriod: 'monthly',
+        individualTotal: 1000
+      },
+      {
+        id: 7,
+        name: 'Test3',
+        category: 'Overhead',
+        amount: 1000,
+        payPeriod: 'monthly',
+        individualTotal: 1000
+      },
+      {
+        id: 6,
+        name: 'Rent',
+        category: 'Overhead',
+        amount: 1000,
+        payPeriod: 'monthly',
+        individualTotal: 1000
+      },
+      {
+        id: 5,
+        name: 'Test2',
+        category: 'Overhead',
+        amount: 1000,
+        payPeriod: 'monthly',
+        individualTotal: 1000
+      },
+      {
+        id: 4,
+        name: 'Test3',
+        category: 'Overhead',
+        amount: 1000,
+        payPeriod: 'monthly',
+        individualTotal: 1000
+      },
+      {
+        id: 3,
+        name: 'Rent',
+        category: 'Overhead',
+        amount: 1000,
+        payPeriod: 'monthly',
+        individualTotal: 1000
+      },
+      {
+        id: 2,
+        name: 'Test2',
+        category: 'Overhead',
+        amount: 1000,
+        payPeriod: 'monthly',
+        individualTotal: 1000
+      },
+      {
+        id: 1,
+        name: 'Test3',
+        category: 'Overhead',
+        amount: 1000,
+        payPeriod: 'monthly',
+        individualTotal: 1000
+      }
     ] as FixedCostObj[],
-    totalFixedCosts: 1200.00,
-    payPerMonth: 200.00,
-    savingsPerMonth: 200.00,
+    totalFixedCosts: 1200.0,
+    payPerMonth: 200.0,
+    savingsPerMonth: 200.0,
     userEmail: 'e@e.com',
     inputValid: true,
-    blankSubmitError: '',
+    blankSubmitError: ''
     // companyName: '',
     // bookingsPerMonth: 0,
     // priceAveragePerBooking: 0.00,
@@ -57,8 +130,7 @@ export const useReportStore = defineStore('reportStore', {
       const totalNum: number = (fixedCost.amount as number) * payPeriodMultiplier
       fixedCost.individualTotal = formatMoney(totalNum)
       this.fixedCosts.unshift(fixedCost)
-      
-      console.log("inAddFixedCostAction", this.fixedCosts)
+
       this.totalFixedCostAction()
     },
     addBookingsPerMonthAction(bookingsPerMonth: number) {
@@ -88,30 +160,28 @@ export const useReportStore = defineStore('reportStore', {
       this.totalVariableCosts = formatMoney(totalNum)
     },
     addVariableCostAction(variableCost: VariableCostObj) {
-      this.variableCosts.push(variableCost)
+      this.variableCosts.unshift(variableCost)
       this.totalVariableCostAction()
     },
     updateInputValidAction(inputValid: boolean) {
       this.inputValid = inputValid
-      console.log("updateInputValidAction", this.inputValid)  ///this.$route
     },
     setBlankSubmitErrorAction(blankSubmitError: string) {
       this.blankSubmitError = blankSubmitError
     }
-    
   },
 
   getters: {
     costOfDoingBusiness(): number {
       return (
         this.totalVariableCosts +
-        (this.totalFixedCosts * 12) +
-        (this.savingsPerMonth * 12) +
-        (this.payPerMonth * 12)
+        this.totalFixedCosts * 12 +
+        this.savingsPerMonth * 12 +
+        this.payPerMonth * 12
       )
     },
     bookingsToBreakEven(): number {
-      return (Math.ceil(this.costOfDoingBusiness / this.priceAveragePerBooking))
+      return Math.ceil(this.costOfDoingBusiness / this.priceAveragePerBooking)
     },
     monthlyHoursWorked(): number {
       return this.hoursAveragePerBooking * this.bookingsPerMonth
@@ -121,12 +191,12 @@ export const useReportStore = defineStore('reportStore', {
     },
     averageYearlyIncome(): number {
       return formatMoney(
-        (this.bookingsPerMonth * this.priceAveragePerBooking * 12) - (this.costOfDoingBusiness)
+        this.bookingsPerMonth * this.priceAveragePerBooking * 12 - this.costOfDoingBusiness
       )
     },
     getCompanyName(): string {
       return this.companyName
-    }, 
+    },
     fixedCostYearly(): number {
       return this.totalFixedCosts * 12
     },
@@ -147,6 +217,6 @@ export const useReportStore = defineStore('reportStore', {
     },
     hourlyRateYearly(): number {
       return this.averageMonthlyHourlyRate * 12
-    },
+    }
   }
 })
