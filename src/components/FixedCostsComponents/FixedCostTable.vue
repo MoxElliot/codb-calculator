@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
-import { onUpdated, ref } from 'vue'
+import { onUpdated } from 'vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 
 const reportStore = useReportStore()
@@ -17,7 +17,6 @@ const fixedCostHeadingArray = [
 ]
 
 onUpdated(() => {
-  console.log('inUpdated', fixedCosts)
   scrollToNewCost(fixedCosts)
 })
 

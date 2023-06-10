@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
-
-defineProps(['variableCost'])
+import { onUpdated } from 'vue'
+import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 
 const reportStore = useReportStore()
 const { variableCosts, totalVariableCosts } = storeToRefs(reportStore)
 const { totalVariableCostAction } = reportStore
+
+
+onUpdated(() => {
+  scrollToNewCost(variableCosts)
+})
 
 const deleteCost = (variableCost: {
   id: number
@@ -18,6 +23,7 @@ const deleteCost = (variableCost: {
   reportStore.variableCosts = filtersList
   totalVariableCostAction()
 }
+
 </script>
 
 <template>
