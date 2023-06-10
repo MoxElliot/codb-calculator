@@ -81,7 +81,6 @@ const {
 } = useField('period', undefined, {
   initialValue: ''
 })
-
 </script>
 
 <template>
