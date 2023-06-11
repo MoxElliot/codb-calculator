@@ -36,6 +36,7 @@ const handleAddCost = (
   fixedCostAmount: number | null,
   fixedCostPeriod: string
 ) => {
+  console.log(nameMeta, categoryMeta, amountMeta, periodMeta)
   if (nameMeta.valid && categoryMeta.valid && amountMeta.valid && periodMeta.valid) {
     fixedFormValid.value = true
     reportStore.addFixedCostAction({
