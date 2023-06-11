@@ -1,4 +1,4 @@
-<script setup lang="ts">
+git <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'

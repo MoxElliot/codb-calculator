@@ -45,10 +45,12 @@ const { value: company, errorMessage: companyError, meta } = useField('company',
 
 <template>
     <div class="flex flex-col items-center justify-around lg:basis-2/4 basis-3/4">
-      <div class="xl:w-6/10 w-8/10 sm:w-7/10">
-        <p class="font-serif text-grey-300 sm:text-heading2 text-heading2_xs">
+      <div class="flex flex-row w-8/10 p-6">
+        <img  class="mb-4 place-self-end" src="../../images/company-name-stars.svg"/>
+        <p class="font-serif text-center text-grey-300 sm:text-heading2 text-heading2_xs">
           What is the name of your business?
         </p>
+        <img class="mt-4 place-self-start" src="../../images/company-name-stars.svg"/>
       </div>
       <div class="">
         <p class="font-sans text-grey-300 sm:text-body2 text-body2_xs text-center mt-6">

@@ -13,6 +13,10 @@ export const useStepStore = defineStore('stepStore', {
     stepPrevious: router.currentRoute.value.meta.previous
   }),
   actions: {
+    backStepAction() {
+      const backStep = router.currentRoute.value.meta.previous
+      router.push(backStep)
+    },
     nextStepAction() {
       const reportStore = useReportStore()
       const { inputValid } = storeToRefs(reportStore)
@@ -24,10 +28,6 @@ export const useStepStore = defineStore('stepStore', {
         reportStore.setBlankSubmitErrorAction('')
         router.push(nextStep)
       }
-    },
-    backStepAction() {
-      const backStep = router.currentRoute.value.meta.previous
-      router.push(backStep)
     }
     // nextButtonLabelAction() {
     //   console.log("in nextbuttonlabelAction")
