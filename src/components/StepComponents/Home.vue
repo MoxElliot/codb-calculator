@@ -1,4 +1,5 @@
-git <script setup lang="ts">
+git
+<script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
@@ -7,7 +8,7 @@ const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
 
 onMounted(() => {
-    updateInputValidAction(true)
+  updateInputValidAction(true)
 })
 </script>
 
@@ -30,24 +31,26 @@ onMounted(() => {
   <div class="flex flex-row justify-center basis-full">
     <div
       class="flex flex-col items-center justify-around lg:basis-2/3 sm:basis-3/4 basis-full px-8"
-    >   
-        <div class="bg-homeWavingHand bg-no-repeat bg-right pr-12">
-          <p class="font-serif text-grey-300 sm:text-heading2 text-heading2_xs">Hey there!</p>
-        </div>
-  
+    >
+      <div class="flex">
+        <p class="font-serif text-grey-300 sm:text-heading2 text-heading2_xs">Hey there!</p>
+        <img src="../../images/waving_hand.svg" alt="Waving Hand" width="40" height="40">
+      </div>
+
       <div class="font-sans text-grey-300 sm:text-body2 text-body2_xs text-center">
-        <p class="">
-          Welcome to the Cost of Doing Business (CoDB) tool. With this spreadsheet,
-        </p>
+        <p class="">Welcome to the Cost of Doing Business (CoDB) tool. With this spreadsheet,</p>
         <p class="">
           you'll be able to easily calculate how much it costs for you to run your business!
         </p>
       </div>
       <div
-        class="info-blue font-sans text-blue-300 sm:text-body text-body_xs m-6 sm:mt-2 md:py-6 md:pr-24 md:pl-16 sm:py-3 pr-12 pl-12 bg-homeInfoQuestionMark bg-no-repeat bg-infoQuesionMark bg-4%"
+        class="flex info-blue font-sans text-blue-300 sm:text-body text-body_xs m-6 sm:mt-2 md:py-6 md:pr-24 md:pl-16 sm:py-3 pr-12 pl-12"
       >
-        <p>This is a self-guided excercise, so don't feel rushed!</p>
-        <p>Using the NEXT STEP button, navigate through each section until the end!</p>
+        <img src="../../images/info-question-mark.svg" alt="Question" class="p-1 self-start" width="40" height="40"/>
+        <div>
+          <p>This is a self-guided excercise, so don't feel rushed!</p>
+          <p>Using the NEXT STEP button, navigate through each section until the end!</p>
+        </div>
       </div>
     </div>
   </div>

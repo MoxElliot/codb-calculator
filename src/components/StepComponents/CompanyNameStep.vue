@@ -44,35 +44,35 @@ const { value: company, errorMessage: companyError, meta } = useField('company',
 </script>
 
 <template>
-    <div class="flex flex-col items-center justify-around lg:basis-2/4 basis-3/4">
-      <div class="flex flex-row w-8/10 p-6">
-        <img  class="mb-4 place-self-end" src="../../images/company-name-stars.svg"/>
-        <p class="font-serif text-center text-grey-300 sm:text-heading2 text-heading2_xs">
-          What is the name of your business?
-        </p>
-        <img class="mt-4 place-self-start" src="../../images/company-name-stars.svg"/>
-      </div>
-      <div class="">
-        <p class="font-sans text-grey-300 sm:text-body2 text-body2_xs text-center mt-6">
-          Any journey begins with defining a goal. So, as we want to help you better understand the
-          financial picture of your photography business, it will be great to start by filling in
-          the name of it.
-        </p>
-      </div>
-      <div class="self-stretch mt-6">
-        <data-input
-          v-model.trim="companyNameInput"
-          name="company"
-          class="input border-bottom-grey text-placeholder placeholder:text-grey-100 sans"
-          :meta="meta"
-          placeholder="Business Name"
-          type="text"
-          id="company-name"
-        />
-        <div>
-          <span class="error-text">{{ companyError }}</span>
-          <span class="error-text" v-show="!meta.dirty">{{ blankSubmitError }}</span>
-        </div>
+  <div class="flex flex-col items-center justify-around lg:basis-2/4 basis-3/4">
+    <div class="flex flex-row w-8/10 p-6">
+      <img class="mb-4 place-self-end" src="../../images/company-name-stars.svg" />
+      <p class="font-serif text-center text-grey-300 sm:text-heading2 text-heading2_xs">
+        What is the name of your business?
+      </p>
+      <img class="mt-4 place-self-start" src="../../images/company-name-stars.svg" />
+    </div>
+    <div class="">
+      <p class="font-sans text-grey-300 sm:text-body2 text-body2_xs text-center mt-6">
+        Any journey begins with defining a goal. So, as we want to help you better understand the
+        financial picture of your photography business, it will be great to start by filling in the
+        name of it.
+      </p>
+    </div>
+    <div class="self-stretch mt-6">
+      <data-input
+        v-model.trim="companyNameInput"
+        name="company"
+        class="input border-bottom-grey text-placeholder placeholder:text-grey-100 sans"
+        :meta="meta"
+        placeholder="Business Name"
+        type="text"
+        id="company-name"
+      />
+      <div>
+        <span class="error-text">{{ companyError }}</span>
+        <span class="error-text" v-show="!meta.dirty">{{ blankSubmitError }}</span>
       </div>
     </div>
+  </div>
 </template>
