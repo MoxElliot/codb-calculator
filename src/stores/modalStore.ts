@@ -13,20 +13,20 @@ export type ModalAction = {
   callback: (props?: any) => void,
 };
 
-export const useModal = defineStore("modal", {
+export const useModalStore = defineStore("modalStore", {
   state: (): Modal => ({
-    isOpen: false,
+    isOpen: true,
     view: {},
     actions: [],
   }),
   actions: {
-    open(view: object, actions?: ModalAction[]) {
+    openModal(view: object, actions?: ModalAction[]) {
       this.isOpen = true;
       this.actions = actions;
       // using markRaw to avoid over performance as reactive is not required
       this.view = markRaw(view);
     },
-    close() {
+    closeModal() {
       this.isOpen = false;
       this.view = {};
       this.actions = [];
@@ -34,4 +34,4 @@ export const useModal = defineStore("modal", {
   },
 });
 
-export default useModal;
+export default useModalStore;
