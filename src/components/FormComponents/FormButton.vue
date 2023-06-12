@@ -3,12 +3,16 @@ const props = defineProps({
   label: {
     type: String,
     default: ''
+  },
+  btnClass: {
+    type: String
+  },
+  btnImage: {
+    type: String
   }
 })
 </script>
 
 <template>
-  <button>
-    {{ label }}
-  </button>
+  <button :class="btnClass"><img :src="btnImage" /> {{ label }}</button>
 </template>

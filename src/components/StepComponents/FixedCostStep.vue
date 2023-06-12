@@ -21,7 +21,7 @@ onMounted(() => {
       <p class="">
         Fixed Costs for <span >{{ companyName }}</span>
       </p>
-      <div class="bg-fixedCostCalendar bg-no-repeat h-10 w-10 bg-contain ml-3"> </div>
+      <img src="../../images/fixed-cost-calandar.svg" alt="Calandar" class="px-3">
     </div>
     <div class="text-body text-grey-300 basis-1/6 w-6/10">
       <p>
