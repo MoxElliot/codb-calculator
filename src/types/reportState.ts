@@ -15,7 +15,8 @@ interface reportState {
   savingsPerMonth: number
   userEmail: string
   inputValid: boolean
-  blankSubmitError: string
+  blankSubmitError: string,
+  fixedFormValid: boolean,
 }
 
 export default reportState

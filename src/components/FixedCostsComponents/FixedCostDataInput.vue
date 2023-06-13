@@ -16,12 +16,12 @@ const { isOpen, view } = storeToRefs(modalStore)
 const { closeModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError } = storeToRefs(reportStore)
-const { setBlankSubmitErrorAction } = reportStore
+const { blankSubmitError, fixedFormValid } = storeToRefs(reportStore)
+const { setBlankSubmitErrorAction, handleAddCost } = reportStore
 
 const fixedCostTotal = ref<number>(0)
 
-let fixedFormValid = ref<boolean>(true)
+// let fixedFormValid = ref<boolean>(true)
 
 const schema = Yup.object({
   name: Yup.string().required(' '),
@@ -34,30 +34,6 @@ const { resetForm } = useForm({
   validationSchema: schema,
   validateOnMount: true
 })
-
-const handleAddCost = (
-  fixedCostName: string,
-  fixedCostCategory: string,
-  fixedCostAmount: number | null,
-  fixedCostPeriod: string
-) => {
-  console.log(nameMeta, categoryMeta, amountMeta, periodMeta)
-  if (nameMeta.valid && categoryMeta.valid && amountMeta.valid && periodMeta.valid) {
-    fixedFormValid.value = true
-    reportStore.addFixedCostAction({
-      id: reportStore.fixedCosts.length + 1,
-      name: fixedCostName,
-      category: fixedCostCategory,
-      amount: fixedCostAmount,
-      payPeriod: fixedCostPeriod,
-      individualTotal: fixedCostTotal.value
-    })
-    resetForm()
-  } else {
-    fixedFormValid.value = false
-    setBlankSubmitErrorAction('Enter a value in each field')
-  }
-}
 
 const {
   value: fixedCostName,
@@ -87,13 +63,16 @@ const {
 } = useField('period', undefined, {
   initialValue: ''
 })
+
+const allValid = ref(nameMeta.valid && categoryMeta.valid && amountMeta.valid && periodMeta.valid)
+
 </script>
 
 <template #body>
   <Form
     class="flex flex-row mt-4"
     :valiation-schema="schema"
-    @submit="handleAddCost(fixedCostName, fixedCostCategory, fixedCostAmount, fixedCostPeriod)"
+    @submit="handleAddCost(fixedCostName, fixedCostCategory, fixedCostAmount, fixedCostPeriod, fixedCostTotal, allValid, resetForm)"
   >
     <fieldset :class="!isOpen ? 'flex flex-row flex-1' : 'flex-flex-col flex-1'">
       <div>

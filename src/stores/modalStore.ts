@@ -10,8 +10,8 @@ export type Modal = {
 
 export const useModalStore = defineStore("modalStore", {
   state: (): Modal => ({
-    isOpen: true,
-    view: 'fixedCosts'
+    isOpen: false,
+    view: ''
   }),
   actions: {
     openModal(view: string) {

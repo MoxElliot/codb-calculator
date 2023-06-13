@@ -13,15 +13,16 @@ const { closeModal } = modalStore
     <form-modal>
       <template #header>
         <div
-          v-if="view === 'fixedCosts'"
+          v-if="view === 'fixedCost'"
           class="flex flex-row justify-center items-center text-heading text-grey-300 font-serif"
         >
           <p>Add Fixed Cost</p>
         </div>
       </template>
-      <template #body>
+      <template #body="bodyProps">
+        {{ bodyProps }}
         <div class="">
-          <fixed-cost-data-input v-if="view === 'fixedCosts'" />
+          <fixed-cost-data-input v-if="view === 'fixedCost'" />
         </div>
       </template>
     </form-modal>

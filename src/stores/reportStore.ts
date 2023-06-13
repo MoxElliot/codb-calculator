@@ -4,6 +4,7 @@ import type VariableCostObj from '../types/VariableCostObj'
 import type reportState from '@/types/reportState'
 import payPeriodOptionsArray from '@/assets/payPeriodOptionsArray'
 import formatMoney from '../assets/utility_functions/formatMoney'
+import testingCostArr from '@/assets/testingCostArr'
 
 export const useReportStore = defineStore('reportStore', {
   state: (): reportState => ({
@@ -15,86 +16,14 @@ export const useReportStore = defineStore('reportStore', {
       { id: 2, name: 'Parking', category: 'Overhead', amount: 80 }
     ] as VariableCostObj[],
     totalVariableCosts: 80.0,
-    fixedCosts: [
-      {
-        id: 9,
-        name: 'Rent',
-        category: 'Overhead',
-        amount: 1000,
-        payPeriod: 'monthly',
-        individualTotal: 1000
-      },
-      {
-        id: 8,
-        name: 'Test2',
-        category: 'Overhead',
-        amount: 1000,
-        payPeriod: 'monthly',
-        individualTotal: 1000
-      },
-      {
-        id: 7,
-        name: 'Test3',
-        category: 'Overhead',
-        amount: 1000,
-        payPeriod: 'monthly',
-        individualTotal: 1000
-      },
-      {
-        id: 6,
-        name: 'Rent',
-        category: 'Overhead',
-        amount: 1000,
-        payPeriod: 'monthly',
-        individualTotal: 1000
-      },
-      {
-        id: 5,
-        name: 'Test2',
-        category: 'Overhead',
-        amount: 1000,
-        payPeriod: 'monthly',
-        individualTotal: 1000
-      },
-      {
-        id: 4,
-        name: 'Test3',
-        category: 'Overhead',
-        amount: 1000,
-        payPeriod: 'monthly',
-        individualTotal: 1000
-      },
-      {
-        id: 3,
-        name: 'Rent',
-        category: 'Overhead',
-        amount: 1000,
-        payPeriod: 'monthly',
-        individualTotal: 1000
-      },
-      {
-        id: 2,
-        name: 'Test2',
-        category: 'Overhead',
-        amount: 1000,
-        payPeriod: 'monthly',
-        individualTotal: 1000
-      },
-      {
-        id: 1,
-        name: 'Test3',
-        category: 'Overhead',
-        amount: 1000,
-        payPeriod: 'monthly',
-        individualTotal: 1000
-      }
-    ] as FixedCostObj[],
+    fixedCosts: testingCostArr as FixedCostObj[],
     totalFixedCosts: 1200.0,
     payPerMonth: 200.0,
     savingsPerMonth: 200.0,
     userEmail: 'e@e.com',
     inputValid: true,
-    blankSubmitError: ''
+    blankSubmitError: '',
+    fixedFormValid: true
     // companyName: '',
     // bookingsPerMonth: 0,
     // priceAveragePerBooking: 0.00,
@@ -168,6 +97,31 @@ export const useReportStore = defineStore('reportStore', {
     },
     setBlankSubmitErrorAction(blankSubmitError: string) {
       this.blankSubmitError = blankSubmitError
+    },
+    handleAddCost(
+      fixedCostName: string,
+      fixedCostCategory: string,
+      fixedCostAmount: number | null,
+      fixedCostPeriod: string,
+      fixedCostTotal: number,
+      allValid: boolean,
+      resetForm: Function,
+    ) {
+      if (allValid) {
+        this.fixedFormValid = true
+        this.addFixedCostAction({
+          id: this.fixedCosts.length + 1,
+          name: fixedCostName,
+          category: fixedCostCategory,
+          amount: fixedCostAmount,
+          payPeriod: fixedCostPeriod,
+          individualTotal: fixedCostTotal
+        })
+        resetForm()
+      } else {
+        this.fixedFormValid = false
+        this.setBlankSubmitErrorAction('Enter a value in each field')
+      }
     }
   },
 
