@@ -114,6 +114,9 @@ module.exports = {
       },
       red: {
         100: '#eb5c5a'
+      },
+      transparent: {
+        100: '#00000099'
       }
     },
     fontFamily: {

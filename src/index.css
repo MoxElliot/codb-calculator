@@ -15,14 +15,17 @@
     @apply bg-primary-white rounded-main border-btn text-grey-300 font-sans uppercase text-btn p-btn m-4 gap-2 w-228 h-48;
   }
   .info-blue {
-    @apply bg-blue-100 border border-blue-200 rounded-lg
+    @apply bg-blue-100 border border-blue-200 rounded-lg;
   }
   .error-text {
-    @apply text-red-100 font-semibold
+    @apply text-red-100 font-semibold;
+  }
+  .modal-container {
+    @apply fixed top-0 bottom-0 left-0 right-0 bg-transparent-100 flex justify-center items-center;
   }
 }
 /* pull this out */
-@layer utilities {   
+@layer utilities {
   .border-full-blue {
     @apply border border-blue-300;
   }

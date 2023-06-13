@@ -4,32 +4,23 @@ import { defineStore } from "pinia";
 
 export type Modal = {
   isOpen: boolean,
-  view: object,
-  actions?: ModalAction[],
+  view: string,
 };
 
-export type ModalAction = {
-  label: string,
-  callback: (props?: any) => void,
-};
 
 export const useModalStore = defineStore("modalStore", {
   state: (): Modal => ({
     isOpen: true,
-    view: {},
-    actions: [],
+    view: 'fixedCosts'
   }),
   actions: {
-    openModal(view: object, actions?: ModalAction[]) {
+    openModal(view: string) {
       this.isOpen = true;
-      this.actions = actions;
-      // using markRaw to avoid over performance as reactive is not required
-      this.view = markRaw(view);
+      this.view = view
     },
     closeModal() {
       this.isOpen = false;
-      this.view = {};
-      this.actions = [];
+      this.view = '';
     },
   },
 });

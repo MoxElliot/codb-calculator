@@ -9,6 +9,11 @@ import FormButton from '../FormComponents/FormButton.vue'
 import DataSelect from '../FormComponents/DataSelect.vue'
 import { useField, useForm, Form } from 'vee-validate'
 import { storeToRefs } from 'pinia'
+import { useModalStore } from '../../stores/modalStore'
+
+const modalStore = useModalStore()
+const { isOpen, view } = storeToRefs(modalStore)
+const { closeModal } = modalStore
 
 const reportStore = useReportStore()
 const { blankSubmitError } = storeToRefs(reportStore)
@@ -84,17 +89,18 @@ const {
 })
 </script>
 
-<template>
+<template #body>
   <Form
     class="flex flex-row mt-4"
     :valiation-schema="schema"
     @submit="handleAddCost(fixedCostName, fixedCostCategory, fixedCostAmount, fixedCostPeriod)"
   >
-    <fieldset class="flex flex-row flex-1">
+    <fieldset :class="!isOpen ? 'flex flex-row flex-1' : 'flex-flex-col flex-1'">
       <div>
         <data-input
           v-model="fixedCostName"
           label="Expense Name"
+          placeholder="Name of the cost"
           type="input"
           id="expense-name"
           name="name"
@@ -133,8 +139,8 @@ const {
       </div>
     </fieldset>
 
-    <div class="btn-add flex flex-col justify-center">
-      <form-button label="Add" type="submit" class="font-bold" />
+    <div class="btn-add flex flex-col justify-center" v-show="!isOpen">
+      <form-button label="Add Fixed Cost" type="submit" class="font-bold" />
     </div>
   </Form>
   <span class="error-text" v-show="!fixedFormValid">{{ blankSubmitError }}</span>

@@ -4,6 +4,10 @@ import FixedCostDataInput from '../FixedCostsComponents/FixedCostDataInput.vue'
 import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
+import { useModalStore } from '../../stores/modalStore'
+
+const modalStore = useModalStore()
+const { isOpen } = storeToRefs(modalStore)
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
@@ -31,7 +35,10 @@ onMounted(() => {
       </p>
     </div>
     <div class="basis-full flex flex-col items-center justify-center w-7/10">
-      <fixed-cost-data-input />
+      <div v-show="!isOpen">
+
+        <fixed-cost-data-input/>
+      </div>
       <fixed-cost-table />
     </div>
   </div>
