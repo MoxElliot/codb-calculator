@@ -9,6 +9,9 @@ module.exports = {
   theme: {
     extend: {
       //extends the default themes
+      gridTemplateRows: {
+        mainlayout: '1fr 3fr 1fr'
+      },
       width: {
         75: '75px',
         204: '204px',

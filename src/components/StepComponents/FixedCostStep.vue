@@ -21,7 +21,7 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-col text-center basis-full items-center justify-center">
-    <div class="flex flex-row justify-center items-center text-heading text-grey-300 font-serif basis-1/6 w-6/10 mb-8 ">
+    <div class="flex flex-row justify-center items-center text-heading text-grey-300 font-serif basis-1/6 w-6/10 mb-8">
       <p class="">
         Fixed Costs for <span >{{ companyName }}</span>
       </p>

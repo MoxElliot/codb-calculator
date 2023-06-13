@@ -9,7 +9,7 @@ const { closeModal } = modalStore
 
 <template>
   <div class="modal-container" v-if="isOpen">
-    <div class="flex flex-col bg-primary-white">
+    <div class="flex flex-col bg-primary-white p-16">
       <header class="modal-header">
         <slot name="header"> This is the default title! </slot>
         
