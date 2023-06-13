@@ -65,14 +65,23 @@ const {
 })
 
 const allValid = ref(nameMeta.valid && categoryMeta.valid && amountMeta.valid && periodMeta.valid)
-
 </script>
 
 <template #body>
   <Form
     class="flex flex-row mt-4"
     :valiation-schema="schema"
-    @submit="handleAddCost(fixedCostName, fixedCostCategory, fixedCostAmount, fixedCostPeriod, fixedCostTotal, allValid, resetForm)"
+    @submit="
+      handleAddCost(
+        fixedCostName,
+        fixedCostCategory,
+        fixedCostAmount,
+        fixedCostPeriod,
+        fixedCostTotal,
+        allValid,
+        resetForm
+      )
+    "
   >
     <fieldset :class="!isOpen ? 'flex flex-row flex-1' : 'flex-flex-col flex-1'">
       <div>
@@ -121,6 +130,23 @@ const allValid = ref(nameMeta.valid && categoryMeta.valid && amountMeta.valid &&
     <div class="btn-add flex flex-col justify-center" v-show="!isOpen">
       <form-button label="Add Fixed Cost" type="submit" class="font-bold" />
     </div>
+    <div class="flex flex-row p-4" v-show="isOpen">
+      <div>
+        <form-button
+          label="cancel"
+          @click="closeModal"
+          class="border rounded-main text-grey-300 font-sans uppercase text-btn p-btn m-4 gap-2.5 w-32 h-48"
+        />
+      </div>
+      <div>
+        <form-button
+          label="Add"
+          type="submit"
+          class="bg-aqua-200 rounded-main text-primary-white font-sans uppercase text-btn p-btn m-4 gap-2.5 w-32 h-48"
+        />
+      </div>
+    </div>
   </Form>
+
   <span class="error-text" v-show="!fixedFormValid">{{ blankSubmitError }}</span>
 </template>

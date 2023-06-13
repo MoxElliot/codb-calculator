@@ -19,8 +19,7 @@ const { closeModal } = modalStore
           <p>Add Fixed Cost</p>
         </div>
       </template>
-      <template #body="bodyProps">
-        {{ bodyProps }}
+      <template #body>
         <div class="">
           <fixed-cost-data-input v-if="view === 'fixedCost'" />
         </div>
