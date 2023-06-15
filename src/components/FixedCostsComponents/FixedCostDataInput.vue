@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
-import { computed, onUpdated, ref } from 'vue'
+import { ref } from 'vue'
 import * as Yup from 'yup'
 import costCategoryOptions from '../../assets/costCategoryOptions'
 import costPeriodOptions from '../../assets/costPeriodOptions'
@@ -12,17 +12,15 @@ import { storeToRefs } from 'pinia'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { isOpen, view } = storeToRefs(modalStore)
+const { isOpen } = storeToRefs(modalStore)
 const { closeModal } = modalStore
 
 const reportStore = useReportStore()
 const { blankSubmitError, fixedFormValid } = storeToRefs(reportStore)
-const { setBlankSubmitErrorAction, handleAddCost, addFixedCostAction, setFixedFormValidAction } =
+const { handleAddCost, addFixedCostAction, setFixedFormValidAction } =
   reportStore
 
 const fixedCostTotal = ref<number>(0)
-
-// let fixedFormValid = ref<boolean>(true)
 
 const schema = Yup.object({
   name: Yup.string().required(' '),
@@ -32,21 +30,16 @@ const schema = Yup.object({
 })
 const { resetForm, meta } = useForm({
   validationSchema: schema
-  // validateOnMount: true
 })
 
 const {
   value: fixedCostName,
-  errorMessage: nameError,
-  meta: nameMeta,
   handleBlur: nameHandleBlur
 } = useField('name', undefined, {
   initialValue: ''
 })
 const {
   value: fixedCostCategory,
-  errorMessage: categoryError,
-  meta: categoryMeta
 } = useField('category', undefined, {
   initialValue: ''
 })
@@ -59,38 +52,10 @@ const {
 })
 const {
   value: fixedCostPeriod,
-  errorMessage: periodError,
-  meta: periodMeta,
 } = useField('period', undefined, {
   initialValue: ''
 })
 
-// const validationListeners = computed(() => {
-//   // If the field is valid or have not been validated yet
-//   // lazy
-//   if (!errorMessage.value) {
-//     return {
-//       blur: handleChange,
-//       change: handleChange,
-//       // disable `shouldValidate` to avoid validating on input
-//       input: (e: any) => handleChange(e, false),
-//     };
-//   }
-//   // Aggressive
-//   return {
-//     blur: handleChange,
-//     change: handleChange,
-//     input: handleChange, // only switched this
-//   };
-// });
-// let allValid = nameMeta.valid && categoryMeta.valid && amountMeta.valid && periodMeta.valid
-
-// onUpdated(() => {
-//   allValid = nameMeta.valid && categoryMeta.valid && amountMeta.valid && periodMeta.valid
-//   console.log('hello', allValid)
-// })
-
-// console.log('all Valid FixedCost', allValid, nameMeta.valid, categoryMeta.valid, amountMeta.valid, periodMeta.valid)
 </script>
 
 <template #body>
@@ -178,11 +143,6 @@ const {
       </div>
     </div>
     </fieldset>
-    <!-- <span class="error-text">{{ periodError }}</span>
-    <span class="error-text">{{ amountError }}</span>
-    <span class="error-text">{{ categoryError }}</span>
-    <span class="error-text">{{ nameError }}</span> -->
-    <!-- <span class="error-text">{{ errorMessage }}</span> -->
     <span class="error-text" v-if="!fixedFormValid">{{ amountError || blankSubmitError }}</span>
   </Form>
 </template>
