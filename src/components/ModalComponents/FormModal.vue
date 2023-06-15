@@ -3,8 +3,8 @@ import { storeToRefs } from 'pinia'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { isOpen, view } = storeToRefs(modalStore)
-const { closeModal } = modalStore
+const { isOpen } = storeToRefs(modalStore)  /// take store out, pass prop for reusability
+
 </script>
 
 <template>

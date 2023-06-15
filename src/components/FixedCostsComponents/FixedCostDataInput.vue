@@ -147,6 +147,5 @@ const allValid = ref(nameMeta.valid && categoryMeta.valid && amountMeta.valid &&
       </div>
     </div>
   </Form>
-
   <span class="error-text" v-show="!fixedFormValid">{{ blankSubmitError }}</span>
 </template>

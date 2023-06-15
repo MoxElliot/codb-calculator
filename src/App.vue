@@ -5,8 +5,8 @@ import { storeToRefs } from 'pinia'
 import { useModalStore } from './stores/modalStore'
 
 const modalStore = useModalStore()
-const { isOpen, view } = storeToRefs(modalStore)
-const { closeModal } = modalStore
+const { view } = storeToRefs(modalStore)
+
 </script>
 <template>
   <div class="h-screen">
