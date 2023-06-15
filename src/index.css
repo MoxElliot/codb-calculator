@@ -26,8 +26,14 @@
   .modal-body {
     @apply min-h-[450px]
   }
+  .modal-btn-add {
+    @apply bg-aqua-200 rounded-main text-primary-white font-sans uppercase text-btn p-btn m-4 gap-2.5 w-32 h-48
+  }
+  .modal-btn-cancel {
+    @apply border rounded-main text-grey-300 font-sans uppercase text-btn p-btn m-4 gap-2.5 w-32 h-48
+  }
 }
-/* pull this out */
+
 @layer utilities {
   .border-full-blue {
     @apply border border-blue-300;
