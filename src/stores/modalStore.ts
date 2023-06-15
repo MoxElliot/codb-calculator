@@ -1,28 +1,22 @@
-
-
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
 export type Modal = {
-  isOpen: boolean,
-  view: string,
-};
+  isOpen: boolean
+}
 
-
-export const useModalStore = defineStore("modalStore", {
+export const useModalStore = defineStore('modalStore', {
   state: (): Modal => ({
-    isOpen: false,
-    view: ''
+    isOpen: false
   }),
   actions: {
-    openModal(view: string) {
-      this.isOpen = true;
-      this.view = view
+    openModal() {
+      this.isOpen = true
     },
     closeModal() {
-      this.isOpen = false;
-      this.view = '';
-    },
-  },
-});
+      this.isOpen = false
+      console.log('in Modal Store', this.isOpen)
+    }
+  }
+})
 
-export default useModalStore;
+export default useModalStore

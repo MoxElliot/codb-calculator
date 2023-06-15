@@ -17,10 +17,15 @@ const { closeModal } = modalStore
 
 const reportStore = useReportStore()
 const { blankSubmitError, fixedFormValid } = storeToRefs(reportStore)
-const { handleAddCost, addFixedCostAction, setFixedFormValidAction } =
-  reportStore
+const { handleAddCost, addFixedCostAction, setFixedFormValidAction } = reportStore
 
 const fixedCostTotal = ref<number>(0)
+
+const props = defineProps({
+  class: {
+    type: String
+  },
+})
 
 const schema = Yup.object({
   name: Yup.string().required(' '),
@@ -32,35 +37,29 @@ const { resetForm, meta } = useForm({
   validationSchema: schema
 })
 
-const {
-  value: fixedCostName,
-  handleBlur: nameHandleBlur
-} = useField('name', undefined, {
+const { value: fixedCostName } = useField('name', undefined, {
   initialValue: ''
 })
-const {
-  value: fixedCostCategory,
-} = useField('category', undefined, {
+const { value: fixedCostCategory } = useField('category', undefined, {
   initialValue: ''
 })
 const {
   value: fixedCostAmount,
   errorMessage: amountError,
-  meta: amountMeta,
+  meta: amountMeta
 } = useField('amount', undefined, {
   initialValue: null
 })
-const {
-  value: fixedCostPeriod,
-} = useField('period', undefined, {
+const { value: fixedCostPeriod } = useField('period', undefined, {
   initialValue: ''
 })
+
 
 </script>
 
 <template #body>
   <Form
-    class="flex flex-col mt-4 min-h-[120px]"
+    class="flex flex-col mt-4 min-h-[145px]"
     :valiation-schema="schema"
     @submit="
       handleAddCost(
@@ -76,20 +75,17 @@ const {
       )
     "
   >
-    <fieldset :class="!isOpen ? 'flex flex-row flex-1' : 'flex-flex-col flex-1'">
+    <fieldset :class="class">
       <div>
         <data-input
           v-model="fixedCostName"
           label="Expense Name"
           placeholder="Name of the cost"
           type="input"
-          id="expense-name"
           name="name"
           class="fixed-cost-dataset basis-1/4 flex-1"
-          @blur="nameHandleBlur"
           @input="setFixedFormValidAction(true)"
         />
-        
       </div>
       <div>
         <data-select
@@ -100,7 +96,6 @@ const {
           class="basis-1/4 flex-1"
           @input="setFixedFormValidAction(true)"
         />
-        
       </div>
       <div>
         <data-input
@@ -108,9 +103,8 @@ const {
           label="Expense Amount"
           name="amount"
           class="fixed-cost-dataset basis-1/4 flex-1"
-          @input="amountMeta.valid ? setFixedFormValidAction(true) : setFixedFormValidAction(false)"
+          @input="setFixedFormValidAction(true)"
         />
-        
       </div>
       <div>
         <data-select
@@ -121,28 +115,28 @@ const {
           class="basis-1/4 flex-1"
           @input="setFixedFormValidAction(true)"
         />
+      </div>
+      <div class="btn-add flex flex-col justify-center" v-if="isOpen === false">
+        <form-button label="Add Fixed Cost" type="submit" class="font-bold" />
+      </div>
+      <div class="flex flex-row p-4" v-else>
         
+          <form-button
+            label="cancel"
+            type="button"
+            class="border rounded-main text-grey-300 font-sans uppercase text-btn p-btn m-4 gap-2.5 w-32 h-48"
+            @click="closeModal"
+          />
+  
+          <form-button
+            label="Add"
+            type="submit"
+            class="bg-aqua-200 rounded-main text-primary-white font-sans uppercase text-btn p-btn m-4 gap-2.5 w-32 h-48"
+          />
+       
       </div>
-      <div class="btn-add flex flex-col justify-center" v-if="!isOpen">
-      <form-button label="Add Fixed Cost" type="submit" class="font-bold" />
-    </div>
-    <div class="flex flex-row p-4" v-if="isOpen">
-      <div>
-        <form-button
-          label="cancel"
-          @click="closeModal"
-          class="border rounded-main text-grey-300 font-sans uppercase text-btn p-btn m-4 gap-2.5 w-32 h-48"
-        />
-      </div>
-      <div>
-        <form-button
-          label="Add"
-          type="submit"
-          class="bg-aqua-200 rounded-main text-primary-white font-sans uppercase text-btn p-btn m-4 gap-2.5 w-32 h-48"
-        />
-      </div>
-    </div>
     </fieldset>
-    <span class="error-text" v-if="!fixedFormValid">{{ amountError || blankSubmitError }}</span>
+    <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
+    <span class="error-text">{{ amountError }} </span>
   </Form>
 </template>

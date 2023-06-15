@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import FixedCostDataInput from '../FixedCostsComponents/FixedCostDataInput.vue'
 import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
 import { useReportStore } from '@/stores/reportStore'
 import FormButton from '../FormComponents/FormButton.vue'
 import { storeToRefs } from 'pinia'
+import FormModal from '../ModalComponents/FormModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
@@ -19,12 +20,37 @@ onMounted(() => {
   updateInputValidAction(true)
 })
 
-const fixedCostModalOn = () => {
-  modalStore.isOpen === true
-}
+
+// let fixedCostModalIsOpen = ref(false)
+// const props = defineProps({
+//   fixedCostModalIsOpen: {
+//     type: Boolean,
+//     required: true,
+//     defaultValue: false
+//   }
+// })
+
+// const handleFixedCostModalOpen = () => {
+//   console.log("in handle", fixedCostModalIsOpen.value)
+//   fixedCostModalIsOpen.value = true
+// }
 </script>
 
 <template>
+  <form-modal  v-if="isOpen" class="flex flex-col">
+      <template #header>
+        <div
+          class="flex flex-row justify-center items-center text-heading text-grey-300 font-serif"
+        >
+          <p>Add Fixed Cost</p>
+        </div>
+      </template>
+      <template #body>
+        <div class="">
+          <fixed-cost-data-input />
+        </div>
+      </template>
+    </form-modal> 
   <div class="flex flex-col text-center basis-full items-center justify-center">
     <div
       class="flex flex-row justify-center items-center text-heading text-grey-300 font-serif basis-1/6 w-6/10 mb-8"
@@ -43,11 +69,11 @@ const fixedCostModalOn = () => {
     </div>
     <div class="basis-full flex flex-col items-center justify-center w-7/10">
       <div class="hidden md:flex">
-        <fixed-cost-data-input />
+        <fixed-cost-data-input class="flex flex-row" />
       </div>
-      <div class="md:hidden">
-        <div class="btn-add flex flex-col justify-center" v-show="!isOpen">
-          <form-button label="Add Fixed Cost" type="submit" class="font-bold" @click="openModal('fixedCost')"/>
+      <div class="md:hidden" >
+        <div class="btn-add flex flex-col justify-center">
+          <form-button label="Add Fixed Cost" type="submit" class="font-bold" @click="openModal()"/>
         </div>
       </div>
       <fixed-cost-table />

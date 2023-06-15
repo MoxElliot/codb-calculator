@@ -5,6 +5,7 @@ import type reportState from '@/types/reportState'
 import payPeriodOptionsArray from '@/assets/payPeriodOptionsArray'
 import formatMoney from '../assets/utility_functions/formatMoney'
 import testingCostArr from '@/assets/testingCostArr'
+import { useModalStore } from './modalStore'
 
 export const useReportStore = defineStore('reportStore', {
   state: (): reportState => ({
@@ -24,7 +25,7 @@ export const useReportStore = defineStore('reportStore', {
     inputValid: true,
     blankSubmitError: '',
     fixedFormValid: true,
-    variableFormValid: true,
+    variableFormValid: true
     // companyName: '',
     // bookingsPerMonth: 0,
     // priceAveragePerBooking: 0.00,
@@ -114,9 +115,12 @@ export const useReportStore = defineStore('reportStore', {
       resetForm: Function,
       addCostAction: Function,
       costPeriod?: string | undefined,
-      costTotal?: number | undefined,
+      costTotal?: number | undefined
     ) {
       if (allValid) {
+        const modalStore = useModalStore()
+        const { closeModal } = modalStore
+
         formValidAction(true)
         addCostAction({
           id: this.fixedCosts.length + 1,
@@ -126,6 +130,7 @@ export const useReportStore = defineStore('reportStore', {
           payPeriod: costPeriod,
           individualTotal: costTotal
         })
+        closeModal()
         resetForm()
       } else {
         formValidAction(false)
