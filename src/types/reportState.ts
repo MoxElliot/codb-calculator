@@ -17,6 +17,7 @@ interface reportState {
   inputValid: boolean
   blankSubmitError: string,
   fixedFormValid: boolean,
+  variableFormValid: boolean,
 }
 
 export default reportState

@@ -23,7 +23,8 @@ export const useReportStore = defineStore('reportStore', {
     userEmail: 'e@e.com',
     inputValid: true,
     blankSubmitError: '',
-    fixedFormValid: true
+    fixedFormValid: true,
+    variableFormValid: true,
     // companyName: '',
     // bookingsPerMonth: 0,
     // priceAveragePerBooking: 0.00,
@@ -98,28 +99,36 @@ export const useReportStore = defineStore('reportStore', {
     setBlankSubmitErrorAction(blankSubmitError: string) {
       this.blankSubmitError = blankSubmitError
     },
+    setFixedFormValidAction(formValid: boolean) {
+      this.fixedFormValid = formValid
+    },
+    setVariableFormValidAction(formValid: boolean) {
+      this.variableFormValid = formValid
+    },
     handleAddCost(
-      fixedCostName: string,
-      fixedCostCategory: string,
-      fixedCostAmount: number | null,
-      fixedCostPeriod: string,
-      fixedCostTotal: number,
+      costName: string,
+      costCategory: string,
+      costAmount: number | null,
       allValid: boolean,
+      formValidAction: Function,
       resetForm: Function,
+      addCostAction: Function,
+      costPeriod?: string | undefined,
+      costTotal?: number | undefined,
     ) {
       if (allValid) {
-        this.fixedFormValid = true
-        this.addFixedCostAction({
+        formValidAction(true)
+        addCostAction({
           id: this.fixedCosts.length + 1,
-          name: fixedCostName,
-          category: fixedCostCategory,
-          amount: fixedCostAmount,
-          payPeriod: fixedCostPeriod,
-          individualTotal: fixedCostTotal
+          name: costName,
+          category: costCategory,
+          amount: costAmount,
+          payPeriod: costPeriod,
+          individualTotal: costTotal
         })
         resetForm()
       } else {
-        this.fixedFormValid = false
+        formValidAction(false)
         this.setBlankSubmitErrorAction('Enter a value in each field')
       }
     }
