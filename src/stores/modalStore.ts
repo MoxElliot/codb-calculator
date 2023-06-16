@@ -1,37 +1,22 @@
-
-import { markRaw } from "vue";
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
 export type Modal = {
-  isOpen: boolean,
-  view: object,
-  actions?: ModalAction[],
-};
+  isOpen: boolean
+}
 
-export type ModalAction = {
-  label: string,
-  callback: (props?: any) => void,
-};
-
-export const useModal = defineStore("modal", {
+export const useModalStore = defineStore('modalStore', {
   state: (): Modal => ({
-    isOpen: false,
-    view: {},
-    actions: [],
+    isOpen: false
   }),
   actions: {
-    open(view: object, actions?: ModalAction[]) {
-      this.isOpen = true;
-      this.actions = actions;
-      // using markRaw to avoid over performance as reactive is not required
-      this.view = markRaw(view);
+    openModal() {
+      this.isOpen = true
     },
-    close() {
-      this.isOpen = false;
-      this.view = {};
-      this.actions = [];
-    },
-  },
-});
+    closeModal() {
+      this.isOpen = false
+      console.log('in Modal Store', this.isOpen)
+    }
+  }
+})
 
-export default useModal;
+export default useModalStore

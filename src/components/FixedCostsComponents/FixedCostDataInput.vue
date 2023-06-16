@@ -9,98 +9,84 @@ import FormButton from '../FormComponents/FormButton.vue'
 import DataSelect from '../FormComponents/DataSelect.vue'
 import { useField, useForm, Form } from 'vee-validate'
 import { storeToRefs } from 'pinia'
+import { useModalStore } from '../../stores/modalStore'
+
+const modalStore = useModalStore()
+const { isOpen } = storeToRefs(modalStore)
+const { closeModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError } = storeToRefs(reportStore)
-const { setBlankSubmitErrorAction } = reportStore
+const { blankSubmitError, fixedFormValid } = storeToRefs(reportStore)
+const { handleAddCost, addFixedCostAction, setFixedFormValidAction } = reportStore
 
 const fixedCostTotal = ref<number>(0)
 
-let fixedFormValid = ref<boolean>(true)
+const props = defineProps({
+  class: {
+    type: String
+  }
+})
 
 const schema = Yup.object({
   name: Yup.string().required(' '),
   category: Yup.string().required(' '),
-  amount: Yup.number().typeError('Please Enter a Number').required(' '),
+  amount: Yup.number().typeError('Please Enter a Number for an Expense').required(' '),
   period: Yup.string().required(' ')
 })
 
-const { resetForm } = useForm({
-  validationSchema: schema,
-  validateOnMount: true
+const { resetForm, meta } = useForm({
+  validationSchema: schema
 })
 
-const handleAddCost = (
-  fixedCostName: string,
-  fixedCostCategory: string,
-  fixedCostAmount: number | null,
-  fixedCostPeriod: string
-) => {
-  console.log(nameMeta, categoryMeta, amountMeta, periodMeta)
-  if (nameMeta.valid && categoryMeta.valid && amountMeta.valid && periodMeta.valid) {
-    fixedFormValid.value = true
-    reportStore.addFixedCostAction({
-      id: reportStore.fixedCosts.length + 1,
-      name: fixedCostName,
-      category: fixedCostCategory,
-      amount: fixedCostAmount,
-      payPeriod: fixedCostPeriod,
-      individualTotal: fixedCostTotal.value
-    })
-    resetForm()
-  } else {
-    fixedFormValid.value = false
-    setBlankSubmitErrorAction('Enter a value in each field')
-  }
-}
+const { value: fixedCostName } = useField('name', undefined, {
+  initialValue: ''
+})
 
-const {
-  value: fixedCostName,
-  errorMessage: nameError,
-  meta: nameMeta
-} = useField('name', undefined, {
+const { value: fixedCostCategory } = useField('category', undefined, {
   initialValue: ''
 })
-const {
-  value: fixedCostCategory,
-  errorMessage: categoryError,
-  meta: categoryMeta
-} = useField('category', undefined, {
-  initialValue: ''
-})
+
 const {
   value: fixedCostAmount,
   errorMessage: amountError,
-  meta: amountMeta
 } = useField('amount', undefined, {
   initialValue: null
 })
-const {
-  value: fixedCostPeriod,
-  errorMessage: periodError,
-  meta: periodMeta
-} = useField('period', undefined, {
+
+const { value: fixedCostPeriod } = useField('period', undefined, {
   initialValue: ''
 })
 </script>
 
 <template>
   <Form
-    class="flex flex-row mt-4"
+    class="flex flex-col mt-4 min-h-[145px]"
     :valiation-schema="schema"
-    @submit="handleAddCost(fixedCostName, fixedCostCategory, fixedCostAmount, fixedCostPeriod)"
+    @submit="
+      handleAddCost(
+        fixedCostName,
+        fixedCostCategory,
+        fixedCostAmount,
+        meta.valid,
+        setFixedFormValidAction,
+        resetForm,
+        addFixedCostAction,
+        fixedCostPeriod,
+        fixedCostTotal
+      )
+    "
   >
-    <fieldset class="flex flex-row flex-1">
+    <fieldset :class="class">
       <div>
         <data-input
           v-model="fixedCostName"
           label="Expense Name"
+          placeholder="Name of the cost"
           type="input"
-          id="expense-name"
           name="name"
-          class="fixed-cost-dataset basis-1/4 flex-1"
+          class="basis-1/4 flex-1"
+          @input="setFixedFormValidAction(true)"
         />
-        <span class="error-text">{{ nameError }}</span>
       </div>
       <div>
         <data-select
@@ -109,17 +95,17 @@ const {
           name="category"
           :optionArray="costCategoryOptions"
           class="basis-1/4 flex-1"
+          @input="setFixedFormValidAction(true)"
         />
-        <span class="error-text">{{ categoryError }}</span>
       </div>
       <div>
         <data-input
           v-model="fixedCostAmount"
           label="Expense Amount"
           name="amount"
-          class="fixed-cost-dataset basis-1/4 flex-1"
+          class="basis-1/4 flex-1"
+          @input="setFixedFormValidAction(true)"
         />
-        <span class="error-text">{{ amountError }}</span>
       </div>
       <div>
         <data-select
@@ -128,14 +114,27 @@ const {
           name="period"
           :optionArray="costPeriodOptions"
           class="basis-1/4 flex-1"
+          @input="setFixedFormValidAction(true)"
         />
-        <span class="error-text">{{ periodError }}</span>
+      </div>
+      <div class="btn-add flex flex-col justify-center" v-if="isOpen === false">
+        <form-button label="Add Fixed Cost" type="submit" class="font-bold" />
+      </div>
+      <div class="flex flex-row p-4" v-else>
+        <form-button
+          label="cancel"
+          type="button"
+          class="modal-btn-cancel"
+          @click="closeModal"
+        />
+        <form-button
+          label="Add"
+          type="submit"
+          class="modal-btn-add"
+        />
       </div>
     </fieldset>
-
-    <div class="btn-add flex flex-col justify-center">
-      <form-button label="Add" type="submit" class="font-bold" />
-    </div>
+    <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
+    <span class="error-text">{{ amountError }} </span>
   </Form>
-  <span class="error-text" v-show="!fixedFormValid">{{ blankSubmitError }}</span>
 </template>

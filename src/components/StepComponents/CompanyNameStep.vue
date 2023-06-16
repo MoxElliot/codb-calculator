@@ -71,7 +71,7 @@ const { value: company, errorMessage: companyError, meta } = useField('company',
       />
       <div>
         <span class="error-text">{{ companyError }}</span>
-        <span class="error-text" v-show="!meta.dirty">{{ blankSubmitError }}</span>
+        <span class="error-text" v-if="!meta.dirty">{{ blankSubmitError }}</span>
       </div>
     </div>
   </div>

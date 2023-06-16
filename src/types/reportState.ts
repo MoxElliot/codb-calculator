@@ -1,6 +1,5 @@
 import type VariableCostObj from './VariableCostObj'
 import type FixedCostObj from './FixedCostObj'
-import type BookingIncomeState from './BookingIncomeState'
 
 interface reportState {
   companyName: string
@@ -15,7 +14,9 @@ interface reportState {
   savingsPerMonth: number
   userEmail: string
   inputValid: boolean
-  blankSubmitError: string
+  blankSubmitError: string,
+  fixedFormValid: boolean,
+  variableFormValid: boolean,
 }
 
 export default reportState

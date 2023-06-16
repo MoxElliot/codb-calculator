@@ -3,25 +3,46 @@ import { onMounted } from 'vue'
 import FixedCostDataInput from '../FixedCostsComponents/FixedCostDataInput.vue'
 import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
 import { useReportStore } from '@/stores/reportStore'
+import FormButton from '../FormComponents/FormButton.vue'
 import { storeToRefs } from 'pinia'
+import FormModal from '../ModalComponents/FormModal.vue'
+import { useModalStore } from '../../stores/modalStore'
+
+const modalStore = useModalStore()
+const { isOpen } = storeToRefs(modalStore)
+const { openModal } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
 const { companyName } = storeToRefs(reportStore)
 
 onMounted(() => {
-    updateInputValidAction(true)
+  updateInputValidAction(true)
 })
-
 </script>
 
 <template>
+  <form-modal v-if="isOpen" class="flex flex-col">
+    <template #header>
+      <div class="flex flex-row justify-center items-center text-heading text-grey-300 font-serif">
+        <p>Add Fixed Cost</p>
+      </div>
+    </template>
+    <template #body>
+      <div class="">
+        <fixed-cost-data-input />
+      </div>
+    </template>
+  </form-modal>
+
   <div class="flex flex-col text-center basis-full items-center justify-center">
-    <div class="flex flex-row justify-center items-center text-heading text-grey-300 font-serif basis-1/6 w-6/10 mb-8 ">
+    <div
+      class="flex flex-row justify-center items-center text-heading text-grey-300 font-serif basis-1/6 w-6/10 mb-8"
+    >
       <p class="">
-        Fixed Costs for <span >{{ companyName }}</span>
+        Fixed Costs for <span>{{ companyName }}</span>
       </p>
-      <img src="../../images/fixed-cost-calandar.svg" alt="Calandar" class="px-3">
+      <img src="../../images/fixed-cost-calandar.svg" alt="Calandar" class="px-3" />
     </div>
     <div class="text-body text-grey-300 basis-1/6 w-6/10">
       <p>
@@ -31,7 +52,19 @@ onMounted(() => {
       </p>
     </div>
     <div class="basis-full flex flex-col items-center justify-center w-7/10">
-      <fixed-cost-data-input />
+      <div class="hidden md:flex">
+        <fixed-cost-data-input class="flex flex-row" />
+      </div>
+      <div class="md:hidden">
+        <div class="btn-add flex flex-col justify-center">
+          <form-button
+            label="Add Fixed Cost"
+            type="submit"
+            class="font-bold"
+            @click="openModal()"
+          />
+        </div>
+      </div>
       <fixed-cost-table />
     </div>
   </div>

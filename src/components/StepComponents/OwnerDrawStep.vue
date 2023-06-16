@@ -71,7 +71,7 @@ const { value: savings, errorMessage: savingsError, meta: savingsMeta } = useFie
     </div>
     <span class="error-text">{{ payError }}</span>
     <span class="error-text">{{ savingsError }}</span>
-    <span class="error-text" v-show="!payMeta.dirty || !savingsMeta.dirty">{{
+    <span class="error-text" v-if="!payMeta.dirty || !savingsMeta.dirty">{{
       blankSubmitError
     }}</span>
   </div>

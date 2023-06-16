@@ -51,6 +51,6 @@ const { value: email, errorMessage: emailError, meta } = useField('email')
       id="user-email-address"
     />
     <span class="error-text">{{ emailError }}</span>
-    <span class="error-text" v-show="!meta.dirty">{{ blankSubmitError }}</span>
+    <span class="error-text" v-if="!meta.dirty">{{ blankSubmitError }}</span>
   </div>
 </template>

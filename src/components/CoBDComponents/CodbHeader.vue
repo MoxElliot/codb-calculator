@@ -8,6 +8,7 @@ import { ref } from 'vue'
 let current = ref(router.currentRoute.value.path)
 
 //this is the active/complete color for the icons: #7CC1B5
+// v-if on line 27ish gives an error 'Property 'step' does not exist on type'
 
 </script>
 
@@ -23,8 +24,8 @@ let current = ref(router.currentRoute.value.path)
       <div
         class="flex justify-center items-center h-4/6 border-r border-grey-200"
         v-for="step in steps"
-        v-show="step.icon !== 'none'"
-      >
+        v-show="step.icon !== 'none'"  
+      > 
         <router-link :to="step.current">
           <img :src="step.icon" class="w-6 h-6" />
         </router-link>
