@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       //extends the default themes
       gridTemplateRows: {
-        mainLayout: '200px minmax(1 fr, 624px) 200px'
+        mainLayout: 'minmax(100px 200px) minmax(200px, max-content) minmax(100px 200px)'
       },
       width: {
         75: '75px',

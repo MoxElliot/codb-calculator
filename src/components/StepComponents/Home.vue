@@ -1,7 +1,6 @@
 git
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
-import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
 
 const reportStore = useReportStore()
@@ -13,9 +12,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
+  <!-- <div
     class="absolute top-0 left-0 bg-homeBackground bg-no-repeat bg-contain bg-center h-100 w-100"
-  ></div>
+  ></div> -->
   <!-- <div
     class="absolute top-14% left-4% bg-homeBackgroundTL bg-no-repeat bg-contain bg-center h-35/100 w-35/100"
   ></div>
@@ -30,7 +29,7 @@ onMounted(() => {
   ></div> -->
   <div class="flex flex-row justify-center basis-full">
     <div
-      class="flex flex-col items-center justify-around lg:basis-2/3 sm:basis-3/4 basis-full px-8"
+      class="flex flex-col items-center justify-around lg:basis-2/3 sm:basis-3/4 basis-full px-8 overflow-auto"
     >
       <div class="flex">
         <p class="font-serif text-grey-300 sm:text-heading2 text-heading2_xs">Hey there!</p>
