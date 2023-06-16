@@ -13,9 +13,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- <div
+  <div
     class="absolute top-0 left-0 bg-homeBackground bg-no-repeat bg-contain bg-center h-100 w-100"
-  ></div> -->
+  ></div>
   <!-- <div
     class="absolute top-14% left-4% bg-homeBackgroundTL bg-no-repeat bg-contain bg-center h-35/100 w-35/100"
   ></div>

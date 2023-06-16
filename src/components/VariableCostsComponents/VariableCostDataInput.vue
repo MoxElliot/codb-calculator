@@ -111,5 +111,5 @@ const {
       <form-button label="Add" type="submit" class="font-bold" />
     </div>
   </Form>
-  <span class="error-text" v-show="!variableFormValid">{{ blankSubmitError }}</span>
+  <span class="error-text" v-if="!variableFormValid">{{ blankSubmitError }}</span>
 </template>
