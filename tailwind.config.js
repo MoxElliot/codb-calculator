@@ -10,7 +10,8 @@ module.exports = {
     extend: {
       //extends the default themes
       gridTemplateRows: {
-        mainLayout: 'minmax(100px 200px) minmax(200px, max-content) minmax(100px 200px)'
+        mainLayout: 'minmax(100px, 200px) minmax(200px, max-content) minmax(100px, 200px)',
+        smallLayout: '100px minmax(200px, max-content) 75px'
       },
       width: {
         75: '75px',
@@ -92,7 +93,8 @@ module.exports = {
       flexBasis: {
         '1/22': '4.54%',
         '3/22': '13.63%',
-        '6/22': '27.27%'
+        '6/22': '27.27%',
+        '7/8' : '87.5%',
       }
     },
     colors: {
@@ -163,7 +165,7 @@ module.exports = {
         // Home Page "Hey There"
         '40px',
         {
-          lineHeight: '50px',
+          lineHeight: '60px',
           letterSpacing: '-0.02em',
           fontWeight: '400'
         }
