@@ -10,7 +10,8 @@ module.exports = {
     extend: {
       //extends the default themes
       gridTemplateRows: {
-        mainlayout: '1fr 3fr 1fr'
+        mainLayout: 'minmax(100px, 200px) minmax(200px, max-content) minmax(100px, 200px)',
+        smallLayout: '100px minmax(200px, max-content) 75px'
       },
       width: {
         75: '75px',
@@ -22,13 +23,13 @@ module.exports = {
         '25/100': '25%',
         '3/10': '30%',
         '35/100': '35%',
-        '4/10':'40%',
+        '4/10': '40%',
         '5/10': '50%',
         '6/10': '60%',
         '7/10': '70%',
         '8/10': '80%',
         '9/10': '90%',
-        '100':'100%'
+        100: '100%'
       },
       height: {
         24: '24px',
@@ -39,13 +40,13 @@ module.exports = {
         '25/100': '25%',
         '3/10': '30%',
         '35/100': '35%',
-        '4/10':'40%',
+        '4/10': '40%',
         '5/10': '50%',
         '6/10': '60%',
         '7/10': '70%',
         '8/10': '80%',
         '9/10': '90%',
-        '100':"100%"
+        100: '100%'
       },
       padding: {
         btn: '12px,44px,12px,44px'
@@ -62,23 +63,23 @@ module.exports = {
         homeBackgroundTR: "url('./src/images/home_background_tr.svg')",
         homeBackgroundBL: "url('./src/images/home_background_bl.svg')",
         homeBackgroundBR: "url('./src/images/home_background_br.svg')",
-        homeWavingHand:"url('./src/images/waving_hand.svg')",
-        homeInfoQuestionMark:"url('./src/images/info-question-mark.svg')",
-        costDelete:"url('./src/images/delete-cost.svg')",
-        fixedCostCalendar:"url('./src/images/fixed-cost-calandar.svg')",
-        nextButtonArrow:"url('./src/images/btn-arrow-right.svg')",
-        backButtonArrow:"url('./src/images/btn-arrow-left.svg')",
+        homeWavingHand: "url('./src/images/waving_hand.svg')",
+        homeInfoQuestionMark: "url('./src/images/info-question-mark.svg')",
+        costDelete: "url('./src/images/delete-cost.svg')",
+        fixedCostCalendar: "url('./src/images/fixed-cost-calandar.svg')",
+        nextButtonArrow: "url('./src/images/btn-arrow-right.svg')",
+        backButtonArrow: "url('./src/images/btn-arrow-left.svg')"
       },
       backgroundPosition: {
         infoQuesionMark: '4% 40%',
-        buttonArrow: '85%, 50%',
+        buttonArrow: '85%, 50%'
       },
       backgroundSize: {
-        '4%':'4%',
+        '4%': '4%',
         '7%': '7%',
-        '15%':'15%',
-        '20%':'20%',
-        '25%':'25%',
+        '15%': '15%',
+        '20%': '20%',
+        '25%': '25%'
       },
       spacing: {
         '2%': '2%',
@@ -86,14 +87,14 @@ module.exports = {
         '7%': '7%', //home background image right & left
         '9%': '9%', //home background image bottom left
         '14%': '14%',
-        '18%':'18%',
-        '21%': '21%',
+        '18%': '18%',
+        '21%': '21%'
       },
       flexBasis: {
         '1/22': '4.54%',
         '3/22': '13.63%',
         '6/22': '27.27%',
-
+        '7/8' : '87.5%',
       }
     },
     colors: {
@@ -164,7 +165,7 @@ module.exports = {
         // Home Page "Hey There"
         '40px',
         {
-          lineHeight: '50px',
+          lineHeight: '60px',
           letterSpacing: '-0.02em',
           fontWeight: '400'
         }
@@ -237,4 +238,3 @@ module.exports = {
   },
   plugins: []
 }
-
