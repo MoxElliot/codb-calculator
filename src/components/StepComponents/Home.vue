@@ -40,7 +40,7 @@ onMounted(() => {
         </p>
       </div>
       <div
-        class="flex info-blue font-sans text-blue-300 sm:text-body text-body_xs m-6 sm:mt-2 md:py-6 md:pr-24 md:pl-16 sm:py-3 pr-12 pl-12"
+        class="flex info-blue font-sans text-blue-300 text-body_xs sm:text-body my-2 md:m-6  md:py-6 md:pr-24 md:pl-16 p-3"
       >
         <img
           src="../../images/info-question-mark.svg"
