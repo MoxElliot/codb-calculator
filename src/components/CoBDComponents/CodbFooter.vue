@@ -6,6 +6,7 @@ import FormButton from '../FormComponents/FormButton.vue'
 const stepStore = useStepStore()
 const { stepCurrent } = storeToRefs(stepStore)
 const { backStepAction, nextStepAction } = stepStore
+console.log('stepCurrent', stepCurrent.value)
 </script>
 <template>
   <div
@@ -18,7 +19,7 @@ const { backStepAction, nextStepAction } = stepStore
         @click="backStepAction()"
         btnClass="btn-back mb-20 sm:mb-0 flex justify-center items-center"
         btnImage="/src/images/btn-arrow-left.svg"
-        v-if="stepCurrent !== '/' || '/company-name-step'"
+        v-if="stepCurrent !== '/' && stepCurrent !== '/company-name-step'"
       />
       <form-button
         :label="stepCurrent === '/' ? 'Let\'s Go!' : 'Next'"
