@@ -11,8 +11,8 @@ let current = ref(router.currentRoute.value.path)
 </script>
 
 <template>
-  <div class="flex flex-col basis-full items-center h-1/2">
-    <div class="mt-8 mb-10">
+  <div class="flex flex-col basis-full items-center">
+    <div class="my-2 md:my-8">
       <img src="../../images/cloudspot-logo.svg" />
     </div>
     <div
