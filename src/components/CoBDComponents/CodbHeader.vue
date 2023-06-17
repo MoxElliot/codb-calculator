@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useStepStore } from '../../stores/stepStore'
-import { storeToRefs } from 'pinia'
 import steps from '../../assets/stepsObject'
 import router from '../../router/index'
 import { ref } from 'vue'
@@ -19,7 +17,7 @@ let current = ref(router.currentRoute.value.path)
     </div>
     <div
       class="grid grid-flow-col gap-2 basis-1/4 w-1/2 border border-grey-200 rounded-xl items-center justify-stretch"
-      v-show="current !== '/'"
+      v-if="current !== '/'"
     >
       <div
         class="flex justify-center items-center h-4/6 border-r border-grey-200"

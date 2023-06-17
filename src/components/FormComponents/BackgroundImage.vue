@@ -32,13 +32,17 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  
- 
+  componentClass: {
+    type:String,
+    default: ''
+  }
 })
 </script>
 <template>
-    <img :src='tlImage' :class='tlClass' />
-    <img :src='trImage' :class='trClass' />
-    <img :src='blImage' :class='blClass' />
-    <img :src='brImage' :class='brClass' />
+  <div :class="componentClass">
+    <img :src="tlImage" :class="tlClass" />
+    <img :src="trImage" :class="trClass" />
+    <img :src="blImage" :class="blClass" />
+    <img :src="brImage" :class="brClass" />
+  </div>
 </template>

@@ -21,8 +21,9 @@ onMounted(() => {
     :tr-image="HomeBackgroundTR" tr-class="absolute top-4% right-0 h-40/100"
     :bl-image="HomeBackgroundBL" bl-class="absolute bottom-9% left-7% h-40/100"
     :br-image="HomeBackgroundBR" br-class="absolute bottom-4% right-7% h-40/100"
+    component-class="invisible"
   />
-  <!-- <HomeBackground class="absolute top-0 left-0 bottom-0 right-0 bg-no-repeat bg-cover bg-center h-100 w-100"/> -->
+  <!-- <HomeBackground class="invisible absolute top-0 left-0 bottom-0 right-0 bg-no-repeat bg-cover bg-center h-100 w-100"/> -->
   <div class="flex flex-row justify-center basis-full">
     <div
       class="flex flex-col items-center justify-around lg:basis-2/3 sm:basis-3/4 basis-full px-8 overflow-auto"

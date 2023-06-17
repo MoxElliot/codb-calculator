@@ -1,9 +1,7 @@
 import { defineStore } from 'pinia'
 import { useReportStore } from '@/stores/reportStore'
 import type StepStoreState from '../types/StepStoreState'
-import steps from '@/assets/stepsObject'
 import router from '../router/index'
-import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
 export const useStepStore = defineStore('stepStore', {
@@ -29,14 +27,5 @@ export const useStepStore = defineStore('stepStore', {
         router.push(nextStep)
       }
     }
-    // nextButtonLabelAction() {
-    //   console.log("in nextbuttonlabelAction")
-    //   if (this.stepCurrent === '/') {
-    //     return this.nextButtonLabel = "Let's Go!"
-    //   } else {
-    //     return this.nextButtonLabel = 'Next'
-    //   }
-
-    //}
   }
 })

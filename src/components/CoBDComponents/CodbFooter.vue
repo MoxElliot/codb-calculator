@@ -10,7 +10,7 @@ const { backStepAction, nextStepAction } = stepStore
 <template>
   <div
     class="flex h-full justify-center items-end sm:items-center"
-    v-show="stepCurrent !== '/final-report-step'"
+    v-if="stepCurrent !== '/final-report-step'"
   >
     <div class="flex items-center">
       <form-button
@@ -18,7 +18,7 @@ const { backStepAction, nextStepAction } = stepStore
         @click="backStepAction()"
         btnClass="btn-back mb-20 sm:mb-0 flex justify-center items-center"
         btnImage="/src/images/btn-arrow-left.svg"
-        v-show="stepCurrent !== '/' || '/company-name-step'"
+        v-if="stepCurrent !== '/' || '/company-name-step'"
       />
       <form-button
         :label="stepCurrent === '/' ? 'Let\'s Go!' : 'Next'"
