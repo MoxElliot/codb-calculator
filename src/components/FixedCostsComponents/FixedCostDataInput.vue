@@ -118,9 +118,9 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
         />
       </div>
       <div class="btn-add flex flex-col justify-center" v-if="isOpen === false">
-        <form-button label="Add Fixed Cost" type="submit" class="font-bold" />
+        <form-button label="+ Add Fixed Cost" type="submit" class="font-bold" />
       </div>
-      <div class="flex flex-row p-4" v-else>
+      <div class="flex flex-row p-1 md:p-4 h-full" v-else>
         <form-button
           label="cancel"
           type="button"

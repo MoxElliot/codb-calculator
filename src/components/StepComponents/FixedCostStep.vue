@@ -24,14 +24,14 @@ onMounted(() => {
 <template>
   <form-modal v-if="isOpen" class="flex flex-col">
     <template #header>
-      <div class="flex flex-row justify-center items-center text-heading text-grey-300 font-serif">
+      <div
+        class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif"
+      >
         <p>Add Fixed Cost</p>
       </div>
     </template>
     <template #body>
-      <div class="">
-        <fixed-cost-data-input />
-      </div>
+      <fixed-cost-data-input />
     </template>
   </form-modal>
 
@@ -42,16 +42,20 @@ onMounted(() => {
       <p class="">
         Fixed Costs for <span>{{ companyName }}</span>
       </p>
-      <img src="../../images/fixed-cost-calandar.svg" alt="Calandar" class="px-3" />
+      <img
+        src="../../images/fixed-cost-calandar.svg"
+        alt="Calandar"
+        class="hidden sm:inline sm:px-3"
+      />
     </div>
-    <div class="text-body text-grey-300 basis-1/6 w-6/10">
+    <div class="text-body text-grey-300 basis-1/6 w-8/10 md:w-6/10">
       <p>
         A Fixed Cost is any Yearly or Monthly fee that you expect to pay in a regular year! Add the
         name of the cost, the category, the amount, and whether or not the cost is Monthly or
         Yearly.
       </p>
     </div>
-    <div class="basis-full flex flex-col items-start justify-center w-7/10">
+    <div class="basis-full flex flex-col items-start justify-center w-8/10 sm:w-7/10">
       <div class="hidden md:flex">
         <fixed-cost-data-input class="flex flex-row" />
       </div>

@@ -1,5 +1,5 @@
 interface FixedCostObj {
-  id: number
+  id: number 
   name: string
   category: string
   amount: number | null 

@@ -2,6 +2,7 @@
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import { onUpdated } from 'vue'
+import ReportOutput from '../FormComponents/ReportOutput.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 
 const reportStore = useReportStore()
@@ -35,14 +36,14 @@ const deleteCost = (fixedCost: {
 </script>
 
 <template>
-  <div class="w-full mt-8">
-    <div class="flex flex-row h-16 items-center bg-grey-200 text-grey-100 mb-4">
+  <div class="w-full mt-8 overflow-scroll">
+    <div class="flex flex-row items-center h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in fixedCostHeadingArray">
         <p>{{ heading[0] }}</p>
       </div>
     </div>
-    <div class="h-64 overflow-scroll">
-      <div class="h-16" v-for="fixedCost in fixedCosts" :id="fixedCost.id" :key="fixedCost.id">
+    <div class="h-64">
+      <div class="h-16" v-for="fixedCost in fixedCosts" :key="fixedCost.id">
         <div class="flex flex-row">
           <div class="basis-6/22 pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.name }}</p>
@@ -60,7 +61,7 @@ const deleteCost = (fixedCost: {
             <p class="border-b border-grey-200">${{ fixedCost.individualTotal }}</p>
           </div>
           <button
-            class="basis-1/22 bg-costDelete bg-contain bg-no-repeat"
+            class="basis-1/22 bg-costDelete bg-no-repeat"
             @click="deleteCost(fixedCost)"
           ></button>
         </div>

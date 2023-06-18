@@ -20,17 +20,11 @@
   .error-text {
     @apply text-red-100 font-semibold;
   }
-  .modal-container {
-    @apply fixed top-0 bottom-0 left-0 right-0 bg-transparent-100 flex justify-center items-center;
-  }
-  .modal-body {
-    @apply min-h-[450px]
-  }
   .modal-btn-add {
-    @apply bg-aqua-200 rounded-main text-primary-white font-sans uppercase text-btn p-btn m-4 gap-2.5 w-32 h-48
+    @apply bg-aqua-200 rounded-main text-primary-white font-sans uppercase text-btn p-btn m-2 md:m-4 gap-2.5 w-32 h-48
   }
   .modal-btn-cancel {
-    @apply border rounded-main text-grey-300 font-sans uppercase text-btn p-btn m-4 gap-2.5 w-32 h-48
+    @apply border rounded-main text-grey-300 font-sans uppercase text-btn p-btn m-2 md:m-4 gap-2.5 w-32 h-48
   }
 }
 
