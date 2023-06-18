@@ -35,7 +35,8 @@ const schema = Yup.object({
 })
 
 const { resetForm, meta } = useForm({
-  validationSchema: schema
+  validationSchema: schema,
+  validateOnMount: true
 })
 
 const { value: fixedCostName } = useField('name', undefined, {

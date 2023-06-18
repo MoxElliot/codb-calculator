@@ -37,26 +37,6 @@ const { resetForm, meta } = useForm({
   validateOnMount: true
 })
 
-// const handleAddCost = (
-//   variableCostName: string,
-//   variableCostCategory: string,
-//   variableCostAmount: null | number | undefined
-// ) => {
-//   if (nameMeta.valid && categoryMeta.valid && amountMeta.valid) {
-//     variableFormValid.value = true
-//     reportStore.addVariableCostAction({
-//       id: reportStore.variableCosts.length + 1,
-//       name: variableCostName,
-//       category: variableCostCategory,
-//       amount: variableCostAmount
-//     })
-//     resetForm()
-//   } else {
-//     variableFormValid.value = false
-//     setBlankSubmitErrorAction('Enter a value in each field')
-//   }
-// }
-
 const { value: variableCostName } = useField('name', undefined, {
   initialValue: ''
 })
@@ -70,7 +50,8 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
 
 <template>
   <Form
-    class="variable-cost-input border border-black flex flex-row"
+    class="flex flex-col mt-4 min-h-[145px]"
+    :valiation-schema="schema"
     @submit="
       handleAddCost(
         variableCostName,

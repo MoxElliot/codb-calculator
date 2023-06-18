@@ -2,7 +2,6 @@
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import { onUpdated } from 'vue'
-import ReportOutput from '../FormComponents/ReportOutput.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 
 const reportStore = useReportStore()

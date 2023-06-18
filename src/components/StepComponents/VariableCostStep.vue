@@ -28,7 +28,7 @@ onMounted(() => {
 <form-modal v-if="isOpen" class="flex flex-col">
     <template #header>
       <div
-        class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif"
+        class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-seri"
       >
         <p>Add Fixed Cost</p>
       </div>
