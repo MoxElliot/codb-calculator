@@ -8,12 +8,23 @@ import DataSelect from '../FormComponents/DataSelect.vue'
 import FormButton from '../FormComponents/FormButton.vue'
 import { useField, useForm, Form } from 'vee-validate'
 import { storeToRefs } from 'pinia'
+import { useModalStore } from '../../stores/modalStore'
+
+const modalStore = useModalStore()
+const { isOpen } = storeToRefs(modalStore)
+const { closeModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError } = storeToRefs(reportStore)
-const { setBlankSubmitErrorAction } = reportStore
+const { blankSubmitError, variableFormValid } = storeToRefs(reportStore)
+const { handleAddCost, addVariableCostAction, setVariableFormValidAction } = reportStore
 
-let variableFormValid = ref<boolean>(true)
+// let variableFormValid = ref<boolean>(true)
+
+const props = defineProps({
+  class: {
+    type: String
+  }
+})
 
 const schema = Yup.object({
   name: Yup.string().required(' '),
@@ -21,50 +32,38 @@ const schema = Yup.object({
   amount: Yup.number().typeError('Please Enter a Number').required(' ')
 })
 
-const { resetForm } = useForm({
+const { resetForm, meta } = useForm({
   validationSchema: schema,
   validateOnMount: true
 })
 
-const handleAddCost = (
-  variableCostName: string,
-  variableCostCategory: string,
-  variableCostAmount: null | number | undefined
-) => {
-  if (nameMeta.valid && categoryMeta.valid && amountMeta.valid) {
-    variableFormValid.value = true
-    reportStore.addVariableCostAction({
-      id: reportStore.variableCosts.length + 1,
-      name: variableCostName,
-      category: variableCostCategory,
-      amount: variableCostAmount
-    })
-    resetForm()
-  } else {
-    variableFormValid.value = false
-    setBlankSubmitErrorAction('Enter a value in each field')
-  }
-}
+// const handleAddCost = (
+//   variableCostName: string,
+//   variableCostCategory: string,
+//   variableCostAmount: null | number | undefined
+// ) => {
+//   if (nameMeta.valid && categoryMeta.valid && amountMeta.valid) {
+//     variableFormValid.value = true
+//     reportStore.addVariableCostAction({
+//       id: reportStore.variableCosts.length + 1,
+//       name: variableCostName,
+//       category: variableCostCategory,
+//       amount: variableCostAmount
+//     })
+//     resetForm()
+//   } else {
+//     variableFormValid.value = false
+//     setBlankSubmitErrorAction('Enter a value in each field')
+//   }
+// }
 
-const {
-  value: variableCostName,
-  errorMessage: nameError,
-  meta: nameMeta
-} = useField('name', undefined, {
+const { value: variableCostName } = useField('name', undefined, {
   initialValue: ''
 })
-const {
-  value: variableCostCategory,
-  errorMessage: categoryError,
-  meta: categoryMeta
-} = useField('category', undefined, {
+const { value: variableCostCategory } = useField('category', undefined, {
   initialValue: ''
 })
-const {
-  value: variableCostAmount,
-  errorMessage: amountError,
-  meta: amountMeta
-} = useField('amount', undefined, {
+const { value: variableCostAmount, errorMessage: amountError } = useField('amount', undefined, {
   initialValue: null
 })
 </script>
@@ -72,44 +71,58 @@ const {
 <template>
   <Form
     class="variable-cost-input border border-black flex flex-row"
-    @submit="handleAddCost(variableCostName, variableCostCategory, variableCostAmount)"
+    @submit="
+      handleAddCost(
+        variableCostName,
+        variableCostCategory,
+        variableCostAmount,
+        meta.valid,
+        setVariableFormValidAction,
+        resetForm,
+        addVariableCostAction
+      )
+    "
   >
-    <fieldset class="variable-cost-fieldset flex flex-row flex-1">
+    <fieldset :class="class">
       <div>
         <data-input
           v-model="variableCostName"
           label="Expense Name"
           type="input"
-          id="expense-name"
-          class="variable-cost-dataset basis-1/3 flex-1"
+          name="name"
+          class="basis-1/3 flex-1"
+          @input="setVariableFormValidAction(true)"
         />
-        <span class="error-text">{{ nameError }}</span>
       </div>
       <div>
         <data-select
           v-model="variableCostCategory"
           label="Category"
+          name="category"
           :optionArray="costCategoryOptions"
           class="basis-1/3 flex-1"
+          @input="setVariableFormValidAction(true)"
         />
-        <span class="error-text">{{ categoryError }}</span>
       </div>
       <div>
         <data-input
           v-model="variableCostAmount"
           label="Expense Amount"
           type="number"
-          id="expense-amount"
-          class="variable-cost-dataset basis-1/3 flex-1"
-          min="0"
-          step="0.01"
+          name="amount"
+          class="basis-1/3 flex-1"
+          @input="setVariableFormValidAction(true)"
         />
-        <span class="error-text">{{ amountError }}</span>
+      </div>
+      <div class="btn-add flex flex-col justify-center" v-if="isOpen === false">
+        <form-button label="+ Add Variable Cost" type="submit" class="font-bold" />
+      </div>
+      <div class="flex flex-row p-1 md:p-4 h-full" v-else>
+        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
+        <form-button label="Add" type="submit" class="modal-btn-add" />
       </div>
     </fieldset>
-    <div class="btn-add flex flex-col justify-center">
-      <form-button label="Add" type="submit" class="font-bold" />
-    </div>
+    <span class="error-text" v-if="!variableFormValid">{{ blankSubmitError }}</span>
+    <span class="error-text">{{ amountError }} </span>
   </Form>
-  <span class="error-text" v-if="!variableFormValid">{{ blankSubmitError }}</span>
 </template>

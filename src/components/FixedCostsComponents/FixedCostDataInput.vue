@@ -46,10 +46,7 @@ const { value: fixedCostCategory } = useField('category', undefined, {
   initialValue: ''
 })
 
-const {
-  value: fixedCostAmount,
-  errorMessage: amountError,
-} = useField('amount', undefined, {
+const { value: fixedCostAmount, errorMessage: amountError } = useField('amount', undefined, {
   initialValue: null
 })
 
@@ -121,17 +118,8 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
         <form-button label="+ Add Fixed Cost" type="submit" class="font-bold" />
       </div>
       <div class="flex flex-row p-1 md:p-4 h-full" v-else>
-        <form-button
-          label="cancel"
-          type="button"
-          class="modal-btn-cancel"
-          @click="closeModal"
-        />
-        <form-button
-          label="Add"
-          type="submit"
-          class="modal-btn-add"
-        />
+        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
+        <form-button label="Add" type="submit" class="modal-btn-add" />
       </div>
     </fieldset>
     <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
