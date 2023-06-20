@@ -8,6 +8,7 @@ import { computed, onMounted, type WritableComputedRef } from 'vue'
 
 const reportStore = useReportStore()
 const {
+  companyName,
   bookingsPerMonth,
   priceAveragePerBooking,
   hoursAveragePerBooking,
@@ -70,7 +71,7 @@ const schema = Yup.object({
 })
 
 const bookingIncomeForm = useForm({
-  validationSchema: schema,
+  validationSchema: schema
 })
 
 const { value: bookings, errorMessage: bookingsError, meta: bookingMeta } = useField('bookings')
@@ -79,42 +80,67 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
 </script>
 
 <template>
-  <div class="basis-full flex flex-col justify-center items-center">
-    <h4>How many bookings do you take on per month?</h4>
-    <div class="">
-      <data-input
-        v-model="bookingsPerMonthInput"
-        label="In a month, I typicaly book"
-        labelAfter="shoots!"
-        parentClass="flex flex-row"
-        type="number"
-        id="bookings-per-month"
+  <div class="flex flex-col basis-full text-center justify-center items-center">
+    <div
+      class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 md:w-6/10 md:mb-8"
+    >
+      <p class="">
+        Booking Income for <span>{{ companyName }}</span>
+      </p>
+      <img
+        src="../../images/fixed-cost-calandar.svg"
+        alt="Calandar"
+        class="hidden sm:inline sm:px-3"
       />
     </div>
-    <div>
-      <data-input
-        v-model="priceAveragePerBookingInput"
-        label="How Much do you charge per booking on average?"
-        parentClass="flex flex-row"
-        type="number"
-        id="price-average-per-booking"
-      />
+    <div class="text-grey-300 text-body2_xs md:text-body2 basis-1/6 w-8/10 md:w-6/10">
+      <p>Fantastic work with those costs!</p>
+      <p>Now, let's talk about how much you're making per booking.</p>
     </div>
-    <div>
-      <data-input
-        v-model="hoursAveragePerBookingInput"
-        label="How many hours do you work per booking? (Including editing time, meetings, etc.)"
-        labelAfter="Hours"
-        parentClass="flex flex-row"
-        type="number"
-        id="hour-average-per-booking"
-      />
+    <div class="basis-full flex flex-col items-center justify-center w-6/10 sm:w-5/10">
+      <div class="font-sans text-grey-300 text-body mt-2 md:mt-6 px-6">
+        <div class="mt-2 md:mt-6">
+          <p>How many bookings do you take on per month?</p>
+          <data-input
+            v-model="bookingsPerMonthInput"
+            label="In a month, I typicaly book"
+            labelAfter="shoots!"
+            class="pl-3"
+            parentClass="flex flex-row"
+            type="number"
+            id="bookings-per-month"
+          />
+        </div>
+        <div class="mt-2 md:mt-6">
+          <data-input
+            v-model="priceAveragePerBookingInput"
+            label="How Much do you charge per booking on average?"
+            class="pl-3"
+            parentClass="flex flex-row"
+            type="number"
+            id="price-average-per-booking"
+          />
+        </div>
+        <div class="mt-2 md:mt-6">
+          <data-input
+            v-model="hoursAveragePerBookingInput"
+            label="How many hours do you work per booking? (Including editing time, meetings, etc.)"
+            labelAfter="hours"
+            class="pl-3"
+            parentClass="flex flex-row"
+            type="number"
+            id="hour-average-per-booking"
+          />
+        </div>
+        <span class="error-text">{{ bookingsError }}</span>
+        <span class="error-text">{{ priceError }}</span>
+        <span class="error-text">{{ hoursError }}</span>
+        <span
+          class="error-text"
+          v-show="!bookingMeta.dirty || !priceMeta.dirty || !hoursMeta.dirty"
+          >{{ blankSubmitError }}</span
+        >
+      </div>
     </div>
-    <span class="error-text">{{ bookingsError }}</span>
-    <span class="error-text">{{ priceError }}</span>
-    <span class="error-text">{{ hoursError }}</span>
-    <span class="error-text" v-show="!bookingMeta.dirty || !priceMeta.dirty || !hoursMeta.dirty">{{
-      blankSubmitError
-    }}</span>
   </div>
 </template>

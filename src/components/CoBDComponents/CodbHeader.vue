@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useStepStore } from '../../stores/stepStore'
-import { storeToRefs } from 'pinia'
 import steps from '../../assets/stepsObject'
 import router from '../../router/index'
 import { ref } from 'vue'
@@ -13,13 +11,13 @@ let current = ref(router.currentRoute.value.path)
 </script>
 
 <template>
-  <div class="flex flex-col basis-full items-center h-1/2">
-    <div class="mt-8 mb-10">
+  <div class="flex flex-col basis-full items-center">
+    <div class="my-2 md:my-8">
       <img src="../../images/cloudspot-logo.svg" />
     </div>
     <div
       class="grid grid-flow-col gap-2 basis-1/4 w-1/2 border border-grey-200 rounded-xl items-center justify-stretch"
-      v-show="current !== '/'"
+      v-if="current !== '/'"
     >
       <div
         class="flex justify-center items-center h-4/6 border-r border-grey-200"

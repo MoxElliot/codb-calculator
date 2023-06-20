@@ -7,7 +7,7 @@ import * as Yup from 'yup'
 import { computed, onMounted, type WritableComputedRef } from 'vue'
 
 const reportStore = useReportStore()
-const { payPerMonth, savingsPerMonth, blankSubmitError } = storeToRefs(reportStore)
+const { companyName, payPerMonth, savingsPerMonth, blankSubmitError } = storeToRefs(reportStore)
 const { addPayPerMonthAction, addSavingsPerMonthAction, updateInputValidAction } = reportStore
 
 onMounted(() => {
@@ -50,29 +50,51 @@ const { value: savings, errorMessage: savingsError, meta: savingsMeta } = useFie
 </script>
 
 <template>
-  <div class="basis-full flex flex-col justify-center items-center">
-    <div>
-      <data-input
-        v-model="payPerMonthInput"
-        label="On average, how much will you be paying yourself per month?"
-        parentClass="flex flex-row"
-        type="number"
-        id="pay-per-month"
+  <div class="flex flex-col basis-full justify-center items-center text-center">
+    <div
+      class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 md:w-6/10 md:mb-8"
+    >
+      <p class="">
+        Owner's draw for <span>{{ companyName }}</span>
+      </p>
+      <img
+        src="../../images/fixed-cost-calandar.svg"
+        alt="Calandar"
+        class="hidden sm:inline sm:px-3"
       />
     </div>
-    <div>
-      <data-input
-        v-model="savingsPerMonthInput"
-        label="On average, how much do you plan to save per month?"
-        parentClass="flex flex-row"
-        type="number"
-        id="savings-per-month"
-      />
+    <div class="text-grey-300 text-body2_xs md:text-body2 basis-1/6 w-8/10 md:w-6/10">
+      <p>Great job! Your CobD Calculation is Almost Finished!</p>
+      <p>Don't forget, you'll need to pay yourself and save some money after all that hard work!</p>
     </div>
-    <span class="error-text">{{ payError }}</span>
-    <span class="error-text">{{ savingsError }}</span>
-    <span class="error-text" v-if="!payMeta.dirty || !savingsMeta.dirty">{{
-      blankSubmitError
-    }}</span>
+    <div class="basis-full flex flex-col items-center justify-center w-6/10 sm:w-5/10">
+      <div class="font-sans text-grey-300 text-body mt-2 md:mt-6 px-6">
+        <div>
+          <data-input
+            v-model="payPerMonthInput"
+            label="On average, how much will you be paying yourself per month?"
+            parentClass="flex flex-row"
+            class="px-3"
+            type="number"
+            id="pay-per-month"
+          />
+        </div>
+        <div>
+          <data-input
+            v-model="savingsPerMonthInput"
+            label="On average, how much do you plan to save per month?"
+            parentClass="flex flex-row"
+            class="px-3"
+            type="number"
+            id="savings-per-month"
+          />
+        </div>
+        <span class="error-text">{{ payError }}</span>
+        <span class="error-text">{{ savingsError }}</span>
+        <span class="error-text" v-if="!payMeta.dirty || !savingsMeta.dirty">
+          {{ blankSubmitError }}
+        </span>
+      </div>
+    </div>
   </div>
 </template>

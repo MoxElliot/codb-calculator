@@ -35,7 +35,8 @@ const schema = Yup.object({
 })
 
 const { resetForm, meta } = useForm({
-  validationSchema: schema
+  validationSchema: schema,
+  validateOnMount: true
 })
 
 const { value: fixedCostName } = useField('name', undefined, {
@@ -46,10 +47,7 @@ const { value: fixedCostCategory } = useField('category', undefined, {
   initialValue: ''
 })
 
-const {
-  value: fixedCostAmount,
-  errorMessage: amountError,
-} = useField('amount', undefined, {
+const { value: fixedCostAmount, errorMessage: amountError } = useField('amount', undefined, {
   initialValue: null
 })
 
@@ -118,20 +116,11 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
         />
       </div>
       <div class="btn-add flex flex-col justify-center" v-if="isOpen === false">
-        <form-button label="Add Fixed Cost" type="submit" class="font-bold" />
+        <form-button label="+ Add Fixed Cost" type="submit" class="font-bold" />
       </div>
-      <div class="flex flex-row p-4" v-else>
-        <form-button
-          label="cancel"
-          type="button"
-          class="modal-btn-cancel"
-          @click="closeModal"
-        />
-        <form-button
-          label="Add"
-          type="submit"
-          class="modal-btn-add"
-        />
+      <div class="flex flex-row p-1 md:p-4 h-full" v-else>
+        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
+        <form-button label="Add" type="submit" class="modal-btn-add" />
       </div>
     </fieldset>
     <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
