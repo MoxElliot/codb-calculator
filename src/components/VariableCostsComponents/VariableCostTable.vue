@@ -8,10 +8,10 @@ const reportStore = useReportStore()
 const { variableCosts, totalVariableCosts } = storeToRefs(reportStore)
 const { totalVariableCostAction } = reportStore
 const variableCostHeadingArray = [
-  ['Name', 'basis-6/22 pr-6'],
-  ['Category', 'text-center basis-6/22 pr-6'],
-  ['Amount ($)', 'text-center basis-3/22 pr-6'],
-  ['', 'basis-1/22']
+  ['Name', 'basis-6/16 pr-6'],
+  ['Category', 'text-center basis-6/16 pr-6'],
+  ['Amount ($)', 'text-center basis-3/16 pr-6'],
+  ['', 'basis-1/16']
 ]
 
 onUpdated(() => {
@@ -40,16 +40,16 @@ const deleteCost = (variableCost: {
     <div class="h-64">
       <div class="h-16" v-for="variableCost in variableCosts" :key="variableCost.id">
         <div class="flex flex-row">
-          <div class="basis-6/22 pr-6">
+          <div class="basis-6/16 pr-6">
             <p class="border-b border-grey-200">{{ variableCost.name }}</p>
           </div>
-          <div class="basis-6/22 pr-6">
+          <div class="basis-6/16 pr-6">
             <p class="border-b border-grey-200">{{ variableCost.category }}</p>
           </div>
-          <div class="basis-6/22 pr-6">
+          <div class="basis-3/16 pr-6">
             <p class="border-b border-grey-200">$ {{ variableCost.amount }}</p>
           </div>
-          <button class="basis-1/22 bg-costDelete bg-no-repeat" @click="deleteCost(variableCost)"></button>
+          <button class="basis-1/16 bg-costDelete bg-no-repeat" @click="deleteCost(variableCost)"></button>
         </div>
       </div>
     </div>

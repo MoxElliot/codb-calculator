@@ -34,23 +34,30 @@ const schema = Yup.object({
 })
 
 const userEmailForm = useForm({
-  validationSchema: schema,
+  validationSchema: schema
 })
 
 const { value: email, errorMessage: emailError, meta } = useField('email')
 </script>
 <template>
-  <div class="basis-full flex flex-col justify-center items-center">
-    <h4>Please Enter Your Email Address to Access the Final Report</h4>
-    <data-input
-      v-model="userEmailInput"
-      name="email"
-      label="Email Address:"
-      parentClass="flex flex-row"
-      type="email"
-      id="user-email-address"
-    />
-    <span class="error-text">{{ emailError }}</span>
-    <span class="error-text" v-if="!meta.dirty">{{ blankSubmitError }}</span>
+  <div class="flex flex-col basis-full justify-center items-center text-center">
+    <div class="text-grey-300 text-body2_xs md:text-body2 basis-1/6 w-8/10 md:w-6/10">
+      <p>Please Enter Your Email Address to Access the Final Report</p>
+    </div>
+    <div class="basis-full flex flex-col items-center justify-center w-6/10 sm:w-5/10">
+      <div class="font-sans text-grey-300 text-body mt-2 md:mt-6 px-6">
+        <data-input
+          v-model="userEmailInput"
+          name="email"
+          label="Email Address:"
+          class="pl-3"
+          parentClass="flex flex-row"
+          type="email"
+          id="user-email-address"
+        />
+        <span class="error-text">{{ emailError }}</span>
+        <span class="error-text" v-if="!meta.dirty">{{ blankSubmitError }}</span>
+      </div>
+    </div>
   </div>
 </template>

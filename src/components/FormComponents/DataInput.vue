@@ -19,7 +19,7 @@ const props = defineProps({
   },
   class: {
     type: String,
-    default: 'input border border-black m-1'
+    default: 'input m-1'
   },
   parentClass: {
     type: String,

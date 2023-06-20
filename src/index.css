@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number'] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield !important;
+  }
 }
 @layer components {
   .btn-next {
@@ -21,10 +28,10 @@
     @apply text-red-100 font-semibold;
   }
   .modal-btn-add {
-    @apply bg-aqua-200 rounded-main text-primary-white font-sans uppercase text-btn p-btn m-2 md:m-4 gap-2.5 w-32 h-48
+    @apply bg-aqua-200 rounded-main text-primary-white font-sans uppercase text-btn p-btn m-2 md:m-4 gap-2.5 w-32 h-48;
   }
   .modal-btn-cancel {
-    @apply border rounded-main text-grey-300 font-sans uppercase text-btn p-btn m-2 md:m-4 gap-2.5 w-32 h-48
+    @apply border rounded-main text-grey-300 font-sans uppercase text-btn p-btn m-2 md:m-4 gap-2.5 w-32 h-48;
   }
 }
 
