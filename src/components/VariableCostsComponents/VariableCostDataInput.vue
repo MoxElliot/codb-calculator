@@ -64,7 +64,7 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
       )
     "
   >
-    <fieldset :class="class">
+    <fieldset class="flex flex-row">
       <div>
         <data-input
           v-model="variableCostName"
@@ -95,14 +95,18 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
           @input="setVariableFormValidAction(true)"
         />
       </div>
-      <div class="btn-add flex flex-col justify-center" v-if="isOpen === false">
-        <form-button label="+ Add Variable Cost" type="submit" class="font-bold" />
-      </div>
-      <div class="flex flex-row p-1 md:p-4 h-full" v-else>
-        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
-        <form-button label="Add" type="submit" class="modal-btn-add" />
-      </div>
     </fieldset>
+    <form-button
+      label="+ Add Variable Cost"
+      type="submit"
+      class="btn-add font-bold"
+      v-if="isOpen === false"
+    />
+    <div class="flex flex-row p-1 md:p-4 h-full" v-else>
+      <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
+      <form-button label="Add" type="submit" class="modal-btn-add" />
+    </div>
+
     <span class="error-text" v-if="!variableFormValid">{{ blankSubmitError }}</span>
     <span class="error-text">{{ amountError }} </span>
   </Form>

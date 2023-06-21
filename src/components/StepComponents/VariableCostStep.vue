@@ -54,19 +54,17 @@ onMounted(() => {
         basis!Add the name of the cost, the category, the amount below.
       </p>
     </div>
-    <div class="basis-full flex flex-col items-center justify-center w-8/10">
+    <div class="flex flex-col items-center w-8/10">
       <div class="hidden md:flex">
-        <variable-cost-data-input class="flex flex-row" />
+        <variable-cost-data-input />
       </div>
       <div class="md:hidden">
-        <div class="btn-add flex flex-col justify-center">
-          <form-button
-            label="+ Add Variable Cost"
-            type="submit"
-            class="font-bold"
-            @click="openModal()"
-          />
-        </div>
+        <form-button
+          label="+ Add Variable Cost"
+          type="submit"
+          class="btn-add font-bold"
+          @click="openModal()"
+        />
       </div>
       <variable-cost-table />
     </div>
