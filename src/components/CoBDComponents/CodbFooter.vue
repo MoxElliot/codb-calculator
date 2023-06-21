@@ -17,14 +17,14 @@ const { backStepAction, nextStepAction } = stepStore
       <form-button
         label="Back"
         @click="backStepAction()"
-        btnClass="btn-back md:mb-20 flex justify-center items-center"
+        btnClass="btn-back md:mb-2 flex justify-center items-center"
         btnImage="/src/images/btn-arrow-left.svg"
         v-if="stepCurrent !== '/' && stepCurrent !== '/company-name-step'"
       />
       <form-button
         :label="stepCurrent === '/' ? 'Let\'s Go!' : 'Next'"
         @click="nextStepAction()"
-        btnClass="btn-next md:mb-20 flex flex-row-reverse justify-center items-center"
+        btnClass="btn-next md:mb-2 flex flex-row-reverse justify-center items-center"
         btnImage="/src/images/btn-arrow-right.svg"
         type="submit"
       />
