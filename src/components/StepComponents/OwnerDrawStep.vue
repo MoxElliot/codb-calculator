@@ -67,28 +67,28 @@ const { value: savings, errorMessage: savingsError, meta: savingsMeta } = useFie
       <p>Great job! Your CobD Calculation is Almost Finished!</p>
       <p>Don't forget, you'll need to pay yourself and save some money after all that hard work!</p>
     </div>
-    <div class="basis-full flex flex-col items-center w-6/10 sm:w-5/10">
-      <div class="font-sans text-grey-300 text-body mt-2 md:mt-6 px-6">
-        <div>
-          <data-input
-            v-model="payPerMonthInput"
-            label="On average, how much will you be paying yourself per month?"
-            parentClass="flex flex-row"
-            class="px-3"
-            type="number"
-            id="pay-per-month"
-          />
-        </div>
-        <div>
-          <data-input
-            v-model="savingsPerMonthInput"
-            label="On average, how much do you plan to save per month?"
-            parentClass="flex flex-row"
-            class="px-3"
-            type="number"
-            id="savings-per-month"
-          />
-        </div>
+    <div
+      class="basis-full flex flex-col md:items-center mt-2 md:mt-8 w-screen md:w-full overflow-auto"
+    >
+      <div class="font-sans text-grey-300 text-body md:mt-6 px-6">
+        <data-input
+          v-model="payPerMonthInput"
+          label="On average, how much will you be paying yourself per month?"
+          parentClass="flex flex-col md:flex-row items-center md:mt-6"
+          class="pl-3 text-center border-b border-grey-200 w-fit"
+          type="number"
+          id="pay-per-month"
+        />
+
+        <data-input
+          v-model="savingsPerMonthInput"
+          label="On average, how much do you plan to save per month?"
+          parentClass="flex flex-col md:flex-row items-center md:mt-6"
+          class="pl-3 text-center border-b border-grey-200 w-fit"
+          type="number"
+          id="savings-per-month"
+        />
+
         <span class="error-text">{{ payError }}</span>
         <span class="error-text">{{ savingsError }}</span>
         <span class="error-text" v-if="!payMeta.dirty || !savingsMeta.dirty">
