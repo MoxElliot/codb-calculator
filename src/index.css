@@ -37,6 +37,10 @@
 }
 
 @layer utilities {
+  .scroll {
+    overflow-y: auto;
+    height: calc(100%)
+  }
   .border-full-blue {
     @apply border border-blue-300;
   }
@@ -58,4 +62,5 @@
   .border-active {
     @apply border-b border-aqua-200;
   }
+
 }

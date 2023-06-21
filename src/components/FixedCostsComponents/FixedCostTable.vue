@@ -13,7 +13,7 @@ const fixedCostHeadingArray = [
   ['Amount ($)', 'text-center basis-3/22 pr-6'],
   ['Frequency', 'text-center basis-3/22 pr-6'],
   ['Total', 'text-center basis-3/22 pr-6'],
-  ['', 'basis-1/22']
+  ['', 'basis-1/22  pr-6']
 ]
 
 onUpdated(() => {
@@ -35,14 +35,14 @@ const deleteCost = (fixedCost: {
 </script>
 
 <template>
-  <div class="w-full mt-8 overflow-scroll">
-    <div class="flex flex-row items-center h-16 bg-grey-200 text-grey-100 mb-4">
+  <div class="mt-2 md:mt-8 scroll">
+    <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in fixedCostHeadingArray">
         <p>{{ heading[0] }}</p>
       </div>
     </div>
-    <div class="h-64">
-      <div class="h-16" v-for="fixedCost in fixedCosts" :key="fixedCost.id">
+    <div class="h-32 md:h-64">
+      <div class="h-10 md:h-16" v-for="fixedCost in fixedCosts" :key="fixedCost.id">
         <div class="flex flex-row">
           <div class="basis-6/22 pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.name }}</p>
@@ -60,7 +60,7 @@ const deleteCost = (fixedCost: {
             <p class="border-b border-grey-200">${{ fixedCost.individualTotal }}</p>
           </div>
           <button
-            class="basis-1/22 bg-costDelete bg-no-repeat"
+            class="basis-1/22 bg-costDelete bg-no-repeat pr-6"
             @click="deleteCost(fixedCost)"
           ></button>
         </div>

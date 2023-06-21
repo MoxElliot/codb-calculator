@@ -118,10 +118,10 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
       <div class="btn-add flex flex-col justify-center" v-if="isOpen === false">
         <form-button label="+ Add Fixed Cost" type="submit" class="font-bold" />
       </div>
-      <div class="flex flex-row p-1 md:p-4 h-full" v-else>
+      <!-- <div class="flex flex-row p-1 md:p-4 h-full" v-else>
         <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
         <form-button label="Add" type="submit" class="modal-btn-add" />
-      </div>
+      </div> -->
     </fieldset>
     <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
     <span class="error-text">{{ amountError }} </span>
