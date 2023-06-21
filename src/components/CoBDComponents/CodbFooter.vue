@@ -6,11 +6,11 @@ import FormButton from '../FormComponents/FormButton.vue'
 const stepStore = useStepStore()
 const { stepCurrent } = storeToRefs(stepStore)
 const { backStepAction, nextStepAction } = stepStore
-console.log('stepCurrent', stepCurrent.value)
+
 </script>
 <template>
   <div
-    class="flex h-full justify-center items-center"
+    :class="stepCurrent === '/' ? 'flex h-full basis-2/3 justify-center items-center' : 'flex h-full basis-2/3 justify-end items-center'"
     v-if="stepCurrent !== '/final-report-step'"
   >
     <div class="flex items-center">

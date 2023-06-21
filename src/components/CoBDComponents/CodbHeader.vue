@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import steps from '../../assets/stepsObject'
-import router from '../../router/index'
-import { ref } from 'vue'
+import { useStepStore } from '../../stores/stepStore'
+import { storeToRefs } from 'pinia'
 
-let current = ref(router.currentRoute.value.path)
+const stepStore = useStepStore()
+const { stepCurrent } = storeToRefs(stepStore)
+
 
 //this is the active/complete color for the icons: #7CC1B5
 // v-if on line 27ish gives an error 'Property 'step' does not exist on type'
@@ -16,11 +18,11 @@ let current = ref(router.currentRoute.value.path)
       <img src="../../images/cloudspot-logo.svg" />
     </div>
     <div
-      class="grid grid-flow-col gap-2 basis-1/4 w-1/2 border border-grey-200 rounded-xl items-center justify-stretch"
-      v-if="current !== '/'"
+      class="grid grid-flow-col gap-2 basis-1/3 w-1/2 border border-grey-200 rounded-xl items-center justify-stretch"
+      v-if="stepCurrent !== '/'"
     >
       <div
-        class="flex justify-center items-center h-4/6 border-r border-grey-200"
+        class="flex justify-center items-center border-r border-grey-200 h-2/3"
         v-for="step in steps"
         v-show="step.icon !== 'none'"  
       > 
