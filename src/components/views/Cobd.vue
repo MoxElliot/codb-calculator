@@ -6,7 +6,7 @@ import CodbFooter from '../CoBDComponents/CodbFooter.vue'
 </script>
 
 <template>
-  <div class="grid grid-rows-smallLayout md:grid-rows-mainLayout md:gap-y-5 ">
+  <div class="grid grid-rows-smallLayout md:grid-rows-mediumLayout lg:grid-rows-mainLayout md:gap-y-5 ">
     <div class="flex">
       <codb-header class="" />
     </div>

@@ -93,7 +93,7 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
         class="hidden sm:inline sm:px-3"
       />
     </div>
-    <div class="text-grey-300 text-body2_xs md:text-body2 basis-1/6 w-8/10 md:w-6/10">
+    <div class="text-grey-300 text-body2_xs md:text-body2 basis-1/6 w-8/10">
       <p>Fantastic work with those costs!</p>
       <p>Now, let's talk about how much you're making per booking.</p>
     </div>

@@ -63,7 +63,7 @@ const { value: savings, errorMessage: savingsError, meta: savingsMeta } = useFie
         class="hidden sm:inline sm:px-3"
       />
     </div>
-    <div class="text-grey-300 text-body2_xs md:text-body2 basis-1/6 w-8/10 md:w-6/10">
+    <div class="text-grey-300 text-body2_xs md:text-body2 basis-1/6 w-8/10">
       <p>Great job! Your CobD Calculation is Almost Finished!</p>
       <p>Don't forget, you'll need to pay yourself and save some money after all that hard work!</p>
     </div>
