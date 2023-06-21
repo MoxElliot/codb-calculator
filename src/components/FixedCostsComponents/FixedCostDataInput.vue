@@ -52,7 +52,7 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
 
 <template>
   <Form
-    class="flex flex-col basis-full"
+    class="flex flex-col basis-full h-full"
     :valiation-schema="schema"
     @submit="
       handleAddCost(
@@ -69,7 +69,13 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
       )
     "
   >
-    <fieldset class="flex flex-row w-full h-10 md:h-16">
+    <fieldset
+      :class="
+        !isOpen
+          ? 'flex flex-row justify-center items-center w-full h-10 md:h-16'
+          : 'flex flex-col justify-center items-start h-full text-center'
+      "
+    >
       <data-input
         v-model="fixedCostName"
         placeholder="Name of the cost"
@@ -84,7 +90,7 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
         name="category"
         :optionArray="costCategoryOptions"
         parentClass="basis-6/24 pr-2 md:pr-6"
-        class="border-b border-grey-200"
+        class="text-center border-b border-grey-200"
         @input="setFixedFormValidAction(true)"
       />
       <data-input
@@ -92,7 +98,7 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
         placeholder="Amount"
         name="amount"
         parentClass="basis-3/24 pr-2 md:pr-6"
-        class="text-center border-b border-grey-200 max-w-[120px]"
+        class="text-center border-b border-grey-200"
         @input="setFixedFormValidAction(true)"
       />
       <data-select
@@ -103,24 +109,18 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
         class="border-b border-grey-200"
         @input="setFixedFormValidAction(true)"
       />
-      <div class="basis-3/24 pr-2 md:pr-6">
-        
+      <form-button
+        label="+ Add Fixed Cost"
+        type="submit"
+        class="btn-add font-bold"
+        v-if="isOpen === false"
+      />
+      <div class="flex flex-row p-1 md:p-4 h-full" v-else>
+        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
+        <form-button label="Add" type="submit" class="modal-btn-add" />
       </div>
-      <div class="basis-3/24 pr-2 md:pr-6"></div>
     </fieldset>
-
     <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
     <span class="error-text">{{ amountError }} </span>
-    <form-button
-      label="+ Add Fixed Cost"
-      type="submit"
-      class="btn-add font-bold"
-      v-if="isOpen === false"
-    />
-
-    <div class="flex flex-row p-1 md:p-4 h-full" v-else>
-      <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
-      <form-button label="Add" type="submit" class="modal-btn-add" />
-    </div>
   </Form>
 </template>
