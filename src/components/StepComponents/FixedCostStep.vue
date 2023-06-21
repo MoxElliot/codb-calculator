@@ -69,7 +69,7 @@ onMounted(() => {
           />
         </div>
       </div>
-      <fixed-cost-table/>
+      <fixed-cost-table />
     </div>
   </div>
 </template>

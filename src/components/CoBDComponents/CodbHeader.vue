@@ -14,7 +14,7 @@ const { stepCurrent } = storeToRefs(stepStore)
 
 <template>
   <div class="flex flex-col basis-full items-center">
-    <div class="my-2 md:my-8">
+    <div class="my-2">
       <img src="../../images/cloudspot-logo.svg" />
     </div>
     <div
