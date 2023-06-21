@@ -30,7 +30,7 @@ onMounted(() => {
   <!-- <HomeBackground class="invisible absolute top-0 left-0 bottom-0 right-0 bg-no-repeat bg-cover bg-center h-100 w-100"/> -->
 
   <div
-    class="flex flex-col items-center justify-between md:justify-center basis-full md:basis-3/4 lg:basis-2/3 px-8 overflow-auto"
+    class="flex flex-col items-center justify-between md:justify-center basis-full md:basis-3/4 lg:basis-2/3 px-8"
   >
     <div class="flex md:mb-10">
       <p class="font-serif text-grey-300 text-heading2_xs md:text-heading2">Hey there!</p>

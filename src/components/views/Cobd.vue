@@ -6,12 +6,12 @@ import CodbFooter from '../CoBDComponents/CodbFooter.vue'
 </script>
 
 <template>
-  <div class="grid grid-rows-mainLayout">
+  <div class="grid grid-rows-mainLayout md:gap-y-5 h-full">
     <div class="flex">
       <codb-header class="" />
     </div>
     <div class="flex" >
-      <codb-form class="flex basis-full justify-center " />
+      <codb-form class="flex basis-full justify-center" />
     </div>
     <div class="flex basis-full justify-center" >
       <codb-footer />

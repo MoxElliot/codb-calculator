@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       //extends the default themes
       gridTemplateRows: {
-        mainLayout: 'minmax(75px, 15%) minmax(200px, 1fr) minmax(75px, 20%)',
+        mainLayout: '75px minmax(200px, 1fr) 75px',
         // smallLayout: '75px minmax(200px, 1fr) 75px'
       },
       width: {
@@ -50,10 +50,6 @@ module.exports = {
       },
       padding: {
         btn: '12px,44px,12px,44px',
-        neg:'-60px'
-      },
-      margin: {
-        neg: '-60px'
       },
       screens: {
         xl: { max: '1440' }

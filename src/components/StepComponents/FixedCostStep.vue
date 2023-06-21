@@ -55,7 +55,7 @@ onMounted(() => {
         Yearly.
       </p>
     </div>
-    <div class="basis-full flex flex-col items-center justify-center w-8/10 sm:w-7/10">
+    <div class="basis-full flex flex-col items-center justify-center w-8/10 md:w-6/10">
       <div class="hidden md:flex">
         <fixed-cost-data-input class="flex flex-row" />
       </div>
