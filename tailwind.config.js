@@ -10,8 +10,9 @@ module.exports = {
     extend: {
       //extends the default themes
       gridTemplateRows: {
-        mainLayout: 'minmax(100px, 200px) minmax(200px, max-content) minmax(100px, 200px)',
-        smallLayout: '75px minmax(200px, max-content) 75px'
+        mainLayout: 'minmax(100px, 150px) minmax(100px, auto) minmax(100px, 150px)',
+        mediumLayout: '100px minmax(100px, auto) 100px',
+        smallLayout: '75px minmax(100px, auto) 75px'
       },
       width: {
         75: '75px',
@@ -49,7 +50,7 @@ module.exports = {
         100: '100%'
       },
       padding: {
-        btn: '12px,44px,12px,44px'
+        btn: '12px,44px,12px,44px',
       },
       screens: {
         xl: { max: '1440' }
@@ -94,9 +95,13 @@ module.exports = {
         '1/16': '6.25%',
         '3/16': '18.75%',
         '6/16': '37.5%',
+        '3/18': '16.7%',
+        '6/18': '33.3%',
         '1/22': '4.54%',
         '3/22': '13.63%',
         '6/22': '27.27%',
+        '3/25': '12%',
+        '6/25': '24%',
         '7/8' : '87.5%',
       }
     },

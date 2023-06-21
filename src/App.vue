@@ -1,3 +1,5 @@
 <template>
-    <RouterView />
+  <div>
+    <RouterView class="h-screen"/>
+  </div>
 </template>

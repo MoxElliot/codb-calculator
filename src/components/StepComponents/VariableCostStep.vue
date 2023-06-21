@@ -35,38 +35,36 @@ onMounted(() => {
     </template>
   </form-modal>
 
-  <div class="flex flex-col text-center basis-full items-center justify-center">
+  <div class="flex flex-col text-center items-center justify-center">
     <div
-      class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 md:w-6/10 md:mb-8"
+      class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif w-8/10 md:mb-8"
     >
       <p class="">
         Variable Costs for <span>{{ companyName }}</span>
       </p>
       <img
-        src="../../images/fixed-cost-calandar.svg"
-        alt="Calandar"
+        src="../../images/variable-cost-camera.svg"
+        alt="Camera"
         class="hidden sm:inline sm:px-3"
       />
     </div>
-    <div class="text-body text-grey-300 basis-1/6 w-8/10 md:w-6/10">
+    <div class="text-body text-grey-300 w-8/10">
       <p>
         A Variable Cost is any expense category that your are expecting to pay on an irregular
         basis!Add the name of the cost, the category, the amount below.
       </p>
     </div>
-    <div class="basis-full flex flex-col items-center justify-center w-6/10 sm:w-5/10">
+    <div class="flex flex-col items-center w-8/10">
       <div class="hidden md:flex">
-        <variable-cost-data-input class="flex flex-row" />
+        <variable-cost-data-input />
       </div>
       <div class="md:hidden">
-        <div class="btn-add flex flex-col justify-center">
-          <form-button
-            label="+ Add Variable Cost"
-            type="submit"
-            class="font-bold"
-            @click="openModal()"
-          />
-        </div>
+        <form-button
+          label="+ Add Variable Cost"
+          type="submit"
+          class="btn-add font-bold"
+          @click="openModal()"
+        />
       </div>
       <variable-cost-table />
     </div>

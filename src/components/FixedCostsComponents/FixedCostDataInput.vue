@@ -74,7 +74,7 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
       )
     "
   >
-    <fieldset :class="class">
+    <fieldset class="flex flex-row">
       <div>
         <data-input
           v-model="fixedCostName"
@@ -115,14 +115,20 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
           @input="setFixedFormValidAction(true)"
         />
       </div>
-      <div class="btn-add flex flex-col justify-center" v-if="isOpen === false">
-        <form-button label="+ Add Fixed Cost" type="submit" class="font-bold" />
-      </div>
-      <div class="flex flex-row p-1 md:p-4 h-full" v-else>
-        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
-        <form-button label="Add" type="submit" class="modal-btn-add" />
-      </div>
     </fieldset>
+
+    <form-button
+      label="+ Add Fixed Cost"
+      type="submit"
+      class="btn-add font-bold"
+      v-if="isOpen === false"
+    />
+
+    <div class="flex flex-row p-1 md:p-4 h-full" v-else>
+      <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
+      <form-button label="Add" type="submit" class="modal-btn-add" />
+    </div>
+
     <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
     <span class="error-text">{{ amountError }} </span>
   </Form>

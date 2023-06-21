@@ -14,7 +14,14 @@ export const useReportStore = defineStore('reportStore', {
     priceAveragePerBooking: 1000.0,
     hoursAveragePerBooking: 200,
     variableCosts: [
-      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 }
+      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
     ] as VariableCostObj[],
     totalVariableCosts: 80.0,
     fixedCosts: testingCostArr as FixedCostObj[],
