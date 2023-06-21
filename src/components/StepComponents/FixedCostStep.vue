@@ -35,7 +35,7 @@ onMounted(() => {
     </template>
   </form-modal>
 
-  <div class="flex flex-col text-center basis-full items-center justify-center">
+  <div class="flex flex-col text-center items-center justify-center">
     <div
       class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 w-8/10 md:mb-8"
     >
@@ -55,19 +55,6 @@ onMounted(() => {
         Yearly.
       </p>
     </div>
-    <div class="flex flex-col items-center w-8/10">
-      <!-- <div class="hidden md:flex">
-        <fixed-cost-data-input />
-      </div>
-      <div class="md:hidden">
-        <form-button
-          label="+ Add Fixed Cost"
-          type="submit"
-          class="btn-add font-bold"
-          @click="openModal()"
-        />
-      </div> -->
-      <fixed-cost-table />
-    </div>
+    <fixed-cost-table />
   </div>
 </template>

@@ -39,7 +39,7 @@ const deleteCost = (variableCost: {
 </script>
 
 <template>
-  <div class="mt-2 md:mt-8 w-full">
+  <div class="mt-2 md:mt-8 w-full md:w-8/10">
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in variableCostHeadingArray">
         <p>{{ heading[0] }}</p>
@@ -70,7 +70,7 @@ const deleteCost = (variableCost: {
       </div>
     </div>
   </div>
-  <div class="hidden md:flex">
+  <div class="hidden md:flex w-8/10">
     <variable-cost-data-input />
   </div>
   <div class="md:hidden">

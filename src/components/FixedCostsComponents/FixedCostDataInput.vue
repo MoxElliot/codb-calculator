@@ -109,18 +109,18 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
         class="border-b border-grey-200"
         @input="setFixedFormValidAction(true)"
       />
-      <form-button
-        label="+ Add Fixed Cost"
-        type="submit"
-        class="btn-add font-bold"
-        v-if="isOpen === false"
-      />
-      <div class="flex flex-row p-1 md:p-4 h-full" v-else>
-        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
-        <form-button label="Add" type="submit" class="modal-btn-add" />
-      </div>
     </fieldset>
     <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
     <span class="error-text">{{ amountError }} </span>
+    <form-button
+      label="+ Add Fixed Cost"
+      type="submit"
+      class="btn-add font-bold"
+      v-if="isOpen === false"
+    />
+    <div class="flex flex-row p-1 md:p-4 h-full" v-else>
+      <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
+      <form-button label="Add" type="submit" class="modal-btn-add" />
+    </div>
   </Form>
 </template>

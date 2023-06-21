@@ -57,7 +57,13 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
       )
     "
   >
-    <fieldset :class="!isOpen ? 'flex flex-row justify-center items-center w-full h-10 md:h-16' :'flex flex-col justify-center items-start h-full text-center' ">
+    <fieldset
+      :class="
+        !isOpen
+          ? 'flex flex-row justify-center items-center w-full h-10 md:h-16'
+          : 'flex flex-col justify-center items-start h-full text-center'
+      "
+    >
       <data-input
         v-model="variableCostName"
         placeholder="Name of the cost"
@@ -72,7 +78,7 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
         name="category"
         :optionArray="costCategoryOptions"
         parentClass="basis-6/18 pr-2 md:pr-6"
-        class=" border-b border-grey-200"
+        class="border-b border-grey-200"
         @input="setVariableFormValidAction(true)"
       />
       <data-input
@@ -81,23 +87,23 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
         type="number"
         name="amount"
         parentClass="basis-3/18 pr-2 md:pr-6"
-        class=" border-b border-grey-200"
+        class="border-b border-grey-200"
         @input="setVariableFormValidAction(true)"
       />
-
-      <form-button
-        label="+ Add Variable Cost"
-        type="submit"
-        class="btn-add font-bold"
-        v-if="isOpen === false"
-      />
-
-      <div class="flex flex-row p-1 md:p-4 h-full" v-else>
-        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
-        <form-button label="Add" type="submit" class="modal-btn-add" />
-      </div>
     </fieldset>
     <span class="error-text" v-if="!variableFormValid">{{ blankSubmitError }}</span>
     <span class="error-text">{{ amountError }} </span>
+    <form-button
+      label="+ Add Variable Cost"
+      type="submit"
+      class="btn-add font-bold"
+      v-if="isOpen === false"
+    />
+
+    <div class="flex flex-row p-1 md:p-4 h-full" v-else>
+      <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
+      <form-button label="Add" type="submit" class="modal-btn-add" />
+    </div>
+    
   </Form>
 </template>
