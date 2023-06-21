@@ -122,7 +122,6 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
         <data-input
           v-model="hoursAveragePerBookingInput"
           label="How many hours do you work per booking? (Including editing time, meetings, etc.)"
-          labelAfter="hours"
           parentClass="flex flex-col md:flex-row items-center md:mt-6"
           class="pl-3 text-center border-b border-grey-200 w-fit"
           type="number"
