@@ -28,7 +28,7 @@ onMounted(() => {
     component-class="invisible"
   />
   <!-- <HomeBackground class="invisible absolute top-0 left-0 bottom-0 right-0 bg-no-repeat bg-cover bg-center h-100 w-100"/> -->
-
+  <div class="flex flex-row justify-center basis-full">
   <div
     class="flex flex-col items-center justify-between md:justify-center basis-full md:basis-3/4 lg:basis-2/3 px-8"
   >
@@ -58,5 +58,6 @@ onMounted(() => {
         <p>Using the NEXT STEP button, navigate through each section until the end!</p>
       </div>
     </div>
+  </div>
   </div>
 </template>
