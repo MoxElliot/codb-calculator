@@ -58,5 +58,8 @@
   .border-active {
     @apply border-b border-aqua-200;
   }
-
+  .scroll {
+    overflow: auto;
+    height:calc(100vh );
+  }
 }

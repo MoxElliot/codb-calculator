@@ -43,8 +43,8 @@ onMounted(() => {
         Variable Costs for <span>{{ companyName }}</span>
       </p>
       <img
-        src="../../images/fixed-cost-calandar.svg"
-        alt="Calandar"
+        src="../../images/variable-cost-camera.svg"
+        alt="Camera"
         class="hidden sm:inline sm:px-3"
       />
     </div>
