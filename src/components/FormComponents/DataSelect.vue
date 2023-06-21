@@ -18,6 +18,14 @@ const props = defineProps({
     type: Array<string>,
     default: []
   },
+  class: {
+    type: String,
+    default: 'input m-1'
+  },
+  parentClass: {
+    type: String,
+    default: 'flex flex-col'
+  },
   value: null
 })
 
@@ -32,12 +40,12 @@ const handleInputChange = (e: any) => {
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <label :for="label" class="label m-1">
+  <div :class="parentClass">
+    <label :for="label" >
       {{ label }}
     </label>
     <select
-      class="input m-1"
+      :class="class"
       v-bind="$attrs"
       :value="modelValue"
       @input="$emit('update:modelValue', handleInputChange($event))"

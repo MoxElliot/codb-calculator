@@ -16,16 +16,10 @@ const { isOpen } = storeToRefs(modalStore)
 const { closeModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError, fixedFormValid } = storeToRefs(reportStore)
+const { blankSubmitError, fixedFormValid, fixedCosts } = storeToRefs(reportStore)
 const { handleAddCost, addFixedCostAction, setFixedFormValidAction } = reportStore
 
 const fixedCostTotal = ref<number>(0)
-
-const props = defineProps({
-  class: {
-    type: String
-  }
-})
 
 const schema = Yup.object({
   name: Yup.string().required(' '),
@@ -58,7 +52,7 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
 
 <template>
   <Form
-    class="flex flex-col mt-4 min-h-[145px]"
+    class="flex flex-col basis-full h-full"
     :valiation-schema="schema"
     @submit="
       handleAddCost(
@@ -69,67 +63,64 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
         setFixedFormValidAction,
         resetForm,
         addFixedCostAction,
+        fixedCosts,
         fixedCostPeriod,
         fixedCostTotal
       )
     "
   >
-    <fieldset class="flex flex-row">
-      <div>
-        <data-input
-          v-model="fixedCostName"
-          label="Expense Name"
-          placeholder="Name of the cost"
-          type="input"
-          name="name"
-          class="basis-1/4 flex-1"
-          @input="setFixedFormValidAction(true)"
-        />
-      </div>
-      <div>
-        <data-select
-          v-model="fixedCostCategory"
-          label="Category"
-          name="category"
-          :optionArray="costCategoryOptions"
-          class="basis-1/4 flex-1"
-          @input="setFixedFormValidAction(true)"
-        />
-      </div>
-      <div>
-        <data-input
-          v-model="fixedCostAmount"
-          label="Expense Amount"
-          name="amount"
-          class="basis-1/4 flex-1"
-          @input="setFixedFormValidAction(true)"
-        />
-      </div>
-      <div>
-        <data-select
-          v-model="fixedCostPeriod"
-          label="Pay Period"
-          name="period"
-          :optionArray="costPeriodOptions"
-          class="basis-1/4 flex-1"
-          @input="setFixedFormValidAction(true)"
-        />
-      </div>
+    <fieldset
+      :class="
+        !isOpen
+          ? 'flex flex-row justify-center items-center w-full h-10 md:h-16'
+          : 'flex flex-col justify-center items-start h-full text-center'
+      "
+    >
+      <data-input
+        v-model="fixedCostName"
+        placeholder="Name of the cost"
+        type="input"
+        name="name"
+        parentClass="basis-6/24 pr-2 md:pr-6"
+        class="text-center border-b border-grey-200"
+        @input="setFixedFormValidAction(true)"
+      />
+      <data-select
+        v-model="fixedCostCategory"
+        name="category"
+        :optionArray="costCategoryOptions"
+        parentClass="basis-6/24 pr-2 md:pr-6"
+        class="text-center border-b border-grey-200"
+        @input="setFixedFormValidAction(true)"
+      />
+      <data-input
+        v-model="fixedCostAmount"
+        placeholder="Amount"
+        name="amount"
+        parentClass="basis-3/24 pr-2 md:pr-6"
+        class="text-center border-b border-grey-200"
+        @input="setFixedFormValidAction(true)"
+      />
+      <data-select
+        v-model="fixedCostPeriod"
+        name="period"
+        :optionArray="costPeriodOptions"
+        parentClass="basis-3/24 pr-2 md:pr-6"
+        class="border-b border-grey-200"
+        @input="setFixedFormValidAction(true)"
+      />
     </fieldset>
-
+    <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
+    <span class="error-text">{{ amountError }} </span>
     <form-button
       label="+ Add Fixed Cost"
       type="submit"
       class="btn-add font-bold"
       v-if="isOpen === false"
     />
-
     <div class="flex flex-row p-1 md:p-4 h-full" v-else>
       <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
       <form-button label="Add" type="submit" class="modal-btn-add" />
     </div>
-
-    <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
-    <span class="error-text">{{ amountError }} </span>
   </Form>
 </template>
