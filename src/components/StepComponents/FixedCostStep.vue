@@ -56,7 +56,7 @@ onMounted(() => {
       </p>
     </div>
     <div class="flex flex-col items-center w-8/10">
-      <div class="hidden md:flex">
+      <!-- <div class="hidden md:flex">
         <fixed-cost-data-input />
       </div>
       <div class="md:hidden">
@@ -66,7 +66,7 @@ onMounted(() => {
           class="btn-add font-bold"
           @click="openModal()"
         />
-      </div>
+      </div> -->
       <fixed-cost-table />
     </div>
   </div>
