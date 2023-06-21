@@ -80,7 +80,7 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
 </script>
 
 <template>
-  <div class="flex flex-col basis-full text-center justify-center items-center">
+  <div class="flex flex-col text-center basis-full items-center justify-center">
     <div
       class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 md:w-6/10 md:mb-8"
     >
@@ -97,16 +97,14 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
       <p>Fantastic work with those costs!</p>
       <p>Now, let's talk about how much you're making per booking.</p>
     </div>
-    <div class="basis-full flex flex-col items-center justify-center w-6/10 sm:w-5/10">
-      <div class="font-sans text-grey-300 text-body mt-2 md:mt-6 px-6">
+    <div class="basis-full flex flex-col md:items-center mt-2 md:mt-8 w-screen md:w-full overflow-auto">
+      <div class="font-sans text-grey-300 text-body mt-2 md:mt-6 md:px-6">
         <div class="mt-2 md:mt-6">
-          <p>How many bookings do you take on per month?</p>
           <data-input
             v-model="bookingsPerMonthInput"
-            label="In a month, I typicaly book"
-            labelAfter="shoots!"
-            class="pl-3"
-            parentClass="flex flex-row"
+            label="How many shoots do you typically book a month?"
+            parentClass="flex flex-col md:flex-row items-center"
+            class="pl-3 text-center border-b border-grey-200 w-fit"
             type="number"
             id="bookings-per-month"
           />
@@ -115,8 +113,8 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
           <data-input
             v-model="priceAveragePerBookingInput"
             label="How Much do you charge per booking on average?"
-            class="pl-3"
-            parentClass="flex flex-row"
+            class="pl-3 text-center border-b border-grey-200 w-fit"
+            parentClass="flex flex-col md:flex-row items-center"
             type="number"
             id="price-average-per-booking"
           />
@@ -126,8 +124,8 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
             v-model="hoursAveragePerBookingInput"
             label="How many hours do you work per booking? (Including editing time, meetings, etc.)"
             labelAfter="hours"
-            class="pl-3"
-            parentClass="flex flex-row"
+            class="pl-3 text-center border-b border-grey-200 w-fit"
+            parentClass="flex flex-col md:flex-row items-center"
             type="number"
             id="hour-average-per-booking"
           />

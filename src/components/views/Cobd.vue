@@ -11,7 +11,7 @@ import CodbFooter from '../CoBDComponents/CodbFooter.vue'
       <codb-header class="" />
     </div>
     <div class="flex" >
-      <codb-form class="flex basis-full justify-center overflow-auto md:overflow-visible" />
+      <codb-form class="flex basis-full justify-center items-center overflow-auto md:overflow-visible" />
     </div>
     <div class="flex basis-full justify-center" >
       <codb-footer />

@@ -67,7 +67,7 @@ const { value: savings, errorMessage: savingsError, meta: savingsMeta } = useFie
       <p>Great job! Your CobD Calculation is Almost Finished!</p>
       <p>Don't forget, you'll need to pay yourself and save some money after all that hard work!</p>
     </div>
-    <div class="basis-full flex flex-col items-center justify-center w-6/10 sm:w-5/10">
+    <div class="basis-full flex flex-col items-center w-6/10 sm:w-5/10">
       <div class="font-sans text-grey-300 text-body mt-2 md:mt-6 px-6">
         <div>
           <data-input
