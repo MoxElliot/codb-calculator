@@ -25,10 +25,11 @@ const fixedCostHeadingArray = [
 
 onUpdated(() => {
   scrollToNewCost(fixedCosts)
+  console.log("in table'", fixedCosts.value)
 })
 
 const deleteCost = (fixedCost: {
-  id: number
+  id:  string
   name: string
   category: string
   amount: number | null
@@ -49,7 +50,7 @@ const deleteCost = (fixedCost: {
       </div>
     </div>
     <div class="h-32 md:h-64 w-screen sm:w-full overflow-auto">
-      <div class="h-10 md:h-16" v-for="fixedCost in fixedCosts" :key="fixedCost.id">
+      <div class="h-10 md:h-16" v-for="fixedCost in fixedCosts" :id="fixedCost.id" :key="fixedCost.id">
         <div class="flex flex-row">
           <div class="basis-6/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.name }}</p>

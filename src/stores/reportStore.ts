@@ -14,14 +14,14 @@ export const useReportStore = defineStore('reportStore', {
     priceAveragePerBooking: 1000.0,
     hoursAveragePerBooking: 200,
     variableCosts: [
-      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: 2, name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: '0', name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: '1', name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: '2', name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: '3', name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: '4', name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: '5', name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: '6', name: 'Parking', category: 'Overhead', amount: 80 },
+      { id: '7', name: 'Parking', category: 'Overhead', amount: 80 },
     ] as VariableCostObj[],
     totalVariableCosts: 80.0,
     fixedCosts: testingCostArr as FixedCostObj[],
@@ -121,6 +121,7 @@ export const useReportStore = defineStore('reportStore', {
       formValidAction: Function,
       resetForm: Function,
       addCostAction: Function,
+      costArr: any[],
       costPeriod?: string | undefined,
       costTotal?: number | undefined
     ) {
@@ -130,7 +131,7 @@ export const useReportStore = defineStore('reportStore', {
 
         formValidAction(true)
         addCostAction({
-          id: this.fixedCosts.length + 1,
+          id: (costArr.length + 1).toString(),
           name: costName,
           category: costCategory,
           amount: costAmount,

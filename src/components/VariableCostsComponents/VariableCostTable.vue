@@ -16,10 +16,11 @@ const variableCostHeadingArray = [
 
 onUpdated(() => {
   scrollToNewCost(variableCosts)
+  console.log("in table'", variableCosts.value)
 })
 
 const deleteCost = (variableCost: {
-  id: number
+  id: string
   name: string
   category: string
   amount: number | null | undefined
@@ -38,7 +39,7 @@ const deleteCost = (variableCost: {
       </div>
     </div>
     <div class="h-32 md:h-64">
-      <div class="h-10 md:h-16" v-for="variableCost in variableCosts" :key="variableCost.id">
+      <div class="h-10 md:h-16" v-for="variableCost in variableCosts" :id="variableCost.id" :key="variableCost.id">
         <div class="flex flex-row">
           <div class="basis-6/18 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ variableCost.name }}</p>

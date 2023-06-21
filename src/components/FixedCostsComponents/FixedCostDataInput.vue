@@ -16,16 +16,10 @@ const { isOpen } = storeToRefs(modalStore)
 const { closeModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError, fixedFormValid } = storeToRefs(reportStore)
+const { blankSubmitError, fixedFormValid, fixedCosts } = storeToRefs(reportStore)
 const { handleAddCost, addFixedCostAction, setFixedFormValidAction } = reportStore
 
 const fixedCostTotal = ref<number>(0)
-
-const props = defineProps({
-  class: {
-    type: String
-  }
-})
 
 const schema = Yup.object({
   name: Yup.string().required(' '),
@@ -69,6 +63,7 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
         setFixedFormValidAction,
         resetForm,
         addFixedCostAction,
+        fixedCosts,
         fixedCostPeriod,
         fixedCostTotal
       )

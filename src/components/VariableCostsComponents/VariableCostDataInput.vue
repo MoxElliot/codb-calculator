@@ -15,16 +15,8 @@ const { isOpen } = storeToRefs(modalStore)
 const { closeModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError, variableFormValid } = storeToRefs(reportStore)
+const { blankSubmitError, variableFormValid, variableCosts } = storeToRefs(reportStore)
 const { handleAddCost, addVariableCostAction, setVariableFormValidAction } = reportStore
-
-// let variableFormValid = ref<boolean>(true)
-
-const props = defineProps({
-  class: {
-    type: String
-  }
-})
 
 const schema = Yup.object({
   name: Yup.string().required(' '),
@@ -60,7 +52,8 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
         meta.valid,
         setVariableFormValidAction,
         resetForm,
-        addVariableCostAction
+        addVariableCostAction,
+        variableCosts,
       )
     "
   >
