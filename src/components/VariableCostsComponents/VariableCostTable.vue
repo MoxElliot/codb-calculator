@@ -8,10 +8,10 @@ const reportStore = useReportStore()
 const { variableCosts, totalVariableCosts } = storeToRefs(reportStore)
 const { totalVariableCostAction } = reportStore
 const variableCostHeadingArray = [
-  ['Name', 'basis-6/16 pr-2 md:pr-6'],
-  ['Category', 'text-center basis-6/16 pr-2 md:pr-6'],
-  ['Amount ($)', 'text-center basis-3/16 pr-2 md:pr-6'],
-  ['', 'basis-1/16  pr-2 md:pr-6']
+  ['Name', 'basis-6/18 pr-2 md:pr-8'],
+  ['Category', 'text-center basis-6/18 pr-2 md:pr-6'],
+  ['Amount ($)', 'text-center basis-3/18 pr-2 md:pr-6'],
+  ['', 'basis-3/18 pr-2 md:pr-6']
 ]
 
 onUpdated(() => {
@@ -31,7 +31,7 @@ const deleteCost = (variableCost: {
 </script>
 
 <template>
-  <div class="mt-2 md:mt-8 w-screen md:w-full overflow-auto">
+  <div class="mt-2 md:mt-8  w-screen sm:w-full overflow-auto">
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in variableCostHeadingArray">
         <p>{{ heading[0] }}</p>
@@ -40,16 +40,16 @@ const deleteCost = (variableCost: {
     <div class="h-32 md:h-64">
       <div class="h-10 md:h-16" v-for="variableCost in variableCosts" :key="variableCost.id">
         <div class="flex flex-row">
-          <div class="basis-6/16 pr-2 md:pr-6">
+          <div class="basis-6/18 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ variableCost.name }}</p>
           </div>
-          <div class="basis-6/16 pr-2 md:pr-6">
+          <div class="basis-6/18 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ variableCost.category }}</p>
           </div>
-          <div class="basis-3/16 pr-2 md:pr-6">
+          <div class="basis-3/18 pr-2 md:pr-6">
             <p class="border-b border-grey-200">$ {{ variableCost.amount }}</p>
           </div>
-          <button class="basis-1/16 bg-costDelete bg-no-repeat pr-2 md:pr-6" @click="deleteCost(variableCost)"></button>
+          <button class="basis-3/18 bg-costDelete bg-no-repeat bg-center pr-2 md:pr-6" @click="deleteCost(variableCost)"></button>
         </div>
       </div>
     </div>

@@ -35,9 +35,9 @@ onMounted(() => {
     </template>
   </form-modal>
 
-  <div class="flex flex-col text-center basis-full items-center justify-center">
+  <div class="flex flex-col text-center items-center justify-center">
     <div
-      class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 md:w-6/10 md:mb-8"
+      class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif w-8/10 md:mb-8"
     >
       <p class="">
         Variable Costs for <span>{{ companyName }}</span>
@@ -48,13 +48,13 @@ onMounted(() => {
         class="hidden sm:inline sm:px-3"
       />
     </div>
-    <div class="text-body text-grey-300 basis-1/6 w-8/10 md:w-6/10">
+    <div class="text-body text-grey-300 w-8/10">
       <p>
         A Variable Cost is any expense category that your are expecting to pay on an irregular
         basis!Add the name of the cost, the category, the amount below.
       </p>
     </div>
-    <div class="basis-full flex flex-col items-center justify-center w-6/10 sm:w-5/10">
+    <div class="basis-full flex flex-col items-center justify-center w-8/10">
       <div class="hidden md:flex">
         <variable-cost-data-input class="flex flex-row" />
       </div>

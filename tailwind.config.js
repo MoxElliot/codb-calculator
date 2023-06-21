@@ -11,7 +11,7 @@ module.exports = {
       //extends the default themes
       gridTemplateRows: {
         mainLayout: 'minmax(75px, auto) minmax(100px, auto) minmax(75px, auto)',
-        smallLayout: '75px minmax(100px, auto) 75px'
+        // smallLayout: '75px minmax(100px, auto) 75px'
       },
       width: {
         75: '75px',
@@ -94,9 +94,13 @@ module.exports = {
         '1/16': '6.25%',
         '3/16': '18.75%',
         '6/16': '37.5%',
+        '3/18': '16.7%',
+        '6/18': '33.3%',
         '1/22': '4.54%',
         '3/22': '13.63%',
         '6/22': '27.27%',
+        '3/25': '12%',
+        '6/25': '24%',
         '7/8' : '87.5%',
       }
     },
