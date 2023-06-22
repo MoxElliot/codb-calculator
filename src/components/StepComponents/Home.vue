@@ -27,7 +27,7 @@ onMounted(() => {
     br-class="absolute bottom-4% right-7% h-40/100"
     component-class=""
   /> -->
-  <!-- <HomeBackground class="absolute top-0 left-0 bottom-0 right-0 bg-homeBackground bg-no-repeat bg-cover bg-center h-100 w-100"/> -->
+  <!-- <HomeBackground class="absolute top-0 left-0 bottom-0 right-0 bg-homeBackground bg-no-repeat bg-contain bg-center h-100 w-100 "/> -->
   <div class="flex flex-row justify-center basis-full">
   <div
     class="flex flex-col items-center justify-center basis-full md:basis-3/4 lg:basis-2/3 px-8"
