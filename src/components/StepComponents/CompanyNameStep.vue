@@ -2,19 +2,17 @@
 import { useReportStore } from '@/stores/reportStore'
 import * as Yup from 'yup'
 import DataInput from '../FormComponents/DataInput.vue'
-import { computed, onMounted, type WritableComputedRef } from 'vue'
+import { computed, onMounted, onUpdated, type WritableComputedRef } from 'vue'
 import { useForm, useField } from 'vee-validate'
 import { storeToRefs } from 'pinia'
 
 const reportStore = useReportStore()
-const { addCompanyNameAction, updateInputValidAction } = reportStore
+const { addCompanyNameAction, updateInputValidAction, setBlankSubmitErrorAction } = reportStore
 const { companyName, inputValid, blankSubmitError } = storeToRefs(reportStore)
 
 onMounted(() => {
-  console.log('in onMounted', company.value)
   if (companyName.value === '') {
     updateInputValidAction(false)
-    console.log('in OnMounted If', inputValid.value)
   }
 })
 
@@ -24,8 +22,8 @@ const companyNameInput: WritableComputedRef<string> = computed<string>({
     company.value = text //take this out of the set, no validation will happen
     addCompanyNameAction(text) // updates Pinia state
     const resp = await companyNameForm.validate()
-    console.log('inCompanyName INput', resp.errors.company)
     updateInputValidAction(resp.valid) // enables the Next button
+    setBlankSubmitErrorAction('')
   }
 })
 
@@ -35,9 +33,7 @@ const schema = Yup.object({
 
 const companyNameForm = useForm({
   validationSchema: schema,
-  initialErrors: {
-    company: blankSubmitError.value
-  }
+  validateOnMount: false
 })
 
 const { value: company, errorMessage: companyError, meta } = useField('company', schema)
@@ -59,19 +55,18 @@ const { value: company, errorMessage: companyError, meta } = useField('company',
         name of it.
       </p>
     </div>
-    <div class="self-starts mt-6">
-      <data-input
-        v-model.trim="companyNameInput"
-        name="company"
-        class="input border-bottom-grey text-placeholder placeholder:text-grey-100 sans"
-        :meta="meta"
-        placeholder="Business Name"
-        type="text"
-        id="company-name"
-      />
-      <div>
-        <span class="error-text">{{ companyError }}</span>
+    <div class="flex flex-col items-center mt-6 w-min-56">
+      <div class="border-b border-b-grey-100">
+        <data-input
+          v-model.trim="companyNameInput"
+          name="company"
+          class=""
+          :class="{ 'border-error': companyError || blankSubmitError }"
+        />
+      </div>
+      <div class="self-start">
         <span class="error-text" v-if="!meta.dirty">{{ blankSubmitError }}</span>
+        <span class="error-text">{{ companyError }}</span>
       </div>
     </div>
   </div>
