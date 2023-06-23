@@ -20,11 +20,11 @@ const props = defineProps({
   },
   class: {
     type: String,
-    default: 'input m-1'
+    default: ''
   },
   parentClass: {
     type: String,
-    default: 'flex flex-col'
+    default: ''
   },
   value: null
 })

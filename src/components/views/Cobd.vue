@@ -8,7 +8,7 @@ import CodbFooter from '../CoBDComponents/CodbFooter.vue'
 <template>
   <div class="grid grid-rows-smallLayout md:grid-rows-mediumLayout lg:grid-rows-mainLayout md:gap-y-5 ">
     <div class="flex">
-      <codb-header class="" />
+      <codb-header class=" " />
     </div>
     <div class="flex overflow-scroll" >
       <codb-form class="flex basis-full justify-center items-center h-fit" />

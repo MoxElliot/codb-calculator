@@ -79,10 +79,11 @@ const deleteCost = (fixedCost: {
         </div>
       </div>
     </div>
+    <div class="hidden md:flex w-screen sm:w-full">
+      <fixed-cost-data-input />
+    </div>
   </div>
-  <div class="hidden md:flex w-8/10">
-    <fixed-cost-data-input />
-  </div>
+
   <div class="md:hidden">
     <form-button
       label="+ Add Fixed Cost"

@@ -72,14 +72,13 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
     <fieldset
       :class="
         !isOpen
-          ? 'flex flex-row justify-center items-center w-full h-10 md:h-16'
+          ? 'flex flex-row w-full h-10 md:h-16'
           : 'flex flex-col justify-center items-start h-full text-center'
       "
     >
       <data-input
         v-model="fixedCostName"
         placeholder="Name of the cost"
-        type="input"
         name="name"
         parentClass="basis-6/24 pr-2 md:pr-6"
         class="text-center border-b border-grey-200"
@@ -89,26 +88,21 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
         v-model="fixedCostCategory"
         name="category"
         :optionArray="costCategoryOptions"
-        parentClass="basis-6/24 pr-2 md:pr-6"
-        class="text-center border-b border-grey-200"
-        @input="setFixedFormValidAction(true)"
-      />
-      <data-input
-        v-model="fixedCostAmount"
-        placeholder="Amount"
-        name="amount"
-        parentClass="basis-3/24 pr-2 md:pr-6"
-        class="text-center border-b border-grey-200"
-        @input="setFixedFormValidAction(true)"
-      />
-      <data-select
-        v-model="fixedCostPeriod"
-        name="period"
-        :optionArray="costPeriodOptions"
-        parentClass="basis-3/24 pr-2 md:pr-6"
+        parentClass="basis-6/24  pr-2 md:pr-6"
         class="border-b border-grey-200"
         @input="setFixedFormValidAction(true)"
       />
+      <div class="basis-3/24 pr-2 md:pr-6">
+        <p class="border-b border-grey-200">${{}}</p>
+      </div>
+      <div class="basis-3/24 pr-2 md:pr-6">
+        <p class="border-b border-grey-200">{{}}</p>
+      </div>
+
+      <div class="basis-3/24 pr-2 md:pr-6">
+        <p class="border-b border-grey-200">${{ fixedCostTotal }}</p>
+      </div>
+      <div class="basis-3/24 pr-2 md:pr-6"></div>
     </fieldset>
     <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
     <span class="error-text">{{ amountError }} </span>
@@ -124,3 +118,30 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
     </div>
   </Form>
 </template>
+
+<!-- <data-input
+v-model="fixedCostName"
+placeholder="Name of the cost"
+type="input"
+name="name"
+parentClass="pr-2 md:pr-6"
+class="basis-6/24 text-center border-b border-grey-200"
+@input="setFixedFormValidAction(true)"
+/>
+
+<data-input
+v-model="fixedCostAmount"
+placeholder="Amount"
+name="amount"
+parentClass="pr-2 md:pr-6"
+class="basis-3/24 text-center border-b border-grey-200"
+@input="setFixedFormValidAction(true)"
+/>
+<data-select
+v-model="fixedCostPeriod"
+name="period"
+:optionArray="costPeriodOptions"
+parentClass="pr-2 md:pr-6"
+class="basis-3/24 border-b border-grey-200"
+@input="setFixedFormValidAction(true)"
+/> -->
