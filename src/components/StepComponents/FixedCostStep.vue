@@ -48,7 +48,7 @@ onMounted(() => {
         class="hidden sm:inline sm:px-3"
       />
     </div>
-    <div class="text-body text-grey-300 basis-1/6 w-8/10">
+    <div class="text-body text-grey-300 basis-1/6 w-9/10 sm:w-8/10">
       <p>
         A Fixed Cost is any Yearly or Monthly fee that you expect to pay in a regular year! Add the
         name of the cost, the category, the amount, and whether or not the cost is Monthly or
