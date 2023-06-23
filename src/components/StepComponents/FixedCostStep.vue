@@ -3,14 +3,12 @@ import { onMounted } from 'vue'
 import FixedCostDataInput from '../FixedCostsComponents/FixedCostDataInput.vue'
 import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
 import { useReportStore } from '@/stores/reportStore'
-import FormButton from '../FormComponents/FormButton.vue'
 import { storeToRefs } from 'pinia'
 import FormModal from '../ModalComponents/FormModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
 const { isOpen } = storeToRefs(modalStore)
-const { openModal } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore

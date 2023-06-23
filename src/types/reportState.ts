@@ -3,9 +3,9 @@ import type FixedCostObj from './FixedCostObj'
 
 interface reportState {
   companyName: string
-  bookingsPerMonth: number
-  priceAveragePerBooking: number
-  hoursAveragePerBooking: number
+  bookingsPerMonth: number | null
+  priceAveragePerBooking: number | null
+  hoursAveragePerBooking: number | null
   variableCosts: VariableCostObj[]
   totalVariableCosts: number
   fixedCosts: FixedCostObj[]

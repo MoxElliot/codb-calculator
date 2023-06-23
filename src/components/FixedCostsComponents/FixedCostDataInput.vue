@@ -33,11 +33,11 @@ const { resetForm, meta } = useForm({
   validateOnMount: true
 })
 
-const { value: fixedCostName, errorMessage: nameError  } = useField('name', undefined, {
+const { value: fixedCostName, errorMessage: nameError } = useField('name', undefined, {
   initialValue: ''
 })
 
-const { value: fixedCostCategory, errorMessage: categoryError  } = useField('category', undefined, {
+const { value: fixedCostCategory, errorMessage: categoryError } = useField('category', undefined, {
   initialValue: ''
 })
 
@@ -45,7 +45,7 @@ const { value: fixedCostAmount, errorMessage: amountError } = useField('amount',
   initialValue: null
 })
 
-const { value: fixedCostPeriod, errorMessage: periodError ,  } = useField('period', undefined, {
+const { value: fixedCostPeriod, errorMessage: periodError } = useField('period', undefined, {
   initialValue: ''
 })
 </script>
@@ -112,20 +112,16 @@ const { value: fixedCostPeriod, errorMessage: periodError ,  } = useField('perio
         :class="{ 'border-error': periodError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
-
-      <div class="basis-3/24 pr-4 md:pr-16">
-      </div>
+      <div class="basis-3/24 pr-4 md:pr-16"></div>
     </fieldset>
     <div class="flex flex-col justify-between sm:h-[100px]">
       <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
       <span class="error-text">{{ amountError }} </span>
       <form-button
         label="+ Add Fixed Cost"
-        type="submit"
         class="btn-add font-bold"
         v-if="isOpen === false"
       />
-
       <div class="flex flex-row p-1 md:p-4 h-full" v-else>
         <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
         <form-button label="Add" type="submit" class="modal-btn-add" />
@@ -133,30 +129,3 @@ const { value: fixedCostPeriod, errorMessage: periodError ,  } = useField('perio
     </div>
   </Form>
 </template>
-
-<!-- <data-input
-v-model="fixedCostName"
-placeholder="Name of the cost"
-type="input"
-name="name"
-parentClass="pr-2 md:pr-6"
-class="basis-6/24 text-center border-b border-grey-200"
-@input="setFixedFormValidAction(true)"
-/>
-
-<data-input
-v-model="fixedCostAmount"
-placeholder="Amount"
-name="amount"
-parentClass="basis-3/24 pr-2 md:pr-6"
-class="text-center border-b border-grey-200"
-@input="setFixedFormValidAction(true)"
-/>
-<data-select
-v-model="fixedCostPeriod"
-name="period"
-:optionArray="costPeriodOptions"
-parentClass="pr-2 md:pr-6"
-class="basis-3/24 border-b border-grey-200"
-@input="setFixedFormValidAction(true)"
-/> -->
