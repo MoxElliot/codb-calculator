@@ -54,8 +54,8 @@ const handleInputChange = (e: any) => {
       :placeholder="placeholder"
       @input="$emit('update:modelValue', handleInputChange($event), ref)"
     />
-    <label :for="labelAfter">
+    <!-- <label :for="labelAfter">
       {{ labelAfter }}
-    </label>
+    </label> -->
   </div>
 </template>

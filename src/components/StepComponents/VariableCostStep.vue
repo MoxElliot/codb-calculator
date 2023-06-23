@@ -46,7 +46,7 @@ onMounted(() => {
         class="hidden sm:inline sm:px-3"
       />
     </div>
-    <div class="text-body text-grey-300 basis-1/6 w-9/10 sm:w-8/10">
+    <div class="text-body2_xs md:text-body2 text-grey-300 basis-1/6 w-9/10 sm:w-8/10">
       <p>
         A Variable Cost is any expense category that your are expecting to pay on an irregular
         basis!Add the name of the cost, the category, the amount below.
