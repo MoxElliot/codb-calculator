@@ -40,27 +40,29 @@ const { value: company, errorMessage: companyError, meta } = useField('company',
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-around basis-full md:basis-3/4 lg:basis-2/4 px-4">
-    <div class="flex flex-row">
+  <div  class="flex basis-full justify-center items-center h-full" >
+  <div class="flex flex-col items-center justify-center md:basis-3/4 px-4 h-full">
+    <div class="flex flex-row mb-4 md:mb-16">
       <img class="place-self-end" src="../../images/company-name-stars.svg" />
       <p class="font-serif text-center text-grey-300 text-heading2_xs md:text-heading2">
         What is the name of your business?
       </p>
       <img class="place-self-start" src="../../images/company-name-stars.svg" />
     </div>
-    <div class="">
-      <p class="font-sans text-grey-300 text-body2_xs md:text-body2 text-center mt-2 md:mt-6 px-6">
+    <div class="mb-4 md:mb-16">
+      <p class="font-sans text-grey-300 text-body2_xs md:text-body2 text-center px-6">
         Any journey begins with defining a goal. So, as we want to help you better understand the
         financial picture of your photography business, it will be great to start by filling in the
         name of it.
       </p>
     </div>
-    <div class="flex flex-col items-center mt-6 w-min-56">
+    <div class="flex flex-col items-center w-8/10 h-16">
       <div class="border-b border-b-grey-100">
         <data-input
           v-model.trim="companyNameInput"
           name="company"
-          class=""
+          parentClass=""
+          class="font-sans text-grey-300 text-body2_xs  md:text-body2 "
           :class="{ 'border-error': companyError || blankSubmitError }"
         />
       </div>
@@ -70,4 +72,5 @@ const { value: company, errorMessage: companyError, meta } = useField('company',
       </div>
     </div>
   </div>
+</div>
 </template>
