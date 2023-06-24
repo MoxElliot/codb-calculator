@@ -23,9 +23,9 @@ const {
 
 onMounted(() => {
   if (
-    bookingsPerMonth.value === null ||
-    priceAveragePerBooking.value === null ||
-    hoursAveragePerBooking.value === null
+    bookingsPerMonth.value === 0 ||
+    priceAveragePerBooking.value === 0 ||
+    hoursAveragePerBooking.value === 0
   ) {
     updateInputValidAction(false)
   }
@@ -96,7 +96,7 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
       <p>Now, let's talk about how much you're making per booking.</p>
     </div>
     <div
-      class="basis-full flex flex-col md:items-center mt-2 lg:mt-6 w-screen md:w-8/10 overflow-auto md:overflow-visible"
+      class="basis-full flex flex-col md:items-center w-screen md:w-8/10 md:px-4 overflow-auto"
     >
       <div class="flex flex-col font-sans text-grey-300 text-body w-full h-full">
         <div class="flex flex-col min-h-75">
@@ -132,7 +132,6 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
           />
           <span class="error-text md:text-end">{{ hoursError }}</span>
         </div>
-
         <span
           class="error-text"
           v-if="!bookingMeta.dirty || !priceMeta.dirty || !hoursMeta.dirty"

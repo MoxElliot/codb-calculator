@@ -10,7 +10,10 @@ export const useStepStore = defineStore('stepStore', {
   }),
   actions: {
     backStepAction() {
+      const reportStore = useReportStore()
       const backStep = router.currentRoute.value.meta.previous
+
+      reportStore.updateInputValidAction(true)
       router.push(backStep)
       this.stepCurrent = backStep
     },
