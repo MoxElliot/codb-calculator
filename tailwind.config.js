@@ -52,6 +52,7 @@ module.exports = {
       },
       minHeight: {
         75: '75px',
+        100:'100px',
       },
       padding: {
         btn: '12px,44px,12px,44px',

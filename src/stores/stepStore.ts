@@ -20,7 +20,7 @@ export const useStepStore = defineStore('stepStore', {
       const nextStep = router.currentRoute.value.meta.next
   
       if (!inputValid.value) {
-        reportStore.setBlankSubmitErrorAction('Please entered all required information')
+        reportStore.setBlankSubmitErrorAction('Please Enter Required Information')
       } else if (inputValid.value) {
         reportStore.setBlankSubmitErrorAction('')
         router.push(nextStep)

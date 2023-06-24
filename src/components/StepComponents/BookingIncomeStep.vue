@@ -80,7 +80,7 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
 <template>
   <div class="flex flex-col text-center items-center justify-center basis-full h-fit md:h-full">
     <div
-      class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 md:w-6/10 md:mb-8"
+      class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 md:w-6/10 md:mb-4"
     >
       <p class="">
         Booking Income for <span>{{ companyName }}</span>
@@ -96,9 +96,9 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
       <p>Now, let's talk about how much you're making per booking.</p>
     </div>
     <div
-      class="basis-full flex flex-col md:items-center mt-2 md:mt-8 w-screen md:w-8/10 overflow-auto"
+      class="basis-full flex flex-col md:items-center mt-2 lg:mt-6 w-screen md:w-8/10 overflow-auto md:overflow-visible"
     >
-      <div class="flex flex-col font-sans text-grey-300 text-body md:mt-6 md:px-6 w-full h-full">
+      <div class="flex flex-col font-sans text-grey-300 text-body w-full h-full">
         <div class="flex flex-col min-h-75">
           <data-input
             v-model="bookingsPerMonthInput"
@@ -108,7 +108,7 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
             :class="{ 'border-error': bookingsError && blankSubmitError }"
             type="number"
           />
-          <span class="error-text text-end">{{ bookingsError }}</span>
+          <span class="error-text md:text-end">{{ bookingsError }}</span>
         </div>
         <div class="flex flex-col min-h-75">
           <data-input
@@ -119,9 +119,9 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
             :class="{ 'border-error': priceError && blankSubmitError }"
             type="number"
           />
-          <span class="error-text text-end">{{ priceError }}</span>
+          <span class="error-text md:text-end">{{ priceError }}</span>
         </div>
-        <div class="flex flex-col min-h-75">
+        <div class="flex flex-col min-h-100">
           <data-input
             v-model="hoursAveragePerBookingInput"
             label="How many hours do you work per booking? (Including editing time, meetings, etc.)"
@@ -130,7 +130,7 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
             :class="{ 'border-error': hoursError && blankSubmitError }"
             type="number"
           />
-          <span class="error-text text-end">{{ hoursError }}</span>
+          <span class="error-text md:text-end">{{ hoursError }}</span>
         </div>
 
         <span

@@ -33,7 +33,7 @@ export const useReportStore = defineStore('reportStore', {
     // blankSubmitError: '',
     // fixedFormValid: true,
     // variableFormValid: true,
-    companyName: '',
+    companyName: 'PhotoBomb',
     bookingsPerMonth: null,
     priceAveragePerBooking: null,
     hoursAveragePerBooking: null,
