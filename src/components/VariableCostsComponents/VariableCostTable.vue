@@ -69,9 +69,9 @@ const deleteCost = (variableCost: {
         </div>
       </div>
     </div>
-  </div>
-  <div class="hidden md:flex w-8/10">
+  <div class="hidden md:flex w-screen sm:w-full">
     <variable-cost-data-input />
+  </div>
   </div>
   <div class="md:hidden">
     <form-button

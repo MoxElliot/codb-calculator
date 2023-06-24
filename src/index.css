@@ -26,7 +26,7 @@
     @apply bg-blue-100 border border-blue-200 rounded-lg;
   }
   .error-text {
-    @apply text-red-100 font-semibold;
+    @apply text-red-100 text-caption-2 font-sans;
   }
   .modal-btn-add {
     @apply bg-aqua-200 rounded-main text-primary-white font-sans uppercase text-btn p-btn m-2 md:m-4 gap-2.5 w-32 h-48;
@@ -53,10 +53,10 @@
     @apply border border-grey-300;
   }
   .border-error {
-    @apply border-b border-red-100;
+    @apply border-b border-b-red-100;
   }
   .border-active {
-    @apply border-b border-aqua-200;
+    @apply border-b border-b-aqua-200;
   }
   .scroll {
     overflow: auto;

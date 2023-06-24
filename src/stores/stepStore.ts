@@ -10,7 +10,10 @@ export const useStepStore = defineStore('stepStore', {
   }),
   actions: {
     backStepAction() {
+      const reportStore = useReportStore()
       const backStep = router.currentRoute.value.meta.previous
+
+      reportStore.updateInputValidAction(true)
       router.push(backStep)
       this.stepCurrent = backStep
     },
@@ -18,10 +21,9 @@ export const useStepStore = defineStore('stepStore', {
       const reportStore = useReportStore()
       const { inputValid } = storeToRefs(reportStore)
       const nextStep = router.currentRoute.value.meta.next
-      console.log(router.currentRoute)
-
+  
       if (!inputValid.value) {
-        reportStore.setBlankSubmitErrorAction('Please entered all required information')
+        reportStore.setBlankSubmitErrorAction('Please Enter Required Information')
       } else if (inputValid.value) {
         reportStore.setBlankSubmitErrorAction('')
         router.push(nextStep)

@@ -43,7 +43,7 @@ const deleteCost = (fixedCost: {
 </script>
 
 <template>
-  <div class="mt-2 md:mt-8 w-full md:w-8/10">
+  <div class="mt-2 md:mt-8 w-full md:w-8/10 ">
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in fixedCostHeadingArray">
         <p>{{ heading[0] }}</p>
@@ -79,10 +79,11 @@ const deleteCost = (fixedCost: {
         </div>
       </div>
     </div>
+    <div class="hidden md:flex w-screen sm:w-full">
+      <fixed-cost-data-input />
+    </div>
   </div>
-  <div class="hidden md:flex w-8/10">
-    <fixed-cost-data-input />
-  </div>
+
   <div class="md:hidden">
     <form-button
       label="+ Add Fixed Cost"

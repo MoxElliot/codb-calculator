@@ -29,10 +29,10 @@ const { resetForm, meta } = useForm({
   validateOnMount: true
 })
 
-const { value: variableCostName } = useField('name', undefined, {
+const { value: variableCostName, errorMessage: nameError  } = useField('name', undefined, {
   initialValue: ''
 })
-const { value: variableCostCategory } = useField('category', undefined, {
+const { value: variableCostCategory, errorMessage: categoryError  } = useField('category', undefined, {
   initialValue: ''
 })
 const { value: variableCostAmount, errorMessage: amountError } = useField('amount', undefined, {
@@ -60,17 +60,17 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
     <fieldset
       :class="
         !isOpen
-          ? 'flex flex-row justify-center items-center w-full h-10 md:h-16'
-          : 'flex flex-col justify-center items-start h-full text-center'
+          ? 'flex flex-row w-full h-10 md:h-16 mt-4 '
+          : 'flex flex-col basis-full justify-center items-center h-full text-center'
       "
     >
       <data-input
         v-model="variableCostName"
         placeholder="Name of the cost"
-        type="input"
         name="name"
         parentClass="basis-6/18 pr-2 md:pr-6"
-        class="border-b border-grey-200"
+        class="text-center border-b border-grey-200"
+        :class="{ 'border-error': nameError && blankSubmitError }"
         @input="setVariableFormValidAction(true)"
       />
       <data-select
@@ -79,31 +79,32 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
         :optionArray="costCategoryOptions"
         parentClass="basis-6/18 pr-2 md:pr-6"
         class="border-b border-grey-200"
+        :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setVariableFormValidAction(true)"
       />
       <data-input
         v-model="variableCostAmount"
-        placeholder="Amount"
+        placeholder="$ Amount"
         type="number"
         name="amount"
         parentClass="basis-3/18 pr-2 md:pr-6"
-        class="border-b border-grey-200"
+        class="text-center border-b border-grey-200"
+        :class="{ 'border-error': amountError && blankSubmitError }"
         @input="setVariableFormValidAction(true)"
       />
     </fieldset>
-    <span class="error-text" v-if="!variableFormValid">{{ blankSubmitError }}</span>
-    <span class="error-text">{{ amountError }} </span>
-    <form-button
-      label="+ Add Variable Cost"
-      type="submit"
-      class="btn-add font-bold"
-      v-if="isOpen === false"
-    />
-
-    <div class="flex flex-row p-1 md:p-4 h-full" v-else>
-      <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
-      <form-button label="Add" type="submit" class="modal-btn-add" />
+    <div class="flex flex-col justify-between sm:h-[100px]">
+      <span class="error-text" v-if="!variableFormValid">{{ blankSubmitError }}</span>
+      <span class="error-text">{{ amountError }} </span>
+      <form-button
+        label="+ Add Variable Cost"
+        class="btn-add font-bold"
+        v-if="isOpen === false"
+      />
+      <div class="flex flex-row p-1 md:p-4 h-full" v-else>
+        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
+        <form-button label="Add" type="submit" class="modal-btn-add" />
+      </div>
     </div>
-    
   </Form>
 </template>

@@ -33,11 +33,11 @@ const { resetForm, meta } = useForm({
   validateOnMount: true
 })
 
-const { value: fixedCostName } = useField('name', undefined, {
+const { value: fixedCostName, errorMessage: nameError } = useField('name', undefined, {
   initialValue: ''
 })
 
-const { value: fixedCostCategory } = useField('category', undefined, {
+const { value: fixedCostCategory, errorMessage: categoryError } = useField('category', undefined, {
   initialValue: ''
 })
 
@@ -45,7 +45,7 @@ const { value: fixedCostAmount, errorMessage: amountError } = useField('amount',
   initialValue: null
 })
 
-const { value: fixedCostPeriod } = useField('period', undefined, {
+const { value: fixedCostPeriod, errorMessage: periodError } = useField('period', undefined, {
   initialValue: ''
 })
 </script>
@@ -72,25 +72,26 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
     <fieldset
       :class="
         !isOpen
-          ? 'flex flex-row justify-center items-center w-full h-10 md:h-16'
-          : 'flex flex-col justify-center items-start h-full text-center'
+          ? 'flex flex-row w-full h-10 md:h-16 mt-4 '
+          : 'flex flex-col basis-full justify-center items-center h-full text-center'
       "
     >
       <data-input
         v-model="fixedCostName"
         placeholder="Name of the cost"
-        type="input"
         name="name"
         parentClass="basis-6/24 pr-2 md:pr-6"
         class="text-center border-b border-grey-200"
+        :class="{ 'border-error': nameError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
       <data-select
         v-model="fixedCostCategory"
         name="category"
         :optionArray="costCategoryOptions"
-        parentClass="basis-6/24 pr-2 md:pr-6"
-        class="text-center border-b border-grey-200"
+        parentClass="basis-6/24  pr-2 md:pr-6"
+        class="border-b border-grey-200"
+        :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
       <data-input
@@ -98,7 +99,8 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
         placeholder="Amount"
         name="amount"
         parentClass="basis-3/24 pr-2 md:pr-6"
-        class="text-center border-b border-grey-200"
+        class="text-center border-b border-grey-200 w-[120px]"
+        :class="{ 'border-error': amountError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
       <data-select
@@ -107,20 +109,23 @@ const { value: fixedCostPeriod } = useField('period', undefined, {
         :optionArray="costPeriodOptions"
         parentClass="basis-3/24 pr-2 md:pr-6"
         class="border-b border-grey-200"
+        :class="{ 'border-error': periodError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
+      <div class="basis-3/24 pr-4 md:pr-16"></div>
     </fieldset>
-    <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
-    <span class="error-text">{{ amountError }} </span>
-    <form-button
-      label="+ Add Fixed Cost"
-      type="submit"
-      class="btn-add font-bold"
-      v-if="isOpen === false"
-    />
-    <div class="flex flex-row p-1 md:p-4 h-full" v-else>
-      <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
-      <form-button label="Add" type="submit" class="modal-btn-add" />
+    <div class="flex flex-col justify-between sm:h-[100px]">
+      <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
+      <span class="error-text">{{ amountError }} </span>
+      <form-button
+        label="+ Add Fixed Cost"
+        class="btn-add font-bold"
+        v-if="isOpen === false"
+      />
+      <div class="flex flex-row p-1 md:p-4 h-full" v-else>
+        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
+        <form-button label="Add" type="submit" class="modal-btn-add" />
+      </div>
     </div>
   </Form>
 </template>
