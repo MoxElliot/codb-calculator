@@ -5,11 +5,12 @@ import { onUpdated } from 'vue'
 import FormButton from '../FormComponents/FormButton.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import FixedCostDataInput from './FixedCostDataInput.vue'
+import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { isOpen } = storeToRefs(modalStore)
-const { closeModal, openModal } = modalStore
+const { isOpen, menuId, isActive } = storeToRefs(modalStore)
+const { openMenuModal, openModal } = modalStore
 
 const reportStore = useReportStore()
 const { fixedCosts } = storeToRefs(reportStore)
@@ -40,15 +41,21 @@ const deleteCost = (fixedCost: {
   reportStore.fixedCosts = filtersList
   totalFixedCostAction()
 }
+
+const getMenuId = (id:string) => {
+  openMenuModal(id)
+  console.log("in getMenuId", menuId.value)
+}
 </script>
 
 <template>
-  <div class="mt-2 md:mt-8 w-full md:w-8/10 ">
+  <div class="mt-2 md:mt-8 w-full md:w-8/10">
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in fixedCostHeadingArray">
         <p>{{ heading[0] }}</p>
       </div>
     </div>
+
     <div class="h-32 md:h-64 w-screen sm:w-full overflow-auto">
       <div
         class="h-10 md:h-16"
@@ -73,9 +80,18 @@ const deleteCost = (fixedCost: {
             <p class="border-b border-grey-200">${{ fixedCost.individualTotal }}</p>
           </div>
           <button
-            class="basis-3/24 bg-costDelete bg-no-repeat bg-center pr-2 md:pr-6"
+            class="hidden md:block basis-3/24 bg-costDelete bg-no-repeat pr-2 md:pr-6"
             @click="deleteCost(fixedCost)"
           ></button>
+          <button class="block md:hidden basis-3/24 pr-2 md:pr-6" @click="getMenuId(fixedCost.id)">
+            ...
+          </button>
+          <ellipsis-modal v-if="menuId === fixedCost.id" :id="fixedCost.id" class="basis-3/24 pr-2">
+            <template #body>
+              <button>Edit</button>
+              <button>Delete</button>
+            </template>
+          </ellipsis-modal>
         </div>
       </div>
     </div>

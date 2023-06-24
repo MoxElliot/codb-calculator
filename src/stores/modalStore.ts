@@ -2,11 +2,15 @@ import { defineStore } from 'pinia'
 
 export type Modal = {
   isOpen: boolean
+  menuId: string
+  isActive:boolean
 }
 
 export const useModalStore = defineStore('modalStore', {
   state: (): Modal => ({
-    isOpen: false
+    isOpen: false,
+    menuId: '1',
+    isActive: true
   }),
   actions: {
     openModal() {
@@ -14,8 +18,12 @@ export const useModalStore = defineStore('modalStore', {
     },
     closeModal() {
       this.isOpen = false
-      console.log('in Modal Store', this.isOpen)
-    }
+    },
+    openMenuModal(menuId: string) {
+      this.menuId = menuId
+    },
+    closeMenuModal(menuId: string) {
+      this.menuId = menuId    }
   }
 })
 
