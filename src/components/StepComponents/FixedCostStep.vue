@@ -8,7 +8,7 @@ import FormModal from '../ModalComponents/FormModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { isOpen, menuId, ellipsisModalisOpen } = storeToRefs(modalStore)
+const { formModalIsOpen, ellipsisModalisOpen } = storeToRefs(modalStore)
 const { closeEllipsisModal } = modalStore
 
 const reportStore = useReportStore()
@@ -22,7 +22,7 @@ onMounted(() => {
 
 <template>
   
-    <form-modal v-if="isOpen" class="flex flex-col">
+    <form-modal v-if="formModalIsOpen" class="flex flex-col">
       <template #header>
         <div
           class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif"

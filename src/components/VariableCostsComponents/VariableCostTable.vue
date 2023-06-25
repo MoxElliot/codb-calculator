@@ -8,11 +8,11 @@ import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { isOpen } = storeToRefs(modalStore)
-const { openModal } = modalStore
+const { menuId } = storeToRefs(modalStore)
+const { openEllipsisModal, openFormModal } = modalStore
 
 const reportStore = useReportStore()
-const { variableCosts, totalVariableCosts } = storeToRefs(reportStore)
+const { variableCosts } = storeToRefs(reportStore)
 const { totalVariableCostAction } = reportStore
 const variableCostHeadingArray = [
   ['Name', 'basis-6/18 pr-2 md:pr-8'],
@@ -66,6 +66,24 @@ const deleteCost = (variableCost: {
             class="basis-3/18 bg-costDelete bg-no-repeat bg-center pr-2 md:pr-6"
             @click="deleteCost(variableCost)"
           ></button>
+          <ellipsis-modal
+            class="block md:hidden basis-3/24 pr-2 md:pr-6"
+            v-if="menuId === variableCost.id"
+            :id="variableCost.id"
+          >
+            <template #body>
+              <button>Edit</button>
+              <button>Delete</button>
+            </template>
+          </ellipsis-modal>
+          <button
+            v-else
+            class="block md:hidden basis-3/24 pr-2 md:pr-6"
+            @click="openEllipsisModal(variableCost.id)"
+            @click.stop=""
+          >
+            ...
+          </button>
         </div>
       </div>
     </div>
@@ -78,7 +96,7 @@ const deleteCost = (variableCost: {
       label="+ Add Variable Cost"
       type="submit"
       class="btn-add font-bold"
-      @click="openModal()"
+      @click="openFormModal()"
     />
   </div>
 </template>

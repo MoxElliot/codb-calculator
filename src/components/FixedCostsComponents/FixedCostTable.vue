@@ -8,10 +8,9 @@ import FixedCostDataInput from './FixedCostDataInput.vue'
 import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
-
 const modalStore = useModalStore()
 const { menuId } = storeToRefs(modalStore)
-const { openEllipsisModal, openModal } = modalStore
+const { openEllipsisModal, openFormModal } = modalStore
 
 const reportStore = useReportStore()
 const { fixedCosts } = storeToRefs(reportStore)
@@ -41,7 +40,6 @@ const deleteCost = (fixedCost: {
   reportStore.fixedCosts = filtersList
   totalFixedCostAction()
 }
-
 </script>
 
 <template>
@@ -79,12 +77,10 @@ const deleteCost = (fixedCost: {
             class="hidden md:block basis-3/24 bg-costDelete bg-no-repeat pr-2 md:pr-6"
             @click="deleteCost(fixedCost)"
           ></button>
-
           <ellipsis-modal
-            class="basis-3/24 pr-2 md:pr-6"
+            class="block md:hidden basis-3/24 pr-2 md:pr-6"
             v-if="menuId === fixedCost.id"
             :id="fixedCost.id"
-           
           >
             <template #body>
               <button>Edit</button>
@@ -102,17 +98,17 @@ const deleteCost = (fixedCost: {
         </div>
       </div>
     </div>
-  </div>
-  <div class="hidden md:flex w-screen sm:w-full">
-    <fixed-cost-data-input />
-  </div>
 
+    <div class="hidden md:flex w-screen sm:w-full">
+      <fixed-cost-data-input />
+    </div>
+  </div>
   <div class="md:hidden">
     <form-button
       label="+ Add Fixed Cost"
       type="submit"
       class="btn-add font-bold"
-      @click="openModal()"
+      @click="openFormModal()"
     />
   </div>
 </template>

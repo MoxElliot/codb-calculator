@@ -11,8 +11,8 @@ import { storeToRefs } from 'pinia'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { isOpen } = storeToRefs(modalStore)
-const { closeModal } = modalStore
+const { formModalIsOpen } = storeToRefs(modalStore)
+const { closeFormModal } = modalStore
 
 const reportStore = useReportStore()
 const { blankSubmitError, variableFormValid, variableCosts } = storeToRefs(reportStore)
@@ -59,7 +59,7 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
   >
     <fieldset
       :class="
-        !isOpen
+        !formModalIsOpen
           ? 'flex flex-row w-full h-10 md:h-16 mt-4 '
           : 'flex flex-col basis-full justify-center items-center h-full text-center'
       "
@@ -99,10 +99,10 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
       <form-button
         label="+ Add Variable Cost"
         class="btn-add font-bold"
-        v-if="isOpen === false"
+        v-if="formModalIsOpen === false"
       />
       <div class="flex flex-row p-1 md:p-4 h-full" v-else>
-        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
+        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeFormModal" />
         <form-button label="Add" type="submit" class="modal-btn-add" />
       </div>
     </div>
