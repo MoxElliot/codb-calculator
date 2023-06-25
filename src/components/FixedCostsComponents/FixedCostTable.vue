@@ -8,9 +8,10 @@ import FixedCostDataInput from './FixedCostDataInput.vue'
 import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
+
 const modalStore = useModalStore()
-const { isOpen, menuId, isActive } = storeToRefs(modalStore)
-const { openMenuModal, openModal } = modalStore
+const { menuId } = storeToRefs(modalStore)
+const { openEllipsisModal, openModal } = modalStore
 
 const reportStore = useReportStore()
 const { fixedCosts } = storeToRefs(reportStore)
@@ -26,7 +27,6 @@ const fixedCostHeadingArray = [
 
 onUpdated(() => {
   scrollToNewCost(fixedCosts)
-  console.log("in table'", fixedCosts.value)
 })
 
 const deleteCost = (fixedCost: {
@@ -42,10 +42,6 @@ const deleteCost = (fixedCost: {
   totalFixedCostAction()
 }
 
-const getMenuId = (id:string) => {
-  openMenuModal(id)
-  console.log("in getMenuId", menuId.value)
-}
 </script>
 
 <template>
@@ -83,21 +79,32 @@ const getMenuId = (id:string) => {
             class="hidden md:block basis-3/24 bg-costDelete bg-no-repeat pr-2 md:pr-6"
             @click="deleteCost(fixedCost)"
           ></button>
-          <button class="block md:hidden basis-3/24 pr-2 md:pr-6" @click="getMenuId(fixedCost.id)">
-            ...
-          </button>
-          <ellipsis-modal v-if="menuId === fixedCost.id" :id="fixedCost.id" class="basis-3/24 pr-2">
+
+          <ellipsis-modal
+            class="basis-3/24 pr-2 md:pr-6"
+            v-if="menuId === fixedCost.id"
+            :id="fixedCost.id"
+           
+          >
             <template #body>
               <button>Edit</button>
               <button>Delete</button>
             </template>
           </ellipsis-modal>
+          <button
+            v-else
+            class="block md:hidden basis-3/24 pr-2 md:pr-6"
+            @click="openEllipsisModal(fixedCost.id)"
+            @click.stop=""
+          >
+            ...
+          </button>
         </div>
       </div>
     </div>
-    <div class="hidden md:flex w-screen sm:w-full">
-      <fixed-cost-data-input />
-    </div>
+  </div>
+  <div class="hidden md:flex w-screen sm:w-full">
+    <fixed-cost-data-input />
   </div>
 
   <div class="md:hidden">

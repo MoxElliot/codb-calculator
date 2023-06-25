@@ -3,14 +3,14 @@ import { defineStore } from 'pinia'
 export type Modal = {
   isOpen: boolean
   menuId: string
-  isActive:boolean
+  ellipsisModalisOpen: boolean
 }
 
 export const useModalStore = defineStore('modalStore', {
   state: (): Modal => ({
     isOpen: false,
-    menuId: '1',
-    isActive: true
+    menuId: ' ',
+    ellipsisModalisOpen: false
   }),
   actions: {
     openModal() {
@@ -19,11 +19,16 @@ export const useModalStore = defineStore('modalStore', {
     closeModal() {
       this.isOpen = false
     },
-    openMenuModal(menuId: string) {
+    openEllipsisModal(menuId: string) {
       this.menuId = menuId
+      this.ellipsisModalisOpen = true
+      console.log("in open")
     },
-    closeMenuModal(menuId: string) {
-      this.menuId = menuId    }
+    closeEllipsisModal(menuId: string) {
+      this.menuId = menuId
+      this.ellipsisModalisOpen = false
+      console.log("in close")
+    }
   }
 })
 
