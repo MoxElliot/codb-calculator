@@ -67,7 +67,7 @@ const deleteCost = (variableCost: {
             @click="deleteCost(variableCost)"
           ></button>
           <ellipsis-modal
-            class="block md:hidden basis-3/24 pr-2 md:pr-6"
+            class="block md:hidden basis-3/24 sm:pr-2 md:pr-6"
             v-if="menuId === variableCost.id"
             :id="variableCost.id"
           >
@@ -78,7 +78,7 @@ const deleteCost = (variableCost: {
           </ellipsis-modal>
           <button
             v-else
-            class="block md:hidden basis-3/24 pr-2 md:pr-6"
+            class="block md:hidden basis-3/24 sm:pr-2 md:pr-6"
             @click="openEllipsisModal(variableCost.id)"
             @click.stop=""
           >

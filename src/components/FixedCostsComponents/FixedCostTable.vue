@@ -9,7 +9,7 @@ import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { menuId } = storeToRefs(modalStore)
+const { ellipsisModalisOpen } = storeToRefs(modalStore)
 const { openEllipsisModal, openFormModal } = modalStore
 
 const reportStore = useReportStore()
@@ -43,6 +43,7 @@ const deleteCost = (fixedCost: {
 </script>
 
 <template>
+  <ellipsis-modal class="ellipsis-modal" v-if="ellipsisModalisOpen"> </ellipsis-modal>
   <div class="mt-2 md:mt-8 w-full md:w-8/10">
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in fixedCostHeadingArray">
@@ -77,19 +78,8 @@ const deleteCost = (fixedCost: {
             class="hidden md:block basis-3/24 bg-costDelete bg-no-repeat pr-2 md:pr-6"
             @click="deleteCost(fixedCost)"
           ></button>
-          <ellipsis-modal
-            class="block md:hidden basis-3/24 pr-2 md:pr-6"
-            v-if="menuId === fixedCost.id"
-            :id="fixedCost.id"
-          >
-            <template #body>
-              <button>Edit</button>
-              <button>Delete</button>
-            </template>
-          </ellipsis-modal>
           <button
-            v-else
-            class="block md:hidden basis-3/24 pr-2 md:pr-6"
+            class="block md:hidden basis-3/24 sm:pr-2 md:pr-6"
             @click="openEllipsisModal(fixedCost.id)"
             @click.stop=""
           >
