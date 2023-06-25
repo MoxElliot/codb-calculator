@@ -5,11 +5,12 @@ import { onUpdated } from 'vue'
 import FormButton from '../FormComponents/FormButton.vue'
 import VariableCostDataInput from '../VariableCostsComponents/VariableCostDataInput.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
+import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { menuId } = storeToRefs(modalStore)
-const { openEllipsisModal, openFormModal } = modalStore
+const { ellipsisModalisOpen } = storeToRefs(modalStore)
+const { openEllipsisModal, openFormModal, closeEllipsisModal } = modalStore
 
 const reportStore = useReportStore()
 const { variableCosts } = storeToRefs(reportStore)
@@ -39,6 +40,8 @@ const deleteCost = (variableCost: {
 </script>
 
 <template>
+  <ellipsis-modal class="ellipsis-modal z-30" v-if="ellipsisModalisOpen"> </ellipsis-modal>
+  <div v-if="ellipsisModalisOpen" class="fixed top-0 bottom-0 left-0 right-0 z-10" @click="closeEllipsisModal('')"></div>
   <div class="mt-2 md:mt-8 w-full md:w-8/10">
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in variableCostHeadingArray">
@@ -63,21 +66,10 @@ const deleteCost = (variableCost: {
             <p class="border-b border-grey-200">$ {{ variableCost.amount }}</p>
           </div>
           <button
-            class="basis-3/18 bg-costDelete bg-no-repeat bg-center pr-2 md:pr-6"
+            class="hidden md:block basis-3/24 bg-costDelete bg-no-repeat pr-2 md:pr-6"
             @click="deleteCost(variableCost)"
           ></button>
-          <ellipsis-modal
-            class="block md:hidden basis-3/24 sm:pr-2 md:pr-6"
-            v-if="menuId === variableCost.id"
-            :id="variableCost.id"
-          >
-            <template #body>
-              <button>Edit</button>
-              <button>Delete</button>
-            </template>
-          </ellipsis-modal>
           <button
-            v-else
             class="block md:hidden basis-3/24 sm:pr-2 md:pr-6"
             @click="openEllipsisModal(variableCost.id)"
             @click.stop=""
