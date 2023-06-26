@@ -10,15 +10,15 @@ import DataSelect from '../FormComponents/DataSelect.vue'
 import { useField, useForm, Form } from 'vee-validate'
 import { storeToRefs } from 'pinia'
 import { useModalStore } from '../../stores/modalStore'
-import type FixedCostObj from '../../types/FixedCostObj'
 
 const modalStore = useModalStore()
-const { formModalIsOpen } = storeToRefs(modalStore)
+const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
 const { closeFormModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError, fixedFormValid, fixedCosts } = storeToRefs(reportStore)
-const { handleAddCost, addFixedCostAction, setFixedFormValidAction } = reportStore
+const { blankSubmitError, fixedFormValid, fixedCosts, editFixedCost } = storeToRefs(reportStore)
+const { handleAddCost, addFixedCostAction, setFixedFormValidAction, replaceFixedCostAction } =
+  reportStore
 
 const props = defineProps<{
   id?: string
@@ -28,7 +28,6 @@ const props = defineProps<{
   frequency?: string
   individualTotal?: number
 }>()
-console.log('inFixedCostDataiNput', props.frequency)
 const fixedCostTotal = ref<number>(0)
 
 const schema = Yup.object({
@@ -55,28 +54,44 @@ const { value: fixedCostAmount, errorMessage: amountError } = useField('amount',
   initialValue: props.amount
 })
 
-const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('frequency', undefined, {
-  initialValue: props.frequency
-})
+const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
+  'frequency',
+  undefined,
+  {
+    initialValue: props.frequency
+  }
+)
 </script>
 
 <template>
   <Form
-    class="flex flex-col basis-full h-full "
+    class="flex flex-col basis-full h-full"
     :valiation-schema="schema"
     @submit="
-      handleAddCost(
-        fixedCostName,
-        fixedCostCategory,
-        fixedCostAmount,
-        meta.valid,
-        setFixedFormValidAction,
-        resetForm,
-        addFixedCostAction,
-        fixedCosts,
-        fixedCostFrequency,
-        fixedCostTotal
-      )
+      formModalType === 'add'
+        ? handleAddCost(
+            fixedCostName,
+            fixedCostCategory,
+            fixedCostAmount,
+            meta.valid,
+            setFixedFormValidAction,
+            resetForm,
+            addFixedCostAction,
+            fixedCosts,
+            fixedCostFrequency,
+            fixedCostTotal
+          )
+        : replaceFixedCostAction(
+            editFixedCost[0].id,
+            fixedCostName,
+            fixedCostCategory,
+            fixedCostAmount,
+            meta.valid,
+            setFixedFormValidAction,
+            resetForm,
+            fixedCostFrequency,
+            fixedCostTotal
+          )
     "
   >
     <fieldset
@@ -124,7 +139,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('fr
       />
       <div class="basis-6/24 pr-4 md:pr-16"></div>
     </fieldset>
- 
+
     <div class="flex flex-col justify-between sm:h-[100px]">
       <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
       <span class="error-text">{{ amountError }} </span>
@@ -140,7 +155,11 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('fr
           class="modal-btn-cancel"
           @click="closeFormModal"
         />
-        <form-button label="Add" type="submit" class="modal-btn-add" />
+        <form-button
+          :label="formModalType === 'add' ? 'Add' : 'Edit'"
+          type="submit"
+          class="modal-btn-add"
+        />
       </div>
     </div>
   </Form>

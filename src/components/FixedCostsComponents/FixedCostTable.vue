@@ -37,7 +37,6 @@ const handleEditCost = (
   individualTotal: number
 ) => {
   openFormModal('edit')
-  console.log('in handleEdit', id, name, category, amount, frequency, individualTotal)
   editFixedCostAction(id, name, category, amount, frequency, individualTotal)
 }
 

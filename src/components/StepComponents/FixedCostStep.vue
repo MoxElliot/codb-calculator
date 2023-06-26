@@ -18,9 +18,6 @@ onMounted(() => {
   updateInputValidAction(true)
 })
 
-
-
-console.log("editFixedCost in FixedCostStep", editFixedCost.value)
 //https://stackoverflow.com/questions/45553162/how-to-get-mouse-coordinates-in-vuejs
 </script>
 
@@ -42,7 +39,7 @@ console.log("editFixedCost in FixedCostStep", editFixedCost.value)
     </template>
     <template #body>
       <fixed-cost-data-input v-if="formModalType === 'add'" />
-      <fixed-cost-data-input v-else-if="formModalType === 'edit'" :name="editFixedCost[0].name" :category="editFixedCost[0].category" :amount="editFixedCost[0].amount" :frequency="editFixedCost[0].frequency"/>
+      <fixed-cost-data-input v-else-if="formModalType === 'edit'" :id="editFixedCost[0].id" :name="editFixedCost[0].name" :category="editFixedCost[0].category" :amount="editFixedCost[0].amount" :frequency="editFixedCost[0].frequency"/>
     </template>
   </form-modal>
 
