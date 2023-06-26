@@ -3,7 +3,7 @@ const testingCostArr = [{
     name: 'Rent',
     category: 'Overhead',
     amount: 1000,
-    payPeriod: 'monthly',
+    frequency: 'Monthly',
     individualTotal: 1000
   },
   {
@@ -11,7 +11,7 @@ const testingCostArr = [{
     name: 'Test2',
     category: 'Overhead',
     amount: 1000,
-    payPeriod: 'monthly',
+    frequency: 'Monthly',
     individualTotal: 1000
   },
   {
@@ -19,7 +19,7 @@ const testingCostArr = [{
     name: 'Test3',
     category: 'Overhead',
     amount: 1000,
-    payPeriod: 'monthly',
+    frequency: 'Monthly',
     individualTotal: 1000
   },
   {
@@ -27,7 +27,7 @@ const testingCostArr = [{
     name: 'Rent',
     category: 'Overhead',
     amount: 1000,
-    payPeriod: 'monthly',
+    frequency: 'Monthly',
     individualTotal: 1000
   },
   {
@@ -35,7 +35,7 @@ const testingCostArr = [{
     name: 'Test2',
     category: 'Overhead',
     amount: 1000,
-    payPeriod: 'monthly',
+    frequency: 'Monthly',
     individualTotal: 1000
   },
   {
@@ -43,7 +43,7 @@ const testingCostArr = [{
     name: 'Test3',
     category: 'Overhead',
     amount: 1000,
-    payPeriod: 'monthly',
+    frequency: 'Monthly',
     individualTotal: 1000
   },
   {
@@ -51,7 +51,7 @@ const testingCostArr = [{
     name: 'Rent',
     category: 'Overhead',
     amount: 1000,
-    payPeriod: 'monthly',
+    frequency: 'Monthly',
     individualTotal: 1000
   },
   {
@@ -59,7 +59,7 @@ const testingCostArr = [{
     name: 'Test2',
     category: 'Overhead',
     amount: 1000,
-    payPeriod: 'monthly',
+    frequency: 'Monthly',
     individualTotal: 1000
   },
   {
@@ -67,7 +67,7 @@ const testingCostArr = [{
     name: 'Test3',
     category: 'Overhead',
     amount: 1000,
-    payPeriod: 'monthly',
+    frequency: 'Monthly',
     individualTotal: 1000
   }]
 

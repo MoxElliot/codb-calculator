@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 
 export type Modal = {
   formModalIsOpen: boolean
+  formModalType: string
   menuId: string
   ellipsisModalisOpen: boolean
 }
@@ -9,12 +10,14 @@ export type Modal = {
 export const useModalStore = defineStore('modalStore', {
   state: (): Modal => ({
     formModalIsOpen: false,
+    formModalType: '',
     menuId: ' ',
     ellipsisModalisOpen: false
   }),
   actions: {
-    openFormModal() {
+    openFormModal(formModalType:string) {
       this.formModalIsOpen = true
+      this.formModalType = formModalType
     },
     closeFormModal() {
       this.formModalIsOpen = false

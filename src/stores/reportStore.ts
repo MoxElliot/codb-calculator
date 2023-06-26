@@ -33,6 +33,7 @@ export const useReportStore = defineStore('reportStore', {
     blankSubmitError: '',
     fixedFormValid: true,
     variableFormValid: true,
+    editFixedCost:[] as FixedCostObj[]
     // companyName: '',
     // bookingsPerMonth: 0,
     // priceAveragePerBooking: 0,
@@ -63,7 +64,7 @@ export const useReportStore = defineStore('reportStore', {
     },
     addFixedCostAction(fixedCost: FixedCostObj) {
       const payPeriodMultiplierElement = payPeriodOptionsArray.find(
-        (ele) => ele.day === fixedCost.payPeriod
+        (ele) => ele.day === fixedCost.frequency
       )
       const payPeriodMultiplier: any = payPeriodMultiplierElement?.multiplier
 
@@ -72,6 +73,20 @@ export const useReportStore = defineStore('reportStore', {
       this.fixedCosts.unshift(fixedCost)
 
       this.totalFixedCostAction()
+    },
+    editFixedCostAction(id: string,
+      name: string,
+      category: string,
+      amount: number | null,
+      frequency: string,
+      individualTotal: number) {
+      this.editFixedCost[0]=({id,
+        name,
+        category,
+        amount,
+        frequency,
+        individualTotal})    
+      console.log("editFixedCost", this.editFixedCost)
     },
     addBookingsPerMonthAction(bookingsPerMonth: number) {
       this.bookingsPerMonth = bookingsPerMonth
@@ -124,12 +139,12 @@ export const useReportStore = defineStore('reportStore', {
       resetForm: Function,
       addCostAction: Function,
       costArr: any[],
-      costPeriod?: string | undefined,
-      costTotal?: number | undefined
+      costFrequency?: string,
+      costTotal?: number,
     ) {
       if (allValid) {
         const modalStore = useModalStore()
-        const { closeModal } = modalStore
+        const { closeFormModal } = modalStore
 
         formValidAction(true)
         addCostAction({
@@ -137,10 +152,10 @@ export const useReportStore = defineStore('reportStore', {
           name: costName,
           category: costCategory,
           amount: costAmount,
-          payPeriod: costPeriod,
+          frequency: costFrequency,
           individualTotal: costTotal
         })
-        closeModal()
+        closeFormModal()
         resetForm()
       } else {
         formValidAction(false)

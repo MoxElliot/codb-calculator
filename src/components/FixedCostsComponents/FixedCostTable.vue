@@ -14,7 +14,7 @@ const { openEllipsisModal, openFormModal, closeEllipsisModal } = modalStore
 
 const reportStore = useReportStore()
 const { fixedCosts } = storeToRefs(reportStore)
-const { totalFixedCostAction } = reportStore
+const { totalFixedCostAction, editFixedCostAction } = reportStore
 const fixedCostHeadingArray = [
   ['Name', 'text-center basis-6/24 pr-2 md:pr-6'],
   ['Category', 'text-center basis-6/24 pr-2 md:pr-6'],
@@ -28,12 +28,25 @@ onUpdated(() => {
   scrollToNewCost(fixedCosts)
 })
 
+const handleEditCost = (
+  id: string,
+  name: string,
+  category: string,
+  amount: number | null,
+  frequency: string,
+  individualTotal: number
+) => {
+  openFormModal('edit')
+  console.log('in handleEdit', id, name, category, amount, frequency, individualTotal)
+  editFixedCostAction(id, name, category, amount, frequency, individualTotal)
+}
+
 const deleteCost = (fixedCost: {
   id: string
   name: string
   category: string
   amount: number | null
-  payPeriod: string
+  frequency: string
   individualTotal: number | undefined
 }) => {
   const filtersList = reportStore.fixedCosts.filter((el) => el !== fixedCost)
@@ -44,7 +57,11 @@ const deleteCost = (fixedCost: {
 
 <template>
   <ellipsis-modal class="ellipsis-modal" v-if="ellipsisModalisOpen"> </ellipsis-modal>
-  <div v-if="ellipsisModalisOpen" class="fixed top-0 bottom-0 left-0 right-0 z-10" @click="closeEllipsisModal('')"></div>
+  <div
+    v-if="ellipsisModalisOpen"
+    class="fixed top-0 bottom-0 left-0 right-0 z-10"
+    @click="closeEllipsisModal('')"
+  ></div>
   <div class="mt-2 md:mt-8 w-full md:w-8/10">
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in fixedCostHeadingArray">
@@ -58,6 +75,16 @@ const deleteCost = (fixedCost: {
         v-for="fixedCost in fixedCosts"
         :id="fixedCost.id"
         :key="fixedCost.id"
+        @click="
+          handleEditCost(
+            fixedCost.id,
+            fixedCost.name,
+            fixedCost.category,
+            fixedCost.amount,
+            fixedCost.frequency,
+            fixedCost.individualTotal
+          )
+        "
       >
         <div class="flex flex-row">
           <div class="basis-6/24 pr-2 md:pr-6">
@@ -70,7 +97,7 @@ const deleteCost = (fixedCost: {
             <p class="border-b border-grey-200">${{ fixedCost.amount }}</p>
           </div>
           <div class="basis-3/24 pr-2 md:pr-6">
-            <p class="border-b border-grey-200">{{ fixedCost.payPeriod }}</p>
+            <p class="border-b border-grey-200">{{ fixedCost.frequency }}</p>
           </div>
           <div class="basis-3/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">${{ fixedCost.individualTotal }}</p>
@@ -99,7 +126,7 @@ const deleteCost = (fixedCost: {
       label="+ Add Fixed Cost"
       type="submit"
       class="btn-add font-bold"
-      @click="openFormModal()"
+      @click="openFormModal('add')"
     />
   </div>
 </template>

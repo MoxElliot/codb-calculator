@@ -10,6 +10,7 @@ import DataSelect from '../FormComponents/DataSelect.vue'
 import { useField, useForm, Form } from 'vee-validate'
 import { storeToRefs } from 'pinia'
 import { useModalStore } from '../../stores/modalStore'
+import type FixedCostObj from '../../types/FixedCostObj'
 
 const modalStore = useModalStore()
 const { formModalIsOpen } = storeToRefs(modalStore)
@@ -19,13 +20,22 @@ const reportStore = useReportStore()
 const { blankSubmitError, fixedFormValid, fixedCosts } = storeToRefs(reportStore)
 const { handleAddCost, addFixedCostAction, setFixedFormValidAction } = reportStore
 
+const props = defineProps<{
+  id?: string
+  name?: string
+  category?: string
+  amount?: number | null
+  frequency?: string
+  individualTotal?: number
+}>()
+console.log('inFixedCostDataiNput', props.frequency)
 const fixedCostTotal = ref<number>(0)
 
 const schema = Yup.object({
   name: Yup.string().required(' '),
   category: Yup.string().required(' '),
   amount: Yup.number().typeError('Please Enter a Number for an Expense').required(' '),
-  period: Yup.string().required(' ')
+  frequency: Yup.string().required(' ')
 })
 
 const { resetForm, meta } = useForm({
@@ -34,19 +44,19 @@ const { resetForm, meta } = useForm({
 })
 
 const { value: fixedCostName, errorMessage: nameError } = useField('name', undefined, {
-  initialValue: ''
+  initialValue: props.name
 })
 
 const { value: fixedCostCategory, errorMessage: categoryError } = useField('category', undefined, {
-  initialValue: ''
+  initialValue: props.category
 })
 
 const { value: fixedCostAmount, errorMessage: amountError } = useField('amount', undefined, {
-  initialValue: null
+  initialValue: props.amount
 })
 
-const { value: fixedCostPeriod, errorMessage: periodError } = useField('period', undefined, {
-  initialValue: ''
+const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('frequency', undefined, {
+  initialValue: props.frequency
 })
 </script>
 
@@ -64,7 +74,7 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         resetForm,
         addFixedCostAction,
         fixedCosts,
-        fixedCostPeriod,
+        fixedCostFrequency,
         fixedCostTotal
       )
     "
@@ -104,12 +114,12 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         @input="setFixedFormValidAction(true)"
       />
       <data-select
-        v-model="fixedCostPeriod"
-        name="period"
+        v-model="fixedCostFrequency"
+        name="frequency"
         :optionArray="costPeriodOptions"
         parentClass="basis-3/24 pr-2 md:pr-6"
         class="border-b border-grey-200"
-        :class="{ 'border-error': periodError && blankSubmitError }"
+        :class="{ 'border-error': frequencyError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
       <div class="basis-3/24 pr-4 md:pr-16"></div>
@@ -123,7 +133,12 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         v-if="formModalIsOpen === false"
       />
       <div class="flex flex-row p-1 md:p-4 h-full" v-else>
-        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeFormModal" />
+        <form-button
+          label="Cancel"
+          type="button"
+          class="modal-btn-cancel"
+          @click="closeFormModal"
+        />
         <form-button label="Add" type="submit" class="modal-btn-add" />
       </div>
     </div>
