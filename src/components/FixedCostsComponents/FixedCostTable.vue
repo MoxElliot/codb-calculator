@@ -52,7 +52,7 @@ const deleteCost = (fixedCost: {
       </div>
     </div>
 
-    <div class="h-32 md:h-64 w-screen sm:w-full overflow-auto">
+    <div class="max-h-32 md:max-h-64 w-screen sm:w-full overflow-auto">
       <div
         class="h-10 md:h-16"
         v-for="fixedCost in fixedCosts"
