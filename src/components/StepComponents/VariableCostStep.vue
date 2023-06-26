@@ -34,7 +34,7 @@ onMounted(() => {
     </template>
   </form-modal>
 
-  <div class="flex flex-col text-center items-center justify-center basis-full md:h-fit h-full">
+  <div class="flex flex-col text-center items-center justify-center basis-full h-fit">
     <div
       class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 w-8/10 md:mb-8 lg:w-6/10"
     >
