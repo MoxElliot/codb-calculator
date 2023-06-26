@@ -5,14 +5,15 @@ import { onUpdated } from 'vue'
 import FormButton from '../FormComponents/FormButton.vue'
 import VariableCostDataInput from '../VariableCostsComponents/VariableCostDataInput.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
+import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { isOpen } = storeToRefs(modalStore)
-const { openModal } = modalStore
+const { ellipsisModalisOpen } = storeToRefs(modalStore)
+const { openEllipsisModal, openFormModal, closeEllipsisModal } = modalStore
 
 const reportStore = useReportStore()
-const { variableCosts, totalVariableCosts } = storeToRefs(reportStore)
+const { variableCosts } = storeToRefs(reportStore)
 const { totalVariableCostAction } = reportStore
 const variableCostHeadingArray = [
   ['Name', 'basis-6/18 pr-2 md:pr-8'],
@@ -39,13 +40,15 @@ const deleteCost = (variableCost: {
 </script>
 
 <template>
+  <ellipsis-modal class="ellipsis-modal z-30" v-if="ellipsisModalisOpen"> </ellipsis-modal>
+  <div v-if="ellipsisModalisOpen" class="fixed top-0 bottom-0 left-0 right-0 z-10" @click="closeEllipsisModal('')"></div>
   <div class="mt-2 md:mt-8 w-full md:w-8/10">
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in variableCostHeadingArray">
         <p>{{ heading[0] }}</p>
       </div>
     </div>
-    <div class="h-32 md:h-64 w-screen sm:w-full overflow-auto">
+    <div class="max-h-32 md:max-h-64 w-screen sm:w-full overflow-auto">
       <div
         class="h-10 md:h-16"
         v-for="variableCost in variableCosts"
@@ -63,9 +66,16 @@ const deleteCost = (variableCost: {
             <p class="border-b border-grey-200">$ {{ variableCost.amount }}</p>
           </div>
           <button
-            class="basis-3/18 bg-costDelete bg-no-repeat bg-center pr-2 md:pr-6"
+            class="hidden md:block basis-3/24 bg-costDelete bg-no-repeat pr-2 md:pr-6"
             @click="deleteCost(variableCost)"
           ></button>
+          <button
+            class="block md:hidden basis-3/24 sm:pr-2 md:pr-6"
+            @click="openEllipsisModal(variableCost.id)"
+            @click.stop=""
+          >
+            ...
+          </button>
         </div>
       </div>
     </div>
@@ -78,7 +88,7 @@ const deleteCost = (variableCost: {
       label="+ Add Variable Cost"
       type="submit"
       class="btn-add font-bold"
-      @click="openModal()"
+      @click="openFormModal()"
     />
   </div>
 </template>

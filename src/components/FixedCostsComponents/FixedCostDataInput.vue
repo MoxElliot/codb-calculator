@@ -12,8 +12,8 @@ import { storeToRefs } from 'pinia'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { isOpen } = storeToRefs(modalStore)
-const { closeModal } = modalStore
+const { formModalIsOpen } = storeToRefs(modalStore)
+const { closeFormModal } = modalStore
 
 const reportStore = useReportStore()
 const { blankSubmitError, fixedFormValid, fixedCosts } = storeToRefs(reportStore)
@@ -71,7 +71,7 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
   >
     <fieldset
       :class="
-        !isOpen
+        !formModalIsOpen
           ? 'flex flex-row w-full h-10 md:h-16 mt-4 '
           : 'flex flex-col basis-full justify-center items-center h-full text-center'
       "
@@ -99,7 +99,7 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         placeholder="Amount"
         name="amount"
         parentClass="basis-3/24 pr-2 md:pr-6"
-        class="text-center border-b border-grey-200 w-[120px]"
+        class="text-center border-b border-grey-200 w-[84px]"
         :class="{ 'border-error': amountError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
@@ -120,10 +120,10 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
       <form-button
         label="+ Add Fixed Cost"
         class="btn-add font-bold"
-        v-if="isOpen === false"
+        v-if="formModalIsOpen === false"
       />
       <div class="flex flex-row p-1 md:p-4 h-full" v-else>
-        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeModal" />
+        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeFormModal" />
         <form-button label="Add" type="submit" class="modal-btn-add" />
       </div>
     </div>

@@ -8,7 +8,8 @@ import FormModal from '../ModalComponents/FormModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { isOpen } = storeToRefs(modalStore)
+const { formModalIsOpen, ellipsisModalisOpen } = storeToRefs(modalStore)
+const { closeEllipsisModal } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
@@ -20,7 +21,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <form-modal v-if="isOpen" class="flex flex-col">
+  <form-modal v-if="formModalIsOpen" class="flex flex-col">
     <template #header>
       <div
         class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif"
@@ -35,7 +36,7 @@ onMounted(() => {
 
   <div class="flex flex-col text-center items-center justify-center basis-full h-fit">
     <div
-      class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 w-8/10 md:mb-8"
+      class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 w-8/10 md:mb-8 lg:w-6/10"
     >
       <p class="">
         Variable Costs for <span>{{ companyName }}</span>

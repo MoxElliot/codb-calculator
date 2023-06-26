@@ -14,6 +14,7 @@
   "dependencies": {
     "lodash.uniqueid": "^4.0.1",
     "pinia": "^2.0.32",
+    "v-click-outside": "^3.2.0",
     "vee-validate": "^4.8.6",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",

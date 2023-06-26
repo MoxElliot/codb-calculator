@@ -1,20 +1,33 @@
 import { defineStore } from 'pinia'
 
 export type Modal = {
-  isOpen: boolean
+  formModalIsOpen: boolean
+  menuId: string
+  ellipsisModalisOpen: boolean
 }
 
 export const useModalStore = defineStore('modalStore', {
   state: (): Modal => ({
-    isOpen: false
+    formModalIsOpen: false,
+    menuId: ' ',
+    ellipsisModalisOpen: false
   }),
   actions: {
-    openModal() {
-      this.isOpen = true
+    openFormModal() {
+      this.formModalIsOpen = true
     },
-    closeModal() {
-      this.isOpen = false
-      console.log('in Modal Store', this.isOpen)
+    closeFormModal() {
+      this.formModalIsOpen = false
+    },
+    openEllipsisModal(menuId: string) {
+      this.menuId = menuId
+      this.ellipsisModalisOpen = true
+      console.log("in open")
+    },
+    closeEllipsisModal(menuId: string) {
+      this.menuId = menuId
+      this.ellipsisModalisOpen = false
+      console.log("in close")
     }
   }
 })
