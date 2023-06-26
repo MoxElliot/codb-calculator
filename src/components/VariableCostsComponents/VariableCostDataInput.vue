@@ -11,12 +11,19 @@ import { storeToRefs } from 'pinia'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { formModalIsOpen } = storeToRefs(modalStore)
+const { formModalIsOpen, formModalType  } = storeToRefs(modalStore)
 const { closeFormModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError, variableFormValid, variableCosts } = storeToRefs(reportStore)
-const { handleAddCost, addVariableCostAction, setVariableFormValidAction } = reportStore
+const { blankSubmitError, variableFormValid, variableCosts, editVariableCost } = storeToRefs(reportStore)
+const { handleAddCost, addVariableCostAction, setVariableFormValidAction, replaceVariableCostAction  } = reportStore
+
+const props = defineProps<{
+  id?: string
+  name?: string
+  category?: string
+  amount?: number | null
+}>()
 
 const schema = Yup.object({
   name: Yup.string().required(' '),
@@ -30,13 +37,13 @@ const { resetForm, meta } = useForm({
 })
 
 const { value: variableCostName, errorMessage: nameError  } = useField('name', undefined, {
-  initialValue: ''
+  initialValue: props.name
 })
 const { value: variableCostCategory, errorMessage: categoryError  } = useField('category', undefined, {
-  initialValue: ''
+  initialValue: props.category
 })
 const { value: variableCostAmount, errorMessage: amountError } = useField('amount', undefined, {
-  initialValue: null
+  initialValue: props.amount
 })
 </script>
 
@@ -44,8 +51,8 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
   <Form
     class="flex flex-col basis-full h-full"
     :valiation-schema="schema"
-    @submit="
-      handleAddCost(
+    @submit="formModalType === 'add'
+      ? handleAddCost(
         variableCostName,
         variableCostCategory,
         variableCostAmount,
@@ -55,6 +62,15 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
         addVariableCostAction,
         variableCosts
       )
+      :replaceVariableCostAction(
+            editVariableCost[0].id,
+            variableCostName,
+            variableCostCategory,
+            variableCostAmount,
+            meta.valid,
+            setVariableFormValidAction,
+            resetForm,
+          )
     "
   >
     <fieldset
@@ -103,7 +119,7 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
       />
       <div class="flex flex-row p-1 md:p-4 h-full" v-else>
         <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeFormModal" />
-        <form-button label="Add" type="submit" class="modal-btn-add" />
+        <form-button :label="formModalType === 'add' ? 'Add' : 'Edit'" type="submit" class="modal-btn-add" />
       </div>
     </div>
   </Form>
