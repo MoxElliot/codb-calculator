@@ -62,7 +62,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('fr
 
 <template>
   <Form
-    class="flex flex-col basis-full h-full"
+    class="flex flex-col basis-full h-full "
     :valiation-schema="schema"
     @submit="
       handleAddCost(
@@ -82,7 +82,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('fr
     <fieldset
       :class="
         !formModalIsOpen
-          ? 'flex flex-row w-full h-10 md:h-16 mt-4 '
+          ? 'flex flex-row h-10 md:h-16 mt-4  w-screen sm:w-full'
           : 'flex flex-col basis-full justify-center items-center h-full text-center'
       "
     >
@@ -108,8 +108,8 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('fr
         v-model="fixedCostAmount"
         placeholder="Amount"
         name="amount"
-        parentClass="basis-3/24 pr-2 md:pr-6"
-        class="text-center border-b border-grey-200 w-[84px]"
+        parentClass="basis-3/24 pr-2 md:pr-6 "
+        class="text-center border-b border-grey-200 w-[87px]"
         :class="{ 'border-error': amountError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
@@ -117,13 +117,14 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('fr
         v-model="fixedCostFrequency"
         name="frequency"
         :optionArray="costPeriodOptions"
-        parentClass="basis-3/24 pr-2 md:pr-6"
+        parentClass="basis-6/24 pr-2 md:pr-6"
         class="border-b border-grey-200"
         :class="{ 'border-error': frequencyError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
-      <div class="basis-3/24 pr-4 md:pr-16"></div>
+      <div class="basis-6/24 pr-4 md:pr-16"></div>
     </fieldset>
+ 
     <div class="flex flex-col justify-between sm:h-[100px]">
       <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
       <span class="error-text">{{ amountError }} </span>

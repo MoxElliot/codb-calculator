@@ -19,7 +19,7 @@ const fixedCostHeadingArray = [
   ['Name', 'text-center basis-6/24 pr-2 md:pr-6'],
   ['Category', 'text-center basis-6/24 pr-2 md:pr-6'],
   ['Amount ($)', 'text-center basis-3/24 pr-2 md:pr-6'],
-  ['Freq', 'text-center basis-3/24 pr-2 md:pr-6'],
+  ['Freq', 'text-center basis-6/24 pr-2 md:pr-6'],
   ['Total', 'text-center basis-3/24 pr-2 md:pr-6'],
   ['', 'text-center basis-3/24 pr-2 md:pr-6']
 ]
@@ -71,11 +71,13 @@ const deleteCost = (fixedCost: {
 
     <div class="max-h-32 md:max-h-64 w-screen sm:w-full overflow-auto">
       <div
-        class="h-10 md:h-16"
+        class="h-10 md:h-16 flex flex-row w-full"
         v-for="fixedCost in fixedCosts"
         :id="fixedCost.id"
         :key="fixedCost.id"
-        @click="
+        
+      >
+        <div class="flex flex-row w-full" @click="
           handleEditCost(
             fixedCost.id,
             fixedCost.name,
@@ -84,9 +86,7 @@ const deleteCost = (fixedCost: {
             fixedCost.frequency,
             fixedCost.individualTotal
           )
-        "
-      >
-        <div class="flex flex-row">
+        ">
           <div class="basis-6/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.name }}</p>
           </div>
@@ -96,14 +96,15 @@ const deleteCost = (fixedCost: {
           <div class="basis-3/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">${{ fixedCost.amount }}</p>
           </div>
-          <div class="basis-3/24 pr-2 md:pr-6">
+          <div class="basis-6/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.frequency }}</p>
           </div>
           <div class="basis-3/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">${{ fixedCost.individualTotal }}</p>
           </div>
+        </div>
           <button
-            class="hidden md:block basis-3/24 bg-costDelete bg-no-repeat pr-2 md:pr-6"
+            class="hidden md:block basis-3/24 bg-costDelete bg-no-repeat w-10 h-10"
             @click="deleteCost(fixedCost)"
           ></button>
           <button
@@ -113,7 +114,7 @@ const deleteCost = (fixedCost: {
           >
             ...
           </button>
-        </div>
+       
       </div>
     </div>
 
