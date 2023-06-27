@@ -17,6 +17,8 @@ interface reportState {
   blankSubmitError: string,
   fixedFormValid: boolean,
   variableFormValid: boolean,
+  editFixedCost: FixedCostObj[]
+  editVariableCost: VariableCostObj[]                                                                                                                   
 }
 
 export default reportState

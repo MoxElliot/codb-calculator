@@ -8,12 +8,11 @@ import FormModal from '../ModalComponents/FormModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { formModalIsOpen, ellipsisModalisOpen } = storeToRefs(modalStore)
-const { closeEllipsisModal } = modalStore
+const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
-const { companyName } = storeToRefs(reportStore)
+const { companyName, editVariableCost } = storeToRefs(reportStore)
 
 onMounted(() => {
   updateInputValidAction(true)
@@ -25,12 +24,20 @@ onMounted(() => {
     <template #header>
       <div
         class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif"
+        v-if="formModalType === 'add'"
       >
         <p>Add Variable Cost</p>
       </div>
+      <div
+        class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif"
+        v-else-if="formModalType === 'edit'"
+      >
+        <p>Edit Variable Cost</p>
+      </div>
     </template>
     <template #body>
-      <variable-cost-data-input />
+      <variable-cost-data-input v-if="formModalType === 'add'"  />
+      <variable-cost-data-input v-else-if="formModalType === 'edit'" :id="editVariableCost[0].id" :name="editVariableCost[0].name" :category="editVariableCost[0].category" :amount="editVariableCost[0].amount" />
     </template>
   </form-modal>
 

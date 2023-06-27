@@ -3,7 +3,7 @@ interface FixedCostObj {
   name: string
   category: string
   amount: number | null 
-  payPeriod: string
+  frequency: string
   individualTotal: number
 }
 

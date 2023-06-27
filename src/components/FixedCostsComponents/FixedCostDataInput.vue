@@ -12,20 +12,29 @@ import { storeToRefs } from 'pinia'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { formModalIsOpen } = storeToRefs(modalStore)
+const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
 const { closeFormModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError, fixedFormValid, fixedCosts } = storeToRefs(reportStore)
-const { handleAddCost, addFixedCostAction, setFixedFormValidAction } = reportStore
+const { blankSubmitError, fixedFormValid, fixedCosts, editFixedCost } = storeToRefs(reportStore)
+const { handleAddCost, addFixedCostAction, setFixedFormValidAction, replaceFixedCostAction } =
+  reportStore
 
+const props = defineProps<{
+  id?: string
+  name?: string
+  category?: string
+  amount?: number | null
+  frequency?: string
+  individualTotal?: number
+}>()
 const fixedCostTotal = ref<number>(0)
 
 const schema = Yup.object({
   name: Yup.string().required(' '),
   category: Yup.string().required(' '),
   amount: Yup.number().typeError('Please Enter a Number for an Expense').required(' '),
-  period: Yup.string().required(' ')
+  frequency: Yup.string().required(' ')
 })
 
 const { resetForm, meta } = useForm({
@@ -34,20 +43,21 @@ const { resetForm, meta } = useForm({
 })
 
 const { value: fixedCostName, errorMessage: nameError } = useField('name', undefined, {
-  initialValue: ''
+  initialValue: props.name
 })
 
 const { value: fixedCostCategory, errorMessage: categoryError } = useField('category', undefined, {
-  initialValue: ''
+  initialValue: props.category
 })
 
 const { value: fixedCostAmount, errorMessage: amountError } = useField('amount', undefined, {
-  initialValue: null
+  initialValue: props.amount
 })
 
-const { value: fixedCostPeriod, errorMessage: periodError } = useField('period', undefined, {
-  initialValue: ''
-})
+const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('frequency', undefined, {
+    initialValue: props.frequency
+  }
+)
 </script>
 
 <template>
@@ -55,24 +65,36 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
     class="flex flex-col basis-full h-full"
     :valiation-schema="schema"
     @submit="
-      handleAddCost(
-        fixedCostName,
-        fixedCostCategory,
-        fixedCostAmount,
-        meta.valid,
-        setFixedFormValidAction,
-        resetForm,
-        addFixedCostAction,
-        fixedCosts,
-        fixedCostPeriod,
-        fixedCostTotal
-      )
+      formModalType === 'add'
+        ? handleAddCost(
+            fixedCostName,
+            fixedCostCategory,
+            fixedCostAmount,
+            meta.valid,
+            setFixedFormValidAction,
+            resetForm,
+            addFixedCostAction,
+            fixedCosts,
+            fixedCostFrequency,
+            fixedCostTotal
+          )
+        : replaceFixedCostAction(
+            editFixedCost[0].id,
+            fixedCostName,
+            fixedCostCategory,
+            fixedCostAmount,
+            meta.valid,
+            setFixedFormValidAction,
+            resetForm,
+            fixedCostFrequency,
+            fixedCostTotal
+          )
     "
   >
     <fieldset
       :class="
         !formModalIsOpen
-          ? 'flex flex-row w-full h-10 md:h-16 mt-4 '
+          ? 'flex flex-row h-10 md:h-16 mt-4  w-screen sm:w-full'
           : 'flex flex-col basis-full justify-center items-center h-full text-center'
       "
     >
@@ -87,10 +109,11 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
       />
       <data-select
         v-model="fixedCostCategory"
+        placeholder="Category"
         name="category"
         :optionArray="costCategoryOptions"
         parentClass="basis-6/24  pr-2 md:pr-6"
-        class="border-b border-grey-200"
+        class="text-center border-b border-grey-200 bg-primary-white w-full"
         :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
@@ -98,22 +121,24 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         v-model="fixedCostAmount"
         placeholder="Amount"
         name="amount"
-        parentClass="basis-3/24 pr-2 md:pr-6"
-        class="text-center border-b border-grey-200 w-[84px]"
+        parentClass="basis-3/24 pr-2 md:pr-6 "
+        class="text-center border-b border-grey-200 w-[87px]"
         :class="{ 'border-error': amountError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
       <data-select
-        v-model="fixedCostPeriod"
-        name="period"
+        v-model="fixedCostFrequency"
+        placeholder="Frequency"
+        name="frequency"
         :optionArray="costPeriodOptions"
-        parentClass="basis-3/24 pr-2 md:pr-6"
-        class="border-b border-grey-200"
-        :class="{ 'border-error': periodError && blankSubmitError }"
+        parentClass="basis-6/24 pr-2 md:pr-6"
+        class="text-center border-b border-grey-200 bg-primary-white w-full"
+        :class="{ 'border-error': frequencyError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
-      <div class="basis-3/24 pr-4 md:pr-16"></div>
+      <div class="basis-6/24 pr-4 md:pr-16"></div>
     </fieldset>
+
     <div class="flex flex-col justify-between sm:h-[100px]">
       <span class="error-text" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
       <span class="error-text">{{ amountError }} </span>
@@ -123,8 +148,17 @@ const { value: fixedCostPeriod, errorMessage: periodError } = useField('period',
         v-if="formModalIsOpen === false"
       />
       <div class="flex flex-row p-1 md:p-4 h-full" v-else>
-        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeFormModal" />
-        <form-button label="Add" type="submit" class="modal-btn-add" />
+        <form-button
+          label="Cancel"
+          type="button"
+          class="modal-btn-cancel"
+          @click="closeFormModal"
+        />
+        <form-button
+          :label="formModalType === 'add' ? 'Add' : 'Edit'"
+          type="submit"
+          class="modal-btn-add"
+        />
       </div>
     </div>
   </Form>

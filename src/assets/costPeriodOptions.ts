@@ -1,3 +1,3 @@
-const costPeriodOptions: string[] = ['weekly', 'bi-monthly', 'monthly', 'yearly']
+const costFrequencyOptions: string[] = ['weekly', 'bi-monthly', 'monthly', 'yearly']
 
-export default costPeriodOptions
+export default costFrequencyOptions

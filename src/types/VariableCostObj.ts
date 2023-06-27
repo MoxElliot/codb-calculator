@@ -2,7 +2,7 @@ interface VariableCostObj {
   id: string
   name: string
   category: string
-  amount: number | null | undefined
+  amount: number | null
 }
 
 export default VariableCostObj
