@@ -22,7 +22,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <form-modal v-if="formModalIsOpen" class="flex flex-col">
+  <form-modal v-if="formModalIsOpen" class="flex flex-col justify-center items-center">
     <template #header>
       <div
         class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif"
