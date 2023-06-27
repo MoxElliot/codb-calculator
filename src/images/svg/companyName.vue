@@ -1,0 +1,21 @@
+<script setup lang="ts">
+
+</script>
+<template>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M17.1602 6.21345L20.1785 9.75793C21.279 11.05 21.279 12.9498 20.1785 14.2418L17.1602 17.7863C16.5034 18.5582 15.5408 19.003 14.5272 19.0028L6.45479 19.0028C4.54474 19.0028 2.99635 17.4544 2.99635 15.5443L2.99635 8.45538C2.99635 6.54534 4.54475 4.99694 6.45479 4.99694L14.5272 4.99694C15.5408 4.99675 16.5034 5.44148 17.1602 6.21345Z"
+      stroke="#A4ABAA"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M13.8837 10.5126L10.9074 13.4878L9.11768 11.7001"
+      stroke="#A4ABAA"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</template>

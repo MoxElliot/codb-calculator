@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
 import { onMounted } from 'vue'
-import BackgroundImage from '../FormComponents/BackgroundImage.vue'
+import HomeBackground from '../../images/home_background.svg'
 import HomeBackgroundTL from '../../images/home_background_tl.svg'
 import HomeBackgroundTR from '../../images/home_background_tr.svg'
 import HomeBackgroundBL from '../../images/home_background_bl.svg'
@@ -28,6 +28,7 @@ onMounted(() => {
     component-class=""
   /> -->
   <!-- <HomeBackground class="absolute top-0 left-0 bottom-0 right-0 bg-homeBackground bg-no-repeat bg-contain bg-center h-100 w-100 "/> -->
+  <img :src="HomeBackground" alt="" class="hidden lg:block absolute top-0 left-0 bottom-0 right-0 h-100 w-100 ">
   <div class="flex basis-full justify-center items-center h-full">
   <div
     class="flex flex-col items-center justify-center basis-full md:basis-3/4 lg:basis-2/3 px-8"
