@@ -12,7 +12,7 @@ export const useModalStore = defineStore('modalStore', {
     formModalIsOpen: false,
     formModalType: '',
     menuId: ' ',
-    ellipsisModalisOpen: false
+    ellipsisModalisOpen: false,
   }),
   actions: {
     openFormModal(formModalType:string) {
@@ -25,10 +25,10 @@ export const useModalStore = defineStore('modalStore', {
     openEllipsisModal(menuId: string) {
       this.menuId = menuId
       this.ellipsisModalisOpen = true
-      console.log("in open")
+      console.log("in open", menuId)
     },
-    closeEllipsisModal(menuId: string) {
-      this.menuId = menuId
+    closeEllipsisModal() {
+      this.menuId = ''
       this.ellipsisModalisOpen = false
       console.log("in close")
     }
