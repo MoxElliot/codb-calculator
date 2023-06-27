@@ -91,10 +91,11 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
       />
       <data-select
         v-model="variableCostCategory"
+        placeholder="Category"
         name="category"
         :optionArray="costCategoryOptions"
         parentClass="basis-6/18 pr-2 md:pr-6"
-        class="border-b border-grey-200"
+        class="text-center border-b border-grey-200  bg-primary-whiteq12 w-full"
         :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setVariableFormValidAction(true)"
       />

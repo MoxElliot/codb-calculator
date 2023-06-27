@@ -33,8 +33,19 @@ export const useReportStore = defineStore('reportStore', {
     blankSubmitError: '',
     fixedFormValid: true,
     variableFormValid: true,
-    editFixedCost: [] as FixedCostObj[],
-    editVariableCost: [] as VariableCostObj[],
+    editFixedCost: [
+      {
+        id: '1',
+        name: 'Test1',
+        category: 'Overhead',
+        amount: 1000,
+        frequency: 'Monthly',
+        individualTotal: 1000
+      }
+    ] as FixedCostObj[],
+    editVariableCost: [
+      { id: '7', name: 'Parking', category: 'Overhead', amount: 80 }
+    ] as VariableCostObj[]
     // companyName: '',
     // bookingsPerMonth: 0,
     // priceAveragePerBooking: 0,
@@ -85,12 +96,7 @@ export const useReportStore = defineStore('reportStore', {
     ) {
       this.editFixedCost[0] = { id, name, category, amount, frequency, individualTotal }
     },
-    editVariableCostAction(
-      id: string,
-      name: string,
-      category: string,
-      amount: number | null,
-    ) {
+    editVariableCostAction(id: string, name: string, category: string, amount: number | null) {
       this.editVariableCost[0] = { id, name, category, amount }
     },
     replaceFixedCostAction(
@@ -133,13 +139,13 @@ export const useReportStore = defineStore('reportStore', {
       amount: number | null,
       allValid: boolean,
       formValidAction: Function,
-      resetForm: Function,
+      resetForm: Function
     ) {
       if (allValid) {
         const modalStore = useModalStore()
         const { closeFormModal } = modalStore
         const newCost = { id, name, category, amount }
-        
+
         console.log('inReplace', this.fixedCosts[Number(id)], newCost, Number(id))
         this.variableCosts[Number(id)] = newCost
         closeFormModal()

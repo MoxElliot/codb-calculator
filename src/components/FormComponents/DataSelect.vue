@@ -26,6 +26,14 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  placeholder: {
+    type: String,
+    default: ''
+  },
+  placeholderClass: {
+    type: String,
+    default: ''
+  },
   value: null
 })
 
@@ -50,6 +58,9 @@ const handleInputChange = (e: any) => {
       :value="modelValue"
       @input="$emit('update:modelValue', handleInputChange($event))"
     >
+      <option value="" disabled selected :class="placeholderClass" >
+        {{ placeholder }}
+      </option>
       <option v-for="option in optionArray" :value="firstLetterUpperCase(option)">
         {{ firstLetterUpperCase(option) }}
       </option>
