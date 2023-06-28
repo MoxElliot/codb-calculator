@@ -6,15 +6,16 @@ import FormButton from '../FormComponents/FormButton.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import FixedCostDataInput from './FixedCostDataInput.vue'
 import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
+import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { ellipsisModalIsOpen, confirmDelete, menuId } = storeToRefs(modalStore)
+const { ellipsisModalIsOpen, confirmModalIsOpen, menuId } = storeToRefs(modalStore)
 const {
   openEllipsisModal,
   openFormModal,
-  closeEllipsisModal,
   openConfirmModal,
+  closeEllipsisModal,
   closeConfirmModal
 } = modalStore
 
@@ -58,6 +59,7 @@ const deleteCost = (fixedCost: {
   reportStore.fixedCosts = filtersList
   totalFixedCostAction()
   closeEllipsisModal()
+  closeConfirmModal()
 }
 </script>
 
@@ -105,6 +107,31 @@ const deleteCost = (fixedCost: {
         :id="fixedCost.id"
         :key="fixedCost.id"
       >
+        <confirm-modal v-if="confirmModalIsOpen">
+          <template #header>
+            <div
+              class="flex flex-row justify-center items-center text-body2 text-grey-300 font-serif"
+            >
+              <p>Are you sure you want to delete this cost?</p>
+            </div>
+          </template>
+          <template #body>
+            <div class="flex flex-row p-1 md:p-4 h-full">
+              <form-button
+                label="No"
+                type="button"
+                class="modal-btn-cancel"
+                @click="closeConfirmModal"
+              />
+              <form-button
+                label="Yes"
+                type="submit"
+                class="modal-btn-add"
+                @click="deleteCost(fixedCost)"
+              />
+            </div>
+          </template>
+        </confirm-modal>
         <div
           class="flex flex-row w-full"
           @click="

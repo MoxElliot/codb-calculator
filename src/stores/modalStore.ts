@@ -34,7 +34,7 @@ export const useModalStore = defineStore('modalStore', {
       this.menuId = ''
       this.ellipsisModalIsOpen = false
     },
-    openConfirmModal() {
+    openConfirmModal(cost:any) {
       this.confirmModalIsOpen = true
     },
     closeConfirmModal() {
