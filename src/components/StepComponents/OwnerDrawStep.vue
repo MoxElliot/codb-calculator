@@ -51,7 +51,7 @@ const { value: savings, errorMessage: savingsError, meta: savingsMeta } = useFie
 </script>
 
 <template>
-  <div class="flex flex-col text-center items-center justify-center basis-full h-fit md:h-full">
+  <div class="flex flex-col text-center items-center justify-center basis-full h-full lg:mt-16 ">
     <div
       class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 md:w-6/10 md:mb-4"
     >
@@ -64,19 +64,19 @@ const { value: savings, errorMessage: savingsError, meta: savingsMeta } = useFie
         class="hidden sm:inline sm:px-3"
       />
     </div>
-    <div class="text-body2_xs md:text-body2 text-grey-300 basis-1/6 w-9/10 sm:w-8/10">
+    <div class="text-body2_xs md:text-body2 text-grey-300 basis-1/6 w-9/10 ">
       <p>Great job! Your CobD Calculation is Almost Finished!</p>
       <p>Don't forget, you'll need to pay yourself and save some money after all that hard work!</p>
     </div>
     <div
-      class="basis-full flex flex-col md:items-center w-screen md:w-8/10 md:px-4 overflow-auto"
+    class="lg:basis-full flex flex-col items-center w-screen md:w-8/10 md:px-4 overflow-auto"
     >
-      <div class="flex flex-col font-sans text-grey-300 text-body w-full h-full">
+      <div class="flex flex-col font-sans text-grey-300 text-body w-7/10 md:w-full h-full mt-4">
         <div class="flex flex-col min-h-100">
           <data-input
             v-model="payPerMonthInput"
             label="On average, how much will you be paying yourself per month?"
-            parentClass="flex flex-col md:flex-row items-center justify-between md:mt-6"
+            parentClass="flex flex-col sm:flex-row items-center justify-between md:mt-6"
             class="pl-3 text-center border-b border-grey-200"
             :class="{ 'border-error': payError && blankSubmitError }"
             type="number"
@@ -87,7 +87,7 @@ const { value: savings, errorMessage: savingsError, meta: savingsMeta } = useFie
           <data-input
             v-model="savingsPerMonthInput"
             label="On average, how much do you plan to save per month?"
-            parentClass="flex flex-col md:flex-row items-center justify-between md:mt-6"
+            parentClass="flex flex-col sm:flex-row items-center justify-between md:mt-6"
             class="pl-3 text-center border-b border-grey-200"
             :class="{ 'border-error': savingsError && blankSubmitError }"
             type="number"
