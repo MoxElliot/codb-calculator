@@ -22,15 +22,15 @@ const { stepCurrent } = storeToRefs(stepStore)
       <div
         :class="
           stepCurrent === step.current
-            ? 'p-2 flex justify-center items-center border-l border-grey-200 h-12 md:h-16 w-full'
-            : 'flex justify-center items-center border-l border-grey-200 h-12 md:h-16'
+            ? 'p-2 flex justify-center items-center border-l border-grey-200 h-10 md:h-16 w-full'
+            : 'flex justify-center items-center border-l border-grey-200 h-10 md:h-16'
         "
         v-for="step in steps"
         v-show="step.icon !== 'none'"
       >
         <router-link :to="step.current" class="w-full">
           <div class="flex flex-row w-full justify-center items-center">
-            <div :class="stepCurrent === step.current ? 'w-10 h-10 bg-aqua-100 flex justify-center items-center rounded-full' : ''">
+            <div :class="stepCurrent === step.current ? 'w-9 h-9 md:w-10 md:h-10 bg-aqua-100 flex justify-center items-center rounded-full' : ''">
               <img :src="step.icon" class="w-6 h-6" />
             </div>
             <div v-if="stepCurrent === step.current" class="pl-3 hidden sm:block">
