@@ -10,7 +10,7 @@ const { backStepAction, nextStepAction } = stepStore
 </script>
 <template>
   <div
-    :class="stepCurrent === '/' ? 'flex h-full basis-2/3 justify-center items-center' : 'flex h-full basis-2/3 justify-end items-center'"
+    :class="stepCurrent === '/' ? 'flex h-full basis-2/3 justify-center items-center z-30' : 'flex h-full basis-2/3 justify-end items-center z-30'"
     v-if="stepCurrent !== '/final-report-step'"
   >
     <div class="flex items-center">
