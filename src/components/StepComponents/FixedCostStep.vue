@@ -5,11 +5,14 @@ import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import FormModal from '../ModalComponents/FormModal.vue'
+import FormButton from '../FormComponents/FormButton.vue'
+import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
-
+const { formModalIsOpen, formModalType, confirmModalIsOpen } = storeToRefs(modalStore)
+const { closeConfirmModal, openConfirmModal } = modalStore
+ 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
 const { companyName, editFixedCost } = storeToRefs(reportStore)
@@ -39,11 +42,46 @@ onMounted(() => {
     </template>
     <template #body>
       <fixed-cost-data-input v-if="formModalType === 'add'" />
-      <fixed-cost-data-input v-else-if="formModalType === 'edit'" :id="editFixedCost[0].id" :name="editFixedCost[0].name" :category="editFixedCost[0].category" :amount="editFixedCost[0].amount" :frequency="editFixedCost[0].frequency"/>
+      <fixed-cost-data-input
+        v-else-if="formModalType === 'edit'"
+        :id="editFixedCost[0].id"
+        :name="editFixedCost[0].name"
+        :category="editFixedCost[0].category"
+        :amount="editFixedCost[0].amount"
+        :frequency="editFixedCost[0].frequency"
+      />
     </template>
   </form-modal>
 
-  <div class="flex flex-col text-center items-center justify-center basis-full h-full md:h-fit z-10">
+  <confirm-modal v-if="confirmModalIsOpen">
+    <template #header>
+      <div
+        class="flex flex-row justify-center items-center text-body2 text-grey-300 font-serif"
+      >
+        <p>Are you sure you want to delete this cost?</p>
+      </div>
+    </template>
+    <template #body>
+      <div class="flex flex-row p-1 md:p-4 h-full">
+        <form-button
+          label="No"
+          type="button"
+          class="modal-btn-cancel"
+          @click="closeConfirmModal"
+        />
+        <form-button
+          label="Yes"
+          type="submit"
+          class="modal-btn-add"
+          @click="closeConfirmModal"
+        />
+      </div>
+    </template>
+  </confirm-modal>
+
+  <div
+    class="flex flex-col text-center items-center justify-center basis-full h-full md:h-fit z-10"
+  >
     <div
       class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 w-8/10 md:mb-8 lg:w-6/10"
     >

@@ -54,7 +54,10 @@ const { value: fixedCostAmount, errorMessage: amountError } = useField('amount',
   initialValue: props.amount
 })
 
-const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('frequency', undefined, {
+const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
+  'frequency',
+  undefined,
+  {
     initialValue: props.frequency
   }
 )

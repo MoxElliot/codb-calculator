@@ -9,8 +9,14 @@ import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { ellipsisModalisOpen, formModalType, menuId } = storeToRefs(modalStore)
-const { openEllipsisModal, openFormModal, closeEllipsisModal } = modalStore
+const { ellipsisModalIsOpen, confirmDelete, menuId } = storeToRefs(modalStore)
+const {
+  openEllipsisModal,
+  openFormModal,
+  closeEllipsisModal,
+  openConfirmModal,
+  closeConfirmModal
+} = modalStore
 
 const reportStore = useReportStore()
 const { fixedCosts } = storeToRefs(reportStore)
@@ -56,18 +62,21 @@ const deleteCost = (fixedCost: {
 </script>
 
 <template>
-  <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalisOpen">
+  <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalIsOpen">
     <template #buttons>
-      <button class="flex flex-row p-2" @click="
-            handleEditCost(
-              fixedCosts[Number(menuId)].id,
-              fixedCosts[Number(menuId)].name,
-              fixedCosts[Number(menuId)].category,
-              fixedCosts[Number(menuId)].amount,
-              fixedCosts[Number(menuId)].frequency,
-              fixedCosts[Number(menuId)].individualTotal
-            )
-          ">
+      <button
+        class="flex flex-row p-2"
+        @click="
+          handleEditCost(
+            fixedCosts[Number(menuId)].id,
+            fixedCosts[Number(menuId)].name,
+            fixedCosts[Number(menuId)].category,
+            fixedCosts[Number(menuId)].amount,
+            fixedCosts[Number(menuId)].frequency,
+            fixedCosts[Number(menuId)].individualTotal
+          )
+        "
+      >
         <img src="../../images/edit-cost.svg" />
         <p class="hidden sm:block ml-1">Edit</p>
       </button>
@@ -78,7 +87,7 @@ const deleteCost = (fixedCost: {
     </template>
   </ellipsis-modal>
   <div
-    v-if="ellipsisModalisOpen"
+    v-if="ellipsisModalIsOpen"
     class="fixed top-0 bottom-0 left-0 right-0 z-10"
     @click="closeEllipsisModal()"
   ></div>
