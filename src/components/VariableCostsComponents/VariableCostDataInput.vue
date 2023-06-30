@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
-import { ref } from 'vue'
 import * as Yup from 'yup'
 import costCategoryOptions from '../../assets/costCategoryOptions'
 import DataInput from '../FormComponents/DataInput.vue'
@@ -95,7 +94,7 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
         name="category"
         :optionArray="costCategoryOptions"
         parentClass="basis-6/18 pr-2 md:pr-6"
-        class="text-center border-b border-grey-200  bg-primary-whiteq12 w-full"
+        class="text-center border-b border-grey-200  bg-primary-white w-full"
         :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setVariableFormValidAction(true)"
       />

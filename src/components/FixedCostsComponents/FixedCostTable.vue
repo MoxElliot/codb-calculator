@@ -20,8 +20,8 @@ const {
 } = modalStore
 
 const reportStore = useReportStore()
-const { fixedCosts } = storeToRefs(reportStore)
-const { totalFixedCostAction, editFixedCostAction } = reportStore
+const { fixedCosts, replaceIndex } = storeToRefs(reportStore)
+const { totalFixedCostAction, editFixedCostAction, addReplaceIndexAction } = reportStore
 const fixedCostHeadingArray = [
   ['Name', 'text-center basis-6/24 pr-2 md:pr-6'],
   ['Category', 'text-center basis-6/24 pr-2 md:pr-6'],
@@ -41,9 +41,12 @@ const handleEditCost = (
   category: string,
   amount: number | null,
   frequency: string,
-  individualTotal: number
+  individualTotal: number,
+  index: number
 ) => {
+  console.log("hello")
   openFormModal('edit')
+  addReplaceIndexAction(index)
   editFixedCostAction(id, name, category, amount, frequency, individualTotal)
 }
 
@@ -75,7 +78,8 @@ const deleteCost = (fixedCost: {
             fixedCosts[Number(menuId)].category,
             fixedCosts[Number(menuId)].amount,
             fixedCosts[Number(menuId)].frequency,
-            fixedCosts[Number(menuId)].individualTotal
+            fixedCosts[Number(menuId)].individualTotal,
+            fixedCosts[Number(menuId)].index as number,
           )
         "
       >
@@ -103,7 +107,7 @@ const deleteCost = (fixedCost: {
     <div class="max-h-32 md:max-h-64 w-screen sm:w-full overflow-auto">
       <div
         class="h-10 md:h-16 flex flex-row w-full"
-        v-for="fixedCost in fixedCosts"
+        v-for="(fixedCost, index ) in fixedCosts"
         :id="fixedCost.id"
         :key="fixedCost.id"
       >
@@ -141,7 +145,8 @@ const deleteCost = (fixedCost: {
               fixedCost.category,
               fixedCost.amount,
               fixedCost.frequency,
-              fixedCost.individualTotal
+              fixedCost.individualTotal,
+              index
             )
           "
         >

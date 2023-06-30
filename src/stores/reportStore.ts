@@ -45,7 +45,8 @@ export const useReportStore = defineStore('reportStore', {
     ] as FixedCostObj[],
     editVariableCost: [
       { id: '7', name: 'Parking', category: 'Overhead', amount: 80 }
-    ] as VariableCostObj[]
+    ] as VariableCostObj[],
+    replaceIndex: 0
     // companyName: '',
     // bookingsPerMonth: 0,
     // priceAveragePerBooking: 0,
@@ -99,6 +100,9 @@ export const useReportStore = defineStore('reportStore', {
     editVariableCostAction(id: string, name: string, category: string, amount: number | null) {
       this.editVariableCost[0] = { id, name, category, amount }
     },
+    addReplaceIndexAction(replaceIndex: number) {
+      this.replaceIndex = replaceIndex
+    },
     replaceFixedCostAction(
       id: string,
       name: string,
@@ -114,17 +118,21 @@ export const useReportStore = defineStore('reportStore', {
         const modalStore = useModalStore()
         const { closeFormModal } = modalStore
 
-        formValidAction(true)
+        formValidAction(true) //toggles form to true to prevent error messages
+
         const payPeriodMultiplierElement = payPeriodOptionsArray.find(
           (ele) => ele.day === frequency
         )
         const payPeriodMultiplier: any = payPeriodMultiplierElement?.multiplier
 
         const totalNum: number = (amount as number) * payPeriodMultiplier
+
         individualTotal = formatMoney(totalNum)
+
         const newCost = { id, name, category, amount, frequency, individualTotal }
-        console.log('inReplace', this.fixedCosts[Number(id)], newCost, Number(id))
-        this.fixedCosts[Number(id)] = newCost
+
+      
+        this.fixedCosts[this.replaceIndex] = newCost // Because the id doesn't change but the position of the cost in the table might ( by the use delteing a cost), this will replace the new cost at the wrong position as the position and the id are no longer the same. Instead need a find and replace type feature.
         closeFormModal()
         resetForm()
       } else {
