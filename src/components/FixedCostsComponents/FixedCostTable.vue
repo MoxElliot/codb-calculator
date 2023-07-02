@@ -2,6 +2,7 @@
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import { onUpdated } from 'vue'
+import fixedCostHeadingArray from '../../assets/fixedCostHeadings'
 import FormButton from '../FormComponents/FormButton.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import FixedCostDataInput from './FixedCostDataInput.vue'
@@ -11,62 +12,40 @@ import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
 const { ellipsisModalIsOpen, confirmModalIsOpen, costId } = storeToRefs(modalStore)
-const {
-  openEllipsisModal,
-  openFormModal,
-  closeEllipsisModal,
-  closeConfirmModal
-} = modalStore
+const { openEllipsisModal, openFormModal, closeEllipsisModal, closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
-const { fixedCosts, selectedId } = storeToRefs(reportStore)
-const { totalFixedCostAction, editFixedCostAction, deleteFixedCostAction, addSelectedIdAction } = reportStore
-const fixedCostHeadingArray = [
-  ['Name', 'text-center basis-6/24 pr-2 md:pr-6'],
-  ['Category', 'text-center basis-6/24 pr-2 md:pr-6'],
-  ['Amount ($)', 'text-center basis-3/24 pr-2 md:pr-6'],
-  ['Freq', 'text-center basis-6/24 pr-2 md:pr-6'],
-  ['Total', 'text-center basis-3/24 pr-2 md:pr-6'],
-  ['', 'text-center basis-3/24 pr-2 md:pr-6']
-]
+const { fixedCosts } = storeToRefs(reportStore)
+const { totalFixedCostAction, editFixedCostAction, deleteFixedCostAction, addSelectedIdAction } =
+  reportStore
 
 onUpdated(() => {
   scrollToNewCost(fixedCosts)
 })
 
-const handleEditCost = (
-  id: string
-) => {
+const handleEditCost = (id: string) => {
   addSelectedIdAction(id)
   openFormModal('edit')
   editFixedCostAction(id)
   closeEllipsisModal()
   closeConfirmModal()
+  totalFixedCostAction()
 }
 
-
-const handleDeleteCost = (
-  id: string
- ) => {
-  console.log("in delete", id)
+const handleDeleteCost = (id: string) => {
+  console.log('in delete', id)
   addSelectedIdAction(id)
   deleteFixedCostAction(id)
   closeEllipsisModal()
   closeConfirmModal()
+  totalFixedCostAction()
 }
 </script>
 
 <template>
   <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalIsOpen">
     <template #buttons>
-      <button
-        class="flex flex-row p-2"
-        @click="
-           handleEditCost(
-              costId
-            )
-        "
-      >
+      <button class="flex flex-row p-2" @click="handleEditCost(costId)">
         <img src="../../images/edit-cost.svg" />
         <p class="hidden sm:block ml-1">Edit</p>
       </button>
@@ -91,7 +70,7 @@ const handleDeleteCost = (
     <div class="max-h-32 md:max-h-64 w-screen sm:w-full overflow-auto">
       <div
         class="h-10 md:h-16 flex flex-row w-full"
-        v-for="(fixedCost, index ) in fixedCosts"
+        v-for="fixedCost in fixedCosts"
         :id="fixedCost.id"
         :key="fixedCost.id"
       >
@@ -120,16 +99,9 @@ const handleDeleteCost = (
             </div>
           </template>
         </confirm-modal>
-        <div
-          class="flex flex-row w-full items-start"
-          @click="
-            handleEditCost(
-              fixedCost.id
-            )
-          "
-        >
+        <div class="flex flex-row w-full items-end" @click="handleEditCost(fixedCost.id)">
           <div class="basis-6/24 pr-2 md:pr-6">
-            <p class=" border-b border-grey-200">{{ fixedCost.name }}</p>
+            <p class="border-b border-grey-200">{{ fixedCost.name }}</p>
           </div>
           <div class="basis-6/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.category }}</p>
@@ -144,17 +116,21 @@ const handleDeleteCost = (
             <p class="border-b border-grey-200">${{ fixedCost.individualTotal }}</p>
           </div>
         </div>
-        <button
-          class="hidden md:block basis-3/24 bg-costDelete bg-no-repeat w-10 h-10"
-          @click="handleDeleteCost(fixedCost.id)"
-        ></button>
-        <button
-          class="flex md:hidden basis-3/24 sm:pr-2 md:pr-6 align-center justify-center"
-          @click="openEllipsisModal(fixedCost.id)"
-          @click.stop=""
-        >
-          ...
-        </button>
+        <div class="flex flex-row items-end basis-3/24">
+          <button
+            class="hidden md:block bg-costDelete bg-no-repeat w-10 h-10"
+            @click="handleDeleteCost(fixedCost.id)"
+          ></button>
+          <button
+            class="block md:hidden sm:pr-2 md:pr-6 "
+            @click="openEllipsisModal(fixedCost.id)"
+            @click.stop=""
+          >
+            ...
+          </button>
+        </div>
+          
+       
       </div>
     </div>
 

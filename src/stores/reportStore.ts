@@ -90,10 +90,7 @@ export const useReportStore = defineStore('reportStore', {
     editFixedCostAction(
       id: string,
     ) {
-      console.log("in editFixedCosAction id", id)
       this.selectedCost = this.fixedCosts.find(item => item.id === id) as CostItem
-      console.log("in editFixedCosAction selectedCost", this.selectedCost)
-   
     },
 
     editVariableCostAction(id: string, name: string, category: string, amount: number | null) {

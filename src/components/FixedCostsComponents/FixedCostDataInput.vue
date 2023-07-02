@@ -82,7 +82,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
             fixedCostTotal
           )
         : replaceFixedCostAction(
-            selectedFixedCost.id,
+            selectedCost.id,
             fixedCostName,
             fixedCostCategory,
             fixedCostAmount,
@@ -97,7 +97,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
     <fieldset
       :class="
         !formModalIsOpen
-          ? 'flex flex-row h-10 md:h-16 mt-4  w-screen sm:w-full'
+          ? 'flex flex-row h-10 md:h-16 mt-4 md:mt-8 w-screen sm:w-full'
           : 'flex flex-col basis-full justify-center items-center h-full text-center'
       "
     >
