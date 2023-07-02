@@ -7,12 +7,12 @@ import FormButton from '../FormComponents/FormButton.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import FixedCostDataInput from './FixedCostDataInput.vue'
 import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
-import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
+import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
-const { ellipsisModalIsOpen, confirmModalIsOpen } = storeToRefs(modalStore)
+const { ellipsisModalIsOpen } = storeToRefs(modalStore)
 const {
   openEllipsisModal,
   openFormModal,
@@ -29,25 +29,25 @@ const { totalFixedCostAction, editFixedCostAction, deleteFixedCostAction, addSel
 onUpdated(() => {
   scrollToNewCost(fixedCosts)
 })
-
-const handleEditCost = (id: string) => {
-  addSelectedIdAction(id)
-  openFormModal('edit')
-  editFixedCostAction(id)
-  closeEllipsisModal()
-  closeConfirmModal()
-  totalFixedCostAction()
-}
-
-const test = (id: string) => {
-  console.log('in test', id)
-}
 </script>
 
 <template>
   <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalIsOpen">
     <template #buttons>
-      <button class="flex flex-row p-2" @click="handleEditCost(selectedId)">
+      <button
+        class="flex flex-row p-2"
+        @click="
+          handleEditCost(
+            selectedId,
+            addSelectedIdAction,
+            editFixedCostAction,
+            openFormModal,
+            closeEllipsisModal,
+            closeConfirmModal,
+            totalFixedCostAction
+          )
+        "
+      >
         <img src="../../images/edit-cost.svg" />
         <p class="hidden sm:block ml-1">Edit</p>
       </button>
@@ -88,7 +88,20 @@ const test = (id: string) => {
         :id="fixedCost.id"
         :key="fixedCost.id"
       >
-        <div class="flex flex-row w-full items-end" @click="handleEditCost(fixedCost.id)">
+        <div
+          class="flex flex-row w-full items-end"
+          @click="
+            handleEditCost(
+              fixedCost.id,
+              addSelectedIdAction,
+              editFixedCostAction,
+              openFormModal,
+              closeEllipsisModal,
+              closeConfirmModal,
+              totalFixedCostAction
+            )
+          "
+        >
           <div class="basis-6/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.name }}</p>
           </div>
