@@ -17,7 +17,7 @@ interface reportState {
   blankSubmitError: string
   fixedFormValid: boolean
   variableFormValid: boolean
-  editFixedCost: {
+  selectedCost: {
     id: string,
     name: string,
     category: string,

@@ -16,7 +16,7 @@ const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
 const { closeFormModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError, fixedFormValid, fixedCosts, editFixedCost } = storeToRefs(reportStore)
+const { blankSubmitError, fixedFormValid, fixedCosts, selectedCost } = storeToRefs(reportStore)
 const { handleAddCost, addFixedCostAction, setFixedFormValidAction, replaceFixedCostAction } =
   reportStore
 
@@ -54,9 +54,13 @@ const { value: fixedCostAmount, errorMessage: amountError } = useField('amount',
   initialValue: props.amount
 })
 
-const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('frequency', undefined, {
-  initialValue: props.frequency
-})
+const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
+  'frequency',
+  undefined,
+  {
+    initialValue: props.frequency
+  }
+)
 </script>
 
 <template>
@@ -78,7 +82,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('fr
             fixedCostTotal
           )
         : replaceFixedCostAction(
-            editFixedCost.id,
+            selectedFixedCost.id,
             fixedCostName,
             fixedCostCategory,
             fixedCostAmount,

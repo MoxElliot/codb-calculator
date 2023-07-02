@@ -40,6 +40,8 @@ const handleEditCost = (
   addSelectedIdAction(id)
   openFormModal('edit')
   editFixedCostAction(id)
+  closeEllipsisModal()
+  closeConfirmModal()
 }
 
 
@@ -48,12 +50,9 @@ const handleDeleteCost = (
  ) => {
   console.log("in delete", id)
   addSelectedIdAction(id)
-  // const filtersList = reportStore.fixedCosts.filter((el) => el !== fixedCost.id)
-  // reportStore.fixedCosts = filtersList
- 
-  // totalFixedCostAction()
-  // closeEllipsisModal()
-  // closeConfirmModal()
+  deleteFixedCostAction(id)
+  closeEllipsisModal()
+  closeConfirmModal()
 }
 </script>
 
@@ -116,7 +115,7 @@ const handleDeleteCost = (
                 label="Yes"
                 type="submit"
                 class="modal-btn-add"
-                @click="handleDeleteCost(fixedCost)"
+                @click="handleDeleteCost(fixedCost.id)"
               />
             </div>
           </template>
@@ -147,7 +146,7 @@ const handleDeleteCost = (
         </div>
         <button
           class="hidden md:block basis-3/24 bg-costDelete bg-no-repeat w-10 h-10"
-          @click="handleDeleteCost(fixedCost)"
+          @click="handleDeleteCost(fixedCost.id)"
         ></button>
         <button
           class="flex md:hidden basis-3/24 sm:pr-2 md:pr-6 align-center justify-center"

@@ -15,7 +15,7 @@ const { closeConfirmModal, openConfirmModal } = modalStore
  
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
-const { companyName, editFixedCost } = storeToRefs(reportStore)
+const { companyName, selectedCost } = storeToRefs(reportStore)
 
 onMounted(() => {
   updateInputValidAction(true)
@@ -44,11 +44,11 @@ onMounted(() => {
       <fixed-cost-data-input v-if="formModalType === 'add'" />
       <fixed-cost-data-input
         v-else-if="formModalType === 'edit'"
-        :id="editFixedCost.id"
-        :name="editFixedCost.name"
-        :category="editFixedCost.category"
-        :amount="editFixedCost.amount"
-        :frequency="editFixedCost.frequency"
+        :id="selectedCost.id"
+        :name="selectedCost.name"
+        :category="selectedCost.category"
+        :amount="selectedCost.amount"
+        :frequency="selectedCost.frequency"
       />
     </template>
   </form-modal>

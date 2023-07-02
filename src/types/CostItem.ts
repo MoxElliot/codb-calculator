@@ -1,6 +1,6 @@
 import type FixedCostsObj from './FixedCostObj'
 
-type FixedCostState = {
+type CostItem = {
   id: string
   name: string
   category: string
@@ -9,4 +9,4 @@ type FixedCostState = {
   individualTotal: number
 }
 
-export default FixedCostState
+export default CostItem

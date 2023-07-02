@@ -6,7 +6,7 @@ import payPeriodOptionsArray from '@/assets/payPeriodOptionsArray'
 import formatMoney from '../assets/utility_functions/formatMoney'
 import testingCostArr from '@/assets/testingCostArr'
 import { useModalStore } from './modalStore'
-import type FixedCostState from '@/types/FixedCostState'
+import type CostItem from '@/types/CostItem'
 
 export const useReportStore = defineStore('reportStore', {
   state: (): reportState => ({
@@ -34,7 +34,7 @@ export const useReportStore = defineStore('reportStore', {
     blankSubmitError: '',
     fixedFormValid: true,
     variableFormValid: true,
-    editFixedCost: 
+    selectedCost: 
       {
         id: '1',
         name: 'Test1',
@@ -42,7 +42,7 @@ export const useReportStore = defineStore('reportStore', {
         amount: 1000,
         frequency: 'Monthly',
         individualTotal: 1000
-      } as FixedCostState,
+      } as CostItem,
     editVariableCost: [
       { id: '7', name: 'Parking', category: 'Overhead', amount: 80 }
     ] as VariableCostObj[],
@@ -91,8 +91,8 @@ export const useReportStore = defineStore('reportStore', {
       id: string,
     ) {
       console.log("in editFixedCosAction id", id)
-      this.editFixedCost = this.fixedCosts.find(item => item.id === id) as FixedCostState
-      console.log("in editFixedCosAction selectedCost", this.editFixedCost)
+      this.selectedCost = this.fixedCosts.find(item => item.id === id) as CostItem
+      console.log("in editFixedCosAction selectedCost", this.selectedCost)
    
     },
 
@@ -129,8 +129,7 @@ export const useReportStore = defineStore('reportStore', {
         individualTotal = formatMoney(totalNum)
 
         const newCost = { id, name, category, amount, frequency, individualTotal }
-        const replaceIndex = this.fixedCosts.indexOf(this.editFixedCost)
-        console.log("replaceFixedCostAction, replaceIndex", replaceIndex, this.editFixedCost, this.fixedCosts[replaceIndex])
+        const replaceIndex = this.fixedCosts.indexOf(this.selectedCost)
         this.fixedCosts.splice(replaceIndex, 1, newCost)
         closeFormModal()
         resetForm()
@@ -163,8 +162,10 @@ export const useReportStore = defineStore('reportStore', {
       }
     },
     deleteFixedCostAction(id: string){
-      const deleteIndex = this.fixedCosts.indexOf(this.editFixedCost)
+      this.selectedCost = this.fixedCosts.find(item => item.id === id) as CostItem
+      const deleteIndex = this.fixedCosts.indexOf(this.selectedCost)
       this.fixedCosts.splice(deleteIndex, 1)
+      console.log("in deltefixedCostAction", this.fixedCosts)
     },
     addBookingsPerMonthAction(bookingsPerMonth: number) {
       this.bookingsPerMonth = bookingsPerMonth
