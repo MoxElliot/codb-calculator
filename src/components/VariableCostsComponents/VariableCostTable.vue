@@ -12,21 +12,12 @@ import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
-const {
-  openOptionsMenu,
-  openFormModal,
-  openConfirmModal,
-  closeOptionsMenu,
-  closeConfirmModal
-} = modalStore
+const { openOptionsMenu, openFormModal, openConfirmModal, closeOptionsMenu, closeConfirmModal } =
+  modalStore
 
 const reportStore = useReportStore()
 const { variableCosts, selectedId, selectedCost } = storeToRefs(reportStore)
-const {
-  totalVariableCostAction,
-  editVariableCostAction,
-  addSelectedIdAction
-} = reportStore
+const { totalVariableCostAction, editVariableCostAction, addSelectedIdAction } = reportStore
 
 onUpdated(() => {
   scrollToNewCost(variableCosts)
@@ -34,40 +25,24 @@ onUpdated(() => {
 </script>
 
 <template>
-  <options-menu class="ellipsis-modal z-20" v-if="optionsMenuIsOpen">
-    <template #buttons>
-      <button
-        class="flex flex-row p-2"
-        @click="
-          handleEditCost(
-            selectedId,
-            addSelectedIdAction,
-            editVariableCostAction,
-            openFormModal,
-            closeOptionsMenu,
-            closeConfirmModal,
-            totalVariableCostAction
-          )
-        "
-      >
-        <img src="../../images/edit-cost.svg" />
-        <p class="hidden sm:block ml-1">Edit</p>
-      </button>
-      <button
-        class="flex flex-row p-2"
-        @click="openConfirmModal(selectedId, selectedCost.name)"
-      >
-        <img src="../../images/delete-cost.svg" />
-        <p class="hidden sm:block ml-1">Delete</p>
-      </button>
-    </template>
-  </options-menu>
-  <div
-    v-if="optionsMenuIsOpen"
-    class="fixed top-0 bottom-0 left-0 right-0 z-10"
-    @click="closeOptionsMenu()"
-  ></div>
-  <div class="mt-2 md:mt-8 w-full md:w-8/10">
+  <div class="mt-2 md:mt-8 w-full md:w-8/10 relative">
+    <options-menu
+      class="ellipsis-modal z-20"
+      v-if="optionsMenuIsOpen"
+      @edit-event="
+        handleEditCost(
+          selectedId,
+          addSelectedIdAction,
+          editVariableCostAction,
+          openFormModal,
+          closeOptionsMenu,
+          closeConfirmModal,
+          totalVariableCostAction
+        )
+      "
+      @delete-event="openConfirmModal(selectedId, selectedCost.name)"
+      @menu-event="closeOptionsMenu"
+    />
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in variableCostHeadingArray">
         <p>{{ heading[0] }}</p>
