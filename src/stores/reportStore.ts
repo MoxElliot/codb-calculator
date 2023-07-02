@@ -155,7 +155,7 @@ export const useReportStore = defineStore('reportStore', {
         const newCost = { id, name, category, amount }
 
         console.log('inReplace', this.fixedCosts[Number(id)], newCost, Number(id))
-        this.variableCosts[Number(id)] = newCost
+        this.variableCosts[this.replaceIndex] = newCost
         closeFormModal()
         resetForm()
       } else {

@@ -14,13 +14,12 @@ const { ellipsisModalIsOpen, confirmModalIsOpen, menuId } = storeToRefs(modalSto
 const {
   openEllipsisModal,
   openFormModal,
-  openConfirmModal,
   closeEllipsisModal,
   closeConfirmModal
 } = modalStore
 
 const reportStore = useReportStore()
-const { fixedCosts, replaceIndex } = storeToRefs(reportStore)
+const { fixedCosts } = storeToRefs(reportStore)
 const { totalFixedCostAction, editFixedCostAction, addReplaceIndexAction } = reportStore
 const fixedCostHeadingArray = [
   ['Name', 'text-center basis-6/24 pr-2 md:pr-6'],
@@ -137,7 +136,7 @@ const deleteCost = (fixedCost: {
           </template>
         </confirm-modal>
         <div
-          class="flex flex-row w-full"
+          class="flex flex-row w-full items-start"
           @click="
             handleEditCost(
               fixedCost.id,
@@ -150,8 +149,8 @@ const deleteCost = (fixedCost: {
             )
           "
         >
-          <div class="basis-6/24 pr-2 md:pr-6">
-            <p class="border-b border-grey-200">{{ fixedCost.name }}</p>
+          <div class="">
+            <p class="basis-6/24 pr-2 md:pr-6 border-b border-grey-200">{{ fixedCost.name }}</p>
           </div>
           <div class="basis-6/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.category }}</p>
@@ -171,7 +170,7 @@ const deleteCost = (fixedCost: {
           @click="deleteCost(fixedCost)"
         ></button>
         <button
-          class="block md:hidden basis-3/24 sm:pr-2 md:pr-6"
+          class="flex md:hidden basis-3/24 sm:pr-2 md:pr-6 align-center justify-center"
           @click="openEllipsisModal(fixedCost.id)"
           @click.stop=""
         >

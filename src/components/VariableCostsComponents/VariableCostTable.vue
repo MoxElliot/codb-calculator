@@ -9,12 +9,12 @@ import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { ellipsisModalIsOpen, formModalType, menuId } = storeToRefs(modalStore)
-const { openEllipsisModal, openFormModal, closeEllipsisModal } = modalStore
+const { ellipsisModalIsOpen, menuId } = storeToRefs(modalStore)
+const { openEllipsisModal, openFormModal, closeEllipsisModal, closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
 const { variableCosts } = storeToRefs(reportStore)
-const { totalVariableCostAction, editVariableCostAction } = reportStore
+const { totalVariableCostAction, editVariableCostAction, addReplaceIndexAction } = reportStore
 const variableCostHeadingArray = [
   ['Name', 'basis-6/18 pr-2 md:pr-8'],
   ['Category', 'text-center basis-6/18 pr-2 md:pr-6'],
@@ -26,8 +26,15 @@ onUpdated(() => {
   scrollToNewCost(variableCosts)
 })
 
-const handleEditCost = (id: string, name: string, category: string, amount: number | null) => {
+const handleEditCost = (
+  id: string,
+  name: string,
+  category: string,
+  amount: number | null,
+  index: number
+) => {
   openFormModal('edit')
+  addReplaceIndexAction(index)
   editVariableCostAction(id, name, category, amount)
 }
 
@@ -40,20 +47,26 @@ const deleteCost = (variableCost: {
   const filtersList = reportStore.variableCosts.filter((el) => el !== variableCost)
   reportStore.variableCosts = filtersList
   totalVariableCostAction()
+  closeEllipsisModal()
+  closeConfirmModal()
 }
 </script>
 
 <template>
   <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalIsOpen">
     <template #buttons>
-      <button class="flex flex-row p-2" @click="
-            handleEditCost(
-              variableCosts[Number(menuId)].id,
-              variableCosts[Number(menuId)].name,
-              variableCosts[Number(menuId)].category,
-              variableCosts[Number(menuId)].amount
-            )
-          ">
+      <button
+        class="flex flex-row p-2"
+        @click="
+          handleEditCost(
+            variableCosts[Number(menuId)].id,
+            variableCosts[Number(menuId)].name,
+            variableCosts[Number(menuId)].category,
+            variableCosts[Number(menuId)].amount,
+            variableCosts[Number(menuId)].index as number
+          )
+        "
+      >
         <img src="../../images/edit-cost.svg" />
         <p class="hidden sm:block ml-1">Edit</p>
       </button>
@@ -77,18 +90,20 @@ const deleteCost = (variableCost: {
     <div class="max-h-32 md:max-h-64 w-screen sm:w-full overflow-auto">
       <div
         class="h-10 md:h-16 flex flex-row w-full"
-        v-for="variableCost in variableCosts"
+        v-for="(variableCost, index) in variableCosts"
         :id="variableCost.id"
         :key="variableCost.id"
       >
         <div
           class="flex flex-row w-full"
-          @click="handleEditCost(
-                  variableCost.id,
-                  variableCost.name,
-                  variableCost.category,
-                  variableCost.amount
-                )
+          @click="
+            handleEditCost(
+              variableCost.id,
+              variableCost.name,
+              variableCost.category,
+              variableCost.amount,
+              index
+            )
           "
         >
           <div class="basis-6/18 pr-2 md:pr-6">
