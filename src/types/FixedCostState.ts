@@ -1,8 +1,12 @@
 import type FixedCostsObj from './FixedCostObj'
 
 type FixedCostState = {
-  fixedCosts: FixedCostsObj[]
-  totalFixedCosts: number
+  id: string
+  name: string
+  category: string
+  amount: number
+  frequency: string
+  individualTotal: number
 }
 
 export default FixedCostState

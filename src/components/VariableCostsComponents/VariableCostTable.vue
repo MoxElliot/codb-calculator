@@ -9,12 +9,12 @@ import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { ellipsisModalIsOpen, menuId } = storeToRefs(modalStore)
+const { ellipsisModalIsOpen, costId } = storeToRefs(modalStore)
 const { openEllipsisModal, openFormModal, closeEllipsisModal, closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
 const { variableCosts } = storeToRefs(reportStore)
-const { totalVariableCostAction, editVariableCostAction, addReplaceIndexAction } = reportStore
+const { totalVariableCostAction, editVariableCostAction, addSelectedIdAction } = reportStore
 const variableCostHeadingArray = [
   ['Name', 'basis-6/18 pr-2 md:pr-8'],
   ['Category', 'text-center basis-6/18 pr-2 md:pr-6'],
@@ -34,7 +34,7 @@ const handleEditCost = (
   index: number
 ) => {
   openFormModal('edit')
-  addReplaceIndexAction(index)
+  addSelectedIdAction(id)
   editVariableCostAction(id, name, category, amount)
 }
 
@@ -46,6 +46,7 @@ const deleteCost = (variableCost: {
 }) => {
   const filtersList = reportStore.variableCosts.filter((el) => el !== variableCost)
   reportStore.variableCosts = filtersList
+  console.log("in Delete", filtersList)
   totalVariableCostAction()
   closeEllipsisModal()
   closeConfirmModal()
@@ -59,18 +60,18 @@ const deleteCost = (variableCost: {
         class="flex flex-row p-2"
         @click="
           handleEditCost(
-            variableCosts[Number(menuId)].id,
-            variableCosts[Number(menuId)].name,
-            variableCosts[Number(menuId)].category,
-            variableCosts[Number(menuId)].amount,
-            variableCosts[Number(menuId)].index as number
+            variableCosts[Number(costId)].id,
+            variableCosts[Number(costId)].name,
+            variableCosts[Number(costId)].category,
+            variableCosts[Number(costId)].amount,
+            variableCosts[Number(costId)].index as number
           )
         "
       >
         <img src="../../images/edit-cost.svg" />
         <p class="hidden sm:block ml-1">Edit</p>
       </button>
-      <button class="flex flex-row p-2" @click="deleteCost(variableCosts[Number(menuId)])">
+      <button class="flex flex-row p-2" @click="deleteCost(variableCosts[Number(costId)])">
         <img src="../../images/delete-cost.svg" />
         <p class="hidden sm:block ml-1">Delete</p>
       </button>
@@ -95,7 +96,7 @@ const deleteCost = (variableCost: {
         :key="variableCost.id"
       >
         <div
-          class="flex flex-row w-full"
+          class="flex flex-row w-full items-start"
           @click="
             handleEditCost(
               variableCost.id,
@@ -121,7 +122,7 @@ const deleteCost = (variableCost: {
           @click="deleteCost(variableCost)"
         ></button>
         <button
-          class="block md:hidden basis-3/18 sm:pr-2 md:pr-6"
+          class="block md:hidden basis-3/18 sm:pr-2 md:pr-6 align-center justify-center"
           @click="openEllipsisModal(variableCost.id)"
           @click.stop=""
         >

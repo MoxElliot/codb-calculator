@@ -10,7 +10,7 @@ import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { ellipsisModalIsOpen, confirmModalIsOpen, menuId } = storeToRefs(modalStore)
+const { ellipsisModalIsOpen, confirmModalIsOpen, costId } = storeToRefs(modalStore)
 const {
   openEllipsisModal,
   openFormModal,
@@ -19,8 +19,8 @@ const {
 } = modalStore
 
 const reportStore = useReportStore()
-const { fixedCosts } = storeToRefs(reportStore)
-const { totalFixedCostAction, editFixedCostAction, addReplaceIndexAction } = reportStore
+const { fixedCosts, selectedId } = storeToRefs(reportStore)
+const { totalFixedCostAction, editFixedCostAction, deleteFixedCostAction, addSelectedIdAction } = reportStore
 const fixedCostHeadingArray = [
   ['Name', 'text-center basis-6/24 pr-2 md:pr-6'],
   ['Category', 'text-center basis-6/24 pr-2 md:pr-6'],
@@ -35,33 +35,25 @@ onUpdated(() => {
 })
 
 const handleEditCost = (
-  id: string,
-  name: string,
-  category: string,
-  amount: number | null,
-  frequency: string,
-  individualTotal: number,
-  index: number
+  id: string
 ) => {
-  console.log("hello")
+  addSelectedIdAction(id)
   openFormModal('edit')
-  addReplaceIndexAction(index)
-  editFixedCostAction(id, name, category, amount, frequency, individualTotal)
+  editFixedCostAction(id)
 }
 
-const deleteCost = (fixedCost: {
+
+const handleDeleteCost = (
   id: string
-  name: string
-  category: string
-  amount: number | null
-  frequency: string
-  individualTotal: number | undefined
-}) => {
-  const filtersList = reportStore.fixedCosts.filter((el) => el !== fixedCost)
-  reportStore.fixedCosts = filtersList
-  totalFixedCostAction()
-  closeEllipsisModal()
-  closeConfirmModal()
+ ) => {
+  console.log("in delete", id)
+  addSelectedIdAction(id)
+  // const filtersList = reportStore.fixedCosts.filter((el) => el !== fixedCost.id)
+  // reportStore.fixedCosts = filtersList
+ 
+  // totalFixedCostAction()
+  // closeEllipsisModal()
+  // closeConfirmModal()
 }
 </script>
 
@@ -71,21 +63,15 @@ const deleteCost = (fixedCost: {
       <button
         class="flex flex-row p-2"
         @click="
-          handleEditCost(
-            fixedCosts[Number(menuId)].id,
-            fixedCosts[Number(menuId)].name,
-            fixedCosts[Number(menuId)].category,
-            fixedCosts[Number(menuId)].amount,
-            fixedCosts[Number(menuId)].frequency,
-            fixedCosts[Number(menuId)].individualTotal,
-            fixedCosts[Number(menuId)].index as number,
-          )
+           handleEditCost(
+              costId
+            )
         "
       >
         <img src="../../images/edit-cost.svg" />
         <p class="hidden sm:block ml-1">Edit</p>
       </button>
-      <button class="flex flex-row p-2" @click="deleteCost(fixedCosts[Number(menuId)])">
+      <button class="flex flex-row p-2" @click="handleDeleteCost(costId)">
         <img src="../../images/delete-cost.svg" />
         <p class="hidden sm:block ml-1">Delete</p>
       </button>
@@ -130,7 +116,7 @@ const deleteCost = (fixedCost: {
                 label="Yes"
                 type="submit"
                 class="modal-btn-add"
-                @click="deleteCost(fixedCost)"
+                @click="handleDeleteCost(fixedCost)"
               />
             </div>
           </template>
@@ -139,18 +125,12 @@ const deleteCost = (fixedCost: {
           class="flex flex-row w-full items-start"
           @click="
             handleEditCost(
-              fixedCost.id,
-              fixedCost.name,
-              fixedCost.category,
-              fixedCost.amount,
-              fixedCost.frequency,
-              fixedCost.individualTotal,
-              index
+              fixedCost.id
             )
           "
         >
-          <div class="">
-            <p class="basis-6/24 pr-2 md:pr-6 border-b border-grey-200">{{ fixedCost.name }}</p>
+          <div class="basis-6/24 pr-2 md:pr-6">
+            <p class=" border-b border-grey-200">{{ fixedCost.name }}</p>
           </div>
           <div class="basis-6/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.category }}</p>
@@ -167,7 +147,7 @@ const deleteCost = (fixedCost: {
         </div>
         <button
           class="hidden md:block basis-3/24 bg-costDelete bg-no-repeat w-10 h-10"
-          @click="deleteCost(fixedCost)"
+          @click="handleDeleteCost(fixedCost)"
         ></button>
         <button
           class="flex md:hidden basis-3/24 sm:pr-2 md:pr-6 align-center justify-center"

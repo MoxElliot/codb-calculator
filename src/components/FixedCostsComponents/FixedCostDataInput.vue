@@ -78,7 +78,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('fr
             fixedCostTotal
           )
         : replaceFixedCostAction(
-            editFixedCost[0].id,
+            editFixedCost.id,
             fixedCostName,
             fixedCostCategory,
             fixedCostAmount,

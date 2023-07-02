@@ -44,11 +44,11 @@ onMounted(() => {
       <fixed-cost-data-input v-if="formModalType === 'add'" />
       <fixed-cost-data-input
         v-else-if="formModalType === 'edit'"
-        :id="editFixedCost[0].id"
-        :name="editFixedCost[0].name"
-        :category="editFixedCost[0].category"
-        :amount="editFixedCost[0].amount"
-        :frequency="editFixedCost[0].frequency"
+        :id="editFixedCost.id"
+        :name="editFixedCost.name"
+        :category="editFixedCost.category"
+        :amount="editFixedCost.amount"
+        :frequency="editFixedCost.frequency"
       />
     </template>
   </form-modal>
