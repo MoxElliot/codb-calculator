@@ -13,7 +13,7 @@ const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
  
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
-const { companyName, selectedCost } = storeToRefs(reportStore)
+const { selectedCost } = storeToRefs(reportStore)
 
 onMounted(() => {
   updateInputValidAction(true)
