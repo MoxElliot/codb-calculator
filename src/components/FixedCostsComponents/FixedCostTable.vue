@@ -39,15 +39,6 @@ const handleEditCost = (id: string) => {
   totalFixedCostAction()
 }
 
-// const handleDeleteCost = (id: string, deleteAction: Function, totalAction: Function ) => {
-//   console.log("in HandleDeleteCosts id", id)
-//   addSelectedIdAction(id)
-//   closeEllipsisModal()
-//   closeConfirmModal()
-//   deleteAction(id)
-//   totalAction()
-// }
-
 const test = (id: string) => {
   console.log('in test', id)
 }
@@ -117,7 +108,7 @@ const test = (id: string) => {
         <div class="flex flex-row items-end basis-3/24">
           <button
             class="hidden md:block bg-costDelete bg-no-repeat w-10 h-10"
-            @click="openConfirmModal(fixedCost.id)"
+            @click="openConfirmModal(fixedCost.id, fixedCost.name)"
           ></button>
           <button
             class="block md:hidden sm:pr-2 md:pr-6"

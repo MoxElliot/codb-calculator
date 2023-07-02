@@ -3,6 +3,7 @@ import { onMounted } from 'vue'
 import FixedCostDataInput from '../FixedCostsComponents/FixedCostDataInput.vue'
 import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
 import FixedCostHeading from '../FixedCostsComponents/FixedCostHeading.vue'
+import FormButton from '../FormComponents/FormButton.vue'
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import FormModal from '../ModalComponents/FormModal.vue'
@@ -11,13 +12,13 @@ import { useModalStore } from '../../stores/modalStore'
 import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 
 const modalStore = useModalStore()
-const { formModalIsOpen, formModalType, confirmModalIsOpen } = storeToRefs(modalStore)
-const { openEllipsisModal, openFormModal, openConfirmModal, closeEllipsisModal, closeConfirmModal } = modalStore
+const { formModalIsOpen, formModalType, confirmModalIsOpen, confirmCostName } = storeToRefs(modalStore)
+const { closeEllipsisModal, closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
 const { selectedCost, selectedId } = storeToRefs(reportStore)
-const { totalFixedCostAction, editFixedCostAction, deleteFixedCostAction, addSelectedIdAction } =
+const { totalFixedCostAction, deleteFixedCostAction, addSelectedIdAction } =
   reportStore
 
 onMounted(() => {
@@ -58,7 +59,7 @@ onMounted(() => {
   <confirm-modal v-if="confirmModalIsOpen">
     <template #header>
       <div class="flex flex-row justify-center items-center text-body2 text-grey-300 font-serif">
-        <p>Are you sure you want to delete this cost?</p>
+        <p>Are you sure you want to delete the {{ confirmCostName }} cost?</p>
       </div>
     </template>
     <template #body>

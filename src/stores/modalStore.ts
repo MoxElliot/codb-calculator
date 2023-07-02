@@ -7,6 +7,7 @@ export type Modal = {
   ellipsisModalIsOpen: boolean
   confirmModalIsOpen: boolean
   confirmDelete: string
+  confirmCostName:string
 }
 
 export const useModalStore = defineStore('modalStore', {
@@ -15,7 +16,8 @@ export const useModalStore = defineStore('modalStore', {
     formModalType: '',
     ellipsisModalIsOpen: false,
     confirmModalIsOpen: false,
-    confirmDelete: ''
+    confirmDelete: '',
+    confirmCostName:'',
   }),
   actions: {
     openFormModal(formModalType: string) {
@@ -35,12 +37,12 @@ export const useModalStore = defineStore('modalStore', {
     closeEllipsisModal() {
       this.ellipsisModalIsOpen = false
     },
-    openConfirmModal(id: string) {
+    openConfirmModal(id: string, confirmCostName:string) {
       const reportStore = useReportStore()
       const { addSelectedIdAction } = reportStore
-      console.log("in Open confirm Modal id", id)
+      
       addSelectedIdAction(id)
-      console.log("in Open confirm Modal selectedID", reportStore.selectedId)
+      this.confirmCostName = confirmCostName
       this.confirmModalIsOpen = true
     },
     closeConfirmModal() {
