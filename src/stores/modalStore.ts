@@ -4,7 +4,6 @@ import { useReportStore } from './reportStore'
 export type Modal = {
   formModalIsOpen: boolean
   formModalType: string
-  costId: string
   ellipsisModalIsOpen: boolean
   confirmModalIsOpen: boolean
   confirmDelete: string
@@ -14,7 +13,6 @@ export const useModalStore = defineStore('modalStore', {
   state: (): Modal => ({
     formModalIsOpen: false,
     formModalType: '',
-    costId: ' ',
     ellipsisModalIsOpen: false,
     confirmModalIsOpen: false,
     confirmDelete: ''
@@ -27,19 +25,22 @@ export const useModalStore = defineStore('modalStore', {
     closeFormModal() {
       this.formModalIsOpen = false
     },
-    openEllipsisModal(costId: string) {
-      this.costId = costId
+    openEllipsisModal(id: string) {
+      const reportStore = useReportStore()
+      const { addSelectedIdAction } = reportStore
+      addSelectedIdAction(id)
+
       this.ellipsisModalIsOpen = true
     },
     closeEllipsisModal() {
-      this.costId = ''
       this.ellipsisModalIsOpen = false
     },
     openConfirmModal(id: string) {
       const reportStore = useReportStore()
       const { addSelectedIdAction } = reportStore
-
+      console.log("in Open confirm Modal id", id)
       addSelectedIdAction(id)
+      console.log("in Open confirm Modal selectedID", reportStore.selectedId)
       this.confirmModalIsOpen = true
     },
     closeConfirmModal() {

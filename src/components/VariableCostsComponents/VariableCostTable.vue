@@ -11,11 +11,11 @@ import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { ellipsisModalIsOpen, confirmModalIsOpen, costId } = storeToRefs(modalStore)
+const { ellipsisModalIsOpen, confirmModalIsOpen } = storeToRefs(modalStore)
 const { openEllipsisModal, openFormModal, closeEllipsisModal, closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
-const { variableCosts } = storeToRefs(reportStore)
+const { variableCosts, selectedId } = storeToRefs(reportStore)
 const {
   totalVariableCostAction,
   editVariableCostAction,
@@ -48,11 +48,11 @@ const handleDeleteCost = (id: string) => {
 <template>
   <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalIsOpen">
     <template #buttons>
-      <button class="flex flex-row p-2" @click="handleEditCost(costId)">
+      <button class="flex flex-row p-2" @click="handleEditCost(selectedId)">
         <img src="../../images/edit-cost.svg" />
         <p class="hidden sm:block ml-1">Edit</p>
       </button>
-      <button class="flex flex-row p-2" @click="handleDeleteCost(costId)">
+      <button class="flex flex-row p-2" @click="handleDeleteCost(selectedId)">
         <img src="../../images/delete-cost.svg" />
         <p class="hidden sm:block ml-1">Delete</p>
       </button>

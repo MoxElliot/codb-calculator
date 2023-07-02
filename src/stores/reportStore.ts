@@ -42,9 +42,6 @@ export const useReportStore = defineStore('reportStore', {
       frequency: 'Monthly',
       individualTotal: 1000
     } as CostItem,
-    editVariableCost: [
-      { id: '7', name: 'Parking', category: 'Overhead', amount: 80 }
-    ] as VariableCostObj[],
     selectedId: ''
     // companyName: '',
     // bookingsPerMonth: 0,

@@ -25,7 +25,6 @@ interface reportState {
     frequency: string,
     individualTotal: number
   }
-  editVariableCost: VariableCostObj[],
   selectedId: string
 }
 

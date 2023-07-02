@@ -9,13 +9,20 @@ import FixedCostDataInput from './FixedCostDataInput.vue'
 import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
 import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
+import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 
 const modalStore = useModalStore()
-const { ellipsisModalIsOpen, confirmModalIsOpen, costId } = storeToRefs(modalStore)
-const { openEllipsisModal, openFormModal, openConfirmModal, closeEllipsisModal, closeConfirmModal } = modalStore
+const { ellipsisModalIsOpen, confirmModalIsOpen } = storeToRefs(modalStore)
+const {
+  openEllipsisModal,
+  openFormModal,
+  openConfirmModal,
+  closeEllipsisModal,
+  closeConfirmModal
+} = modalStore
 
 const reportStore = useReportStore()
-const { fixedCosts } = storeToRefs(reportStore)
+const { fixedCosts, selectedId } = storeToRefs(reportStore)
 const { totalFixedCostAction, editFixedCostAction, deleteFixedCostAction, addSelectedIdAction } =
   reportStore
 
@@ -32,24 +39,40 @@ const handleEditCost = (id: string) => {
   totalFixedCostAction()
 }
 
-const handleDeleteCost = (id: string) => {
-  console.log("in HandleDeleteCosts id", id)
-  addSelectedIdAction(id)
-  deleteFixedCostAction(id)
-  closeEllipsisModal()
-  closeConfirmModal()
-  totalFixedCostAction()
+// const handleDeleteCost = (id: string, deleteAction: Function, totalAction: Function ) => {
+//   console.log("in HandleDeleteCosts id", id)
+//   addSelectedIdAction(id)
+//   closeEllipsisModal()
+//   closeConfirmModal()
+//   deleteAction(id)
+//   totalAction()
+// }
+
+const test = (id: string) => {
+  console.log('in test', id)
 }
 </script>
 
 <template>
   <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalIsOpen">
     <template #buttons>
-      <button class="flex flex-row p-2" @click="handleEditCost(costId)">
+      <button class="flex flex-row p-2" @click="handleEditCost(selectedId)">
         <img src="../../images/edit-cost.svg" />
         <p class="hidden sm:block ml-1">Edit</p>
       </button>
-      <button class="flex flex-row p-2" @click="handleDeleteCost(costId)">
+      <button
+        class="flex flex-row p-2"
+        @click="
+          handleDeleteCost(
+            selectedId,
+            addSelectedIdAction,
+            closeEllipsisModal,
+            closeConfirmModal,
+            deleteFixedCostAction,
+            totalFixedCostAction
+          )
+        "
+      >
         <img src="../../images/delete-cost.svg" />
         <p class="hidden sm:block ml-1">Delete</p>
       </button>
@@ -74,31 +97,6 @@ const handleDeleteCost = (id: string) => {
         :id="fixedCost.id"
         :key="fixedCost.id"
       >
-        <confirm-modal v-if="confirmModalIsOpen">
-          <template #header>
-            <div
-              class="flex flex-row justify-center items-center text-body2 text-grey-300 font-serif"
-            >
-              <p>Are you sure you want to delete this cost?</p>
-            </div>
-          </template>
-          <template #body>
-            <div class="flex flex-row p-1 md:p-4 h-full">
-              <form-button
-                label="No"
-                type="button"
-                class="modal-btn-cancel"
-                @click="closeConfirmModal"
-              />
-              <form-button
-                label="Yes"
-                type="submit"
-                class="modal-btn-add"
-                @click="handleDeleteCost(fixedCost.id)"
-              />
-            </div>
-          </template>
-        </confirm-modal>
         <div class="flex flex-row w-full items-end" @click="handleEditCost(fixedCost.id)">
           <div class="basis-6/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.name }}</p>

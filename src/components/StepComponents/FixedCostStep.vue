@@ -6,14 +6,19 @@ import FixedCostHeading from '../FixedCostsComponents/FixedCostHeading.vue'
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import FormModal from '../ModalComponents/FormModal.vue'
+import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
+import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 
 const modalStore = useModalStore()
-const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
- 
+const { formModalIsOpen, formModalType, confirmModalIsOpen } = storeToRefs(modalStore)
+const { openEllipsisModal, openFormModal, openConfirmModal, closeEllipsisModal, closeConfirmModal } = modalStore
+
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
-const { selectedCost } = storeToRefs(reportStore)
+const { selectedCost, selectedId } = storeToRefs(reportStore)
+const { totalFixedCostAction, editFixedCostAction, deleteFixedCostAction, addSelectedIdAction } =
+  reportStore
 
 onMounted(() => {
   updateInputValidAction(true)
@@ -50,6 +55,24 @@ onMounted(() => {
       />
     </template>
   </form-modal>
+  <confirm-modal v-if="confirmModalIsOpen">
+    <template #header>
+      <div class="flex flex-row justify-center items-center text-body2 text-grey-300 font-serif">
+        <p>Are you sure you want to delete this cost?</p>
+      </div>
+    </template>
+    <template #body>
+      <div class="flex flex-row p-1 md:p-4 h-full">
+        <form-button label="No" type="button" class="modal-btn-cancel" @click="closeConfirmModal" />
+        <form-button
+          label="Yes"
+          type="submit"
+          class="modal-btn-add"
+          @click="handleDeleteCost(selectedId, addSelectedIdAction, closeEllipsisModal, closeConfirmModal, deleteFixedCostAction, totalFixedCostAction)"
+        />
+      </div>
+    </template>
+  </confirm-modal>
   <div
     class="flex flex-col text-center items-center justify-center basis-full h-full md:h-fit z-10"
   >
