@@ -9,10 +9,10 @@ import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
 const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
-
+ 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
-const { companyName, editVariableCost } = storeToRefs(reportStore)
+const { companyName, selectedCost } = storeToRefs(reportStore)
 
 onMounted(() => {
   updateInputValidAction(true)
@@ -20,7 +20,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <form-modal v-if="formModalIsOpen" class="flex flex-col">
+  <form-modal v-if="formModalIsOpen" class="flex flex-col justify-center items-center">
     <template #header>
       <div
         class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif"
@@ -37,11 +37,11 @@ onMounted(() => {
     </template>
     <template #body>
       <variable-cost-data-input v-if="formModalType === 'add'"  />
-      <variable-cost-data-input v-else-if="formModalType === 'edit'" :id="editVariableCost[0].id" :name="editVariableCost[0].name" :category="editVariableCost[0].category" :amount="editVariableCost[0].amount" />
+      <variable-cost-data-input v-else-if="formModalType === 'edit'" :id="selectedCost.id" :name="selectedCost.name" :category="selectedCost.category" :amount="selectedCost.amount" />
     </template>
   </form-modal>
 
-  <div class="flex flex-col text-center items-center justify-center basis-full h-full md:h-fit">
+  <div class="flex flex-col text-center items-center justify-center basis-full h-full md:h-fit z-10">
     <div
       class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif md:basis-1/6 w-8/10 md:mb-8 lg:w-6/10"
     >
@@ -54,7 +54,7 @@ onMounted(() => {
         class="hidden sm:inline sm:px-3"
       />
     </div>
-    <div class="text-body2_xs md:text-body2 text-grey-300 basis-1/6 w-9/10 sm:w-8/10">
+    <div class="text-body2_xs md:text-body2 text-grey-300 basis-1/6 w-9/10 sm:w-8/10 lg:w-6/10">
       <p>
         A Variable Cost is any expense category that your are expecting to pay on an irregular
         basis!Add the name of the cost, the category, the amount below.
