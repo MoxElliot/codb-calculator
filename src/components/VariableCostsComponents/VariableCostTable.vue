@@ -9,6 +9,8 @@ import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
 import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
+import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
+import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
 const { ellipsisModalIsOpen, confirmModalIsOpen } = storeToRefs(modalStore)
@@ -27,32 +29,41 @@ onUpdated(() => {
   scrollToNewCost(variableCosts)
 })
 
-const handleEditCost = (id: string) => {
-  addSelectedIdAction(id)
-  openFormModal('edit')
-  editVariableCostAction(id)
-  closeEllipsisModal()
-  closeConfirmModal()
-  totalVariableCostAction()
-}
-
-const handleDeleteCost = (id: string) => {
-  addSelectedIdAction(id)
-  deleteVariableCostAction(id)
-  closeEllipsisModal()
-  closeConfirmModal()
-  totalVariableCostAction()
-}
 </script>
 
 <template>
   <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalIsOpen">
     <template #buttons>
-      <button class="flex flex-row p-2" @click="handleEditCost(selectedId)">
+      <button
+        class="flex flex-row p-2"
+        @click="
+          handleEditCost(
+            selectedId,
+            addSelectedIdAction,
+            editVariableCostAction,
+            openFormModal,
+            closeEllipsisModal,
+            closeConfirmModal,
+            totalVariableCostAction
+          )
+        "
+      >
         <img src="../../images/edit-cost.svg" />
         <p class="hidden sm:block ml-1">Edit</p>
       </button>
-      <button class="flex flex-row p-2" @click="handleDeleteCost(selectedId)">
+      <button
+        class="flex flex-row p-2"
+        @click="
+          handleDeleteCost(
+            selectedId,
+            addSelectedIdAction,
+            closeEllipsisModal,
+            closeConfirmModal,
+            deleteVariableCostAction,
+            totalVariableCostAction
+          )
+        "
+      >
         <img src="../../images/delete-cost.svg" />
         <p class="hidden sm:block ml-1">Delete</p>
       </button>
@@ -96,12 +107,34 @@ const handleDeleteCost = (id: string) => {
                 label="Yes"
                 type="submit"
                 class="modal-btn-add"
-                @click="handleDeleteCost(variableCost.id)"
+                @click="
+                  handleDeleteCost(
+                    variableCost.id,
+                    addSelectedIdAction,
+                    closeEllipsisModal,
+                    closeConfirmModal,
+                    deleteVariableCostAction,
+                    totalVariableCostAction
+                  )
+                "
               />
             </div>
           </template>
         </confirm-modal>
-        <div class="flex flex-row w-full items-end" @click="handleEditCost(variableCost.id)">
+        <div
+          class="flex flex-row w-full items-end"
+          @click="
+            handleEditCost(
+              variableCost.id,
+              addSelectedIdAction,
+              editVariableCostAction,
+              openFormModal,
+              closeEllipsisModal,
+              closeConfirmModal,
+              totalVariableCostAction
+            )
+          "
+        >
           <div class="basis-6/18 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ variableCost.name }}</p>
           </div>
@@ -115,7 +148,16 @@ const handleDeleteCost = (id: string) => {
         <div class="flex flex-row items-end basis-3/18">
           <button
             class="hidden md:block bg-costDelete bg-no-repeat w-10 h-10"
-            @click="handleDeleteCost(variableCost.id)"
+            @click="
+              handleDeleteCost(
+                variableCost.id,
+                addSelectedIdAction,
+                closeEllipsisModal,
+                closeConfirmModal,
+                deleteVariableCostAction,
+                totalVariableCostAction
+              )
+            "
           ></button>
           <button
             class="block md:hidden sm:pr-2 md:pr-6"
