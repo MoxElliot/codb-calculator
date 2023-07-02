@@ -2,83 +2,66 @@
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import { onUpdated } from 'vue'
+import fixedCostHeadingArray from '../../assets/fixedCostHeadings'
 import FormButton from '../FormComponents/FormButton.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import FixedCostDataInput from './FixedCostDataInput.vue'
 import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
 import { useModalStore } from '../../stores/modalStore'
+import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
+import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
-const { ellipsisModalisOpen, formModalType, menuId } = storeToRefs(modalStore)
-const { openEllipsisModal, openFormModal, closeEllipsisModal } = modalStore
+const { ellipsisModalIsOpen } = storeToRefs(modalStore)
+const {
+  openEllipsisModal,
+  openFormModal,
+  openConfirmModal,
+  closeEllipsisModal,
+  closeConfirmModal
+} = modalStore
 
 const reportStore = useReportStore()
-const { fixedCosts } = storeToRefs(reportStore)
-const { totalFixedCostAction, editFixedCostAction } = reportStore
-const fixedCostHeadingArray = [
-  ['Name', 'text-center basis-6/24 pr-2 md:pr-6'],
-  ['Category', 'text-center basis-6/24 pr-2 md:pr-6'],
-  ['Amount ($)', 'text-center basis-3/24 pr-2 md:pr-6'],
-  ['Freq', 'text-center basis-6/24 pr-2 md:pr-6'],
-  ['Total', 'text-center basis-3/24 pr-2 md:pr-6'],
-  ['', 'text-center basis-3/24 pr-2 md:pr-6']
-]
+const { fixedCosts, selectedId, selectedCost } = storeToRefs(reportStore)
+const { totalFixedCostAction, editFixedCostAction, deleteFixedCostAction, addSelectedIdAction } =
+  reportStore
 
 onUpdated(() => {
   scrollToNewCost(fixedCosts)
 })
-
-const handleEditCost = (
-  id: string,
-  name: string,
-  category: string,
-  amount: number | null,
-  frequency: string,
-  individualTotal: number
-) => {
-  openFormModal('edit')
-  editFixedCostAction(id, name, category, amount, frequency, individualTotal)
-}
-
-const deleteCost = (fixedCost: {
-  id: string
-  name: string
-  category: string
-  amount: number | null
-  frequency: string
-  individualTotal: number | undefined
-}) => {
-  const filtersList = reportStore.fixedCosts.filter((el) => el !== fixedCost)
-  reportStore.fixedCosts = filtersList
-  totalFixedCostAction()
-  closeEllipsisModal()
-}
 </script>
 
 <template>
-  <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalisOpen">
+  <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalIsOpen">
     <template #buttons>
-      <button class="flex flex-row p-2" @click="
-            handleEditCost(
-              fixedCosts[Number(menuId)].id,
-              fixedCosts[Number(menuId)].name,
-              fixedCosts[Number(menuId)].category,
-              fixedCosts[Number(menuId)].amount,
-              fixedCosts[Number(menuId)].frequency,
-              fixedCosts[Number(menuId)].individualTotal
-            )
-          ">
+      <button
+        class="flex flex-row p-2"
+        @click="
+          handleEditCost(
+            selectedId,
+            addSelectedIdAction,
+            editFixedCostAction,
+            openFormModal,
+            closeEllipsisModal,
+            closeConfirmModal,
+            totalFixedCostAction
+          )
+        "
+      >
         <img src="../../images/edit-cost.svg" />
         <p class="hidden sm:block ml-1">Edit</p>
       </button>
-      <button class="flex flex-row p-2" @click="deleteCost(fixedCosts[Number(menuId)])">
+      <button
+        class="flex flex-row p-2"
+        @click="openConfirmModal(selectedId, selectedCost.name)"
+      >
         <img src="../../images/delete-cost.svg" />
         <p class="hidden sm:block ml-1">Delete</p>
       </button>
     </template>
   </ellipsis-modal>
   <div
-    v-if="ellipsisModalisOpen"
+    v-if="ellipsisModalIsOpen"
     class="fixed top-0 bottom-0 left-0 right-0 z-10"
     @click="closeEllipsisModal()"
   ></div>
@@ -97,15 +80,16 @@ const deleteCost = (fixedCost: {
         :key="fixedCost.id"
       >
         <div
-          class="flex flex-row w-full"
+          class="flex flex-row w-full items-end"
           @click="
             handleEditCost(
               fixedCost.id,
-              fixedCost.name,
-              fixedCost.category,
-              fixedCost.amount,
-              fixedCost.frequency,
-              fixedCost.individualTotal
+              addSelectedIdAction,
+              editFixedCostAction,
+              openFormModal,
+              closeEllipsisModal,
+              closeConfirmModal,
+              totalFixedCostAction
             )
           "
         >
@@ -125,20 +109,21 @@ const deleteCost = (fixedCost: {
             <p class="border-b border-grey-200">${{ fixedCost.individualTotal }}</p>
           </div>
         </div>
-        <button
-          class="hidden md:block basis-3/24 bg-costDelete bg-no-repeat w-10 h-10"
-          @click="deleteCost(fixedCost)"
-        ></button>
-        <button
-          class="block md:hidden basis-3/24 sm:pr-2 md:pr-6"
-          @click="openEllipsisModal(fixedCost.id)"
-          @click.stop=""
-        >
-          ...
-        </button>
+        <div class="flex flex-row items-end basis-3/24">
+          <button
+            class="hidden md:block bg-costDelete bg-no-repeat w-10 h-10"
+            @click="openConfirmModal(fixedCost.id, fixedCost.name)"
+          ></button>
+          <button
+            class="block md:hidden sm:pr-2 md:pr-6"
+            @click="openEllipsisModal(fixedCost.id)"
+            @click.stop=""
+          >
+            ...
+          </button>
+        </div>
       </div>
     </div>
-
     <div class="hidden md:flex w-screen sm:w-full">
       <fixed-cost-data-input />
     </div>

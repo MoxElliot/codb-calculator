@@ -16,7 +16,7 @@ const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
 const { closeFormModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError, fixedFormValid, fixedCosts, editFixedCost } = storeToRefs(reportStore)
+const { blankSubmitError, fixedFormValid, fixedCosts, selectedCost } = storeToRefs(reportStore)
 const { handleAddCost, addFixedCostAction, setFixedFormValidAction, replaceFixedCostAction } =
   reportStore
 
@@ -54,7 +54,10 @@ const { value: fixedCostAmount, errorMessage: amountError } = useField('amount',
   initialValue: props.amount
 })
 
-const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('frequency', undefined, {
+const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
+  'frequency',
+  undefined,
+  {
     initialValue: props.frequency
   }
 )
@@ -79,7 +82,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('fr
             fixedCostTotal
           )
         : replaceFixedCostAction(
-            editFixedCost[0].id,
+            selectedCost.id,
             fixedCostName,
             fixedCostCategory,
             fixedCostAmount,
@@ -94,7 +97,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField('fr
     <fieldset
       :class="
         !formModalIsOpen
-          ? 'flex flex-row h-10 md:h-16 mt-4  w-screen sm:w-full'
+          ? 'flex flex-row h-10 md:h-16 mt-4 md:mt-8 w-screen sm:w-full'
           : 'flex flex-col basis-full justify-center items-center h-full text-center'
       "
     >

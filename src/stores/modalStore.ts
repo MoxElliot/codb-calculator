@@ -1,36 +1,53 @@
 import { defineStore } from 'pinia'
+import { useReportStore } from './reportStore'
 
 export type Modal = {
   formModalIsOpen: boolean
   formModalType: string
-  menuId: string
-  ellipsisModalisOpen: boolean
+  ellipsisModalIsOpen: boolean
+  confirmModalIsOpen: boolean
+  confirmDelete: string
+  confirmCostName: string
 }
 
 export const useModalStore = defineStore('modalStore', {
   state: (): Modal => ({
     formModalIsOpen: false,
     formModalType: '',
-    menuId: ' ',
-    ellipsisModalisOpen: false,
+    ellipsisModalIsOpen: false,
+    confirmModalIsOpen: false,
+    confirmDelete: '',
+    confirmCostName: ''
   }),
   actions: {
-    openFormModal(formModalType:string) {
+    openFormModal(formModalType: string) {
       this.formModalIsOpen = true
       this.formModalType = formModalType
     },
     closeFormModal() {
       this.formModalIsOpen = false
     },
-    openEllipsisModal(menuId: string) {
-      this.menuId = menuId
-      this.ellipsisModalisOpen = true
-      console.log("in open", menuId)
+    openEllipsisModal(id: string) {
+      const reportStore = useReportStore()
+      const { addSelectedIdAction } = reportStore
+      addSelectedIdAction(id)
+
+      this.ellipsisModalIsOpen = true
     },
     closeEllipsisModal() {
-      this.menuId = ''
-      this.ellipsisModalisOpen = false
-      console.log("in close")
+      this.ellipsisModalIsOpen = false
+    },
+    openConfirmModal(id: string, confirmCostName?: string) {
+      const reportStore = useReportStore()
+      const { addSelectedIdAction } = reportStore
+      this.closeEllipsisModal()
+      addSelectedIdAction(id)
+      this.confirmCostName = confirmCostName as string
+      this.confirmModalIsOpen = true
+    },
+    closeConfirmModal() {
+      this.confirmDelete = ''
+      this.confirmModalIsOpen = false
     }
   }
 })

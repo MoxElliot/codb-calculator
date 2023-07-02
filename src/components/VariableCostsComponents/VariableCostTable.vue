@@ -2,69 +2,68 @@
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import { onUpdated } from 'vue'
+import variableCostHeadingArray from '@/assets/variableCostHeadings'
 import FormButton from '../FormComponents/FormButton.vue'
 import VariableCostDataInput from '../VariableCostsComponents/VariableCostDataInput.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
 import { useModalStore } from '../../stores/modalStore'
+import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
-const { ellipsisModalisOpen, formModalType, menuId } = storeToRefs(modalStore)
-const { openEllipsisModal, openFormModal, closeEllipsisModal } = modalStore
+const { ellipsisModalIsOpen } = storeToRefs(modalStore)
+const {
+  openEllipsisModal,
+  openFormModal,
+  openConfirmModal,
+  closeEllipsisModal,
+  closeConfirmModal
+} = modalStore
 
 const reportStore = useReportStore()
-const { variableCosts } = storeToRefs(reportStore)
-const { totalVariableCostAction, editVariableCostAction } = reportStore
-const variableCostHeadingArray = [
-  ['Name', 'basis-6/18 pr-2 md:pr-8'],
-  ['Category', 'text-center basis-6/18 pr-2 md:pr-6'],
-  ['Amount ($)', 'text-center basis-6/18 pr-2 md:pr-6'],
-  ['', 'basis-3/18 pr-2 md:pr-6']
-]
+const { variableCosts, selectedId, selectedCost } = storeToRefs(reportStore)
+const {
+  totalVariableCostAction,
+  editVariableCostAction,
+  addSelectedIdAction
+} = reportStore
 
 onUpdated(() => {
   scrollToNewCost(variableCosts)
 })
-
-const handleEditCost = (id: string, name: string, category: string, amount: number | null) => {
-  openFormModal('edit')
-  editVariableCostAction(id, name, category, amount)
-}
-
-const deleteCost = (variableCost: {
-  id: string
-  name: string
-  category: string
-  amount: number | null
-}) => {
-  const filtersList = reportStore.variableCosts.filter((el) => el !== variableCost)
-  reportStore.variableCosts = filtersList
-  totalVariableCostAction()
-}
 </script>
 
 <template>
-  <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalisOpen">
+  <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalIsOpen">
     <template #buttons>
-      <button class="flex flex-row p-2" @click="
-            handleEditCost(
-              variableCosts[Number(menuId)].id,
-              variableCosts[Number(menuId)].name,
-              variableCosts[Number(menuId)].category,
-              variableCosts[Number(menuId)].amount
-            )
-          ">
+      <button
+        class="flex flex-row p-2"
+        @click="
+          handleEditCost(
+            selectedId,
+            addSelectedIdAction,
+            editVariableCostAction,
+            openFormModal,
+            closeEllipsisModal,
+            closeConfirmModal,
+            totalVariableCostAction
+          )
+        "
+      >
         <img src="../../images/edit-cost.svg" />
         <p class="hidden sm:block ml-1">Edit</p>
       </button>
-      <button class="flex flex-row p-2" @click="deleteCost(variableCosts[Number(menuId)])">
+      <button
+        class="flex flex-row p-2"
+        @click="openConfirmModal(selectedId, selectedCost.name)"
+      >
         <img src="../../images/delete-cost.svg" />
         <p class="hidden sm:block ml-1">Delete</p>
       </button>
     </template>
   </ellipsis-modal>
   <div
-    v-if="ellipsisModalisOpen"
+    v-if="ellipsisModalIsOpen"
     class="fixed top-0 bottom-0 left-0 right-0 z-10"
     @click="closeEllipsisModal()"
   ></div>
@@ -82,13 +81,17 @@ const deleteCost = (variableCost: {
         :key="variableCost.id"
       >
         <div
-          class="flex flex-row w-full"
-          @click="handleEditCost(
-                  variableCost.id,
-                  variableCost.name,
-                  variableCost.category,
-                  variableCost.amount
-                )
+          class="flex flex-row w-full items-end"
+          @click="
+            handleEditCost(
+              variableCost.id,
+              addSelectedIdAction,
+              editVariableCostAction,
+              openFormModal,
+              closeEllipsisModal,
+              closeConfirmModal,
+              totalVariableCostAction
+            )
           "
         >
           <div class="basis-6/18 pr-2 md:pr-6">
@@ -101,17 +104,19 @@ const deleteCost = (variableCost: {
             <p class="border-b border-grey-200">$ {{ variableCost.amount }}</p>
           </div>
         </div>
-        <button
-          class="hidden md:block basis-3/18 bg-costDelete bg-no-repeat w-10 h-10"
-          @click="deleteCost(variableCost)"
-        ></button>
-        <button
-          class="block md:hidden basis-3/18 sm:pr-2 md:pr-6"
-          @click="openEllipsisModal(variableCost.id)"
-          @click.stop=""
-        >
-          ...
-        </button>
+        <div class="flex flex-row items-end basis-3/18">
+          <button
+            class="hidden md:block bg-costDelete bg-no-repeat w-10 h-10"
+            @click="openConfirmModal(variableCost.id, variableCost.name)"
+          ></button>
+          <button
+            class="block md:hidden sm:pr-2 md:pr-6"
+            @click="openEllipsisModal(variableCost.id)"
+            @click.stop=""
+          >
+            ...
+          </button>
+        </div>
       </div>
     </div>
     <div class="hidden md:flex w-screen sm:w-full">

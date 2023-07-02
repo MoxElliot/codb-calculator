@@ -1,5 +1,5 @@
 const testingCostArr = [{
-    id: '0',
+    id: '0ee',
     name: 'Test0',
     category: 'Overhead',
     amount: 1000,
@@ -7,7 +7,7 @@ const testingCostArr = [{
     individualTotal: 1000
   },
   {
-    id: '1',
+    id: '1ee',
     name: 'Test1',
     category: 'Overhead',
     amount: 1000,
@@ -15,7 +15,7 @@ const testingCostArr = [{
     individualTotal: 1000
   },
   {
-    id: '2',
+    id: '2ee',
     name: 'Test2',
     category: 'Overhead',
     amount: 1000,
@@ -23,7 +23,7 @@ const testingCostArr = [{
     individualTotal: 1000
   },
   {
-    id: '3',
+    id: '3ee',
     name: 'Test3',
     category: 'Overhead',
     amount: 1000,
@@ -31,7 +31,7 @@ const testingCostArr = [{
     individualTotal: 1000
   },
   {
-    id: '4',
+    id: '4ee',
     name: 'Test4',
     category: 'Overhead',
     amount: 1000,
@@ -39,7 +39,7 @@ const testingCostArr = [{
     individualTotal: 1000
   },
   {
-    id: '5',
+    id: '5ee',
     name: 'Test5',
     category: 'Overhead',
     amount: 1000,
@@ -47,7 +47,7 @@ const testingCostArr = [{
     individualTotal: 1000
   },
   {
-    id: '6',
+    id: '6ee',
     name: 'Test6',
     category: 'Overhead',
     amount: 1000,
@@ -55,7 +55,7 @@ const testingCostArr = [{
     individualTotal: 1000
   },
   {
-    id: '7',
+    id: '7eee',
     name: 'Test7',
     category: 'Overhead',
     amount: 1000,
@@ -63,7 +63,7 @@ const testingCostArr = [{
     individualTotal: 1000
   },
   {
-    id: '8',
+    id: '8ee',
     name: 'Test8',
     category: 'Overhead',
     amount: 1000,
@@ -71,7 +71,7 @@ const testingCostArr = [{
     individualTotal: 1000
   },
   {
-    id: '9',
+    id: '9ee',
     name: 'Test9',
     category: 'Overhead',
     amount: 1000,

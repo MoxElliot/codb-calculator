@@ -5,6 +5,7 @@ interface FixedCostObj {
   amount: number | null 
   frequency: string
   individualTotal: number
+  index?: number
 }
 
 export default FixedCostObj

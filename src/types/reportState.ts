@@ -14,11 +14,18 @@ interface reportState {
   savingsPerMonth: number
   userEmail: string
   inputValid: boolean
-  blankSubmitError: string,
-  fixedFormValid: boolean,
-  variableFormValid: boolean,
-  editFixedCost: FixedCostObj[]
-  editVariableCost: VariableCostObj[]                                                                                                                   
+  blankSubmitError: string
+  fixedFormValid: boolean
+  variableFormValid: boolean
+  selectedCost: {
+    id: string,
+    name: string,
+    category: string,
+    amount: number,
+    frequency: string,
+    individualTotal: number
+  }
+  selectedId: string
 }
 
 export default reportState

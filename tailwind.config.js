@@ -167,7 +167,6 @@ module.exports = {
         }
       ],
       heading2: [
-        // Home Page "Hey There"
         '60px',
         {
           lineHeight: '72px',
@@ -176,7 +175,6 @@ module.exports = {
         }
       ],
       heading2_xs: [
-        // Home Page "Hey There"
         '40px',
         {
           lineHeight: '60px',

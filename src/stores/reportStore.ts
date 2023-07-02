@@ -6,6 +6,7 @@ import payPeriodOptionsArray from '@/assets/payPeriodOptionsArray'
 import formatMoney from '../assets/utility_functions/formatMoney'
 import testingCostArr from '@/assets/testingCostArr'
 import { useModalStore } from './modalStore'
+import type CostItem from '@/types/CostItem'
 
 export const useReportStore = defineStore('reportStore', {
   state: (): reportState => ({
@@ -14,14 +15,14 @@ export const useReportStore = defineStore('reportStore', {
     priceAveragePerBooking: 1000.0,
     hoursAveragePerBooking: 200,
     variableCosts: [
-      { id: '0', name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: '1', name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: '2', name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: '3', name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: '4', name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: '5', name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: '6', name: 'Parking', category: 'Overhead', amount: 80 },
-      { id: '7', name: 'Parking', category: 'Overhead', amount: 80 }
+      { id: '0', name: 'Parking0', category: 'Overhead', amount: 80 },
+      { id: '1', name: 'Parking1', category: 'Overhead', amount: 80 },
+      { id: '2', name: 'Parking2', category: 'Overhead', amount: 80 },
+      { id: '3', name: 'Parking3', category: 'Overhead', amount: 80 },
+      { id: '4', name: 'Parking4', category: 'Overhead', amount: 80 },
+      { id: '5', name: 'Parking5', category: 'Overhead', amount: 80 },
+      { id: '6', name: 'Parking6', category: 'Overhead', amount: 80 },
+      { id: '7', name: 'Parking7', category: 'Overhead', amount: 80 }
     ] as VariableCostObj[],
     totalVariableCosts: 80.0,
     fixedCosts: testingCostArr as FixedCostObj[],
@@ -33,19 +34,15 @@ export const useReportStore = defineStore('reportStore', {
     blankSubmitError: '',
     fixedFormValid: true,
     variableFormValid: true,
-    editFixedCost: [
-      {
-        id: '1',
-        name: 'Test1',
-        category: 'Overhead',
-        amount: 1000,
-        frequency: 'Monthly',
-        individualTotal: 1000
-      }
-    ] as FixedCostObj[],
-    editVariableCost: [
-      { id: '7', name: 'Parking', category: 'Overhead', amount: 80 }
-    ] as VariableCostObj[]
+    selectedCost: {
+      id: '1',
+      name: 'Test1',
+      category: 'Overhead',
+      amount: 1000,
+      frequency: 'Monthly',
+      individualTotal: 1000
+    } as CostItem,
+    selectedId: ''
     // companyName: '',
     // bookingsPerMonth: 0,
     // priceAveragePerBooking: 0,
@@ -86,18 +83,15 @@ export const useReportStore = defineStore('reportStore', {
 
       this.totalFixedCostAction()
     },
-    editFixedCostAction(
-      id: string,
-      name: string,
-      category: string,
-      amount: number | null,
-      frequency: string,
-      individualTotal: number
-    ) {
-      this.editFixedCost[0] = { id, name, category, amount, frequency, individualTotal }
+    editFixedCostAction(id: string) {
+      this.selectedCost = this.fixedCosts.find((item) => item.id === id) as CostItem
     },
-    editVariableCostAction(id: string, name: string, category: string, amount: number | null) {
-      this.editVariableCost[0] = { id, name, category, amount }
+
+    editVariableCostAction(id: string) {
+      this.selectedCost = this.variableCosts.find((item) => item.id === id) as CostItem
+    },
+    addSelectedIdAction(selectedId: string) {
+      this.selectedId = selectedId
     },
     replaceFixedCostAction(
       id: string,
@@ -114,17 +108,21 @@ export const useReportStore = defineStore('reportStore', {
         const modalStore = useModalStore()
         const { closeFormModal } = modalStore
 
-        formValidAction(true)
+        formValidAction(true) //toggles form to true to prevent error messages
+
         const payPeriodMultiplierElement = payPeriodOptionsArray.find(
           (ele) => ele.day === frequency
         )
         const payPeriodMultiplier: any = payPeriodMultiplierElement?.multiplier
 
         const totalNum: number = (amount as number) * payPeriodMultiplier
+
         individualTotal = formatMoney(totalNum)
+
         const newCost = { id, name, category, amount, frequency, individualTotal }
-        console.log('inReplace', this.fixedCosts[Number(id)], newCost, Number(id))
-        this.fixedCosts[Number(id)] = newCost
+        const replaceIndex = this.fixedCosts.indexOf(this.selectedCost)
+        this.fixedCosts.splice(replaceIndex, 1, newCost)
+
         closeFormModal()
         resetForm()
       } else {
@@ -144,16 +142,29 @@ export const useReportStore = defineStore('reportStore', {
       if (allValid) {
         const modalStore = useModalStore()
         const { closeFormModal } = modalStore
-        const newCost = { id, name, category, amount }
 
-        console.log('inReplace', this.fixedCosts[Number(id)], newCost, Number(id))
-        this.variableCosts[Number(id)] = newCost
+        formValidAction(true)
+
+        const newCost = { id, name, category, amount }
+        const replaceIndex = this.variableCosts.indexOf(this.selectedCost)
+        this.variableCosts.splice(replaceIndex, 1, newCost)
+
         closeFormModal()
         resetForm()
       } else {
         formValidAction(false)
         this.setBlankSubmitErrorAction('Enter a value in each field')
       }
+    },
+    deleteFixedCostAction(id: string) {
+      this.selectedCost = this.fixedCosts.find((item) => item.id === id) as CostItem
+      const deleteIndex = this.fixedCosts.indexOf(this.selectedCost)
+      this.fixedCosts.splice(deleteIndex, 1)
+    },
+    deleteVariableCostAction(id: string) {
+      this.selectedCost = this.variableCosts.find((item) => item.id === id) as CostItem
+      const deleteIndex = this.variableCosts.indexOf(this.selectedCost)
+      this.variableCosts.splice(deleteIndex, 1)
     },
     addBookingsPerMonthAction(bookingsPerMonth: number) {
       this.bookingsPerMonth = bookingsPerMonth
