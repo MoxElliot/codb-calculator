@@ -6,17 +6,17 @@ import variableCostHeadingArray from '@/assets/variableCostHeadings'
 import FormButton from '../FormComponents/FormButton.vue'
 import VariableCostDataInput from '../VariableCostsComponents/VariableCostDataInput.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
-import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
+import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
 import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
-const { ellipsisModalIsOpen } = storeToRefs(modalStore)
+const { optionsMenuIsOpen } = storeToRefs(modalStore)
 const {
-  openEllipsisModal,
+  openOptionsMenu,
   openFormModal,
   openConfirmModal,
-  closeEllipsisModal,
+  closeOptionsMenu,
   closeConfirmModal
 } = modalStore
 
@@ -34,7 +34,7 @@ onUpdated(() => {
 </script>
 
 <template>
-  <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalIsOpen">
+  <options-menu class="ellipsis-modal z-20" v-if="optionsMenuIsOpen">
     <template #buttons>
       <button
         class="flex flex-row p-2"
@@ -44,7 +44,7 @@ onUpdated(() => {
             addSelectedIdAction,
             editVariableCostAction,
             openFormModal,
-            closeEllipsisModal,
+            closeOptionsMenu,
             closeConfirmModal,
             totalVariableCostAction
           )
@@ -61,11 +61,11 @@ onUpdated(() => {
         <p class="hidden sm:block ml-1">Delete</p>
       </button>
     </template>
-  </ellipsis-modal>
+  </options-menu>
   <div
-    v-if="ellipsisModalIsOpen"
+    v-if="optionsMenuIsOpen"
     class="fixed top-0 bottom-0 left-0 right-0 z-10"
-    @click="closeEllipsisModal()"
+    @click="closeOptionsMenu()"
   ></div>
   <div class="mt-2 md:mt-8 w-full md:w-8/10">
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
@@ -88,7 +88,7 @@ onUpdated(() => {
               addSelectedIdAction,
               editVariableCostAction,
               openFormModal,
-              closeEllipsisModal,
+              closeOptionsMenu,
               closeConfirmModal,
               totalVariableCostAction
             )
@@ -111,7 +111,7 @@ onUpdated(() => {
           ></button>
           <button
             class="block md:hidden sm:pr-2 md:pr-6"
-            @click="openEllipsisModal(variableCost.id)"
+            @click="openOptionsMenu(variableCost.id)"
             @click.stop=""
           >
             ...

@@ -13,7 +13,7 @@ import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 
 const modalStore = useModalStore()
 const { formModalIsOpen, formModalType, confirmModalIsOpen, confirmCostName  } = storeToRefs(modalStore)
-const { closeEllipsisModal, closeConfirmModal } = modalStore
+const { closeOptionsMenu, closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
@@ -70,7 +70,7 @@ onMounted(() => {
             handleDeleteCost(
               selectedId,
               addSelectedIdAction,
-              closeEllipsisModal,
+              closeOptionsMenu,
               closeConfirmModal,
               deleteVariableCostAction,
               totalVariableCostAction
