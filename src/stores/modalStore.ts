@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useReportStore } from './reportStore'
 
 export type Modal = {
   formModalIsOpen: boolean
@@ -29,13 +30,16 @@ export const useModalStore = defineStore('modalStore', {
     openEllipsisModal(costId: string) {
       this.costId = costId
       this.ellipsisModalIsOpen = true
-      console.log("in openEllisps Modal", this.costId)
     },
     closeEllipsisModal() {
       this.costId = ''
       this.ellipsisModalIsOpen = false
     },
-    openConfirmModal(cost:any) {
+    openConfirmModal(id: string) {
+      const reportStore = useReportStore()
+      const { addSelectedIdAction } = reportStore
+
+      addSelectedIdAction(id)
       this.confirmModalIsOpen = true
     },
     closeConfirmModal() {

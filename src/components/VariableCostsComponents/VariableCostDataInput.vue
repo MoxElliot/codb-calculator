@@ -14,8 +14,14 @@ const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
 const { closeFormModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError, variableFormValid, variableCosts, editVariableCost } = storeToRefs(reportStore)
-const { handleAddCost, addVariableCostAction, setVariableFormValidAction, replaceVariableCostAction  } = reportStore
+const { blankSubmitError, variableFormValid, variableCosts, selectedCost } =
+  storeToRefs(reportStore)
+const {
+  handleAddCost,
+  addVariableCostAction,
+  setVariableFormValidAction,
+  replaceVariableCostAction
+} = reportStore
 
 const props = defineProps<{
   id?: string
@@ -35,12 +41,16 @@ const { resetForm, meta } = useForm({
   validateOnMount: true
 })
 
-const { value: variableCostName, errorMessage: nameError  } = useField('name', undefined, {
+const { value: variableCostName, errorMessage: nameError } = useField('name', undefined, {
   initialValue: props.name
 })
-const { value: variableCostCategory, errorMessage: categoryError  } = useField('category', undefined, {
-  initialValue: props.category
-})
+const { value: variableCostCategory, errorMessage: categoryError } = useField(
+  'category',
+  undefined,
+  {
+    initialValue: props.category
+  }
+)
 const { value: variableCostAmount, errorMessage: amountError } = useField('amount', undefined, {
   initialValue: props.amount
 })
@@ -50,32 +60,33 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
   <Form
     class="flex flex-col basis-full h-full"
     :valiation-schema="schema"
-    @submit="formModalType === 'add'
-      ? handleAddCost(
-        variableCostName,
-        variableCostCategory,
-        variableCostAmount,
-        meta.valid,
-        setVariableFormValidAction,
-        resetForm,
-        addVariableCostAction,
-        variableCosts
-      )
-      :replaceVariableCostAction(
-            editVariableCost[0].id,
+    @submit="
+      formModalType === 'add'
+        ? handleAddCost(
             variableCostName,
             variableCostCategory,
             variableCostAmount,
             meta.valid,
             setVariableFormValidAction,
             resetForm,
+            addVariableCostAction,
+            variableCosts
+          )
+        : replaceVariableCostAction(
+            selectedCost.id,
+            variableCostName,
+            variableCostCategory,
+            variableCostAmount,
+            meta.valid,
+            setVariableFormValidAction,
+            resetForm
           )
     "
   >
     <fieldset
       :class="
         !formModalIsOpen
-          ? 'flex flex-row w-full h-10 md:h-16 mt-4 '
+          ? 'flex flex-row h-10 md:h-16 mt-4 md:mt-8 w-screen sm:w-full'
           : 'flex flex-col basis-full justify-center items-center h-full text-center'
       "
     >
@@ -94,7 +105,7 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
         name="category"
         :optionArray="costCategoryOptions"
         parentClass="basis-6/18 pr-2 md:pr-6"
-        class="text-center border-b border-grey-200  bg-primary-white w-full"
+        class="text-center border-b border-grey-200 bg-primary-white w-full"
         :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setVariableFormValidAction(true)"
       />
@@ -118,8 +129,17 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
         v-if="formModalIsOpen === false"
       />
       <div class="flex flex-row p-1 md:p-4 h-full" v-else>
-        <form-button label="Cancel" type="button" class="modal-btn-cancel" @click="closeFormModal" />
-        <form-button :label="formModalType === 'add' ? 'Add' : 'Edit'" type="submit" class="modal-btn-add" />
+        <form-button
+          label="Cancel"
+          type="button"
+          class="modal-btn-cancel"
+          @click="closeFormModal"
+        />
+        <form-button
+          :label="formModalType === 'add' ? 'Add' : 'Edit'"
+          type="submit"
+          class="modal-btn-add"
+        />
       </div>
     </div>
   </Form>

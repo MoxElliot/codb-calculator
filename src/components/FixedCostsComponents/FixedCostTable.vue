@@ -12,7 +12,7 @@ import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
 const { ellipsisModalIsOpen, confirmModalIsOpen, costId } = storeToRefs(modalStore)
-const { openEllipsisModal, openFormModal, closeEllipsisModal, closeConfirmModal } = modalStore
+const { openEllipsisModal, openFormModal, openConfirmModal, closeEllipsisModal, closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
 const { fixedCosts } = storeToRefs(reportStore)
@@ -33,7 +33,7 @@ const handleEditCost = (id: string) => {
 }
 
 const handleDeleteCost = (id: string) => {
-  console.log('in delete', id)
+  console.log("in HandleDeleteCosts id", id)
   addSelectedIdAction(id)
   deleteFixedCostAction(id)
   closeEllipsisModal()
@@ -119,21 +119,18 @@ const handleDeleteCost = (id: string) => {
         <div class="flex flex-row items-end basis-3/24">
           <button
             class="hidden md:block bg-costDelete bg-no-repeat w-10 h-10"
-            @click="handleDeleteCost(fixedCost.id)"
+            @click="openConfirmModal(fixedCost.id)"
           ></button>
           <button
-            class="block md:hidden sm:pr-2 md:pr-6 "
+            class="block md:hidden sm:pr-2 md:pr-6"
             @click="openEllipsisModal(fixedCost.id)"
             @click.stop=""
           >
             ...
           </button>
         </div>
-          
-       
       </div>
     </div>
-
     <div class="hidden md:flex w-screen sm:w-full">
       <fixed-cost-data-input />
     </div>

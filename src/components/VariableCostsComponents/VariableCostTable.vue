@@ -2,76 +2,57 @@
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import { onUpdated } from 'vue'
+import variableCostHeadingArray from '@/assets/variableCostHeadings'
 import FormButton from '../FormComponents/FormButton.vue'
 import VariableCostDataInput from '../VariableCostsComponents/VariableCostDataInput.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
+import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 
 const modalStore = useModalStore()
-const { ellipsisModalIsOpen, costId } = storeToRefs(modalStore)
+const { ellipsisModalIsOpen, confirmModalIsOpen, costId } = storeToRefs(modalStore)
 const { openEllipsisModal, openFormModal, closeEllipsisModal, closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
 const { variableCosts } = storeToRefs(reportStore)
-const { totalVariableCostAction, editVariableCostAction, addSelectedIdAction } = reportStore
-const variableCostHeadingArray = [
-  ['Name', 'basis-6/18 pr-2 md:pr-8'],
-  ['Category', 'text-center basis-6/18 pr-2 md:pr-6'],
-  ['Amount ($)', 'text-center basis-6/18 pr-2 md:pr-6'],
-  ['', 'basis-3/18 pr-2 md:pr-6']
-]
+const {
+  totalVariableCostAction,
+  editVariableCostAction,
+  deleteVariableCostAction,
+  addSelectedIdAction
+} = reportStore
 
 onUpdated(() => {
   scrollToNewCost(variableCosts)
 })
 
-const handleEditCost = (
-  id: string,
-  name: string,
-  category: string,
-  amount: number | null,
-  index: number
-) => {
-  openFormModal('edit')
+const handleEditCost = (id: string) => {
   addSelectedIdAction(id)
-  editVariableCostAction(id, name, category, amount)
-}
-
-const deleteCost = (variableCost: {
-  id: string
-  name: string
-  category: string
-  amount: number | null
-}) => {
-  const filtersList = reportStore.variableCosts.filter((el) => el !== variableCost)
-  reportStore.variableCosts = filtersList
-  console.log("in Delete", filtersList)
-  totalVariableCostAction()
+  openFormModal('edit')
+  editVariableCostAction(id)
   closeEllipsisModal()
   closeConfirmModal()
+  totalVariableCostAction()
+}
+
+const handleDeleteCost = (id: string) => {
+  addSelectedIdAction(id)
+  deleteVariableCostAction(id)
+  closeEllipsisModal()
+  closeConfirmModal()
+  totalVariableCostAction()
 }
 </script>
 
 <template>
   <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalIsOpen">
     <template #buttons>
-      <button
-        class="flex flex-row p-2"
-        @click="
-          handleEditCost(
-            variableCosts[Number(costId)].id,
-            variableCosts[Number(costId)].name,
-            variableCosts[Number(costId)].category,
-            variableCosts[Number(costId)].amount,
-            variableCosts[Number(costId)].index as number
-          )
-        "
-      >
+      <button class="flex flex-row p-2" @click="handleEditCost(costId)">
         <img src="../../images/edit-cost.svg" />
         <p class="hidden sm:block ml-1">Edit</p>
       </button>
-      <button class="flex flex-row p-2" @click="deleteCost(variableCosts[Number(costId)])">
+      <button class="flex flex-row p-2" @click="handleDeleteCost(costId)">
         <img src="../../images/delete-cost.svg" />
         <p class="hidden sm:block ml-1">Delete</p>
       </button>
@@ -91,22 +72,36 @@ const deleteCost = (variableCost: {
     <div class="max-h-32 md:max-h-64 w-screen sm:w-full overflow-auto">
       <div
         class="h-10 md:h-16 flex flex-row w-full"
-        v-for="(variableCost, index) in variableCosts"
+        v-for="variableCost in variableCosts"
         :id="variableCost.id"
         :key="variableCost.id"
       >
-        <div
-          class="flex flex-row w-full items-start"
-          @click="
-            handleEditCost(
-              variableCost.id,
-              variableCost.name,
-              variableCost.category,
-              variableCost.amount,
-              index
-            )
-          "
-        >
+        <confirm-modal v-if="confirmModalIsOpen">
+          <template #header>
+            <div
+              class="flex flex-row justify-center items-center text-body2 text-grey-300 font-serif"
+            >
+              <p>Are you sure you want to delete this cost?</p>
+            </div>
+          </template>
+          <template #body>
+            <div class="flex flex-row p-1 md:p-4 h-full">
+              <form-button
+                label="No"
+                type="button"
+                class="modal-btn-cancel"
+                @click="closeConfirmModal"
+              />
+              <form-button
+                label="Yes"
+                type="submit"
+                class="modal-btn-add"
+                @click="handleDeleteCost(variableCost.id)"
+              />
+            </div>
+          </template>
+        </confirm-modal>
+        <div class="flex flex-row w-full items-end" @click="handleEditCost(variableCost.id)">
           <div class="basis-6/18 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ variableCost.name }}</p>
           </div>
@@ -117,17 +112,19 @@ const deleteCost = (variableCost: {
             <p class="border-b border-grey-200">$ {{ variableCost.amount }}</p>
           </div>
         </div>
-        <button
-          class="hidden md:block basis-3/18 bg-costDelete bg-no-repeat w-10 h-10"
-          @click="deleteCost(variableCost)"
-        ></button>
-        <button
-          class="block md:hidden basis-3/18 sm:pr-2 md:pr-6 align-center justify-center"
-          @click="openEllipsisModal(variableCost.id)"
-          @click.stop=""
-        >
-          ...
-        </button>
+        <div class="flex flex-row items-end basis-3/18">
+          <button
+            class="hidden md:block bg-costDelete bg-no-repeat w-10 h-10"
+            @click="handleDeleteCost(variableCost.id)"
+          ></button>
+          <button
+            class="block md:hidden sm:pr-2 md:pr-6"
+            @click="openEllipsisModal(variableCost.id)"
+            @click.stop=""
+          >
+            ...
+          </button>
+        </div>
       </div>
     </div>
     <div class="hidden md:flex w-screen sm:w-full">

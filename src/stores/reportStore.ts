@@ -34,15 +34,14 @@ export const useReportStore = defineStore('reportStore', {
     blankSubmitError: '',
     fixedFormValid: true,
     variableFormValid: true,
-    selectedCost: 
-      {
-        id: '1',
-        name: 'Test1',
-        category: 'Overhead',
-        amount: 1000,
-        frequency: 'Monthly',
-        individualTotal: 1000
-      } as CostItem,
+    selectedCost: {
+      id: '1',
+      name: 'Test1',
+      category: 'Overhead',
+      amount: 1000,
+      frequency: 'Monthly',
+      individualTotal: 1000
+    } as CostItem,
     editVariableCost: [
       { id: '7', name: 'Parking', category: 'Overhead', amount: 80 }
     ] as VariableCostObj[],
@@ -87,14 +86,12 @@ export const useReportStore = defineStore('reportStore', {
 
       this.totalFixedCostAction()
     },
-    editFixedCostAction(
-      id: string,
-    ) {
-      this.selectedCost = this.fixedCosts.find(item => item.id === id) as CostItem
+    editFixedCostAction(id: string) {
+      this.selectedCost = this.fixedCosts.find((item) => item.id === id) as CostItem
     },
 
-    editVariableCostAction(id: string, name: string, category: string, amount: number | null) {
-      this.editVariableCost[0] = { id, name, category, amount }
+    editVariableCostAction(id: string) {
+      this.selectedCost = this.variableCosts.find((item) => item.id === id) as CostItem
     },
     addSelectedIdAction(selectedId: string) {
       this.selectedId = selectedId
@@ -128,6 +125,7 @@ export const useReportStore = defineStore('reportStore', {
         const newCost = { id, name, category, amount, frequency, individualTotal }
         const replaceIndex = this.fixedCosts.indexOf(this.selectedCost)
         this.fixedCosts.splice(replaceIndex, 1, newCost)
+
         closeFormModal()
         resetForm()
       } else {
@@ -147,10 +145,13 @@ export const useReportStore = defineStore('reportStore', {
       if (allValid) {
         const modalStore = useModalStore()
         const { closeFormModal } = modalStore
-        const newCost = { id, name, category, amount }
 
-        console.log('inReplace', this.fixedCosts[Number(id)], newCost, Number(id))
-        this.variableCosts[Number(this.selectedId)] = newCost
+        formValidAction(true)
+
+        const newCost = { id, name, category, amount }
+        const replaceIndex = this.variableCosts.indexOf(this.selectedCost)
+        this.variableCosts.splice(replaceIndex, 1, newCost)
+
         closeFormModal()
         resetForm()
       } else {
@@ -158,11 +159,15 @@ export const useReportStore = defineStore('reportStore', {
         this.setBlankSubmitErrorAction('Enter a value in each field')
       }
     },
-    deleteFixedCostAction(id: string){
-      this.selectedCost = this.fixedCosts.find(item => item.id === id) as CostItem
+    deleteFixedCostAction(id: string) {
+      this.selectedCost = this.fixedCosts.find((item) => item.id === id) as CostItem
       const deleteIndex = this.fixedCosts.indexOf(this.selectedCost)
       this.fixedCosts.splice(deleteIndex, 1)
-      console.log("in deltefixedCostAction", this.fixedCosts)
+    },
+    deleteVariableCostAction(id: string) {
+      this.selectedCost = this.variableCosts.find((item) => item.id === id) as CostItem
+      const deleteIndex = this.variableCosts.indexOf(this.selectedCost)
+      this.variableCosts.splice(deleteIndex, 1)
     },
     addBookingsPerMonthAction(bookingsPerMonth: number) {
       this.bookingsPerMonth = bookingsPerMonth
