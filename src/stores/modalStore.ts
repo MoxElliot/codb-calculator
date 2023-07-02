@@ -37,12 +37,12 @@ export const useModalStore = defineStore('modalStore', {
     closeEllipsisModal() {
       this.ellipsisModalIsOpen = false
     },
-    openConfirmModal(id: string, confirmCostName: string) {
+    openConfirmModal(id: string, confirmCostName?: string) {
       const reportStore = useReportStore()
       const { addSelectedIdAction } = reportStore
-
+      this.closeEllipsisModal()
       addSelectedIdAction(id)
-      this.confirmCostName = confirmCostName
+      this.confirmCostName = confirmCostName as string
       this.confirmModalIsOpen = true
     },
     closeConfirmModal() {

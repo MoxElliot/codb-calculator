@@ -22,7 +22,7 @@ const {
 } = modalStore
 
 const reportStore = useReportStore()
-const { fixedCosts, selectedId } = storeToRefs(reportStore)
+const { fixedCosts, selectedId, selectedCost } = storeToRefs(reportStore)
 const { totalFixedCostAction, editFixedCostAction, deleteFixedCostAction, addSelectedIdAction } =
   reportStore
 
@@ -53,16 +53,7 @@ onUpdated(() => {
       </button>
       <button
         class="flex flex-row p-2"
-        @click="
-          handleDeleteCost(
-            selectedId,
-            addSelectedIdAction,
-            closeEllipsisModal,
-            closeConfirmModal,
-            deleteFixedCostAction,
-            totalFixedCostAction
-          )
-        "
+        @click="openConfirmModal(selectedId, selectedCost.name)"
       >
         <img src="../../images/delete-cost.svg" />
         <p class="hidden sm:block ml-1">Delete</p>

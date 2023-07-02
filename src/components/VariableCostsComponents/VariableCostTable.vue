@@ -7,28 +7,30 @@ import FormButton from '../FormComponents/FormButton.vue'
 import VariableCostDataInput from '../VariableCostsComponents/VariableCostDataInput.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
-import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
-import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
-const { ellipsisModalIsOpen, confirmModalIsOpen } = storeToRefs(modalStore)
-const { openEllipsisModal, openFormModal, closeEllipsisModal, closeConfirmModal } = modalStore
+const { ellipsisModalIsOpen } = storeToRefs(modalStore)
+const {
+  openEllipsisModal,
+  openFormModal,
+  openConfirmModal,
+  closeEllipsisModal,
+  closeConfirmModal
+} = modalStore
 
 const reportStore = useReportStore()
-const { variableCosts, selectedId } = storeToRefs(reportStore)
+const { variableCosts, selectedId, selectedCost } = storeToRefs(reportStore)
 const {
   totalVariableCostAction,
   editVariableCostAction,
-  deleteVariableCostAction,
   addSelectedIdAction
 } = reportStore
 
 onUpdated(() => {
   scrollToNewCost(variableCosts)
 })
-
 </script>
 
 <template>
@@ -53,16 +55,7 @@ onUpdated(() => {
       </button>
       <button
         class="flex flex-row p-2"
-        @click="
-          handleDeleteCost(
-            selectedId,
-            addSelectedIdAction,
-            closeEllipsisModal,
-            closeConfirmModal,
-            deleteVariableCostAction,
-            totalVariableCostAction
-          )
-        "
+        @click="openConfirmModal(selectedId, selectedCost.name)"
       >
         <img src="../../images/delete-cost.svg" />
         <p class="hidden sm:block ml-1">Delete</p>
@@ -87,40 +80,6 @@ onUpdated(() => {
         :id="variableCost.id"
         :key="variableCost.id"
       >
-        <confirm-modal v-if="confirmModalIsOpen">
-          <template #header>
-            <div
-              class="flex flex-row justify-center items-center text-body2 text-grey-300 font-serif"
-            >
-              <p>Are you sure you want to delete this cost?</p>
-            </div>
-          </template>
-          <template #body>
-            <div class="flex flex-row p-1 md:p-4 h-full">
-              <form-button
-                label="No"
-                type="button"
-                class="modal-btn-cancel"
-                @click="closeConfirmModal"
-              />
-              <form-button
-                label="Yes"
-                type="submit"
-                class="modal-btn-add"
-                @click="
-                  handleDeleteCost(
-                    variableCost.id,
-                    addSelectedIdAction,
-                    closeEllipsisModal,
-                    closeConfirmModal,
-                    deleteVariableCostAction,
-                    totalVariableCostAction
-                  )
-                "
-              />
-            </div>
-          </template>
-        </confirm-modal>
         <div
           class="flex flex-row w-full items-end"
           @click="
@@ -148,16 +107,7 @@ onUpdated(() => {
         <div class="flex flex-row items-end basis-3/18">
           <button
             class="hidden md:block bg-costDelete bg-no-repeat w-10 h-10"
-            @click="
-              handleDeleteCost(
-                variableCost.id,
-                addSelectedIdAction,
-                closeEllipsisModal,
-                closeConfirmModal,
-                deleteVariableCostAction,
-                totalVariableCostAction
-              )
-            "
+            @click="openConfirmModal(variableCost.id, variableCost.name)"
           ></button>
           <button
             class="block md:hidden sm:pr-2 md:pr-6"
