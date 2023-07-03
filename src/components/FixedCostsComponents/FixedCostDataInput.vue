@@ -65,7 +65,9 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
 
 <template>
   <Form
-    :class="!formModalIsOpen ? 'flex flex-col basis-full h-full' : 'flex flex-col items-around h-80'"
+    :class="
+      !formModalIsOpen ? 'flex flex-col basis-full h-full' : 'flex flex-col items-around h-80'
+    "
     :valiation-schema="schema"
     @submit="
       formModalType === 'add'
@@ -141,7 +143,6 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
       />
       <div :parentClass="!formModalIsOpen ? 'basis-6/24 pr-2 md:pr-6' : ''"></div>
     </fieldset>
-
     <div class="flex flex-col justify-between sm:h-[100px]">
       <span class="error-text text-center" v-if="!fixedFormValid">{{ blankSubmitError }}</span>
       <span class="error-text text-center">{{ amountError }} </span>

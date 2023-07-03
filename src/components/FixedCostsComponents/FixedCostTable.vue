@@ -8,7 +8,6 @@ import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import FixedCostDataInput from './FixedCostDataInput.vue'
 import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
-import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
@@ -17,9 +16,8 @@ const { openOptionsMenu, openFormModal, openConfirmModal, closeOptionsMenu, clos
   modalStore
 
 const reportStore = useReportStore()
-const { fixedCosts, selectedId, selectedCost } = storeToRefs(reportStore)
-const { totalFixedCostAction, editFixedCostAction, deleteFixedCostAction, addSelectedIdAction } =
-  reportStore
+const { fixedCosts, selectedId } = storeToRefs(reportStore)
+const { totalFixedCostAction, editFixedCostAction, addSelectedIdAction } = reportStore
 
 onUpdated(() => {
   scrollToNewCost(fixedCosts)
@@ -36,8 +34,6 @@ const handleOpenOption = (cost: string, e: Event) => {
   // clickLocation(e, 50, 500)
   openOptionsMenu(cost)
 }
-
-console.log('in fixedCostTabel', x, y)
 </script>
 
 <template>
@@ -48,23 +44,23 @@ console.log('in fixedCostTabel', x, y)
       </div>
     </div>
     <options-menu
-            :x-loc="x"
-            :y-loc="y"
-            v-if="optionsMenuIsOpen"
-            @edit-event="
-              handleEditCost(
-                selectedId,
-                addSelectedIdAction,
-                editFixedCostAction,
-                openFormModal,
-                closeOptionsMenu,
-                closeConfirmModal,
-                totalFixedCostAction
-              )
-            "
-            @delete-event="openConfirmModal(selectedId, 'fixed')"
-            @menu-event="closeOptionsMenu()"
-          />
+      :x-loc="x"
+      :y-loc="y"
+      v-if="optionsMenuIsOpen"
+      @edit-event="
+        handleEditCost(
+          selectedId,
+          addSelectedIdAction,
+          editFixedCostAction,
+          openFormModal,
+          closeOptionsMenu,
+          closeConfirmModal,
+          totalFixedCostAction
+        )
+      "
+      @delete-event="openConfirmModal(selectedId, 'fixed')"
+      @menu-event="closeOptionsMenu()"
+    />
     <div class="max-h-32 sm:max-h-64 w-screen sm:w-full overflow-auto">
       <div
         class="h-10 md:h-16 flex flex-row w-full"
@@ -102,20 +98,17 @@ console.log('in fixedCostTabel', x, y)
             <p class="border-b border-grey-200">${{ fixedCost.individualTotal }}</p>
           </div>
         </div>
-        <div class="flex flex-row items-center basis-3/24">
-          
-          <button
-            class="hidden md:block bg-costDelete bg-no-repeat w-10 h-10"
-            @click="openConfirmModal(fixedCost.id, 'fixed')"
-          ></button>
-          <button
-            class="block md:hidden sm:pr-2 md:pr-6"
-            @click="handleOpenOption(fixedCost.id, $event)"
-            @click.stop=""
-          >
-            ...
-          </button>
-        </div>
+        <form-button
+          class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
+          btnImage="/src/images/delete-cost.svg"
+          @click="openConfirmModal(fixedCost.id, 'fixed')"
+        />
+        <form-button
+          class="flex flex-row md:hidden basis-3/24 w-3/4 h-3/4"
+          label="..."
+          @click="handleOpenOption(fixedCost.id, $event)"
+          @click.stop=""
+        />
       </div>
     </div>
     <div class="hidden md:flex w-screen sm:w-full">
