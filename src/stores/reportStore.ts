@@ -42,7 +42,8 @@ export const useReportStore = defineStore('reportStore', {
       frequency: 'Monthly',
       individualTotal: 1000
     } as CostItem,
-    selectedId: ''
+    selectedId: '',
+    selectedName:'',
     // companyName: '',
     // bookingsPerMonth: 0,
     // priceAveragePerBooking: 0,
@@ -92,6 +93,11 @@ export const useReportStore = defineStore('reportStore', {
     },
     addSelectedIdAction(selectedId: string) {
       this.selectedId = selectedId
+    },
+    addSelectedFixedCostNameAction() {
+      const id = this.selectedId
+      const selectedCost = this.fixedCosts.find((item)=> item.id === id) as CostItem
+      this.selectedName = selectedCost.name
     },
     replaceFixedCostAction(
       id: string,

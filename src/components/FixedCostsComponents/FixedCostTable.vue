@@ -51,7 +51,7 @@ console.log("in testLocaion","x", e.clientX,"y", e.clientY)
           totalFixedCostAction
         )
       "
-      @delete-event="openConfirmModal(selectedId, selectedCost.name)"
+      @delete-event="openConfirmModal(selectedId, 'fixed')"
       @menu-event="closeOptionsMenu"
     />
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
@@ -100,7 +100,7 @@ console.log("in testLocaion","x", e.clientX,"y", e.clientY)
         <div class="flex flex-row items-end basis-3/24">
           <button
             class="hidden md:block bg-costDelete bg-no-repeat w-10 h-10"
-            @click="openConfirmModal(fixedCost.id, fixedCost.name)"
+            @click="openConfirmModal(fixedCost.id, 'fixed')"
           ></button>
           <button
             class="block md:hidden sm:pr-2 md:pr-6"

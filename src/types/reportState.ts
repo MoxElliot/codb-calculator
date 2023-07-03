@@ -26,6 +26,7 @@ interface reportState {
     individualTotal: number
   }
   selectedId: string
+  selectedName:string
 }
 
 export default reportState

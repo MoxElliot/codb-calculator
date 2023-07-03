@@ -1,5 +1,6 @@
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 import { useReportStore } from './reportStore'
+import type CostItem from '@/types/CostItem'
 
 export type Modal = {
   formModalIsOpen: boolean
@@ -31,18 +32,29 @@ export const useModalStore = defineStore('modalStore', {
       const reportStore = useReportStore()
       const { addSelectedIdAction } = reportStore
       addSelectedIdAction(id)
+      console.log('in Open Options Menu, id, reportStore.selectedId', id, reportStore.selectedId)
 
       this.optionsMenuIsOpen = true
     },
     closeOptionsMenu() {
       this.optionsMenuIsOpen = false
     },
-    openConfirmModal(id: string, confirmCostName: string) {
+    openConfirmModal(id: string, costType: string) {
       const reportStore = useReportStore()
       const { addSelectedIdAction } = reportStore
+      // const { fixedCosts } = storeToRefs(reportStore)
       this.closeOptionsMenu()
       addSelectedIdAction(id)
-      this.confirmCostName = confirmCostName
+
+      if(costType === 'fixed') {
+        const selectedCost = reportStore.fixedCosts.find((item) => item.id === id) as CostItem
+        this.confirmCostName = selectedCost.name
+        console.log('in openConfirmModal costType fixed, costName', this.confirmCostName)
+      } else if(costType === 'variable') {
+        const selectedCost = reportStore.variableCosts.find((item) => item.id === id) as CostItem
+        this.confirmCostName = selectedCost.name 
+      }
+
       this.confirmModalIsOpen = true
     },
     closeConfirmModal() {
