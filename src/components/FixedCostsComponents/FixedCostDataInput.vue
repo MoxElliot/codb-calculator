@@ -98,7 +98,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
       :class="
         !formModalIsOpen
           ? 'flex flex-row h-10 md:h-16 mt-4 md:mt-8 w-screen sm:w-full'
-          : 'flex flex-col basis-full justify-center items-center h-full text-center'
+          : 'flex flex-col basis-full items-center text-center'
       "
     >
       <data-input
