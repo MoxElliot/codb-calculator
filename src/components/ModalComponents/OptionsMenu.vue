@@ -1,13 +1,21 @@
 <script setup lang="ts">
 import FormButton from '../FormComponents/FormButton.vue'
+
+defineProps({
+  parentClass: {
+    type: String,
+    default: ''
+  }})
+
+defineEmits(['menu-event', 'edit-event', 'delete-event'])
 </script>
 
 <template>
   <div
     class="fixed top-0 bottom-0 left-0 right-0 z-10 h-full w-full"
-    @click="$emit('menuEvent')"
+    @click="$emit('menu-event')"
   ></div>
-  <div class="absolute top-10 right-20 options-menu h-[85px] w-[85px] z-20">
+  <div class="options-menu absolute top-10 right-20 options-menu h-[85px] w-[85px] z-20">
     <section
       class="bg-primary-white flex flex-col justify-center items-center max-w-[100px] max-h-[100px]"
     >
@@ -15,13 +23,13 @@ import FormButton from '../FormComponents/FormButton.vue'
         class="flex flex-row p-2"
         label="Edit"
         btnImage="src/images/edit-cost.svg"
-        @click="$emit('editEvent')"
+        @click="$emit('edit-event')"
       />
       <form-button
         class="flex flex-row p-2"
         label="Delete"
         btnImage="/src/images/delete-cost.svg"
-        @click="$emit('deleteEvent')"
+        @click="$emit('delete-event')"
       />
     </section>
   </div>

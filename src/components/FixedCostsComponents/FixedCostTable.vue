@@ -38,7 +38,6 @@ console.log("in testLocaion","x", e.clientX,"y", e.clientY)
 <template>
   <div class="mt-2 md:mt-8 w-full md:w-8/10 relative" @click="testLocation">
     <options-menu
-      class="ellipsis-modal z-20"
       v-if="optionsMenuIsOpen"
       @edit-event="
         handleEditCost(
@@ -52,7 +51,7 @@ console.log("in testLocaion","x", e.clientX,"y", e.clientY)
         )
       "
       @delete-event="openConfirmModal(selectedId, 'fixed')"
-      @menu-event="closeOptionsMenu"
+      @menu-event="closeOptionsMenu()"
     />
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in fixedCostHeadingArray">
