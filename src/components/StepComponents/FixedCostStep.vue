@@ -52,9 +52,7 @@ onMounted(() => {
   </form-modal>
   <confirm-modal v-if="confirmModalIsOpen">
     <template #header>
-      <div class="flex flex-row justify-center items-center text-body2 text-grey-300 font-serif">
-        <p>Are you sure you want to delete the {{ confirmCostName }} cost?</p>
-      </div>
+      <p>Are you sure you want to delete the cost {{ confirmCostName }}?</p>
     </template>
     <template #body>
       <div class="flex flex-row p-1 md:p-4 h-full">
@@ -78,7 +76,7 @@ onMounted(() => {
     </template>
   </confirm-modal>
   <div
-    class="flex flex-col text-center items-center justify-center basis-full h-full md:h-fit z-10"
+    class="flex flex-col text-center items-center justify-center basis-full h-fit min-h-[700px] z-10"
   >
     <fixed-cost-heading />
     <fixed-cost-table />

@@ -59,7 +59,7 @@ console.log("in testLocaion","x", e.clientX,"y", e.clientY)
       </div>
     </div>
 
-    <div class="max-h-32 md:max-h-64 w-screen sm:w-full overflow-auto">
+    <div class="max-h-32 sm:max-h-64 w-screen sm:w-full overflow-auto">
       <div
         class="h-10 md:h-16 flex flex-row w-full"
         v-for="fixedCost in fixedCosts"
