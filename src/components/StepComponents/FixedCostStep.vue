@@ -12,14 +12,14 @@ import { useModalStore } from '../../stores/modalStore'
 import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 
 const modalStore = useModalStore()
-const { formModalIsOpen, formModalType, confirmModalIsOpen, confirmCostName } = storeToRefs(modalStore)
+const { formModalIsOpen, formModalType, confirmModalIsOpen, confirmCostName } =
+  storeToRefs(modalStore)
 const { closeOptionsMenu, closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
 const { selectedCost, selectedId } = storeToRefs(reportStore)
-const { totalFixedCostAction, deleteFixedCostAction, addSelectedIdAction } =
-  reportStore
+const { totalFixedCostAction, deleteFixedCostAction, addSelectedIdAction } = reportStore
 
 onMounted(() => {
   updateInputValidAction(true)
@@ -33,15 +33,9 @@ onMounted(() => {
     <template #header>
       <div
         class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif"
-        v-if="formModalType === 'add'"
       >
-        <p>Add Fixed Cost</p>
-      </div>
-      <div
-        class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif"
-        v-else-if="formModalType === 'edit'"
-      >
-        <p>Edit Fixed Cost</p>
+        <p v-if="formModalType === 'add'">Add Fixed Cost</p>
+        <p v-else-if="formModalType === 'edit'">Edit Fixed Cost</p>
       </div>
     </template>
     <template #body>
@@ -69,7 +63,16 @@ onMounted(() => {
           label="Yes"
           type="submit"
           class="modal-btn-add"
-          @click="handleDeleteCost(selectedId, addSelectedIdAction, closeOptionsMenu, closeConfirmModal, deleteFixedCostAction, totalFixedCostAction)"
+          @click="
+            handleDeleteCost(
+              selectedId,
+              addSelectedIdAction,
+              closeOptionsMenu,
+              closeConfirmModal,
+              deleteFixedCostAction,
+              totalFixedCostAction
+            )
+          "
         />
       </div>
     </template>
