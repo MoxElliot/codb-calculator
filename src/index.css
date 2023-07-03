@@ -34,7 +34,7 @@
   .modal-btn-cancel {
     @apply border rounded-main text-grey-300 font-sans uppercase text-btn p-btn m-2 md:m-4 gap-2.5 w-32 h-48;
   }
-  .ellipsis-modal {
+  .options-menu {
     @apply rounded-lg border border-grey-400 drop-shadow-md
   }
 }

@@ -14,5 +14,5 @@ const props = defineProps({
 </script>
 
 <template>
-  <button :class="btnClass"><img :src="btnImage" /> {{ label }}</button>
+  <button :class="btnClass"><img :src="btnImage"/>{{ label }}</button>
 </template>

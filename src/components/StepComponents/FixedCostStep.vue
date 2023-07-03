@@ -13,7 +13,7 @@ import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 
 const modalStore = useModalStore()
 const { formModalIsOpen, formModalType, confirmModalIsOpen, confirmCostName } = storeToRefs(modalStore)
-const { closeEllipsisModal, closeConfirmModal } = modalStore
+const { closeOptionsMenu, closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
@@ -69,7 +69,7 @@ onMounted(() => {
           label="Yes"
           type="submit"
           class="modal-btn-add"
-          @click="handleDeleteCost(selectedId, addSelectedIdAction, closeEllipsisModal, closeConfirmModal, deleteFixedCostAction, totalFixedCostAction)"
+          @click="handleDeleteCost(selectedId, addSelectedIdAction, closeOptionsMenu, closeConfirmModal, deleteFixedCostAction, totalFixedCostAction)"
         />
       </div>
     </template>

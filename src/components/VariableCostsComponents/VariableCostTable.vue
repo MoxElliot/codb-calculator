@@ -6,27 +6,18 @@ import variableCostHeadingArray from '@/assets/variableCostHeadings'
 import FormButton from '../FormComponents/FormButton.vue'
 import VariableCostDataInput from '../VariableCostsComponents/VariableCostDataInput.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
-import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
+import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
 import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
-const { ellipsisModalIsOpen } = storeToRefs(modalStore)
-const {
-  openEllipsisModal,
-  openFormModal,
-  openConfirmModal,
-  closeEllipsisModal,
-  closeConfirmModal
-} = modalStore
+const { optionsMenuIsOpen } = storeToRefs(modalStore)
+const { openOptionsMenu, openFormModal, openConfirmModal, closeOptionsMenu, closeConfirmModal } =
+  modalStore
 
 const reportStore = useReportStore()
 const { variableCosts, selectedId, selectedCost } = storeToRefs(reportStore)
-const {
-  totalVariableCostAction,
-  editVariableCostAction,
-  addSelectedIdAction
-} = reportStore
+const { totalVariableCostAction, editVariableCostAction, addSelectedIdAction } = reportStore
 
 onUpdated(() => {
   scrollToNewCost(variableCosts)
@@ -34,40 +25,24 @@ onUpdated(() => {
 </script>
 
 <template>
-  <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalIsOpen">
-    <template #buttons>
-      <button
-        class="flex flex-row p-2"
-        @click="
-          handleEditCost(
-            selectedId,
-            addSelectedIdAction,
-            editVariableCostAction,
-            openFormModal,
-            closeEllipsisModal,
-            closeConfirmModal,
-            totalVariableCostAction
-          )
-        "
-      >
-        <img src="../../images/edit-cost.svg" />
-        <p class="hidden sm:block ml-1">Edit</p>
-      </button>
-      <button
-        class="flex flex-row p-2"
-        @click="openConfirmModal(selectedId, selectedCost.name)"
-      >
-        <img src="../../images/delete-cost.svg" />
-        <p class="hidden sm:block ml-1">Delete</p>
-      </button>
-    </template>
-  </ellipsis-modal>
-  <div
-    v-if="ellipsisModalIsOpen"
-    class="fixed top-0 bottom-0 left-0 right-0 z-10"
-    @click="closeEllipsisModal()"
-  ></div>
-  <div class="mt-2 md:mt-8 w-full md:w-8/10">
+  <div class="mt-2 md:mt-8 w-full md:w-8/10 relative">
+    <options-menu
+      class="ellipsis-modal z-20"
+      v-if="optionsMenuIsOpen"
+      @edit-event="
+        handleEditCost(
+          selectedId,
+          addSelectedIdAction,
+          editVariableCostAction,
+          openFormModal,
+          closeOptionsMenu,
+          closeConfirmModal,
+          totalVariableCostAction
+        )
+      "
+      @delete-event="openConfirmModal(selectedId, selectedCost.name)"
+      @menu-event="closeOptionsMenu"
+    />
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in variableCostHeadingArray">
         <p>{{ heading[0] }}</p>
@@ -88,7 +63,7 @@ onUpdated(() => {
               addSelectedIdAction,
               editVariableCostAction,
               openFormModal,
-              closeEllipsisModal,
+              closeOptionsMenu,
               closeConfirmModal,
               totalVariableCostAction
             )
@@ -111,7 +86,7 @@ onUpdated(() => {
           ></button>
           <button
             class="block md:hidden sm:pr-2 md:pr-6"
-            @click="openEllipsisModal(variableCost.id)"
+            @click="openOptionsMenu(variableCost.id)"
             @click.stop=""
           >
             ...

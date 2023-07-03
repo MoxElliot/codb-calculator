@@ -1,10 +1,11 @@
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 import { useReportStore } from './reportStore'
+import type CostItem from '@/types/CostItem'
 
 export type Modal = {
   formModalIsOpen: boolean
   formModalType: string
-  ellipsisModalIsOpen: boolean
+  optionsMenuIsOpen: boolean
   confirmModalIsOpen: boolean
   confirmDelete: string
   confirmCostName: string
@@ -14,7 +15,7 @@ export const useModalStore = defineStore('modalStore', {
   state: (): Modal => ({
     formModalIsOpen: false,
     formModalType: '',
-    ellipsisModalIsOpen: false,
+    optionsMenuIsOpen: false,
     confirmModalIsOpen: false,
     confirmDelete: '',
     confirmCostName: ''
@@ -27,22 +28,31 @@ export const useModalStore = defineStore('modalStore', {
     closeFormModal() {
       this.formModalIsOpen = false
     },
-    openEllipsisModal(id: string) {
+    openOptionsMenu(id: string) {
       const reportStore = useReportStore()
       const { addSelectedIdAction } = reportStore
       addSelectedIdAction(id)
 
-      this.ellipsisModalIsOpen = true
+      this.optionsMenuIsOpen = true
     },
-    closeEllipsisModal() {
-      this.ellipsisModalIsOpen = false
+    closeOptionsMenu() {
+      this.optionsMenuIsOpen = false
     },
-    openConfirmModal(id: string, confirmCostName?: string) {
+    openConfirmModal(id: string, costType: string) {
       const reportStore = useReportStore()
       const { addSelectedIdAction } = reportStore
-      this.closeEllipsisModal()
+      // const { fixedCosts } = storeToRefs(reportStore)
+      this.closeOptionsMenu()
       addSelectedIdAction(id)
-      this.confirmCostName = confirmCostName as string
+
+      if (costType === 'fixed') {
+        const selectedCost = reportStore.fixedCosts.find((item) => item.id === id) as CostItem
+        this.confirmCostName = selectedCost.name
+      } else if (costType === 'variable') {
+        const selectedCost = reportStore.variableCosts.find((item) => item.id === id) as CostItem
+        this.confirmCostName = selectedCost.name
+      }
+
       this.confirmModalIsOpen = true
     },
     closeConfirmModal() {

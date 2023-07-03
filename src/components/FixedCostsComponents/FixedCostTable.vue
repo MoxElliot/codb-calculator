@@ -6,18 +6,18 @@ import fixedCostHeadingArray from '../../assets/fixedCostHeadings'
 import FormButton from '../FormComponents/FormButton.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import FixedCostDataInput from './FixedCostDataInput.vue'
-import EllipsisModal from '../ModalComponents/EllipsisModal.vue'
+import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
 import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
-const { ellipsisModalIsOpen } = storeToRefs(modalStore)
+const { optionsMenuIsOpen } = storeToRefs(modalStore)
 const {
-  openEllipsisModal,
+  openOptionsMenu,
   openFormModal,
   openConfirmModal,
-  closeEllipsisModal,
+  closeOptionsMenu,
   closeConfirmModal
 } = modalStore
 
@@ -29,43 +29,30 @@ const { totalFixedCostAction, editFixedCostAction, deleteFixedCostAction, addSel
 onUpdated(() => {
   scrollToNewCost(fixedCosts)
 })
+
+const testLocation = (e: any) => {
+console.log("in testLocaion","x", e.clientX,"y", e.clientY)
+}
 </script>
 
 <template>
-  <ellipsis-modal class="ellipsis-modal z-20" v-if="ellipsisModalIsOpen">
-    <template #buttons>
-      <button
-        class="flex flex-row p-2"
-        @click="
-          handleEditCost(
-            selectedId,
-            addSelectedIdAction,
-            editFixedCostAction,
-            openFormModal,
-            closeEllipsisModal,
-            closeConfirmModal,
-            totalFixedCostAction
-          )
-        "
-      >
-        <img src="../../images/edit-cost.svg" />
-        <p class="hidden sm:block ml-1">Edit</p>
-      </button>
-      <button
-        class="flex flex-row p-2"
-        @click="openConfirmModal(selectedId, selectedCost.name)"
-      >
-        <img src="../../images/delete-cost.svg" />
-        <p class="hidden sm:block ml-1">Delete</p>
-      </button>
-    </template>
-  </ellipsis-modal>
-  <div
-    v-if="ellipsisModalIsOpen"
-    class="fixed top-0 bottom-0 left-0 right-0 z-10"
-    @click="closeEllipsisModal()"
-  ></div>
-  <div class="mt-2 md:mt-8 w-full md:w-8/10">
+  <div class="mt-2 md:mt-8 w-full md:w-8/10 relative" @click="testLocation">
+    <options-menu
+      v-if="optionsMenuIsOpen"
+      @edit-event="
+        handleEditCost(
+          selectedId,
+          addSelectedIdAction,
+          editFixedCostAction,
+          openFormModal,
+          closeOptionsMenu,
+          closeConfirmModal,
+          totalFixedCostAction
+        )
+      "
+      @delete-event="openConfirmModal(selectedId, 'fixed')"
+      @menu-event="closeOptionsMenu()"
+    />
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in fixedCostHeadingArray">
         <p>{{ heading[0] }}</p>
@@ -87,7 +74,7 @@ onUpdated(() => {
               addSelectedIdAction,
               editFixedCostAction,
               openFormModal,
-              closeEllipsisModal,
+              closeOptionsMenu,
               closeConfirmModal,
               totalFixedCostAction
             )
@@ -112,11 +99,11 @@ onUpdated(() => {
         <div class="flex flex-row items-end basis-3/24">
           <button
             class="hidden md:block bg-costDelete bg-no-repeat w-10 h-10"
-            @click="openConfirmModal(fixedCost.id, fixedCost.name)"
+            @click="openConfirmModal(fixedCost.id, 'fixed')"
           ></button>
           <button
             class="block md:hidden sm:pr-2 md:pr-6"
-            @click="openEllipsisModal(fixedCost.id)"
+            @click="openOptionsMenu(fixedCost.id)"
             @click.stop=""
           >
             ...
