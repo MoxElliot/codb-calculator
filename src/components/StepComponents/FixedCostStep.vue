@@ -76,7 +76,7 @@ onMounted(() => {
     </template>
   </confirm-modal>
   <div
-    class="flex flex-col text-center items-center justify-center basis-full h-fit min-h-[700px] z-10"
+    class="flex flex-col text-center items-center justify-center basis-full h-screen sm:min-h-[900px] z-10"
   >
     <fixed-cost-heading />
     <fixed-cost-table />

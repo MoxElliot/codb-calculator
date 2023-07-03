@@ -13,13 +13,8 @@ import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
-const {
-  openOptionsMenu,
-  openFormModal,
-  openConfirmModal,
-  closeOptionsMenu,
-  closeConfirmModal
-} = modalStore
+const { openOptionsMenu, openFormModal, openConfirmModal, closeOptionsMenu, closeConfirmModal } =
+  modalStore
 
 const reportStore = useReportStore()
 const { fixedCosts, selectedId, selectedCost } = storeToRefs(reportStore)
@@ -29,36 +24,47 @@ const { totalFixedCostAction, editFixedCostAction, deleteFixedCostAction, addSel
 onUpdated(() => {
   scrollToNewCost(fixedCosts)
 })
+let x = '540'
+let y = '100'
+// const clickLocation = (e: any, adjustX: number, adjustY:number) => {
+//   x = (e.clientX - adjustX).toString()
+//   y = (e.clientX - adjustY).toString()
+//   console.log('in testLocaion', 'x', x, 'y', y)
+// }
 
-const testLocation = (e: any) => {
-console.log("in testLocaion","x", e.clientX,"y", e.clientY)
+const handleOpenOption = (cost: string, e: Event) => {
+  // clickLocation(e, 50, 500)
+  openOptionsMenu(cost)
 }
+
+console.log('in fixedCostTabel', x, y)
 </script>
 
 <template>
-  <div class="mt-2 md:mt-8 w-full md:w-8/10 relative" @click="testLocation">
-    <options-menu
-      v-if="optionsMenuIsOpen"
-      @edit-event="
-        handleEditCost(
-          selectedId,
-          addSelectedIdAction,
-          editFixedCostAction,
-          openFormModal,
-          closeOptionsMenu,
-          closeConfirmModal,
-          totalFixedCostAction
-        )
-      "
-      @delete-event="openConfirmModal(selectedId, 'fixed')"
-      @menu-event="closeOptionsMenu()"
-    />
+  <div class="mt-2 md:mt-8 w-full md:w-8/10 relative">
     <div class="flex flex-row items-center h-10 md:h-16 bg-grey-200 text-grey-100 mb-4">
       <div :class="heading[1]" v-for="heading in fixedCostHeadingArray">
         <p>{{ heading[0] }}</p>
       </div>
     </div>
-
+    <options-menu
+            :x-loc="x"
+            :y-loc="y"
+            v-if="optionsMenuIsOpen"
+            @edit-event="
+              handleEditCost(
+                selectedId,
+                addSelectedIdAction,
+                editFixedCostAction,
+                openFormModal,
+                closeOptionsMenu,
+                closeConfirmModal,
+                totalFixedCostAction
+              )
+            "
+            @delete-event="openConfirmModal(selectedId, 'fixed')"
+            @menu-event="closeOptionsMenu()"
+          />
     <div class="max-h-32 sm:max-h-64 w-screen sm:w-full overflow-auto">
       <div
         class="h-10 md:h-16 flex flex-row w-full"
@@ -96,14 +102,15 @@ console.log("in testLocaion","x", e.clientX,"y", e.clientY)
             <p class="border-b border-grey-200">${{ fixedCost.individualTotal }}</p>
           </div>
         </div>
-        <div class="flex flex-row items-end basis-3/24">
+        <div class="flex flex-row items-center basis-3/24">
+          
           <button
             class="hidden md:block bg-costDelete bg-no-repeat w-10 h-10"
             @click="openConfirmModal(fixedCost.id, 'fixed')"
           ></button>
           <button
             class="block md:hidden sm:pr-2 md:pr-6"
-            @click="openOptionsMenu(fixedCost.id)"
+            @click="handleOpenOption(fixedCost.id, $event)"
             @click.stop=""
           >
             ...
