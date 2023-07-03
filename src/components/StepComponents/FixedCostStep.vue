@@ -29,15 +29,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <form-modal v-if="formModalIsOpen" class="flex flex-col justify-center items-center">
-    <template #header>
-      <div
-        class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif"
-      >
-        <p v-if="formModalType === 'add'">Add Fixed Cost</p>
-        <p v-else-if="formModalType === 'edit'">Edit Fixed Cost</p>
-      </div>
-    </template>
+  <form-modal v-if="formModalIsOpen" class="flex flex-col justify-center items-center" type="Fixed">
     <template #body>
       <fixed-cost-data-input v-if="formModalType === 'add'" />
       <fixed-cost-data-input
