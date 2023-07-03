@@ -3,7 +3,6 @@ import { onMounted } from 'vue'
 import FixedCostDataInput from '../FixedCostsComponents/FixedCostDataInput.vue'
 import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
 import FixedCostHeading from '../FixedCostsComponents/FixedCostHeading.vue'
-import FormButton from '../FormComponents/FormButton.vue'
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import FormModal from '../ModalComponents/FormModal.vue'
@@ -12,7 +11,7 @@ import { useModalStore } from '../../stores/modalStore'
 import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 
 const modalStore = useModalStore()
-const { formModalIsOpen, formModalType, confirmModalIsOpen, confirmCostName } =
+const { formModalIsOpen, formModalType, confirmModalIsOpen } =
   storeToRefs(modalStore)
 const { closeOptionsMenu, closeConfirmModal } = modalStore
 
@@ -42,31 +41,20 @@ onMounted(() => {
       />
     </template>
   </form-modal>
-  <confirm-modal v-if="confirmModalIsOpen">
-    <template #header>
-      <p>Are you sure you want to delete the cost {{ confirmCostName }}?</p>
-    </template>
-    <template #body>
-      <div class="flex flex-row p-1 md:p-4 h-full">
-        <form-button label="No" type="button" class="modal-btn-cancel" @click="closeConfirmModal" />
-        <form-button
-          label="Yes"
-          type="submit"
-          class="modal-btn-add"
-          @click="
-            handleDeleteCost(
-              selectedId,
-              addSelectedIdAction,
-              closeOptionsMenu,
-              closeConfirmModal,
-              deleteFixedCostAction,
-              totalFixedCostAction
-            )
-          "
-        />
-      </div>
-    </template>
-  </confirm-modal>
+  <confirm-modal
+    v-if="confirmModalIsOpen"
+    @confirm-event="closeConfirmModal"
+    @handle-event="
+      handleDeleteCost(
+        selectedId,
+        addSelectedIdAction,
+        closeOptionsMenu,
+        closeConfirmModal,
+        deleteFixedCostAction,
+        totalFixedCostAction
+      )
+    "
+  />
   <div
     class="flex flex-col text-center items-center justify-center basis-full h-screen sm:min-h-[900px] z-10"
   >
