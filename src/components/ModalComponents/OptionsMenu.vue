@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import FormButton from '../FormComponents/FormButton.vue'
 
-defineProps({
-  parentClass: {
-    type: String,
-    default: ''
-  }})
-
 defineEmits(['menu-event', 'edit-event', 'delete-event'])
 </script>
 

@@ -32,7 +32,6 @@ export const useModalStore = defineStore('modalStore', {
       const reportStore = useReportStore()
       const { addSelectedIdAction } = reportStore
       addSelectedIdAction(id)
-      console.log('in Open Options Menu, id, reportStore.selectedId', id, reportStore.selectedId)
 
       this.optionsMenuIsOpen = true
     },
@@ -46,13 +45,12 @@ export const useModalStore = defineStore('modalStore', {
       this.closeOptionsMenu()
       addSelectedIdAction(id)
 
-      if(costType === 'fixed') {
+      if (costType === 'fixed') {
         const selectedCost = reportStore.fixedCosts.find((item) => item.id === id) as CostItem
         this.confirmCostName = selectedCost.name
-        console.log('in openConfirmModal costType fixed, costName', this.confirmCostName)
-      } else if(costType === 'variable') {
+      } else if (costType === 'variable') {
         const selectedCost = reportStore.variableCosts.find((item) => item.id === id) as CostItem
-        this.confirmCostName = selectedCost.name 
+        this.confirmCostName = selectedCost.name
       }
 
       this.confirmModalIsOpen = true
