@@ -206,6 +206,14 @@ module.exports = {
           fontWeight: '400'
         }
       ],
+      body3: [
+        '28px',
+        {
+          lineHeight: '32px',
+          letterSpacing: '-0.02em',
+          fontWeight: '400'
+        }
+      ],
       body2_xs: [
         '16px',
         {

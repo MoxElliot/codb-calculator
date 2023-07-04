@@ -3,7 +3,6 @@ import { onMounted } from 'vue'
 import FixedCostDataInput from '../FixedCostsComponents/FixedCostDataInput.vue'
 import FixedCostTable from '../FixedCostsComponents/FixedCostTable.vue'
 import FixedCostHeading from '../FixedCostsComponents/FixedCostHeading.vue'
-import FormButton from '../FormComponents/FormButton.vue'
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
 import FormModal from '../ModalComponents/FormModal.vue'
@@ -12,14 +11,14 @@ import { useModalStore } from '../../stores/modalStore'
 import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 
 const modalStore = useModalStore()
-const { formModalIsOpen, formModalType, confirmModalIsOpen, confirmCostName } = storeToRefs(modalStore)
+const { formModalIsOpen, formModalType, confirmModalIsOpen } =
+  storeToRefs(modalStore)
 const { closeOptionsMenu, closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
 const { selectedCost, selectedId } = storeToRefs(reportStore)
-const { totalFixedCostAction, deleteFixedCostAction, addSelectedIdAction } =
-  reportStore
+const { totalFixedCostAction, deleteFixedCostAction, addSelectedIdAction } = reportStore
 
 onMounted(() => {
   updateInputValidAction(true)
@@ -29,21 +28,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <form-modal v-if="formModalIsOpen" class="flex flex-col justify-center items-center">
-    <template #header>
-      <div
-        class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif"
-        v-if="formModalType === 'add'"
-      >
-        <p>Add Fixed Cost</p>
-      </div>
-      <div
-        class="flex flex-row justify-center items-center text-heading2_xs md:text-heading text-grey-300 font-serif"
-        v-else-if="formModalType === 'edit'"
-      >
-        <p>Edit Fixed Cost</p>
-      </div>
-    </template>
+  <form-modal v-if="formModalIsOpen" class="flex flex-col justify-center items-center" type="Fixed">
     <template #body>
       <fixed-cost-data-input v-if="formModalType === 'add'" />
       <fixed-cost-data-input
@@ -56,26 +41,22 @@ onMounted(() => {
       />
     </template>
   </form-modal>
-  <confirm-modal v-if="confirmModalIsOpen">
-    <template #header>
-      <div class="flex flex-row justify-center items-center text-body2 text-grey-300 font-serif">
-        <p>Are you sure you want to delete the {{ confirmCostName }} cost?</p>
-      </div>
-    </template>
-    <template #body>
-      <div class="flex flex-row p-1 md:p-4 h-full">
-        <form-button label="No" type="button" class="modal-btn-cancel" @click="closeConfirmModal" />
-        <form-button
-          label="Yes"
-          type="submit"
-          class="modal-btn-add"
-          @click="handleDeleteCost(selectedId, addSelectedIdAction, closeOptionsMenu, closeConfirmModal, deleteFixedCostAction, totalFixedCostAction)"
-        />
-      </div>
-    </template>
-  </confirm-modal>
+  <confirm-modal
+    v-if="confirmModalIsOpen"
+    @confirm-event="closeConfirmModal"
+    @handle-event="
+      handleDeleteCost(
+        selectedId,
+        addSelectedIdAction,
+        closeOptionsMenu,
+        closeConfirmModal,
+        deleteFixedCostAction,
+        totalFixedCostAction
+      )
+    "
+  />
   <div
-    class="flex flex-col text-center items-center justify-center basis-full h-full md:h-fit z-10"
+    class="flex flex-col text-center items-center justify-center basis-full h-screen sm:min-h-[900px] z-10"
   >
     <fixed-cost-heading />
     <fixed-cost-table />

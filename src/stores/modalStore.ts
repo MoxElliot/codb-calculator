@@ -41,7 +41,6 @@ export const useModalStore = defineStore('modalStore', {
     openConfirmModal(id: string, costType: string) {
       const reportStore = useReportStore()
       const { addSelectedIdAction } = reportStore
-      // const { fixedCosts } = storeToRefs(reportStore)
       this.closeOptionsMenu()
       addSelectedIdAction(id)
 

@@ -58,7 +58,9 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
 
 <template>
   <Form
-    class="flex flex-col basis-full h-full"
+    :class="
+      !formModalIsOpen ? 'flex flex-col basis-full h-full' : 'flex flex-col items-around h-80'
+    "
     :valiation-schema="schema"
     @submit="
       formModalType === 'add'
@@ -87,14 +89,14 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
       :class="
         !formModalIsOpen
           ? 'flex flex-row h-10 md:h-16 mt-4 md:mt-8 w-screen sm:w-full'
-          : 'flex flex-col basis-full justify-center items-center h-full text-center'
+          : 'flex flex-col basis-full justify-around items-center text-center'
       "
     >
       <data-input
         v-model="variableCostName"
         placeholder="Name of the cost"
         name="name"
-        parentClass="basis-6/18 pr-2 md:pr-6"
+        :parentClass="!formModalIsOpen ? 'basis-6/18 pr-2 md:pr-6' : ''"
         class="text-center border-b border-grey-200"
         :class="{ 'border-error': nameError && blankSubmitError }"
         @input="setVariableFormValidAction(true)"
@@ -104,7 +106,7 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
         placeholder="Category"
         name="category"
         :optionArray="costCategoryOptions"
-        parentClass="basis-6/18 pr-2 md:pr-6"
+        :parentClass="!formModalIsOpen ? 'basis-6/18 pr-2 md:pr-6' : ''"
         class="text-center border-b border-grey-200 bg-primary-white w-full"
         :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setVariableFormValidAction(true)"
@@ -114,7 +116,7 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
         placeholder="$ Amount"
         type="number"
         name="amount"
-        parentClass="basis-3/18 pr-2 md:pr-6"
+        :parentClass="!formModalIsOpen ? 'basis-3/18 pr-2 md:pr-6' : ''"
         class="text-center border-b border-grey-200"
         :class="{ 'border-error': amountError && blankSubmitError }"
         @input="setVariableFormValidAction(true)"
