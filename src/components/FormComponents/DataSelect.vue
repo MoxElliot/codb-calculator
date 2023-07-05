@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import firstLetterUpperCase from '../../assets/utility_functions/firstLetterUpperCase'
-import ClientManagementCategory from '../../images/client-managment-category-component.vue'
 const props = defineProps({
   label: {
     type: String,

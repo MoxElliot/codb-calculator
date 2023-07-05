@@ -1,6 +1,6 @@
 import type CostObj from '../../types/CostObj'
 
-const handleDeleteCost = (
+const handleDeleteCost = (   //destructure as object
   id: string,
   addSelectedIdAction: Function,
   closeOptionsMenu: Function,

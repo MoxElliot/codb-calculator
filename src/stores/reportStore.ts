@@ -191,6 +191,7 @@ export const useReportStore = defineStore('reportStore', {
       this.fixedCosts.splice(deleteIndex, 1)
       this.totalCostAction(this.fixedCosts)
       this.totalFixedCosts = this.totalCosts
+     
     },
     deleteVariableCostAction(id: string) {
       this.selectedCost = this.variableCosts.find((item) => item.id === id) as CostItem

@@ -24,7 +24,11 @@ onMounted(() => {
   updateInputValidAction(true)
 })
 
+
+
 //https://stackoverflow.com/questions/45553162/how-to-get-mouse-coordinates-in-vuejs
+
+// rename confirm-emit as cancel-emit
 </script>
 
 <template>
@@ -43,7 +47,7 @@ onMounted(() => {
   </form-modal>
   <confirm-modal
     v-if="confirmModalIsOpen"
-    @confirm-event="closeConfirmModal"
+    @confirm-event="closeConfirmModal"  
     @handle-event="
       handleDeleteCost(
         selectedId,
