@@ -4,6 +4,7 @@ import type reportState from '@/types/reportState'
 import payPeriodOptionsArray from '@/assets/payPeriodOptionsArray'
 import formatMoney from '../assets/utility_functions/formatMoney'
 import testingCostArr from '@/assets/testingCostArr'
+import testingVariableCostArr from '@/assets/testingVariableCostArr'
 import { useModalStore } from './modalStore'
 import type CostItem from '@/types/CostItem'
 
@@ -13,16 +14,7 @@ export const useReportStore = defineStore('reportStore', {
     bookingsPerMonth: 3,
     priceAveragePerBooking: 1000.0,
     hoursAveragePerBooking: 200,
-    variableCosts: [
-      { id: '0', name: 'Parking0', category: 'Overhead', amount: 80 },
-      { id: '1', name: 'Parking1', category: 'Overhead', amount: 80 },
-      { id: '2', name: 'Parking2', category: 'Overhead', amount: 80 },
-      { id: '3', name: 'Parking3', category: 'Overhead', amount: 80 },
-      { id: '4', name: 'Parking4', category: 'Overhead', amount: 80 },
-      { id: '5', name: 'Parking5', category: 'Overhead', amount: 80 },
-      { id: '6', name: 'Parking6', category: 'Overhead', amount: 80 },
-      { id: '7', name: 'Parking7', category: 'Overhead', amount: 80 }
-    ] as CostObj[],
+    variableCosts: testingVariableCostArr as CostObj[],
     fixedCosts: testingCostArr as CostObj[],
     totalCosts: 0,
     totalVariableCosts: 640,
@@ -37,7 +29,7 @@ export const useReportStore = defineStore('reportStore', {
     selectedCost: {
       id: '1',
       name: 'Test1',
-      category: 'Overhead',
+      category: 'Other',
       amount: 1000,
       individualTotal: 1000,
       frequency: 'Monthly',
@@ -69,11 +61,8 @@ export const useReportStore = defineStore('reportStore', {
       Object.entries(costArr).forEach(([key, val]) => {
         totalArr.push(Number(val.individualTotal || val.amount)) //Unsure why amount is a string, my data-input is typed to number
       })
-      console.log("in totalCosts costArr", costArr, totalArr)
-      
       const totalNum: number = totalArr.reduce((a, b) => a + b, 0)
       this.totalCosts = formatMoney(totalNum)
-      console.log("in totalCosts totalNum", totalNum)
     },
     // totalVariableCostAction() {
     //   let totalArr: number[] = []
@@ -110,7 +99,6 @@ export const useReportStore = defineStore('reportStore', {
       if (allValid) {
         const modalStore = useModalStore()
         const { closeFormModal } = modalStore
-
         formValidAction(true)
         addCostAction(costItem)
         closeFormModal()

@@ -8,13 +8,14 @@ import FormButton from '../FormComponents/FormButton.vue'
 import { useField, useForm, Form } from 'vee-validate'
 import { storeToRefs } from 'pinia'
 import { useModalStore } from '../../stores/modalStore'
+import uniqueId from 'lodash.uniqueid'
 
 const modalStore = useModalStore()
 const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
 const { closeFormModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError, variableFormValid, variableCosts, selectedCost, totalVariableCosts } =
+const { blankSubmitError, variableFormValid, variableCosts, selectedCost } =
   storeToRefs(reportStore)
 const { handleAddCost, addVariableCostAction, setVariableFormValidAction, replaceVariableCostAction } = reportStore
 
@@ -69,12 +70,7 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
             resetForm
           )
         : handleAddCost(meta.valid, setVariableFormValidAction, resetForm, addVariableCostAction, {
-            id: (
-              variableCosts.length +
-              variableCostName +
-              variableCostCategory +
-              variableCostAmount
-            ).toString(),
+          id: uniqueId('variableCost_').toString(),
             name: variableCostName,
             category: variableCostCategory,
             amount: variableCostAmount as number,

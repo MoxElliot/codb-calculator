@@ -10,6 +10,7 @@ import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
 import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
+
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
 const { openOptionsMenu, openFormModal, openConfirmModal, closeOptionsMenu, closeConfirmModal } =
@@ -20,7 +21,7 @@ const { fixedCosts, selectedId } = storeToRefs(reportStore)
 const { totalCostAction, editFixedCostAction, addSelectedIdAction } = reportStore
 
 onUpdated(() => {
-  scrollToNewCost(fixedCosts)
+  scrollToNewCost(fixedCosts.value[0].id)
 })
 let x = '540'
 let y = '100'
@@ -50,6 +51,7 @@ const handleOpenOption = (cost: string, e: Event) => {
       @edit-event="
         handleEditCost(
           selectedId,
+          fixedCosts,
           addSelectedIdAction,
           editFixedCostAction,
           openFormModal,
@@ -73,6 +75,7 @@ const handleOpenOption = (cost: string, e: Event) => {
           @click="
             handleEditCost(
               fixedCost.id,
+              fixedCosts,
               addSelectedIdAction,
               editFixedCostAction,
               openFormModal,

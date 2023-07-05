@@ -9,6 +9,7 @@ import DataSelect from '../FormComponents/DataSelect.vue'
 import { useField, useForm, Form } from 'vee-validate'
 import { storeToRefs } from 'pinia'
 import { useModalStore } from '../../stores/modalStore'
+import uniqueId from 'lodash.uniqueid'
 
 const modalStore = useModalStore()
 const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
@@ -81,18 +82,14 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
             fixedCostFrequency,
             totalFixedCosts
           )
-        : handleAddCost(
-            fixedCostName,
-            fixedCostCategory,
-            fixedCostAmount,
-            meta.valid,
-            setFixedFormValidAction,
-            resetForm,
-            addFixedCostAction,
-            fixedCosts,
-            totalFixedCosts,
-            fixedCostFrequency
-          )
+        : handleAddCost(meta.valid, setFixedFormValidAction, resetForm, addFixedCostAction, {
+            id: uniqueId().toString(),
+            name: fixedCostName,
+            category: fixedCostCategory,
+            amount: fixedCostAmount as number,
+            frequency: fixedCostFrequency,
+            individualTotal: totalFixedCosts
+          })
     "
   >
     <fieldset
