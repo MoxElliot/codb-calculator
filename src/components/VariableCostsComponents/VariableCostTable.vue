@@ -17,7 +17,7 @@ const { openOptionsMenu, openFormModal, openConfirmModal, closeOptionsMenu, clos
 
 const reportStore = useReportStore()
 const { variableCosts, selectedId } = storeToRefs(reportStore)
-const { totalVariableCostAction, editVariableCostAction, addSelectedIdAction } = reportStore
+const { totalCostAction, editVariableCostAction, addSelectedIdAction } = reportStore
 
 onUpdated(() => {
   scrollToNewCost(variableCosts)
@@ -57,7 +57,7 @@ const handleOpenOption = (cost: string, e: Event) => {
           openFormModal,
           closeOptionsMenu,
           closeConfirmModal,
-          totalVariableCostAction
+          totalCostAction
         )
       "
       @delete-event="openConfirmModal(selectedId, 'variable')"
@@ -81,7 +81,7 @@ const handleOpenOption = (cost: string, e: Event) => {
               openFormModal,
               closeOptionsMenu,
               closeConfirmModal,
-              totalVariableCostAction
+              totalCostAction
             )
           "
         >

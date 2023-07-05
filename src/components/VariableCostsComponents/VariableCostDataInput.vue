@@ -14,14 +14,9 @@ const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
 const { closeFormModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError, variableFormValid, variableCosts, selectedCost } =
+const { blankSubmitError, variableFormValid, variableCosts, selectedCost, totalVariableCosts } =
   storeToRefs(reportStore)
-const {
-  handleAddCost,
-  addVariableCostAction,
-  setVariableFormValidAction,
-  replaceVariableCostAction
-} = reportStore
+const { handleAddCost, addVariableCostAction, setVariableFormValidAction, replaceVariableCostAction } = reportStore
 
 const props = defineProps<{
   id?: string
@@ -63,18 +58,8 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
     "
     :valiation-schema="schema"
     @submit="
-      formModalType === 'add'
-        ? handleAddCost(
-            variableCostName,
-            variableCostCategory,
-            variableCostAmount,
-            meta.valid,
-            setVariableFormValidAction,
-            resetForm,
-            addVariableCostAction,
-            variableCosts
-          )
-        : replaceVariableCostAction(
+      formModalType === 'edit'
+        ? replaceVariableCostAction(
             selectedCost.id,
             variableCostName,
             variableCostCategory,
@@ -83,6 +68,18 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
             setVariableFormValidAction,
             resetForm
           )
+        : handleAddCost(meta.valid, setVariableFormValidAction, resetForm, addVariableCostAction, {
+            id: (
+              variableCosts.length +
+              variableCostName +
+              variableCostCategory +
+              variableCostAmount
+            ).toString(),
+            name: variableCostName,
+            category: variableCostCategory,
+            amount: variableCostAmount as number,
+            individualTotal: variableCostAmount as number
+          })
     "
   >
     <fieldset

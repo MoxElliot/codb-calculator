@@ -17,8 +17,8 @@ const { closeOptionsMenu, closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
-const { selectedCost, selectedId } = storeToRefs(reportStore)
-const { totalVariableCostAction, deleteVariableCostAction, addSelectedIdAction } = reportStore
+const { selectedCost, selectedId, variableCosts } = storeToRefs(reportStore)
+const { totalCostAction, deleteVariableCostAction, addSelectedIdAction } = reportStore
 
 onMounted(() => {
   updateInputValidAction(true)
@@ -52,7 +52,8 @@ onMounted(() => {
         closeOptionsMenu,
         closeConfirmModal,
         deleteVariableCostAction,
-        totalVariableCostAction
+        totalCostAction,
+        variableCosts
       )
     "
   />

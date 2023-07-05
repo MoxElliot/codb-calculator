@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
-import { ref } from 'vue'
 import * as Yup from 'yup'
 import costCategoryOptions from '../../assets/costCategoryOptions'
 import costPeriodOptions from '../../assets/costPeriodOptions'
@@ -16,10 +15,9 @@ const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
 const { closeFormModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError, fixedFormValid, fixedCosts, selectedCost } = storeToRefs(reportStore)
-const { 
-  handleAddCost,
-   addFixedCostAction, setFixedFormValidAction, replaceFixedCostAction } =
+const { blankSubmitError, fixedFormValid, fixedCosts, selectedCost, totalFixedCosts } =
+  storeToRefs(reportStore)
+const { handleAddCost, addFixedCostAction, setFixedFormValidAction, replaceFixedCostAction } =
   reportStore
 
 const props = defineProps<{
@@ -30,7 +28,6 @@ const props = defineProps<{
   frequency?: string
   individualTotal?: number
 }>()
-const fixedCostTotal = ref<number>(0)
 
 const schema = Yup.object({
   name: Yup.string().required(' '),
@@ -73,8 +70,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
     :valiation-schema="schema"
     @submit="
       formModalType === 'edit'
-        ? 
-        replaceFixedCostAction(
+        ? replaceFixedCostAction(
             selectedCost.id,
             fixedCostName,
             fixedCostCategory,
@@ -83,10 +79,9 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
             setFixedFormValidAction,
             resetForm,
             fixedCostFrequency,
-            fixedCostTotal
+            totalFixedCosts
           )
-          :
-           handleAddCost(
+        : handleAddCost(
             fixedCostName,
             fixedCostCategory,
             fixedCostAmount,
@@ -95,9 +90,9 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
             resetForm,
             addFixedCostAction,
             fixedCosts,
-            fixedCostFrequency,
-            fixedCostTotal
-           )
+            totalFixedCosts,
+            fixedCostFrequency
+          )
     "
   >
     <fieldset
