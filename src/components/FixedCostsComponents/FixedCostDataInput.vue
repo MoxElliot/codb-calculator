@@ -17,7 +17,9 @@ const { closeFormModal } = modalStore
 
 const reportStore = useReportStore()
 const { blankSubmitError, fixedFormValid, fixedCosts, selectedCost } = storeToRefs(reportStore)
-const { handleAddCost, addFixedCostAction, setFixedFormValidAction, replaceFixedCostAction } =
+const { 
+  handleAddCost,
+   addFixedCostAction, setFixedFormValidAction, replaceFixedCostAction } =
   reportStore
 
 const props = defineProps<{
@@ -70,20 +72,9 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
     "
     :valiation-schema="schema"
     @submit="
-      formModalType === 'add'
-        ? handleAddCost(
-            fixedCostName,
-            fixedCostCategory,
-            fixedCostAmount,
-            meta.valid,
-            setFixedFormValidAction,
-            resetForm,
-            addFixedCostAction,
-            fixedCosts,
-            fixedCostFrequency,
-            fixedCostTotal
-          )
-        : replaceFixedCostAction(
+      formModalType === 'edit'
+        ? 
+        replaceFixedCostAction(
             selectedCost.id,
             fixedCostName,
             fixedCostCategory,
@@ -94,6 +85,19 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
             fixedCostFrequency,
             fixedCostTotal
           )
+          :
+           handleAddCost(
+            fixedCostName,
+            fixedCostCategory,
+            fixedCostAmount,
+            meta.valid,
+            setFixedFormValidAction,
+            resetForm,
+            addFixedCostAction,
+            fixedCosts,
+            fixedCostFrequency,
+            fixedCostTotal
+           )
     "
   >
     <fieldset
@@ -126,7 +130,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
         v-model="fixedCostAmount"
         placeholder="Amount"
         name="amount"
-        :parentClass="!formModalIsOpen ? 'dropdown basis-3/24 pr-2 md:pr-6' : 'dropdown'"
+        :parentClass="!formModalIsOpen ? 'basis-3/24 pr-2 md:pr-6' : ''"
         class="text-center border-b border-grey-200 w-[87px]"
         :class="{ 'border-error': amountError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
@@ -134,7 +138,6 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
       <data-select
         v-model="fixedCostFrequency"
         placeholder="Frequency"
-        placeholderClass="text-grey-300 font-serif"
         name="frequency"
         :optionArray="costPeriodOptions"
         :parentClass="!formModalIsOpen ? 'basis-6/24 pr-2 md:pr-6' : ''"

@@ -81,7 +81,7 @@ export const useReportStore = defineStore('reportStore', {
       const totalNum: number = (fixedCost.amount as number) * payPeriodMultiplier
       fixedCost.individualTotal = formatMoney(totalNum)
       this.fixedCosts.unshift(fixedCost)
-
+        console.log("in add fixed Cost action", this.fixedCosts)
       this.totalFixedCostAction()
     },
     editFixedCostAction(id: string) {
@@ -239,6 +239,7 @@ export const useReportStore = defineStore('reportStore', {
           frequency: costFrequency,
           individualTotal: costTotal
         })
+        console.log("in add handle Cost action", this.fixedCosts)
         closeFormModal()
         resetForm()
       } else {
