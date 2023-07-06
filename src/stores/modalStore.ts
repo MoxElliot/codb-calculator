@@ -1,18 +1,12 @@
 import { defineStore, storeToRefs } from 'pinia'
 import { useReportStore } from './reportStore'
 import type CostItem from '@/types/CostItem'
+import type ModalState from '@/types/ModalState'
 
-export type Modal = {
-  formModalIsOpen: boolean
-  formModalType: string
-  optionsMenuIsOpen: boolean
-  confirmModalIsOpen: boolean
-  confirmDelete: string
-  confirmCostName: string
-}
+
 
 export const useModalStore = defineStore('modalStore', {
-  state: (): Modal => ({
+  state: (): ModalState => ({
     formModalIsOpen: false,
     formModalType: '',
     optionsMenuIsOpen: false,
@@ -38,23 +32,28 @@ export const useModalStore = defineStore('modalStore', {
     closeOptionsMenu() {
       this.optionsMenuIsOpen = false
     },
-    openConfirmModal(id: string, costType: string) {  //the edit method select costs to remove if
-      const reportStore = useReportStore()
-      const { addSelectedIdAction } = reportStore
+    openConfirmModal(id: string, costType: string) {
+      //the edit method select costs to remove if
+      try {
+        const reportStore = useReportStore()
+        const { addSelectedIdAction } = reportStore
 
-      this.closeOptionsMenu()
-      addSelectedIdAction(id)
-      console.log("in openConfirmModal",)
+        this.closeOptionsMenu()
+        addSelectedIdAction(id)
+        console.log('in openConfirmModal')
 
-      if (costType === 'fixed') {
-        const selectedCost = reportStore.fixedCosts.find((item) => item.id === id) as CostItem
-        this.confirmCostName = selectedCost.name
-      } else if (costType === 'variable') {
-        const selectedCost = reportStore.variableCosts.find((item) => item.id === id) as CostItem
-        this.confirmCostName = selectedCost.name
+        if (costType === 'fixed') {
+          const selectedCost = reportStore.fixedCosts.find((item) => item.id === id) as CostItem
+          this.confirmCostName = selectedCost.name
+        } else if (costType === 'variable') {
+          const selectedCost = reportStore.variableCosts.find((item) => item.id === id) as CostItem
+          this.confirmCostName = selectedCost.name
+        }
+
+        this.confirmModalIsOpen = true
+      } catch {
+        console.error('test')
       }
-
-      this.confirmModalIsOpen = true
     },
     closeConfirmModal() {
       this.confirmDelete = ''
