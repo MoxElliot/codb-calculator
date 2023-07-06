@@ -22,7 +22,6 @@ onMounted(() => {
   updateInputValidAction(true)
 })
 
-//https://stackoverflow.com/questions/45553162/how-to-get-mouse-coordinates-in-vuejs
 </script>
 
 <template>
