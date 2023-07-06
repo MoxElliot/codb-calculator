@@ -1,4 +1,4 @@
-import { defineStore, storeToRefs } from 'pinia'
+import { defineStore } from 'pinia'
 import type CostObj from '../types/CostObj'
 import type reportState from '@/types/reportState'
 import payPeriodOptionsArray from '@/assets/payPeriodOptionsArray'
@@ -50,7 +50,17 @@ export const useReportStore = defineStore('reportStore', {
     // inputValid: false,
     // blankSubmitError: '',
     // fixedFormValid: true,
-    // variableFormValid: true
+    // variableFormValid: true,
+    // selectedCost: {
+    //   id: '',
+    //   name: '',
+    //   category: '',
+    //   amount: 0,
+    //   individualTotal: 0,
+    //   frequency: ''
+    // } as CostItem,
+    // selectedId: '',
+    // selectedName: ''
   }),
   actions: {
     addCompanyNameAction(companyName: string) {
@@ -100,8 +110,9 @@ export const useReportStore = defineStore('reportStore', {
         this.setBlankSubmitErrorAction('Enter a value in each field')
       }
     },
-    editFixedCostAction(id: string) {
+    selectCostAction(id: string) {
       this.selectedCost = this.fixedCosts.find((item) => item.id === id) as CostItem
+      console.log('in editFixedCostAction', this.selectedCost)
     },
     editVariableCostAction(id: string) {
       this.selectedCost = this.variableCosts.find((item) => item.id === id) as CostItem
@@ -197,7 +208,7 @@ export const useReportStore = defineStore('reportStore', {
     deleteVariableCostAction() {
       const modalStore = useModalStore()
       const { closeOptionsMenu, closeConfirmModal } = modalStore
-      
+
       try {
         this.selectedCost = this.variableCosts.find((item) => item.id === this.selectedId) as CostItem
         const deleteIndex = this.variableCosts.indexOf(this.selectedCost)

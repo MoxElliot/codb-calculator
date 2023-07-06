@@ -12,16 +12,29 @@ import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
-const { openOptionsMenu, openFormModal, openConfirmModal, closeOptionsMenu, closeConfirmModal } =
-  modalStore
+const {
+  openOptionsMenu,
+  openFormModal,
+  openEditFormModal,
+  openConfirmModal,
+  closeOptionsMenu,
+  closeConfirmModal
+} = modalStore
 
 const reportStore = useReportStore()
 const { fixedCosts, selectedId } = storeToRefs(reportStore)
-const { totalCostAction, editFixedCostAction, addSelectedIdAction } = reportStore
+const { totalCostAction, addSelectedIdAction, selectCostAction } = reportStore
 
 onUpdated(() => {
   scrollToNewCost(fixedCosts.value[0].id)
 })
+
+const editFixedCostActionWrapper = (id: string) => {
+  selectCostAction(id)
+  openFormModal('edit')
+  closeOptionsMenu()
+  closeConfirmModal()
+}
 </script>
 
 <template>
@@ -33,18 +46,7 @@ onUpdated(() => {
     </div>
     <options-menu
       v-if="optionsMenuIsOpen"
-      @edit-event="
-        handleEditCost(
-          selectedId,
-          fixedCosts,
-          addSelectedIdAction,
-          editFixedCostAction,
-          openFormModal,
-          closeOptionsMenu,
-          closeConfirmModal,
-          totalCostAction
-        )
-      "
+      @edit-event="editFixedCostActionWrapper(selectedId)"
       @delete-event="openConfirmModal(selectedId, 'fixed')"
       @menu-event="closeOptionsMenu()"
     />
@@ -57,18 +59,7 @@ onUpdated(() => {
       >
         <div
           class="flex flex-row w-full items-end"
-          @click="
-            handleEditCost(
-              fixedCost.id,
-              fixedCosts,
-              addSelectedIdAction,
-              editFixedCostAction,
-              openFormModal,
-              closeOptionsMenu,
-              closeConfirmModal,
-              totalCostAction
-            )
-          "
+          @click="openEditFormModal('edit', fixedCost.id)"
         >
           <div class="basis-6/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.name }}</p>
@@ -89,7 +80,7 @@ onUpdated(() => {
         <form-button
           class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
           btnImage="/src/images/delete-cost.svg"
-          @click="openConfirmModal(fixedCost.id, 'fixed')" 
+          @click="openConfirmModal(fixedCost.id, 'fixed')"
         />
         <form-button
           class="flex flex-row md:hidden basis-3/24 w-3/4 h-3/4"

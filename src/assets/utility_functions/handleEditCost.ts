@@ -16,6 +16,7 @@ const handleEditCost = (
   closeOptionsMenu()
   closeConfirmModal()
   totalAction(costArr)
+  console.log("in handle edit cost", id)
 }
 
 export default handleEditCost

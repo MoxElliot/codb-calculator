@@ -20,6 +20,16 @@ export const useModalStore = defineStore('modalStore', {
       this.formModalIsOpen = true
       this.formModalType = formModalType
     },
+    openEditFormModal(formModalType: string, id?: string) {
+      const reportStore = useReportStore()
+      const { addSelectedIdAction, selectCostAction } = reportStore
+
+      this.formModalIsOpen = true
+      this.formModalType = formModalType
+
+      addSelectedIdAction(id as string)
+      selectCostAction(id as string)
+    },
     closeFormModal() {
       this.formModalIsOpen = false
     },
@@ -53,10 +63,10 @@ export const useModalStore = defineStore('modalStore', {
           const selectedCost = reportStore.variableCosts.find((item) => item.id === id) as CostItem
           this.confirmCostName = selectedCost.name
         }
-        this.costNotification = "Delete Cost Successful!"
+        this.costNotification = 'Delete Cost Successful!'
         this.confirmModalIsOpen = true
       } catch {
-        this.costNotification = "Error occured while deleting cost"
+        this.costNotification = 'Error occured while deleting cost'
         console.error('error in openConfirmModal')
       }
     },

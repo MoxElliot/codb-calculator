@@ -16,7 +16,7 @@ const { formModalIsOpen, formModalType } = storeToRefs(modalStore)
 const { closeFormModal } = modalStore
 
 const reportStore = useReportStore()
-const { blankSubmitError, fixedFormValid, selectedCost, totalFixedCosts } =
+const { blankSubmitError, fixedFormValid, fixedCosts, selectedCost, totalFixedCosts } =
   storeToRefs(reportStore)
 const { handleAddCost, addFixedCostAction, setFixedFormValidAction, replaceFixedCostAction } =
   reportStore
