@@ -13,7 +13,7 @@ import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 const modalStore = useModalStore()
 const { formModalIsOpen, formModalType, confirmModalIsOpen } =
   storeToRefs(modalStore)
-const { closeOptionsMenu, closeConfirmModal } = modalStore
+const { closeOptionsMenu, closeConfirmModal, notify } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
@@ -23,8 +23,6 @@ const { totalCostAction, deleteFixedCostAction, addSelectedIdAction } = reportSt
 onMounted(() => {
   updateInputValidAction(true)
 })
-
-
 
 //https://stackoverflow.com/questions/45553162/how-to-get-mouse-coordinates-in-vuejs
 
@@ -47,8 +45,8 @@ onMounted(() => {
   </form-modal>
   <confirm-modal
     v-if="confirmModalIsOpen"
-    @confirm-event="closeConfirmModal"  
-    @handle-event="
+    @cancel-confirm="closeConfirmModal"  
+    @handle-confirm="
       handleDeleteCost(
         selectedId,
         addSelectedIdAction,
@@ -56,7 +54,8 @@ onMounted(() => {
         closeConfirmModal,
         deleteFixedCostAction,
         totalCostAction,
-        fixedCosts
+        fixedCosts,
+        notify
       )
     "
   />

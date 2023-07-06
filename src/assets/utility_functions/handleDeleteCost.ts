@@ -7,7 +7,8 @@ const handleDeleteCost = (   //destructure as object
   closeConfirmModal: Function,
   deleteAction: Function,
   totalAction: Function,
-  costObj: CostObj[]
+  costObj: CostObj[],
+  notify: Function,
 ) => {
   addSelectedIdAction(id)
   closeOptionsMenu()
@@ -15,6 +16,7 @@ const handleDeleteCost = (   //destructure as object
   deleteAction(id)
   totalAction(costObj)
   costObj
+  notify()
 }
 
 export default handleDeleteCost
