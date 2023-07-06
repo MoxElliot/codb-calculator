@@ -1,14 +1,15 @@
-import type VariableCostObj from './VariableCostObj'
-import type FixedCostObj from './FixedCostObj'
+import type CostObj from './CostObj'
+import type CostItem from './CostItem'
 
 interface reportState {
   companyName: string
   bookingsPerMonth: number
   priceAveragePerBooking: number
   hoursAveragePerBooking: number
-  variableCosts: VariableCostObj[]
+  variableCosts: CostObj[]
+  fixedCosts: CostObj[]
+  totalCosts:number
   totalVariableCosts: number
-  fixedCosts: FixedCostObj[]
   totalFixedCosts: number
   payPerMonth: number
   savingsPerMonth: number
@@ -17,14 +18,7 @@ interface reportState {
   blankSubmitError: string
   fixedFormValid: boolean
   variableFormValid: boolean
-  selectedCost: {
-    id: string,
-    name: string,
-    category: string,
-    amount: number,
-    frequency: string,
-    individualTotal: number
-  }
+  selectedCost: CostItem
   selectedId: string
   selectedName:string
 }

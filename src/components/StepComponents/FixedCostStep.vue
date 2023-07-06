@@ -17,14 +17,18 @@ const { closeOptionsMenu, closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
-const { selectedCost, selectedId } = storeToRefs(reportStore)
-const { totalFixedCostAction, deleteFixedCostAction, addSelectedIdAction } = reportStore
+const { selectedCost, selectedId, fixedCosts } = storeToRefs(reportStore)
+const { totalCostAction, deleteFixedCostAction, addSelectedIdAction } = reportStore
 
 onMounted(() => {
   updateInputValidAction(true)
 })
 
+
+
 //https://stackoverflow.com/questions/45553162/how-to-get-mouse-coordinates-in-vuejs
+
+// rename confirm-emit as cancel-emit
 </script>
 
 <template>
@@ -43,7 +47,7 @@ onMounted(() => {
   </form-modal>
   <confirm-modal
     v-if="confirmModalIsOpen"
-    @confirm-event="closeConfirmModal"
+    @confirm-event="closeConfirmModal"  
     @handle-event="
       handleDeleteCost(
         selectedId,
@@ -51,7 +55,8 @@ onMounted(() => {
         closeOptionsMenu,
         closeConfirmModal,
         deleteFixedCostAction,
-        totalFixedCostAction
+        totalCostAction,
+        fixedCosts
       )
     "
   />

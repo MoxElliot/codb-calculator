@@ -1,12 +1,10 @@
-import type FixedCostsObj from './FixedCostObj'
-
 type CostItem = {
   id: string
   name: string
   category: string
   amount: number
-  frequency: string
   individualTotal: number
+  frequency?: string
 }
 
 export default CostItem

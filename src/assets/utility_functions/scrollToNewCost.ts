@@ -1,9 +1,8 @@
-import { ref } from 'vue'
 
-const scrollToNewCost = (array: { value: string | any[] }) => {
-  let top = array.value.length.toString()
-  const cost = ref<null | HTMLElement>(document.getElementById(top))
-  cost.value?.scrollIntoView({ block: 'start', inline: 'start' })
+const scrollToNewCost = (costId: string) => {
+  let cost = document.getElementById(costId) as HTMLElement | null
+  cost?.scrollIntoView({ block: 'start', inline: 'start' })
+  console.log('in scroll', cost)
 }
 
 export default scrollToNewCost

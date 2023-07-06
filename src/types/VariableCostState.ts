@@ -1,7 +1,7 @@
-import type VariableCostObj from './VariableCostObj'
+import type CostObj from './CostObj'
 
 type VariableCostState = {
-  variableCosts: VariableCostObj[]
+  variableCosts: CostObj[]
   totalVariableCosts: number
 }
 

@@ -38,11 +38,13 @@ export const useModalStore = defineStore('modalStore', {
     closeOptionsMenu() {
       this.optionsMenuIsOpen = false
     },
-    openConfirmModal(id: string, costType: string) {
+    openConfirmModal(id: string, costType: string) {  //the edit method select costs to remove if
       const reportStore = useReportStore()
       const { addSelectedIdAction } = reportStore
+
       this.closeOptionsMenu()
       addSelectedIdAction(id)
+      console.log("in openConfirmModal",)
 
       if (costType === 'fixed') {
         const selectedCost = reportStore.fixedCosts.find((item) => item.id === id) as CostItem

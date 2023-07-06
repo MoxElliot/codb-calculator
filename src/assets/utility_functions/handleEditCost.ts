@@ -1,10 +1,21 @@
-const handleEditCost = (id: string, addSelectedIdAction: Function, editCostAction: Function,openFormModal: Function,  closeOptionsMenu: Function, closeConfirmModal:Function, totalAction: Function ) => {
-    addSelectedIdAction(id)
-    editCostAction(id)
-    openFormModal('edit')
-    closeOptionsMenu()
-    closeConfirmModal()
-    totalAction()
-  }
+import type CostObj from '@/types/CostObj'
 
-  export default handleEditCost
+const handleEditCost = (
+  id: string,
+  costArr: CostObj[],
+  addSelectedIdAction: Function,
+  editCostAction: Function,
+  openFormModal: Function,
+  closeOptionsMenu: Function,
+  closeConfirmModal: Function,
+  totalAction: Function
+) => {
+  addSelectedIdAction(id)
+  editCostAction(id)
+  openFormModal('edit')
+  closeOptionsMenu()
+  closeConfirmModal()
+  totalAction(costArr)
+}
+
+export default handleEditCost

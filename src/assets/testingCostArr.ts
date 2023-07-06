@@ -1,7 +1,7 @@
 const testingCostArr = [{
     id: '0ee',
     name: 'Test0',
-    category: 'Overhead',
+    category: 'Other',
     amount: 1000,
     frequency: 'Monthly',
     individualTotal: 1000
@@ -9,7 +9,7 @@ const testingCostArr = [{
   {
     id: '1ee',
     name: 'Test1',
-    category: 'Overhead',
+    category: 'Other',
     amount: 1000,
     frequency: 'Monthly',
     individualTotal: 1000
@@ -17,7 +17,7 @@ const testingCostArr = [{
   {
     id: '2ee',
     name: 'Test2',
-    category: 'Overhead',
+    category: 'Other',
     amount: 1000,
     frequency: 'Monthly',
     individualTotal: 1000
@@ -25,7 +25,7 @@ const testingCostArr = [{
   {
     id: '3ee',
     name: 'Test3',
-    category: 'Overhead',
+    category: 'Other',
     amount: 1000,
     frequency: 'Monthly',
     individualTotal: 1000
@@ -33,7 +33,7 @@ const testingCostArr = [{
   {
     id: '4ee',
     name: 'Test4',
-    category: 'Overhead',
+    category: 'Other',
     amount: 1000,
     frequency: 'Monthly',
     individualTotal: 1000
@@ -41,7 +41,7 @@ const testingCostArr = [{
   {
     id: '5ee',
     name: 'Test5',
-    category: 'Overhead',
+    category: 'Other',
     amount: 1000,
     frequency: 'Monthly',
     individualTotal: 1000
@@ -49,7 +49,7 @@ const testingCostArr = [{
   {
     id: '6ee',
     name: 'Test6',
-    category: 'Overhead',
+    category: 'Other',
     amount: 1000,
     frequency: 'Monthly',
     individualTotal: 1000
@@ -57,7 +57,7 @@ const testingCostArr = [{
   {
     id: '7eee',
     name: 'Test7',
-    category: 'Overhead',
+    category: 'Other',
     amount: 1000,
     frequency: 'Monthly',
     individualTotal: 1000
@@ -65,7 +65,7 @@ const testingCostArr = [{
   {
     id: '8ee',
     name: 'Test8',
-    category: 'Overhead',
+    category: 'Other',
     amount: 1000,
     frequency: 'Monthly',
     individualTotal: 1000
@@ -73,7 +73,7 @@ const testingCostArr = [{
   {
     id: '9ee',
     name: 'Test9',
-    category: 'Overhead',
+    category: 'Other',
     amount: 1000,
     frequency: 'Monthly',
     individualTotal: 1000
