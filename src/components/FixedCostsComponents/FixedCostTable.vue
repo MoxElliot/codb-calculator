@@ -8,7 +8,6 @@ import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import FixedCostDataInput from './FixedCostDataInput.vue'
 import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
-import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
@@ -18,23 +17,15 @@ const {
   openEditFormModal,
   openConfirmModal,
   closeOptionsMenu,
-  closeConfirmModal
 } = modalStore
 
 const reportStore = useReportStore()
 const { fixedCosts, selectedId } = storeToRefs(reportStore)
-const { totalCostAction, addSelectedIdAction, selectCostAction } = reportStore
 
 onUpdated(() => {
   scrollToNewCost(fixedCosts.value[0].id)
 })
 
-const editFixedCostActionWrapper = (id: string) => {
-  selectCostAction(id)
-  openFormModal('edit')
-  closeOptionsMenu()
-  closeConfirmModal()
-}
 </script>
 
 <template>
@@ -46,7 +37,7 @@ const editFixedCostActionWrapper = (id: string) => {
     </div>
     <options-menu
       v-if="optionsMenuIsOpen"
-      @edit-event="editFixedCostActionWrapper(selectedId)"
+      @edit-event="openEditFormModal(selectedId)"
       @delete-event="openConfirmModal(selectedId, 'fixed')"
       @menu-event="closeOptionsMenu()"
     />
@@ -59,7 +50,7 @@ const editFixedCostActionWrapper = (id: string) => {
       >
         <div
           class="flex flex-row w-full items-end"
-          @click="openEditFormModal('edit', fixedCost.id)"
+          @click="openEditFormModal(fixedCost.id)"
         >
           <div class="basis-6/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.name }}</p>

@@ -20,15 +20,16 @@ export const useModalStore = defineStore('modalStore', {
       this.formModalIsOpen = true
       this.formModalType = formModalType
     },
-    openEditFormModal(formModalType: string, id?: string) {
+    openEditFormModal(id: string) {
       const reportStore = useReportStore()
       const { addSelectedIdAction, selectCostAction } = reportStore
 
+      this.formModalType = 'edit'
       this.formModalIsOpen = true
-      this.formModalType = formModalType
 
       addSelectedIdAction(id as string)
       selectCostAction(id as string)
+      this.closeOptionsMenu()
     },
     closeFormModal() {
       this.formModalIsOpen = false
