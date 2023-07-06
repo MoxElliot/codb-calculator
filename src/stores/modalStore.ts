@@ -4,7 +4,6 @@ import type CostItem from '@/types/CostItem'
 import type ModalState from '@/types/ModalState'
 
 
-
 export const useModalStore = defineStore('modalStore', {
   state: (): ModalState => ({
     formModalIsOpen: false,
@@ -23,11 +22,15 @@ export const useModalStore = defineStore('modalStore', {
       this.formModalIsOpen = false
     },
     openOptionsMenu(id: string) {
+      try {
       const reportStore = useReportStore()
       const { addSelectedIdAction } = reportStore
       addSelectedIdAction(id)
 
-      this.optionsMenuIsOpen = true
+      this.optionsMenuIsOpen = true}
+      catch {
+        console.error('error in openOptionsMenu')
+      }
     },
     closeOptionsMenu() {
       this.optionsMenuIsOpen = false
@@ -49,10 +52,10 @@ export const useModalStore = defineStore('modalStore', {
           const selectedCost = reportStore.variableCosts.find((item) => item.id === id) as CostItem
           this.confirmCostName = selectedCost.name
         }
-
+        
         this.confirmModalIsOpen = true
       } catch {
-        console.error('test')
+        console.error('erro in openConfirmModal')
       }
     },
     closeConfirmModal() {
