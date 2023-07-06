@@ -9,11 +9,12 @@ import FormModal from '../ModalComponents/FormModal.vue'
 import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
+import { toast } from 'vue3-toastify'
 
 const modalStore = useModalStore()
-const { formModalIsOpen, formModalType, confirmModalIsOpen } =
+const { formModalIsOpen, formModalType, confirmModalIsOpen, costNotification } =
   storeToRefs(modalStore)
-const { closeOptionsMenu, closeConfirmModal } = modalStore
+const { closeOptionsMenu, closeConfirmModal, notify } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
@@ -23,8 +24,6 @@ const { totalCostAction, deleteFixedCostAction, addSelectedIdAction } = reportSt
 onMounted(() => {
   updateInputValidAction(true)
 })
-
-
 
 //https://stackoverflow.com/questions/45553162/how-to-get-mouse-coordinates-in-vuejs
 
@@ -56,7 +55,8 @@ onMounted(() => {
         closeConfirmModal,
         deleteFixedCostAction,
         totalCostAction,
-        fixedCosts
+        fixedCosts,
+        notify
       )
     "
   />

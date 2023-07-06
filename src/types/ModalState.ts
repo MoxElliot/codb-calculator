@@ -5,6 +5,7 @@ type Modal = {
   confirmModalIsOpen: boolean
   confirmDelete: string
   confirmCostName: string
+  costNotification: string
 }
 
 export default Modal

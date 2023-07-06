@@ -10,19 +10,23 @@ import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 
+
+
 const modalStore = useModalStore()
 const { formModalIsOpen, formModalType, confirmModalIsOpen } =
   storeToRefs(modalStore)
-const { closeOptionsMenu, closeConfirmModal } = modalStore
+const { closeOptionsMenu, closeConfirmModal, notify } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
-const { selectedCost, selectedId, variableCosts } = storeToRefs(reportStore)
+const { selectedCost, selectedId, variableCosts} = storeToRefs(reportStore)
 const { totalCostAction, deleteVariableCostAction, addSelectedIdAction } = reportStore
 
 onMounted(() => {
   updateInputValidAction(true)
 })
+
+
 </script>
 
 <template>
@@ -53,7 +57,8 @@ onMounted(() => {
         closeConfirmModal,
         deleteVariableCostAction,
         totalCostAction,
-        variableCosts
+        variableCosts,
+        notify
       )
     "
   />

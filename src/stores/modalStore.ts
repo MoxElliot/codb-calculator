@@ -2,7 +2,8 @@ import { defineStore, storeToRefs } from 'pinia'
 import { useReportStore } from './reportStore'
 import type CostItem from '@/types/CostItem'
 import type ModalState from '@/types/ModalState'
-
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 export const useModalStore = defineStore('modalStore', {
   state: (): ModalState => ({
@@ -11,7 +12,8 @@ export const useModalStore = defineStore('modalStore', {
     optionsMenuIsOpen: false,
     confirmModalIsOpen: false,
     confirmDelete: '',
-    confirmCostName: ''
+    confirmCostName: '',
+    costNotification: ''
   }),
   actions: {
     openFormModal(formModalType: string) {
@@ -23,12 +25,12 @@ export const useModalStore = defineStore('modalStore', {
     },
     openOptionsMenu(id: string) {
       try {
-      const reportStore = useReportStore()
-      const { addSelectedIdAction } = reportStore
-      addSelectedIdAction(id)
+        const reportStore = useReportStore()
+        const { addSelectedIdAction } = reportStore
+        addSelectedIdAction(id)
 
-      this.optionsMenuIsOpen = true}
-      catch {
+        this.optionsMenuIsOpen = true
+      } catch {
         console.error('error in openOptionsMenu')
       }
     },
@@ -52,15 +54,21 @@ export const useModalStore = defineStore('modalStore', {
           const selectedCost = reportStore.variableCosts.find((item) => item.id === id) as CostItem
           this.confirmCostName = selectedCost.name
         }
-        
+        this.costNotification = "Delete Cost Successful!"
         this.confirmModalIsOpen = true
       } catch {
+        this.costNotification = "Error occured while deleting cost"
         console.error('erro in openConfirmModal')
       }
     },
     closeConfirmModal() {
       this.confirmDelete = ''
       this.confirmModalIsOpen = false
+    },
+    notify() {
+      toast(this.costNotification, {
+        autoClose: 1000
+      })
     }
   }
 })
