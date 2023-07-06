@@ -10,7 +10,6 @@ import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
 import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
-
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
 const { openOptionsMenu, openFormModal, openConfirmModal, closeOptionsMenu, closeConfirmModal } =
@@ -33,8 +32,6 @@ onUpdated(() => {
       </div>
     </div>
     <options-menu
-      :x-loc="x"
-      :y-loc="y"
       v-if="optionsMenuIsOpen"
       @edit-event="
         handleEditCost(
@@ -92,7 +89,7 @@ onUpdated(() => {
         <form-button
           class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
           btnImage="/src/images/delete-cost.svg"
-          @click="openConfirmModal(fixedCost.id, 'fixed')"
+          @click="openConfirmModal(fixedCost.id, 'fixed')" 
         />
         <form-button
           class="flex flex-row md:hidden basis-3/24 w-3/4 h-3/4"

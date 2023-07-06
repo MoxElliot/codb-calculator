@@ -8,25 +8,19 @@ import { storeToRefs } from 'pinia'
 import FormModal from '../ModalComponents/FormModal.vue'
 import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
-import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
-
-
 
 const modalStore = useModalStore()
-const { formModalIsOpen, formModalType, confirmModalIsOpen } =
-  storeToRefs(modalStore)
-const { closeOptionsMenu, closeConfirmModal, notify } = modalStore
+const { formModalIsOpen, formModalType, confirmModalIsOpen } = storeToRefs(modalStore)
+const { closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
-const { selectedCost, selectedId, variableCosts} = storeToRefs(reportStore)
-const { totalCostAction, deleteVariableCostAction, addSelectedIdAction } = reportStore
+const { selectedCost } = storeToRefs(reportStore)
+const { deleteVariableCostAction } = reportStore
 
 onMounted(() => {
   updateInputValidAction(true)
 })
-
-
 </script>
 
 <template>
@@ -49,18 +43,7 @@ onMounted(() => {
   <confirm-modal
     v-if="confirmModalIsOpen"
     @cancel-confirm="closeConfirmModal"
-    @handle-confirm="
-      handleDeleteCost(
-        selectedId,
-        addSelectedIdAction,
-        closeOptionsMenu,
-        closeConfirmModal,
-        deleteVariableCostAction,
-        totalCostAction,
-        variableCosts,
-        notify
-      )
-    "
+    @handle-confirm="deleteVariableCostAction"
   />
   <div
     class="flex flex-col text-center items-center justify-center basis-full h-screen sm:min-h-[900px] z-10"

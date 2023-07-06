@@ -8,36 +8,21 @@ import { storeToRefs } from 'pinia'
 import FormModal from '../ModalComponents/FormModal.vue'
 import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
-// import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 
 const modalStore = useModalStore()
-const { formModalIsOpen, formModalType, confirmModalIsOpen } =
-  storeToRefs(modalStore)
-const { 
-  // closeOptionsMenu, 
-  closeConfirmModal, 
-  // notify 
-} = modalStore
+const { formModalIsOpen, formModalType, confirmModalIsOpen } = storeToRefs(modalStore)
+const { closeConfirmModal } = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
-const { 
-  selectedCost, 
-  // selectedId, 
-  // fixedCosts 
-} = storeToRefs(reportStore)
-const { 
-  // totalCostAction, 
-  deleteFixedCostAction, 
-  // addSelectedIdAction 
-} = reportStore
+const { selectedCost } = storeToRefs(reportStore)
+const { deleteFixedCostAction } = reportStore
 
 onMounted(() => {
   updateInputValidAction(true)
 })
 
 //https://stackoverflow.com/questions/45553162/how-to-get-mouse-coordinates-in-vuejs
-
 </script>
 
 <template>
@@ -56,20 +41,8 @@ onMounted(() => {
   </form-modal>
   <confirm-modal
     v-if="confirmModalIsOpen"
-    @cancel-confirm="closeConfirmModal"  
-    @handle-confirm="
-      // handleDeleteCost(
-      //   selectedId,
-      //   addSelectedIdAction,
-      //   closeOptionsMenu,
-      //   closeConfirmModal,
-      //   deleteFixedCostAction,
-      //   totalCostAction,
-      //   fixedCosts,
-      //   notify
-      // )
-      deleteFixedCostAction()
-    "
+    @cancel-confirm="closeConfirmModal"
+    @handle-confirm="deleteFixedCostAction()"
   />
   <div
     class="flex flex-col text-center items-center justify-center basis-full h-screen sm:min-h-[900px] z-10"
