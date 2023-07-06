@@ -70,7 +70,7 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
             resetForm
           )
         : handleAddCost(meta.valid, setVariableFormValidAction, resetForm, addVariableCostAction, {
-          id: uniqueId('variableCost_').toString(),
+            id: uniqueId('variableCost_').toString(), 
             name: variableCostName,
             category: variableCostCategory,
             amount: variableCostAmount as number,
