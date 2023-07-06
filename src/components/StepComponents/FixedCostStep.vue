@@ -9,10 +9,9 @@ import FormModal from '../ModalComponents/FormModal.vue'
 import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
 import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
-import { toast } from 'vue3-toastify'
 
 const modalStore = useModalStore()
-const { formModalIsOpen, formModalType, confirmModalIsOpen, costNotification } =
+const { formModalIsOpen, formModalType, confirmModalIsOpen } =
   storeToRefs(modalStore)
 const { closeOptionsMenu, closeConfirmModal, notify } = modalStore
 
