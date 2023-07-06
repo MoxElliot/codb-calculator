@@ -6,7 +6,7 @@ import FormButton from '../FormComponents/FormButton.vue'
 const modalStore = useModalStore()
 const { confirmCostName } = storeToRefs(modalStore)
 
-defineEmits(['confirm-event', 'handle-event'])
+defineEmits(['cancel-confirm', 'handle-confirm'])
 </script>
 <template>
     <div class="fixed top-0 bottom-0 left-0 right-0 bg-primary-white/60 flex justify-center items-center z-40">

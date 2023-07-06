@@ -8,17 +8,29 @@ import { storeToRefs } from 'pinia'
 import FormModal from '../ModalComponents/FormModal.vue'
 import ConfirmModal from '../ModalComponents/ConfirmModal.vue'
 import { useModalStore } from '../../stores/modalStore'
-import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
+// import handleDeleteCost from '../../assets/utility_functions/handleDeleteCost'
 
 const modalStore = useModalStore()
 const { formModalIsOpen, formModalType, confirmModalIsOpen } =
   storeToRefs(modalStore)
-const { closeOptionsMenu, closeConfirmModal, notify } = modalStore
+const { 
+  // closeOptionsMenu, 
+  closeConfirmModal, 
+  // notify 
+} = modalStore
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
-const { selectedCost, selectedId, fixedCosts } = storeToRefs(reportStore)
-const { totalCostAction, deleteFixedCostAction, addSelectedIdAction } = reportStore
+const { 
+  selectedCost, 
+  // selectedId, 
+  // fixedCosts 
+} = storeToRefs(reportStore)
+const { 
+  // totalCostAction, 
+  deleteFixedCostAction, 
+  // addSelectedIdAction 
+} = reportStore
 
 onMounted(() => {
   updateInputValidAction(true)
@@ -26,7 +38,6 @@ onMounted(() => {
 
 //https://stackoverflow.com/questions/45553162/how-to-get-mouse-coordinates-in-vuejs
 
-// rename confirm-emit as cancel-emit
 </script>
 
 <template>
@@ -47,16 +58,17 @@ onMounted(() => {
     v-if="confirmModalIsOpen"
     @cancel-confirm="closeConfirmModal"  
     @handle-confirm="
-      handleDeleteCost(
-        selectedId,
-        addSelectedIdAction,
-        closeOptionsMenu,
-        closeConfirmModal,
-        deleteFixedCostAction,
-        totalCostAction,
-        fixedCosts,
-        notify
-      )
+      // handleDeleteCost(
+      //   selectedId,
+      //   addSelectedIdAction,
+      //   closeOptionsMenu,
+      //   closeConfirmModal,
+      //   deleteFixedCostAction,
+      //   totalCostAction,
+      //   fixedCosts,
+      //   notify
+      // )
+      deleteFixedCostAction()
     "
   />
   <div

@@ -23,18 +23,6 @@ const { totalCostAction, editFixedCostAction, addSelectedIdAction } = reportStor
 onUpdated(() => {
   scrollToNewCost(fixedCosts.value[0].id)
 })
-let x = '540'
-let y = '100'
-// const clickLocation = (e: any, adjustX: number, adjustY:number) => {
-//   x = (e.clientX - adjustX).toString()
-//   y = (e.clientX - adjustY).toString()
-//   console.log('in testLocaion', 'x', x, 'y', y)
-// }
-
-const handleOpenOption = (cost: string, e: Event) => {
-  // clickLocation(e, 50, 500)
-  openOptionsMenu(cost)
-}
 </script>
 
 <template>
@@ -109,7 +97,7 @@ const handleOpenOption = (cost: string, e: Event) => {
         <form-button
           class="flex flex-row md:hidden basis-3/24 w-3/4 h-3/4"
           label="..."
-          @click="handleOpenOption(fixedCost.id, $event)"
+          @click="openOptionsMenu(fixedCost.id)"
           @click.stop=""
         />
       </div>

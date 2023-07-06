@@ -38,7 +38,6 @@ export const useModalStore = defineStore('modalStore', {
       this.optionsMenuIsOpen = false
     },
     openConfirmModal(id: string, costType: string) {
-      //the edit method select costs to remove if
       try {
         const reportStore = useReportStore()
         const { addSelectedIdAction } = reportStore
@@ -58,7 +57,7 @@ export const useModalStore = defineStore('modalStore', {
         this.confirmModalIsOpen = true
       } catch {
         this.costNotification = "Error occured while deleting cost"
-        console.error('erro in openConfirmModal')
+        console.error('error in openConfirmModal')
       }
     },
     closeConfirmModal() {
