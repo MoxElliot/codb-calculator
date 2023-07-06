@@ -45,8 +45,8 @@ onMounted(() => {
   </form-modal>
   <confirm-modal
     v-if="confirmModalIsOpen"
-    @confirm-event="closeConfirmModal"  
-    @handle-event="
+    @cancel-confirm="closeConfirmModal"  
+    @handle-confirm="
       handleDeleteCost(
         selectedId,
         addSelectedIdAction,

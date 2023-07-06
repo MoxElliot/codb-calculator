@@ -18,12 +18,12 @@ defineEmits(['confirm-event', 'handle-event'])
         <section class=" min-h-[100px]">
           <div class="flex flex-row p-1 md:p-4 h-full">
         <form-button label="No" type="button" class="modal-btn-cancel" 
-        @click="$emit('confirm-event')"/>
+        @click="$emit('cancel-confirm')"/>
         <form-button
           label="Yes"
           type="submit"
           class="modal-btn-add"
-          @click="$emit('handle-event')"
+          @click="$emit('handle-confirm')"
         />
       </div>
         </section>
