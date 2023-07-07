@@ -25,7 +25,7 @@ const props = defineProps<{
   id?: string
   name?: string
   category?: string
-  amount?: number | null
+  amount?: number
   frequency?: string
   individualTotal?: number
 }>()
@@ -86,7 +86,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
             id: uniqueId().toString(),
             name: fixedCostName,
             category: fixedCostCategory,
-            amount: fixedCostAmount as number,
+            amount: fixedCostAmount,
             frequency: fixedCostFrequency,
             individualTotal: totalFixedCosts
           })

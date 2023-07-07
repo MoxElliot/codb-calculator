@@ -132,7 +132,7 @@ export const useReportStore = defineStore('reportStore', {
       id: string,
       name: string,
       category: string,
-      amount: number | null,
+      amount: number,
       allValid: boolean,
       formValidAction: Function,
       resetForm: Function,
@@ -169,7 +169,7 @@ export const useReportStore = defineStore('reportStore', {
       id: string,
       name: string,
       category: string,
-      amount: number | null,
+      amount: number,
       allValid: boolean,
       formValidAction: Function,
       resetForm: Function

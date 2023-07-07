@@ -8,16 +8,12 @@ import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import FixedCostDataInput from './FixedCostDataInput.vue'
 import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
+import CostRow from '../FormComponents/CostRow.vue'
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
-const {
-  openOptionsMenu,
-  openFormModal,
-  openEditFormModal,
-  openConfirmModal,
-  closeOptionsMenu,
-} = modalStore
+const { openOptionsMenu, openFormModal, openEditFormModal, openConfirmModal, closeOptionsMenu } =
+  modalStore
 
 const reportStore = useReportStore()
 const { fixedCosts, selectedId } = storeToRefs(reportStore)
@@ -25,7 +21,6 @@ const { fixedCosts, selectedId } = storeToRefs(reportStore)
 onUpdated(() => {
   scrollToNewCost(fixedCosts.value[0].id)
 })
-
 </script>
 
 <template>
@@ -48,26 +43,18 @@ onUpdated(() => {
         :id="fixedCost.id"
         :key="fixedCost.id"
       >
-        <div
-          class="flex flex-row w-full items-end"
-          @click="openEditFormModal(fixedCost.id, 'fixed')"
-        >
-          <div class="basis-6/24 pr-2 md:pr-6">
-            <p class="border-b border-grey-200">{{ fixedCost.name }}</p>
-          </div>
-          <div class="basis-6/24 pr-2 md:pr-6">
-            <p class="border-b border-grey-200">{{ fixedCost.category }}</p>
-          </div>
-          <div class="basis-3/24 pr-2 md:pr-6">
-            <p class="border-b border-grey-200">${{ fixedCost.amount }}</p>
-          </div>
-          <div class="basis-6/24 pr-2 md:pr-6">
-            <p class="border-b border-grey-200">{{ fixedCost.frequency }}</p>
-          </div>
-          <div class="basis-3/24 pr-2 md:pr-6">
-            <p class="border-b border-grey-200">${{ fixedCost.individualTotal }}</p>
-          </div>
-        </div>
+        <cost-row
+          parentClass="flex flex-row w-full items-end"
+          cellClass1="basis-6/24 pr-2 md:pr-6"
+          cellClass2="basis-3/24 pr-2 md:pr-6"
+          pClass="border-b border-grey-200"
+          :name="fixedCost.id"
+          :costName="fixedCost.name"
+          :category="fixedCost.category"
+          :amount="fixedCost.amount"
+          :frequency="fixedCost.frequency"
+          :individual-total="fixedCost.individualTotal"
+        />
         <form-button
           class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
           btnImage="/src/images/delete-cost.svg"

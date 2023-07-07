@@ -2,7 +2,7 @@ interface CostObj {
   id: string 
   name: string
   category: string
-  amount: number | null 
+  amount?: number 
   frequency?: string
   individualTotal?: number
 }
