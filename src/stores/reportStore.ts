@@ -116,7 +116,6 @@ export const useReportStore = defineStore('reportStore', {
       } else if (type === 'variable') {
         this.selectedCost = this.variableCosts.find((item) => item.id === id) as CostItem
       }
-      console.log('in selectCostAction', this.selectedCost)
     },
     editVariableCostAction(id: string) {
       this.selectedCost = this.variableCosts.find((item) => item.id === id) as CostItem
