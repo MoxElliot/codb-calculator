@@ -5,10 +5,6 @@ const modalStore = useModalStore()
 const { openEditFormModal } = modalStore
 
 defineProps({
-  costArr: {
-    type: String,
-    default: ''
-  },
   parentClass: {
     type: String,
     default: ''

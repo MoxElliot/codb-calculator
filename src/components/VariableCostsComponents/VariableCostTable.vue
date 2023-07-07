@@ -8,6 +8,7 @@ import VariableCostDataInput from '../VariableCostsComponents/VariableCostDataIn
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
+import VariableCostRow from '../FormComponents/VariableCostRow.vue'
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
@@ -48,7 +49,19 @@ onUpdated(() => {
         :id="variableCost.id"
         :key="variableCost.id"
       >
-        <div class="flex flex-row w-full items-end" @click="openEditFormModal(variableCost.id, 'variable')">
+      <variable-cost-row
+          @click="openEditFormModal(variableCost.id, 'variable')"
+          parentClass="flex flex-row w-full items-end"
+          cellClass="basis-6/18 pr-2 md:pr-6"
+          pClass="border-b border-grey-200"
+          :name="variableCost.id"
+          :costName="variableCost.name"
+          :category="variableCost.category"
+          :amount="variableCost.amount"
+        >
+      
+        </variable-cost-row>
+        <!-- <div class="flex flex-row w-full items-end" @click="openEditFormModal(variableCost.id, 'variable')">
           <div class="basis-6/18 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ variableCost.name }}</p>
           </div>
@@ -58,7 +71,7 @@ onUpdated(() => {
           <div class="basis-6/18 pr-2 md:pr-6">
             <p class="border-b border-grey-200">$ {{ variableCost.amount }}</p>
           </div>
-        </div>
+        </div> -->
         <form-button
           class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
           btnImage="/src/images/delete-cost.svg"

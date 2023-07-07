@@ -8,7 +8,7 @@ import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import FixedCostDataInput from './FixedCostDataInput.vue'
 import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
-import CostRow from '../FormComponents/CostRow.vue'
+import FixedCostRow from '../FormComponents/FixedCostRow.vue'
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
@@ -43,7 +43,7 @@ onUpdated(() => {
         :id="fixedCost.id"
         :key="fixedCost.id"
       >
-        <cost-row
+        <fixed-cost-row
           @click="openEditFormModal(fixedCost.id, 'fixed')"
           parentClass="flex flex-row w-full items-end"
           cellClass1="basis-6/24 pr-2 md:pr-6"
@@ -57,7 +57,7 @@ onUpdated(() => {
           :individual-total="fixedCost.individualTotal"
         >
       
-        </cost-row>
+        </fixed-cost-row>
         <form-button
           class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
           btnImage="/src/images/delete-cost.svg"
