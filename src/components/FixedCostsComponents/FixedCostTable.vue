@@ -30,22 +30,17 @@ onUpdated(() => {
         <p>{{ heading[0] }}</p>
       </div>
     </div>
-    <options-menu
-      v-if="optionsMenuIsOpen"
-      @edit-event="openEditFormModal(selectedId, 'fixed')"
-      @delete-event="openConfirmModal(selectedId, 'fixed')"
-      @menu-event="closeOptionsMenu()"
-    />
+
     <div class="max-h-32 sm:max-h-64 w-screen sm:w-full overflow-auto">
       <div
-        class="h-10 md:h-16 flex flex-row w-full"
+        class="relative h-10 md:h-16 flex flex-row w-full"
         v-for="fixedCost in fixedCosts"
         :id="fixedCost.id"
         :key="fixedCost.id"
       >
         <fixed-cost-row
           @click="openEditFormModal(fixedCost.id, 'fixed')"
-          parentClass="flex flex-row w-full items-end"
+          parentClass=" flex flex-row w-full items-end"
           cellClass1="basis-6/24 pr-2 md:pr-6"
           cellClass2="basis-3/24 pr-2 md:pr-6"
           pClass="border-b border-grey-200"
@@ -56,8 +51,14 @@ onUpdated(() => {
           :frequency="fixedCost.frequency"
           :individual-total="fixedCost.individualTotal"
         >
-      
+          
         </fixed-cost-row>
+        <options-menu
+            v-if="optionsMenuIsOpen && selectedId === fixedCost.id"
+            @edit-event="openEditFormModal(selectedId, 'fixed')"
+            @delete-event="openConfirmModal(selectedId, 'fixed')"
+            @menu-event="closeOptionsMenu()"
+          />
         <form-button
           class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
           btnImage="/src/images/delete-cost.svg"

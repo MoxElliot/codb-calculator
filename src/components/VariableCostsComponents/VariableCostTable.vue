@@ -61,17 +61,6 @@ onUpdated(() => {
         >
       
         </variable-cost-row>
-        <!-- <div class="flex flex-row w-full items-end" @click="openEditFormModal(variableCost.id, 'variable')">
-          <div class="basis-6/18 pr-2 md:pr-6">
-            <p class="border-b border-grey-200">{{ variableCost.name }}</p>
-          </div>
-          <div class="basis-6/18 pr-2 md:pr-6">
-            <p class="border-b border-grey-200">{{ variableCost.category }}</p>
-          </div>
-          <div class="basis-6/18 pr-2 md:pr-6">
-            <p class="border-b border-grey-200">$ {{ variableCost.amount }}</p>
-          </div>
-        </div> -->
         <form-button
           class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
           btnImage="/src/images/delete-cost.svg"
