@@ -50,9 +50,7 @@ onUpdated(() => {
           :amount="fixedCost.amount"
           :frequency="fixedCost.frequency"
           :individual-total="fixedCost.individualTotal"
-        >
-          
-        </fixed-cost-row>
+        />
         <options-menu
             v-if="optionsMenuIsOpen && selectedId === fixedCost.id"
             @edit-event="openEditFormModal(selectedId, 'fixed')"

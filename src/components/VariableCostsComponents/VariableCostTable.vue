@@ -12,13 +12,8 @@ import VariableCostRow from '../FormComponents/VariableCostRow.vue'
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
-const {
-  openOptionsMenu,
-  openFormModal,
-  openEditFormModal,
-  openConfirmModal,
-  closeOptionsMenu,
-} = modalStore
+const { openOptionsMenu, openFormModal, openEditFormModal, openConfirmModal, closeOptionsMenu } =
+  modalStore
 
 const reportStore = useReportStore()
 const { variableCosts, selectedId } = storeToRefs(reportStore)
@@ -35,21 +30,15 @@ onUpdated(() => {
         <p>{{ heading[0] }}</p>
       </div>
     </div>
-    <options-menu
-      v-if="optionsMenuIsOpen"
-      @edit-event="openEditFormModal(selectedId, 'variable')"
-      @delete-event="openConfirmModal(selectedId, 'variable')"
-      @menu-event="closeOptionsMenu()"
-    />
 
     <div class="max-h-32 md:max-h-64 w-screen sm:w-full overflow-auto">
       <div
-        class="h-10 md:h-16 flex flex-row w-full"
+        class="relative h-10 md:h-16 flex flex-row w-full"
         v-for="variableCost in variableCosts"
         :id="variableCost.id"
         :key="variableCost.id"
       >
-      <variable-cost-row
+        <variable-cost-row
           @click="openEditFormModal(variableCost.id, 'variable')"
           parentClass="flex flex-row w-full items-end"
           cellClass="basis-6/18 pr-2 md:pr-6"
@@ -58,9 +47,13 @@ onUpdated(() => {
           :costName="variableCost.name"
           :category="variableCost.category"
           :amount="variableCost.amount"
-        >
-      
-        </variable-cost-row>
+        />
+        <options-menu
+          v-if="optionsMenuIsOpen  && selectedId === variableCost.id"
+          @edit-event="openEditFormModal(selectedId, 'variable')"
+          @delete-event="openConfirmModal(selectedId, 'variable')"
+          @menu-event="closeOptionsMenu()"
+        />
         <form-button
           class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
           btnImage="/src/images/delete-cost.svg"
