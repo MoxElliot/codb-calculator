@@ -4,20 +4,22 @@ import FormButton from '../FormComponents/FormButton.vue'
 
 defineEmits(['menu-event', 'edit-event', 'delete-event'])
 
-const props = defineProps({
-  xLoc: {
-    type: String,
+// const props = defineProps({
+//   xLoc: {
+//     type: String,
+//     default: ''
    
-  },
-  yLoc: {
-    type: String,
+//   },
+//   yLoc: {
+//     type: String,
+//     default: ''
    
-  }
-  })
+//   }
+//   })
 
-onUpdated(()=>{
-  console.log("hello",props.xLoc)
-})
+// onUpdated(()=>{
+//   console.log("hello",props.xLoc)
+// })  :style="{left:props.xLoc + 'px', top:props.yLoc + 'px'}"
 </script>
 
 <template>
@@ -25,7 +27,9 @@ onUpdated(()=>{
     class="fixed top-0 bottom-0 left-0 right-0 z-10 h-full w-full"
     @click="$emit('menu-event')"
   ></div>
-  <div class="options-menu absolute options-menu h-[85px] w-[85px] z-20" :style="{left:props.xLoc + 'px', top:props.yLoc + 'px'}">
+  <div class="options-menu absolute options-menu h-[85px] w-[85px] z-20" 
+  
+  >
     <section
       class="bg-primary-white flex flex-col justify-center items-center max-w-[100px] max-h-[100px]"
     >

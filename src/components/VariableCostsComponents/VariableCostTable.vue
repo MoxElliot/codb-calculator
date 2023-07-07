@@ -12,8 +12,14 @@ import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
-const { openOptionsMenu, openFormModal, openConfirmModal, closeOptionsMenu, closeConfirmModal } =
-  modalStore
+const {
+  openOptionsMenu,
+  openFormModal,
+  openEditFormModal,
+  openConfirmModal,
+  closeOptionsMenu,
+  closeConfirmModal
+} = modalStore
 
 const reportStore = useReportStore()
 const { variableCosts, selectedId } = storeToRefs(reportStore)
@@ -33,20 +39,9 @@ onUpdated(() => {
     </div>
     <options-menu
       v-if="optionsMenuIsOpen"
-      @edit-event="
-        handleEditCost(
-          selectedId,
-          variableCosts,
-          addSelectedIdAction,
-          editVariableCostAction,
-          openFormModal,
-          closeOptionsMenu,
-          closeConfirmModal,
-          totalCostAction
-        )
-      "
+      @edit-event="openEditFormModal(selectedId, 'variable')"
       @delete-event="openConfirmModal(selectedId, 'variable')"
-      @menu-event="closeOptionsMenu"
+      @menu-event="closeOptionsMenu()"
     />
 
     <div class="max-h-32 md:max-h-64 w-screen sm:w-full overflow-auto">
@@ -56,21 +51,7 @@ onUpdated(() => {
         :id="variableCost.id"
         :key="variableCost.id"
       >
-        <div
-          class="flex flex-row w-full items-end"
-          @click="
-            handleEditCost(
-              variableCost.id,
-              variableCosts,
-              addSelectedIdAction,
-              editVariableCostAction,
-              openFormModal,
-              closeOptionsMenu,
-              closeConfirmModal,
-              totalCostAction
-            )
-          "
-        >
+        <div class="flex flex-row w-full items-end" @click="openEditFormModal(variableCost.id, 'variable')">
           <div class="basis-6/18 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ variableCost.name }}</p>
           </div>

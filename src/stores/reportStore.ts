@@ -110,9 +110,13 @@ export const useReportStore = defineStore('reportStore', {
         this.setBlankSubmitErrorAction('Enter a value in each field')
       }
     },
-    selectCostAction(id: string) {
-      this.selectedCost = this.fixedCosts.find((item) => item.id === id) as CostItem
-      console.log('in editFixedCostAction', this.selectedCost)
+    selectCostAction(id: string, type: string) {
+      if (type === 'fixed') {
+        this.selectedCost = this.fixedCosts.find((item) => item.id === id) as CostItem
+      } else if (type === 'variable') {
+        this.selectedCost = this.variableCosts.find((item) => item.id === id) as CostItem
+      }
+      console.log('in selectCostAction', this.selectedCost)
     },
     editVariableCostAction(id: string) {
       this.selectedCost = this.variableCosts.find((item) => item.id === id) as CostItem
@@ -210,7 +214,9 @@ export const useReportStore = defineStore('reportStore', {
       const { closeOptionsMenu, closeConfirmModal } = modalStore
 
       try {
-        this.selectedCost = this.variableCosts.find((item) => item.id === this.selectedId) as CostItem
+        this.selectedCost = this.variableCosts.find(
+          (item) => item.id === this.selectedId
+        ) as CostItem
         const deleteIndex = this.variableCosts.indexOf(this.selectedCost)
         this.variableCosts.splice(deleteIndex, 1)
         this.totalCostAction(this.variableCosts)

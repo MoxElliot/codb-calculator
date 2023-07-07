@@ -20,7 +20,7 @@ export const useModalStore = defineStore('modalStore', {
       this.formModalIsOpen = true
       this.formModalType = formModalType
     },
-    openEditFormModal(id: string) {
+    openEditFormModal(id: string, type:string) {
       const reportStore = useReportStore()
       const { addSelectedIdAction, selectCostAction } = reportStore
 
@@ -28,7 +28,7 @@ export const useModalStore = defineStore('modalStore', {
       this.formModalIsOpen = true
 
       addSelectedIdAction(id as string)
-      selectCostAction(id as string)
+      selectCostAction(id as string, type as string)
       this.closeOptionsMenu()
     },
     closeFormModal() {

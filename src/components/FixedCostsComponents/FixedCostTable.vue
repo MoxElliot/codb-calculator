@@ -37,7 +37,7 @@ onUpdated(() => {
     </div>
     <options-menu
       v-if="optionsMenuIsOpen"
-      @edit-event="openEditFormModal(selectedId)"
+      @edit-event="openEditFormModal(selectedId, 'fixed')"
       @delete-event="openConfirmModal(selectedId, 'fixed')"
       @menu-event="closeOptionsMenu()"
     />
@@ -50,7 +50,7 @@ onUpdated(() => {
       >
         <div
           class="flex flex-row w-full items-end"
-          @click="openEditFormModal(fixedCost.id)"
+          @click="openEditFormModal(fixedCost.id, 'fixed')"
         >
           <div class="basis-6/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.name }}</p>

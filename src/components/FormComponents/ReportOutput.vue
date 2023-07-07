@@ -1,10 +1,12 @@
 <script setup lang="ts">
 const props = defineProps({
   label: {
-    type: [Number, String]
+    type: [Number, String],
+    default: ''
   },
   variable: {
-    type: [Number, String]
+    type: [Number, String],
+    default: ''
   }
 })
 </script>
