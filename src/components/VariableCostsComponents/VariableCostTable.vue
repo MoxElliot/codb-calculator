@@ -8,16 +8,12 @@ import VariableCostDataInput from '../VariableCostsComponents/VariableCostDataIn
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
+import VariableCostRow from '../FormComponents/VariableCostRow.vue'
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
-const {
-  openOptionsMenu,
-  openFormModal,
-  openEditFormModal,
-  openConfirmModal,
-  closeOptionsMenu,
-} = modalStore
+const { openOptionsMenu, openFormModal, openEditFormModal, openConfirmModal, closeOptionsMenu } =
+  modalStore
 
 const reportStore = useReportStore()
 const { variableCosts, selectedId } = storeToRefs(reportStore)
@@ -34,31 +30,30 @@ onUpdated(() => {
         <p>{{ heading[0] }}</p>
       </div>
     </div>
-    <options-menu
-      v-if="optionsMenuIsOpen"
-      @edit-event="openEditFormModal(selectedId, 'variable')"
-      @delete-event="openConfirmModal(selectedId, 'variable')"
-      @menu-event="closeOptionsMenu()"
-    />
 
     <div class="max-h-32 md:max-h-64 w-screen sm:w-full overflow-auto">
       <div
-        class="h-10 md:h-16 flex flex-row w-full"
+        class="relative h-10 md:h-16 flex flex-row w-full"
         v-for="variableCost in variableCosts"
         :id="variableCost.id"
         :key="variableCost.id"
       >
-        <div class="flex flex-row w-full items-end" @click="openEditFormModal(variableCost.id, 'variable')">
-          <div class="basis-6/18 pr-2 md:pr-6">
-            <p class="border-b border-grey-200">{{ variableCost.name }}</p>
-          </div>
-          <div class="basis-6/18 pr-2 md:pr-6">
-            <p class="border-b border-grey-200">{{ variableCost.category }}</p>
-          </div>
-          <div class="basis-6/18 pr-2 md:pr-6">
-            <p class="border-b border-grey-200">$ {{ variableCost.amount }}</p>
-          </div>
-        </div>
+        <variable-cost-row
+          @click="openEditFormModal(variableCost.id, 'variable')"
+          parentClass="flex flex-row w-full items-end"
+          cellClass="basis-6/18 pr-2 md:pr-6"
+          pClass="border-b border-grey-200"
+          :name="variableCost.id"
+          :costName="variableCost.name"
+          :category="variableCost.category"
+          :amount="variableCost.amount"
+        />
+        <options-menu
+          v-if="optionsMenuIsOpen  && selectedId === variableCost.id"
+          @edit-event="openEditFormModal(selectedId, 'variable')"
+          @delete-event="openConfirmModal(selectedId, 'variable')"
+          @menu-event="closeOptionsMenu()"
+        />
         <form-button
           class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
           btnImage="/src/images/delete-cost.svg"

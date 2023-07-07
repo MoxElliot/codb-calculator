@@ -193,7 +193,7 @@ export const useReportStore = defineStore('reportStore', {
     },
     deleteFixedCostAction() {
       const modalStore = useModalStore()
-      const { closeOptionsMenu, closeConfirmModal } = modalStore
+      const { closeOptionsMenu, closeConfirmModal, notify } = modalStore
 
       try {
         this.selectedCost = this.fixedCosts.find((item) => item.id === this.selectedId) as CostItem
@@ -206,11 +206,12 @@ export const useReportStore = defineStore('reportStore', {
       } finally {
         closeOptionsMenu()
         closeConfirmModal()
+        notify()
       }
     },
     deleteVariableCostAction() {
       const modalStore = useModalStore()
-      const { closeOptionsMenu, closeConfirmModal } = modalStore
+      const { closeOptionsMenu, closeConfirmModal, notify } = modalStore
 
       try {
         this.selectedCost = this.variableCosts.find(
@@ -225,6 +226,7 @@ export const useReportStore = defineStore('reportStore', {
       } finally {
         closeOptionsMenu()
         closeConfirmModal()
+        notify()
       }
     },
     addBookingsPerMonthAction(bookingsPerMonth: number) {

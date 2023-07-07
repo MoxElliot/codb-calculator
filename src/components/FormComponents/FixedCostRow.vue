@@ -5,10 +5,6 @@ const modalStore = useModalStore()
 const { openEditFormModal } = modalStore
 
 defineProps({
-  costArr: {
-    type: String,
-    default: ''
-  },
   parentClass: {
     type: String,
     default: ''
@@ -52,7 +48,7 @@ defineProps({
 })
 </script>
 <template>
-  <div :class=parentClass  @click="" :name=id>
+  <div :class=parentClass :name=id>
     <div :class=cellClass1>
         <p :class=pClass> {{ costName }}</p>
     </div>
@@ -68,6 +64,5 @@ defineProps({
     <div :class=cellClass2>
         <p :class=pClass> {{ individualTotal }}</p>
     </div>
-    
   </div>
 </template>
