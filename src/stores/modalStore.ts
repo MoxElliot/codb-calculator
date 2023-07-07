@@ -39,7 +39,7 @@ export const useModalStore = defineStore('modalStore', {
         const reportStore = useReportStore()
         const { addSelectedIdAction } = reportStore
         addSelectedIdAction(id)
-
+        console.log("in OpenOptionsMenu", reportStore.selectedId)
         this.optionsMenuIsOpen = true
       } catch {
         console.error('error in openOptionsMenu')

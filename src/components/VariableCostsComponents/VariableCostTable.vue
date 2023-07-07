@@ -32,7 +32,6 @@ onUpdated(() => {
       </div>
     </div>
     <options-menu
-      class="ellipsis-modal z-20"
       v-if="optionsMenuIsOpen"
       @edit-event="
         handleEditCost(
