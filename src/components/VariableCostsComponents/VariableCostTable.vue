@@ -8,33 +8,23 @@ import VariableCostDataInput from '../VariableCostsComponents/VariableCostDataIn
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
-import handleEditCost from '../../assets/utility_functions/handleEditCost'
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
-const { openOptionsMenu, openFormModal, openConfirmModal, closeOptionsMenu, closeConfirmModal } =
-  modalStore
+const {
+  openOptionsMenu,
+  openFormModal,
+  openEditFormModal,
+  openConfirmModal,
+  closeOptionsMenu,
+} = modalStore
 
 const reportStore = useReportStore()
 const { variableCosts, selectedId } = storeToRefs(reportStore)
-const { totalCostAction, editVariableCostAction, addSelectedIdAction } = reportStore
 
 onUpdated(() => {
   scrollToNewCost(variableCosts.value[0].id)
 })
-
-let x = '540'
-let y = '100'
-// const clickLocation = (e: any, adjustX: number, adjustY:number) => {
-//   x = (e.clientX - adjustX).toString()
-//   y = (e.clientX - adjustY).toString()
-//   console.log('in testLocaion', 'x', x, 'y', y)
-// }
-
-const handleOpenOption = (cost: string, e: Event) => {
-  // clickLocation(e, 50, 500)
-  openOptionsMenu(cost)
-}
 </script>
 
 <template>
@@ -45,24 +35,10 @@ const handleOpenOption = (cost: string, e: Event) => {
       </div>
     </div>
     <options-menu
-      class="ellipsis-modal z-20"
-      :x-loc="x"
-      :y-loc="y"
       v-if="optionsMenuIsOpen"
-      @edit-event="
-        handleEditCost(
-          selectedId,
-          variableCosts,
-          addSelectedIdAction,
-          editVariableCostAction,
-          openFormModal,
-          closeOptionsMenu,
-          closeConfirmModal,
-          totalCostAction
-        )
-      "
+      @edit-event="openEditFormModal(selectedId, 'variable')"
       @delete-event="openConfirmModal(selectedId, 'variable')"
-      @menu-event="closeOptionsMenu"
+      @menu-event="closeOptionsMenu()"
     />
 
     <div class="max-h-32 md:max-h-64 w-screen sm:w-full overflow-auto">
@@ -72,21 +48,7 @@ const handleOpenOption = (cost: string, e: Event) => {
         :id="variableCost.id"
         :key="variableCost.id"
       >
-        <div
-          class="flex flex-row w-full items-end"
-          @click="
-            handleEditCost(
-              variableCost.id,
-              variableCosts,
-              addSelectedIdAction,
-              editVariableCostAction,
-              openFormModal,
-              closeOptionsMenu,
-              closeConfirmModal,
-              totalCostAction
-            )
-          "
-        >
+        <div class="flex flex-row w-full items-end" @click="openEditFormModal(variableCost.id, 'variable')">
           <div class="basis-6/18 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ variableCost.name }}</p>
           </div>
@@ -105,7 +67,7 @@ const handleOpenOption = (cost: string, e: Event) => {
         <form-button
           class="flex flex-row md:hidden basis-3/24 w-3/4 h-3/4"
           label="..."
-          @click="handleOpenOption(variableCost.id, $event)"
+          @click="openOptionsMenu(variableCost.id)"
           @click.stop=""
         />
       </div>

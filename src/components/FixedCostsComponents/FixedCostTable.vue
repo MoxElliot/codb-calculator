@@ -8,33 +8,24 @@ import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import FixedCostDataInput from './FixedCostDataInput.vue'
 import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
-import handleEditCost from '../../assets/utility_functions/handleEditCost'
-
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
-const { openOptionsMenu, openFormModal, openConfirmModal, closeOptionsMenu, closeConfirmModal } =
-  modalStore
+const {
+  openOptionsMenu,
+  openFormModal,
+  openEditFormModal,
+  openConfirmModal,
+  closeOptionsMenu,
+} = modalStore
 
 const reportStore = useReportStore()
 const { fixedCosts, selectedId } = storeToRefs(reportStore)
-const { totalCostAction, editFixedCostAction, addSelectedIdAction } = reportStore
 
 onUpdated(() => {
   scrollToNewCost(fixedCosts.value[0].id)
 })
-let x = '540'
-let y = '100'
-// const clickLocation = (e: any, adjustX: number, adjustY:number) => {
-//   x = (e.clientX - adjustX).toString()
-//   y = (e.clientX - adjustY).toString()
-//   console.log('in testLocaion', 'x', x, 'y', y)
-// }
 
-const handleOpenOption = (cost: string, e: Event) => {
-  // clickLocation(e, 50, 500)
-  openOptionsMenu(cost)
-}
 </script>
 
 <template>
@@ -45,21 +36,8 @@ const handleOpenOption = (cost: string, e: Event) => {
       </div>
     </div>
     <options-menu
-      :x-loc="x"
-      :y-loc="y"
       v-if="optionsMenuIsOpen"
-      @edit-event="
-        handleEditCost(
-          selectedId,
-          fixedCosts,
-          addSelectedIdAction,
-          editFixedCostAction,
-          openFormModal,
-          closeOptionsMenu,
-          closeConfirmModal,
-          totalCostAction
-        )
-      "
+      @edit-event="openEditFormModal(selectedId, 'fixed')"
       @delete-event="openConfirmModal(selectedId, 'fixed')"
       @menu-event="closeOptionsMenu()"
     />
@@ -72,18 +50,7 @@ const handleOpenOption = (cost: string, e: Event) => {
       >
         <div
           class="flex flex-row w-full items-end"
-          @click="
-            handleEditCost(
-              fixedCost.id,
-              fixedCosts,
-              addSelectedIdAction,
-              editFixedCostAction,
-              openFormModal,
-              closeOptionsMenu,
-              closeConfirmModal,
-              totalCostAction
-            )
-          "
+          @click="openEditFormModal(fixedCost.id, 'fixed')"
         >
           <div class="basis-6/24 pr-2 md:pr-6">
             <p class="border-b border-grey-200">{{ fixedCost.name }}</p>
@@ -109,7 +76,7 @@ const handleOpenOption = (cost: string, e: Event) => {
         <form-button
           class="flex flex-row md:hidden basis-3/24 w-3/4 h-3/4"
           label="..."
-          @click="handleOpenOption(fixedCost.id, $event)"
+          @click="openOptionsMenu(fixedCost.id)"
           @click.stop=""
         />
       </div>

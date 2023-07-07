@@ -5,10 +5,12 @@ const props = defineProps({
     default: ''
   },
   btnClass: {
-    type: String
+    type: String,
+    default: ''
   },
   btnImage: {
-    type: String
+    type: String,
+    default: ''
   }
 })
 </script>

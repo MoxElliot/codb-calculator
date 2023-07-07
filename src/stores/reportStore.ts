@@ -8,7 +8,6 @@ import testingVariableCostArr from '@/assets/testingVariableCostArr'
 import { useModalStore } from './modalStore'
 import type CostItem from '@/types/CostItem'
 
-
 export const useReportStore = defineStore('reportStore', {
   state: (): reportState => ({
     companyName: 'PhotoBomb',
@@ -36,7 +35,7 @@ export const useReportStore = defineStore('reportStore', {
       frequency: 'Monthly'
     } as CostItem,
     selectedId: '',
-    selectedName: '',
+    selectedName: ''
     // companyName: '',
     // bookingsPerMonth: 0,
     // priceAveragePerBooking: 0,
@@ -51,7 +50,17 @@ export const useReportStore = defineStore('reportStore', {
     // inputValid: false,
     // blankSubmitError: '',
     // fixedFormValid: true,
-    // variableFormValid: true
+    // variableFormValid: true,
+    // selectedCost: {
+    //   id: '',
+    //   name: '',
+    //   category: '',
+    //   amount: 0,
+    //   individualTotal: 0,
+    //   frequency: ''
+    // } as CostItem,
+    // selectedId: '',
+    // selectedName: ''
   }),
   actions: {
     addCompanyNameAction(companyName: string) {
@@ -65,14 +74,6 @@ export const useReportStore = defineStore('reportStore', {
       const totalNum: number = totalArr.reduce((a, b) => a + b, 0)
       this.totalCosts = formatMoney(totalNum)
     },
-    // totalVariableCostAction() {
-    //   let totalArr: number[] = []
-    //   Object.entries(this.variableCosts).forEach(([key, val]) => {
-    //     totalArr.push(Number(val.amount)) //Unsure why amount is a string, my data-input is typed to number
-    //   })
-    //   const totalNum: number = totalArr.reduce((a, b) => a + b, 0)
-    //   this.totalVariableCosts = formatMoney(totalNum)
-    // },
     addFixedCostAction(fixedCost: CostItem) {
       const payPeriodMultiplierElement = payPeriodOptionsArray.find(
         (ele) => ele.day === fixedCost.frequency
@@ -109,8 +110,12 @@ export const useReportStore = defineStore('reportStore', {
         this.setBlankSubmitErrorAction('Enter a value in each field')
       }
     },
-    editFixedCostAction(id: string) {
-      this.selectedCost = this.fixedCosts.find((item) => item.id === id) as CostItem
+    selectCostAction(id: string, type: string) {
+      if (type === 'fixed') {
+        this.selectedCost = this.fixedCosts.find((item) => item.id === id) as CostItem
+      } else if (type === 'variable') {
+        this.selectedCost = this.variableCosts.find((item) => item.id === id) as CostItem
+      }
     },
     editVariableCostAction(id: string) {
       this.selectedCost = this.variableCosts.find((item) => item.id === id) as CostItem
@@ -186,27 +191,40 @@ export const useReportStore = defineStore('reportStore', {
         this.setBlankSubmitErrorAction('Enter a value in each field')
       }
     },
-    deleteFixedCostAction(id: string) {
+    deleteFixedCostAction() {
+      const modalStore = useModalStore()
+      const { closeOptionsMenu, closeConfirmModal } = modalStore
+
       try {
-      this.selectedCost = this.fixedCosts.find((item) => item.id === id) as CostItem
-      const deleteIndex = this.fixedCosts.indexOf(this.selectedCost)
-      this.fixedCosts.splice(deleteIndex, 1)
-      this.totalCostAction(this.fixedCosts)
-      this.totalFixedCosts = this.totalCosts
-    }
-      catch {
+        this.selectedCost = this.fixedCosts.find((item) => item.id === this.selectedId) as CostItem
+        const deleteIndex = this.fixedCosts.indexOf(this.selectedCost)
+        this.fixedCosts.splice(deleteIndex, 1)
+        this.totalCostAction(this.fixedCosts)
+        this.totalFixedCosts = this.totalCosts
+      } catch {
         console.error('error in deleteVariableCostAction')
+      } finally {
+        closeOptionsMenu()
+        closeConfirmModal()
       }
     },
-    deleteVariableCostAction(id: string) {
+    deleteVariableCostAction() {
+      const modalStore = useModalStore()
+      const { closeOptionsMenu, closeConfirmModal } = modalStore
+
       try {
-        this.selectedCost = this.variableCosts.find((item) => item.id === id) as CostItem
+        this.selectedCost = this.variableCosts.find(
+          (item) => item.id === this.selectedId
+        ) as CostItem
         const deleteIndex = this.variableCosts.indexOf(this.selectedCost)
         this.variableCosts.splice(deleteIndex, 1)
         this.totalCostAction(this.variableCosts)
         this.totalVariableCosts = this.totalCosts
       } catch {
         console.error('error in deleteVariableCostAction')
+      } finally {
+        closeOptionsMenu()
+        closeConfirmModal()
       }
     },
     addBookingsPerMonthAction(bookingsPerMonth: number) {
