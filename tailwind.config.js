@@ -55,7 +55,7 @@ module.exports = {
         100:'100px',
       },
       padding: {
-        btn: '12px,44px,12px,44px',
+        btn: '12px, 44px, 12px, 44px',
       },
       screens: {
         xl: { max: '1440' }

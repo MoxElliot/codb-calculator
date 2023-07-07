@@ -10,6 +10,6 @@ import CodbFooter from '../CoBDComponents/CodbFooter.vue'
   >
     <codb-header class="flex" />
     <codb-form class="overflow-scroll" />
-    <codb-footer class="flex basis-full justify-center items-center" />
+    <codb-footer class="" />
   </div>
 </template>

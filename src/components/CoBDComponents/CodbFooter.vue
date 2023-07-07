@@ -10,10 +10,13 @@ const { backStepAction, nextStepAction } = stepStore
 </script>
 <template>
   <div
-    :class="stepCurrent === '/' ? 'flex h-full basis-2/3 justify-center items-center z-30' : 'flex h-full basis-2/3 justify-end items-center z-30'"
+    :class="stepCurrent === '/' ? 'flex h-full basis-2/3 justify-center items-center z-30' : 'flex h-full basis-2/3 justify-center items-center z-30'"
     v-if="stepCurrent !== '/final-report-step' && stepCurrent !== '/user-email-step'"
   >
-    <div class="flex items-center">
+    <div 
+    :class="stepCurrent === '/' ? 'flex items-center justify-center basis-3/4 ' : 'flex items-center justify-end basis-3/4 '"
+    >
+      
       <form-button
         label="Back"
         @click="backStepAction()"
