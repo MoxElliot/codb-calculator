@@ -95,8 +95,8 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
     <fieldset
       :class="
         !formModalIsOpen
-          ? 'flex flex-row h-10 md:h-16 mt-4 md:mt-8 w-screen sm:w-full'
-          : 'flex flex-col basis-full justify-around items-center text-center'
+          ? 'flex flex-row h-10 md:h-16 mt-4 md:mt-8 w-screen sm:w-full text-bodyTable text-grey-300 font-sans'
+          : 'flex flex-col basis-full justify-around items-center text-center text-bodyTable text-grey-300 font-sans'
       "
     >
       <data-input
@@ -110,11 +110,12 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
       />
       <data-select
         v-model="fixedCostCategory"
-        placeholder="Category"
+        label="Category"
         name="category"
         :optionArray="costCategoryOptions"
-        :parentClass="!formModalIsOpen ? 'basis-6/24 pr-2 md:pr-6' : ''"
-        class="text-center border-b border-grey-200 bg-primary-white w-full"
+        :parentClass="!formModalIsOpen ? 'relative basis-6/24 pr-2 md:pr-6' : 'relative'"
+        class="flex text-center border-b border-grey-200 w-full"
+        labelClass="text-center "
         :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
@@ -129,11 +130,11 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
       />
       <data-select
         v-model="fixedCostFrequency"
-        placeholder="Frequency"
+        label="Frequency"
         name="frequency"
         :optionArray="costPeriodOptions"
-        :parentClass="!formModalIsOpen ? 'basis-6/24 pr-2 md:pr-6' : ''"
-        class="text-center border-b border-grey-200 bg-primary-white w-full"
+        :parentClass="!formModalIsOpen ? 'relative basis-6/24 pr-2 md:pr-6' : 'relative'"
+        class="flex text-center border-b border-grey-200 bg-primary-white w-full"
         :class="{ 'border-error': frequencyError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
