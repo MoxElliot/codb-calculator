@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import firstLetterUpperCase from '../../assets/utility_functions/firstLetterUpperCase'
+import payPeriodOptionsArray from '@/assets/payPeriodOptionsArray'
 const props = defineProps({
   label: {
     type: String,
@@ -46,17 +47,17 @@ const $emit = defineEmits<{
 }>()
 
 let show = ref(false)
-let shownValue = ''
+
 const isOpen = () => (show.value = !show.value)
 const isSelected = (name: string) => {
   isOpen()
-  shownValue = name
-  console.log('in isSelected', shownValue)
+  console.log('in isSelected', )
 }
 
 const handleInputChange = (e: any) => {
   (e.target as HTMLInputElement).value
-  open()
+  isOpen()
+  console.log("in handleInputChange", e.target.value)
   return e.target.value
 }
 
@@ -88,20 +89,21 @@ const selectArr = ['thing 1', 'src/images/CostCategoryImages/client-managment-ca
   <div>
     <div :class="parentClass">
       <button
-        @click="isOpen"
+        @click="$emit('update:modelValue', handleInputChange($event))"
         :class="class"
+        v-bind="$attrs"
         :value="modelValue"
-        @input="$emit('update:modelValue', handleInputChange($event))"
+      
       >
         <label
           :for="label"
           :class="
-            shownValue === ''
+            modelValue === ''
               ? ' text-grey-100 text-bodyTable font-sans' + labelClass
               : ' text-bodyTable text-grey-300 font-sans ' + labelClass
           "
         >
-          {{ shownValue === '' ? label : shownValue }}
+          {{ modelValue === '' ? label : modelValue }}
         </label>
         <svg
           class="w-5 h-5"
@@ -118,9 +120,9 @@ const selectArr = ['thing 1', 'src/images/CostCategoryImages/client-managment-ca
       </button>
 
       <div v-show="show" class="absolute right-0 bg-primary-white rounded-md shadow-xl w-44">
-        <a href="#" class="flex px-2 py-2" :value="selectArr[0]" @click="isSelected(selectArr[0])">
+        <a v-for="option in optionArray" href="#" class="flex px-2 py-2" :value="option" @click="isSelected(option)">
           <img :src="selectArr[1]" class="px-2" />
-          {{ selectArr[0] }}
+          {{ option }}
         </a>
       </div>
     </div>

@@ -115,7 +115,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
         :optionArray="costCategoryOptions"
         :parentClass="!formModalIsOpen ? 'relative basis-6/24 pr-2 md:pr-6' : 'relative'"
         class="flex text-center border-b border-grey-200 w-full"
-        labelClass="text-center "
+        labelClass="text-center"
         :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
