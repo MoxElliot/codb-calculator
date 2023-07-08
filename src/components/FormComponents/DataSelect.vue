@@ -16,7 +16,7 @@ const props = defineProps({
     default: ''
   },
   optionArray: {
-    type: Array<string>,
+    type: Array,
     default: []
   },
   class: {
@@ -39,6 +39,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  selected: {
+    type: String,
+    default: null
+  },
   value: null
 })
 
@@ -46,22 +50,15 @@ const $emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
 }>()
 
-let show = ref(false)
-
-const isOpen = () => (show.value = !show.value)
-const isSelected = (name: string) => {
-  isOpen()
-  console.log('in isSelected', )
+const test = () => {
+  console.log('hello')
 }
 
 const handleInputChange = (e: any) => {
-  (e.target as HTMLInputElement).value
-  isOpen()
-  console.log("in handleInputChange", e.target.value)
+  ;(e.target as HTMLInputElement).value
+  console.log('in handleInputChange', e.target.value)
   return e.target.value
 }
-
-const selectArr = ['thing 1', 'src/images/CostCategoryImages/client-managment-category.svg']
 </script>
 
 <!-- <template>
@@ -86,45 +83,17 @@ const selectArr = ['thing 1', 'src/images/CostCategoryImages/client-managment-ca
 </template> -->
 
 <template>
-  <div>
-    <div :class="parentClass">
-      <button
-        @click="$emit('update:modelValue', handleInputChange($event))"
-        :class="class"
+  <div :class="parentClass">
+    <form>
+      <v-select
+        :options="optionArray"
+        label="category"
         v-bind="$attrs"
+        :class="class"
         :value="modelValue"
-      
+        @input="$emit('update:modelValue', handleInputChange($event))"
       >
-        <label
-          :for="label"
-          :class="
-            modelValue === ''
-              ? ' text-grey-100 text-bodyTable font-sans' + labelClass
-              : ' text-bodyTable text-grey-300 font-sans ' + labelClass
-          "
-        >
-          {{ modelValue === '' ? label : modelValue }}
-        </label>
-        <svg
-          class="w-5 h-5"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-            clip-rule="evenodd"
-          />
-        </svg>
-      </button>
-
-      <div v-show="show" class="absolute right-0 bg-primary-white rounded-md shadow-xl w-44">
-        <a v-for="option in optionArray" href="#" class="flex px-2 py-2" :value="option" @click="isSelected(option)">
-          <img :src="selectArr[1]" class="px-2" />
-          {{ option }}
-        </a>
-      </div>
-    </div>
+      </v-select>
+    </form>
   </div>
 </template>
