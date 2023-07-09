@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const props = defineProps({
   selectedOption: {
     type: String,
@@ -17,7 +16,9 @@ const props = defineProps({
     type: String,
     default: null
   },
-  value: null
+  parentClass: {
+    type:String,
+  }
 })
 
 const $emit = defineEmits<{
@@ -33,16 +34,18 @@ const handleInputChange = (e: any) => {
 </script>
 
 <template>
-  <v-select
-    :value="selected"
-    :options="optionArray"
-    class="new-styles"
-    :reduce="(category: any) => category.category"
-    placeholder="Frequency"
-    @input="$emit('option:selected', handleInputChange($event))"
-  >
-    <template #option="option">
-      <span><img :src="option.image" />{{ option.category }}</span>
-    </template>
-  </v-select>
+  <!-- <div :class="parentClass"> -->
+    <v-select
+      :value="selected"
+      :options="optionArray"
+      class="new-styles"
+      :reduce="(category: any) => category.category"
+      placeholder="Frequency"
+      @input="$emit('option:selected', handleInputChange($event))"
+    >
+      <template #option="option">
+        <span class="flex flex-row h-8"><img :src="option.image" class="pr-2"/>{{ option.category }}</span>
+      </template>
+    </v-select>
+  <!-- </div> -->
 </template>

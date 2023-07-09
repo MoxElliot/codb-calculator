@@ -35,14 +35,22 @@
     @apply border rounded-main text-grey-300 font-sans uppercase text-btn p-btn m-2 md:m-4 gap-2.5 w-32 h-48;
   }
   .options-menu {
-    @apply rounded-lg border border-grey-400 drop-shadow-md
+    @apply rounded-lg border border-grey-400 drop-shadow-md;
   }
- .new-styles .vs__search,
-.vs__search:focus {
+  .new-styles .vs__dropdown-toggle {
+    @apply w-full border-b border-grey-200 border-r-0 border-l-0 border-t-0
+  }
 
- @apply w-[100px]
+  .new-styles .vs__search::placeholder  {
+    @apply text-center text-bodyTable text-grey-100 font-sans h-10 md:h-16;
+  }
 
-}
+  .new-styles .vs__clear {
+    @apply hidden 
+   }
+   .new-styles .vs__selected {
+    @apply text-center text-bodyTable text-grey-300 font-sans
+   }
 }
 
 @layer utilities {

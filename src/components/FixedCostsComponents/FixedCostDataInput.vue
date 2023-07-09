@@ -96,15 +96,15 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
       :class="
         !formModalIsOpen
           ? 'flex flex-row h-10 md:h-16 mt-4 md:mt-8 w-screen sm:w-full text-bodyTable text-grey-300 font-sans'
-          : 'flex flex-col basis-full justify-around items-center text-center text-bodyTable text-grey-300 font-sans'
+          : 'flex flex-col basis-full text-bodyTable text-grey-300 font-sans'
       "
     >
       <data-input
         v-model="fixedCostName"
         placeholder="Name of the cost"
         name="name"
-        :parentClass="!formModalIsOpen ? 'pr-2 md:pr-6' : ''"
-        class="text-center border-b border-grey-200 basis-6/24"
+        :parentClass="!formModalIsOpen ? 'pr-2 md:pr-6 basis-6/24' : ''"
+        class="text-center border-b border-grey-200 w-full h-full"
         :class="{ 'border-error': nameError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
@@ -113,7 +113,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
         label="category"
         name="frequency"
         :options="costCategoryOptions"
-        class="flex text-center border-b border-grey-200 bg-primary-white basis-6/24 "
+        class="basis-6/24 pr-2 md:pr-6 flex bg-primary-white"
         :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
@@ -121,8 +121,8 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
         v-model="fixedCostAmount"
         placeholder="Amount"
         name="amount"
-        :parentClass="!formModalIsOpen ? ' pr-2 md:pr-6' : ''"
-        class="text-center border-b border-grey-200 basis-3/24 "
+        :parentClass="!formModalIsOpen ? 'basis-3/24 pr-2 md:pr-6' : ''"
+        class="text-center border-b border-grey-200 w-full h-full"
         :class="{ 'border-error': amountError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
@@ -131,11 +131,11 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
         label="category"
         name="frequency"
         :options="costPeriodOptions"
-        class="flex text-center border-b border-grey-200 bg-primary-white basis-6/24"
-        :class="{ 'border-error': categoryError && blankSubmitError }"
+        class="basis-6/24 pr-2 md:pr-6 flex  bg-primary-white"
+        :class="{ 'border-error': frequencyError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
-      <div :parentClass="!formModalIsOpen ? 'basis-6/24 pr-2 md:pr-6' : ''"></div>
+      <div :class="!formModalIsOpen ? 'basis-6/24 pr-4 md:pr-6' : ''"></div>
     </fieldset>
     <div class="flex flex-col justify-between sm:h-[100px]">
       <span class="error-text text-center" v-if="!fixedFormValid">{{ blankSubmitError }}</span>

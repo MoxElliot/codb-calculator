@@ -16,7 +16,7 @@ const costCategoryOptions: {
     image: 'src/images/CostCategoryImages/client-managment-category.svg'
   },
   {
-    category: 'Client Management (CRM)',
+    category: 'Client Management',
     image: 'src/images/CostCategoryImages/client-managment-category.svg'
   },
   { category: 'Studio Rent', image: 'src/images/CostCategoryImages/client-managment-category.svg' },
