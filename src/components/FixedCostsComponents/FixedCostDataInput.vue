@@ -108,18 +108,16 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
         :class="{ 'border-error': nameError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
-      <!-- <data-select
-        v-model="fixedCostCategory"
-        label="Category"
-        name="category"
-        :optionArray="costCategoryOptions"
-        :parentClass="!formModalIsOpen ? 'relative basis-6/24 pr-2 md:pr-6' : 'relative'"
-        class="flex text-center border-b border-grey-200 w-full"
-        labelClass="text-center"
+      <data-select
+      v-model="fixedCostCategory"
+        label="category"
+        name="frequency"
+        :options="costCategoryOptions"
+        class="flex text-center border-b border-grey-200 bg-primary-white w-full"
         :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
-      /> -->
-      <v-select
+      />
+      <!-- <v-select
         v-model="fixedCostCategory"
         :options="costCategoryOptions"
         :reduce="(category: any) => category.category"
@@ -131,7 +129,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
         <template #option="option">
           <span><img :src="option.image" />{{ option.category }}</span>
         </template>
-      </v-select>
+      </v-select> -->
       <data-input
         v-model="fixedCostAmount"
         placeholder="Amount"
@@ -145,6 +143,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
         v-model="fixedCostFrequency"
         label="category"
         name="frequency"
+        spanClass="w-96"
         :options="costPeriodOptions"
         class="flex text-center border-b border-grey-200 bg-primary-white w-full"
         :class="{ 'border-error': categoryError && blankSubmitError }"

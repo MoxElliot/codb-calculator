@@ -23,10 +23,10 @@ const props = defineProps({
     type: Array,
     default: []
   },
-  // class: {
-  //   type: String,
-  //   default: ''
-  // },
+  spanClass: {
+    type: String,
+    default: ''
+  },
   // parentClass: {
   //   type: String,
   //   default: ''
@@ -35,10 +35,10 @@ const props = defineProps({
   //   type: String,
   //   default: ''
   // },
-  // placeholder: {
-  //   type: String,
-  //   default: ''
-  // },
+  placeholder: {
+    type: String,
+    default: ''
+  },
   // placeholderClass: {
   //   type: String,
   //   default: ''
@@ -51,7 +51,8 @@ const props = defineProps({
 })
 
 const $emit = defineEmits<{
-  e:'option:selected', selectedOption:string
+  e: 'option:selected'
+  selectedOption: string
 }>()
 
 // const $emit = defineEmits<{
@@ -59,7 +60,7 @@ const $emit = defineEmits<{
 // }>()
 
 const handleInputChange = (e: any) => {
-  (e.target as HTMLInputElement).value
+  ;(e.target as HTMLInputElement).value
   console.log('in handleInputChange', e.target.value)
   return e.target.value
 }
@@ -87,16 +88,22 @@ const handleInputChange = (e: any) => {
 </template> -->
 
 <template>
-       <v-select
-        :value="selected"
-        :options="optionArray"
-        :reduce="(category: any) => category.category"
-        label="category"
-        
-        @input="$emit('option:selected', handleInputChange($event))"
-      >
-        <template #option="option">
-          <span><img :src="option.image" />{{ option.category }}</span>
-        </template>
-      </v-select>
+  <v-select
+    :value="selected"
+    :options="optionArray"
+    class="new-styles"
+    :reduce="(category: any) => category.category"
+    placeholder="Frequency"
+    @input="$emit('option:selected', handleInputChange($event))"
+  >
+    <template #option="option">
+      <span><img :src="option.image" />{{ option.category }}</span>
+    </template>
+  </v-select>
 </template>
+
+<!-- <style>
+.v-select.vs__search .v-select.vs__search:focus {
+  width: 100px
+}
+</style> -->

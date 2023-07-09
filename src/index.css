@@ -37,6 +37,12 @@
   .options-menu {
     @apply rounded-lg border border-grey-400 drop-shadow-md
   }
+ .new-styles .vs__search,
+.vs__search:focus {
+
+ @apply w-96
+
+}
 }
 
 @layer utilities {
