@@ -40,7 +40,7 @@
  .new-styles .vs__search,
 .vs__search:focus {
 
- @apply w-96
+ @apply w-[100px]
 
 }
 }
