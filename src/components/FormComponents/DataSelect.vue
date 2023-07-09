@@ -15,7 +15,7 @@ const props = defineProps({
   //   type: String,
   //   default: ''
   // },
-  selected: {
+  selectedOption: {
     type: String,
     default: ''
   },
@@ -23,14 +23,14 @@ const props = defineProps({
     type: Array,
     default: []
   },
-  class: {
-    type: String,
-    default: ''
-  },
-  parentClass: {
-    type: String,
-    default: ''
-  },
+  // class: {
+  //   type: String,
+  //   default: ''
+  // },
+  // parentClass: {
+  //   type: String,
+  //   default: ''
+  // },
   // labelClass: {
   //   type: String,
   //   default: ''
@@ -87,17 +87,16 @@ const handleInputChange = (e: any) => {
 </template> -->
 
 <template>
-  <div :class="parentClass">
-    <v-select
-      v-bind="$attrs"
-      :value="selected"
-      :reduce="(category: any) => category.category"
-      :class="class"
-      @input="$emit('option:selected', handleInputChange($event))"
-    >
-      <template #option="option">
-        <span ><img :src="option.image" />{{ option.category }}</span>
-      </template>
-    </v-select>
-  </div>
+       <v-select
+        :value="selected"
+        :options="optionArray"
+        :reduce="(category: any) => category.category"
+        label="category"
+        
+        @input="$emit('option:selected', handleInputChange($event))"
+      >
+        <template #option="option">
+          <span><img :src="option.image" />{{ option.category }}</span>
+        </template>
+      </v-select>
 </template>

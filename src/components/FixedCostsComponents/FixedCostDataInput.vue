@@ -143,12 +143,11 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
       />
       <data-select
         v-model="fixedCostFrequency"
-        label="Frequency"
+        label="category"
         name="frequency"
         :options="costPeriodOptions"
-        :parentClass="!formModalIsOpen ? 'relative basis-6/24 pr-2 md:pr-6' : 'relative'"
         class="flex text-center border-b border-grey-200 bg-primary-white w-full"
-        :class="{ 'border-error': frequencyError && blankSubmitError }"
+        :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
       <!-- <v-select
