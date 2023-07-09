@@ -23,7 +23,7 @@ const props = defineProps<{
   id?: string
   name?: string
   category?: string
-  amount?: number | null
+  amount?: number 
 }>()
 
 const schema = Yup.object({
@@ -79,10 +79,10 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
     "
   >
     <fieldset
-      :class="
+    :class="
         !formModalIsOpen
-          ? 'flex flex-row h-10 md:h-16 mt-4 md:mt-8 w-screen sm:w-full'
-          : 'flex flex-col basis-full justify-around items-center text-center'
+          ? 'flex flex-row h-10 md:h-16 mt-4 md:mt-8 w-screen sm:w-full text-bodyTable text-grey-300 font-sans'
+          : 'flex flex-col basis-full text-bodyTable text-grey-300 font-sans'
       "
     >
       <data-input
@@ -96,11 +96,10 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
       />
       <data-select
         v-model="variableCostCategory"
-        placeholder="Category"
-        name="category"
-        :optionArray="costCategoryOptions"
-        :parentClass="!formModalIsOpen ? 'basis-6/18 pr-2 md:pr-6' : ''"
-        class="text-center border-b border-grey-200 bg-primary-white w-full"
+        label="category"
+        name="frequency"
+        :options="costCategoryOptions"
+        class="basis-6/18 pr-2 md:pr-6 flex bg-primary-white"
         :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setVariableFormValidAction(true)"
       />
@@ -114,6 +113,7 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
         :class="{ 'border-error': amountError && blankSubmitError }"
         @input="setVariableFormValidAction(true)"
       />
+      <div :class="!formModalIsOpen ? 'basis-3/18 pr-4 md:pr-6' : ''"></div>
     </fieldset>
     <div class="flex flex-col justify-between sm:h-[100px]">
       <span class="error-text" v-if="!variableFormValid">{{ blankSubmitError }}</span>
