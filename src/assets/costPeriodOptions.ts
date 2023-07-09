@@ -1,18 +1,27 @@
 const costFrequencyOptions: {
-    category: string;
-    image: string;
-}[] = [{
-    category: 'weekly',
+  category: string
+  image: string
+}[] = [
+  {
+    category: 'Weekly',
     image: 'src/images/CostCategoryImages/client-managment-category.svg'
-  },{
-    category: 'bi-monthly',
+  },
+  {
+    category: 'Bi-monthly',
     image: 'src/images/CostCategoryImages/client-managment-category.svg'
-  },{
-    category: 'monthly',
+  },
+  {
+    category: 'Monthly',
     image: 'src/images/CostCategoryImages/client-managment-category.svg'
-  },{
-    category: 'yearly',
+  },
+  {
+    category: 'Yearly',
     image: 'src/images/CostCategoryImages/client-managment-category.svg'
-  }]
+  }
+]
+
+// const costFrequencyOptions: string[] = [
+//  'Weekly','Bi-monthly','Monthly','Yearly',
+// ]
 
 export default costFrequencyOptions

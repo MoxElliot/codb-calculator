@@ -108,7 +108,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
         :class="{ 'border-error': nameError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
       />
-      <data-select
+      <!-- <data-select
         v-model="fixedCostCategory"
         label="Category"
         name="category"
@@ -118,7 +118,20 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
         labelClass="text-center"
         :class="{ 'border-error': categoryError && blankSubmitError }"
         @input="setFixedFormValidAction(true)"
-      />
+      /> -->
+      <v-select
+        v-model="fixedCostCategory"
+        :options="costCategoryOptions"
+        :reduce="(category: any) => category.category"
+        label="category"
+        class="flex text-center border-b border-grey-200 bg-primary-white w-full"
+        :class="{ 'border-error': categoryError && blankSubmitError }"
+        @input="setFixedFormValidAction(true)"
+      >
+        <template #option="option">
+          <span><img :src="option.image" />{{ option.category }}</span>
+        </template>
+      </v-select>
       <data-input
         v-model="fixedCostAmount"
         placeholder="Amount"
@@ -141,7 +154,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
       <v-select
         v-model="fixedCostFrequency"
         :options="costPeriodOptions"
-        :value="costPeriodOptions[0].category"
+        :reduce="(category: any) => category.category"
         label="category"
         class="flex text-center border-b border-grey-200 bg-primary-white w-full"
         :class="{ 'border-error': frequencyError && blankSubmitError }"
