@@ -3,15 +3,19 @@ import { ref } from 'vue'
 import firstLetterUpperCase from '../../assets/utility_functions/firstLetterUpperCase'
 import payPeriodOptionsArray from '@/assets/payPeriodOptionsArray'
 const props = defineProps({
-  label: {
-    type: String,
-    default: ''
-  },
-  id: {
-    type: String,
-    default: ''
-  },
-  modelValue: {
+  // label: {
+  //   type: String,
+  //   default: ''
+  // },
+  // id: {
+  //   type: String,
+  //   default: ''
+  // },
+  // modelValue: {
+  //   type: String,
+  //   default: ''
+  // },
+  selected: {
     type: String,
     default: ''
   },
@@ -27,18 +31,18 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  labelClass: {
-    type: String,
-    default: ''
-  },
-  placeholder: {
-    type: String,
-    default: ''
-  },
-  placeholderClass: {
-    type: String,
-    default: ''
-  },
+  // labelClass: {
+  //   type: String,
+  //   default: ''
+  // },
+  // placeholder: {
+  //   type: String,
+  //   default: ''
+  // },
+  // placeholderClass: {
+  //   type: String,
+  //   default: ''
+  // },
   selected: {
     type: String,
     default: null
@@ -47,15 +51,15 @@ const props = defineProps({
 })
 
 const $emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void
+  e:'option:selected', selectedOption:string
 }>()
 
-const test = () => {
-  console.log('hello')
-}
+// const $emit = defineEmits<{
+//   (e: 'update:modelValue', value: string): void
+// }>()
 
 const handleInputChange = (e: any) => {
-  ;(e.target as HTMLInputElement).value
+  (e.target as HTMLInputElement).value
   console.log('in handleInputChange', e.target.value)
   return e.target.value
 }
@@ -84,16 +88,16 @@ const handleInputChange = (e: any) => {
 
 <template>
   <div :class="parentClass">
-    <form>
-      <v-select
-        :options="optionArray"
-        label="category"
-        v-bind="$attrs"
-        :class="class"
-        :value="modelValue"
-        @input="$emit('update:modelValue', handleInputChange($event))"
-      >
-      </v-select>
-    </form>
+    <v-select
+      v-bind="$attrs"
+      :value="selected"
+      :reduce="(category: any) => category.category"
+      :class="class"
+      @input="$emit('option:selected', handleInputChange($event))"
+    >
+      <template #option="option">
+        <span ><img :src="option.image" />{{ option.category }}</span>
+      </template>
+    </v-select>
   </div>
 </template>
