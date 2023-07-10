@@ -41,15 +41,17 @@
     @apply w-full border-b border-grey-200 border-r-0 border-l-0 border-t-0
   }
 
+  /* .new-styles .vs__search  {
+    @apply hidden;
+  } */
   .new-styles .vs__search::placeholder  {
     @apply text-center text-bodyTable text-grey-100 font-sans h-10 md:h-16;
   }
-
   .new-styles .vs__clear {
     @apply hidden 
    }
    .new-styles .vs__selected {
-    @apply text-center text-bodyTable text-grey-300 font-sans
+    @apply text-center text-bodyTable text-grey-300 font-sans basis-full justify-center ml-4 h-full
    }
 }
 
