@@ -81,7 +81,7 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
     <fieldset
     :class="
         !formModalIsOpen
-          ? 'flex flex-row h-10 md:h-16 mt-4 md:mt-8 w-screen sm:w-full text-bodyTable text-grey-300 font-sans'
+          ? 'relative h-10 md:h-16 flex flex-row w-full text-bodyTable text-grey-300 font-sans'
           : 'flex flex-col basis-full text-bodyTable text-grey-300 font-sans'
       "
     >
@@ -90,7 +90,7 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
         placeholder="Name of the cost"
         name="name"
         :parentClass="!formModalIsOpen ? 'basis-6/18 pr-2 md:pr-6' : ''"
-        class="text-center border-b border-grey-200"
+        class="text-center border-b border-grey-200 w-full h-full"
         :class="{ 'border-error': nameError && blankSubmitError }"
         @input="setVariableFormValidAction(true)"
       />
@@ -108,8 +108,8 @@ const { value: variableCostAmount, errorMessage: amountError } = useField('amoun
         placeholder="$ Amount"
         type="number"
         name="amount"
-        :parentClass="!formModalIsOpen ? 'basis-3/18 pr-2 md:pr-6' : ''"
-        class="text-center border-b border-grey-200"
+        :parentClass="!formModalIsOpen ? 'basis-6/18 pr-2 md:pr-6' : ''"
+        class="text-center border-b border-grey-200 w-full h-full"
         :class="{ 'border-error': amountError && blankSubmitError }"
         @input="setVariableFormValidAction(true)"
       />

@@ -55,7 +55,7 @@ onUpdated(() => {
           @menu-event="closeOptionsMenu()"
         />
         <form-button
-          class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
+          class="md:flex md:flex-row hidden basis-3/18 h-full pt-6"
           btnImage="/src/images/delete-cost.svg"
           @click="openConfirmModal(variableCost.id, 'variable')"
         />
