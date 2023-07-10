@@ -21,6 +21,7 @@ interface reportState {
   selectedCost: CostItem
   selectedId: string
   selectedName:string
+  replaceIndex: number
 }
 
 export default reportState

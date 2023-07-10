@@ -9,10 +9,11 @@ const props = defineProps({
     default: ''
   },
   modelValue: {  
-  },
-  ref: {
     type: [String, Number]
   },
+  // ref: {
+  //   type: [String, Number]
+  // },
   labelAfter: {
     type: String,
     default: ''
@@ -52,7 +53,7 @@ const handleInputChange = (e: any) => {
       v-bind="$attrs"
       :value="modelValue"
       :placeholder="placeholder"
-      @input="$emit('update:modelValue', handleInputChange($event), ref)"
+      @input="$emit('update:modelValue', handleInputChange($event))"
     />
     <!-- <label :for="labelAfter">
       {{ labelAfter }}
