@@ -33,7 +33,7 @@ onUpdated(() => {
 
     <div class="max-h-32 md:max-h-64 w-screen sm:w-full overflow-auto">
       <div
-        class="relative h-10 md:h-16 flex flex-row w-full"
+        class="relative h-10 md:h-16 flex flex-row w-full text-bodyTable text-grey-300 font-sans"
         v-for="variableCost in variableCosts"
         :id="variableCost.id"
         :key="variableCost.id"
@@ -55,7 +55,7 @@ onUpdated(() => {
           @menu-event="closeOptionsMenu()"
         />
         <form-button
-          class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
+          class="md:flex md:flex-row hidden basis-3/18 h-full pt-6"
           btnImage="/src/images/delete-cost.svg"
           @click="openConfirmModal(variableCost.id, 'variable')"
         />

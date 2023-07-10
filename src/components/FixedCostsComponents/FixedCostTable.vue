@@ -33,7 +33,7 @@ onUpdated(() => {
 
     <div class="max-h-32 sm:max-h-64 w-screen sm:w-full overflow-auto">
       <div
-        class="relative h-10 md:h-16 flex flex-row w-full"
+        class="relative h-10 md:h-16 flex flex-row w-full text-bodyTable text-grey-300 font-sans"
         v-for="fixedCost in fixedCosts"
         :id="fixedCost.id"
         :key="fixedCost.id"

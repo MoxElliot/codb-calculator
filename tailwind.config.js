@@ -209,8 +209,16 @@ module.exports = {
       body3: [
         '28px',
         {
-          lineHeight: '32px',
+          lineHeight: '26px',
           letterSpacing: '-0.02em',
+          fontWeight: '400'
+        }
+      ],
+      bodyTable: [
+        '16px',
+        {
+          lineHeight: '32px',
+          letterSpacing: '0em',
           fontWeight: '400'
         }
       ],
