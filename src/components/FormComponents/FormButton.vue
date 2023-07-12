@@ -9,20 +9,21 @@ const props = defineProps({
     default: ''
   },
   btnImage: {
+    default:'' as any
   }
 })
 
-let currentIcon = 'CurrentIcon' as any
+let currentIcon = '' as any
 
 const changeIcon = (icon: any) => {
-  return currentIcon = icon
+  currentIcon = icon
 }
 
 </script>
 
 <template>
-  <button :class="btnClass" @="changeIcon(btnImage)">
-    <current-icon />
+  <button :class="btnClass" :=changeIcon(btnImage)>
+    <current-icon v-if="currentIcon != ''"/>
     {{ label }}
   </button>
 </template>

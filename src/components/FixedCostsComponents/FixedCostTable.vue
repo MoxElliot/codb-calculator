@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import { onUpdated } from 'vue'
 import fixedCostHeadingArray from '../../assets/fixedCostHeadings'
 import FormButton from '../FormComponents/FormButton.vue'
+import DeleteCost from '../Icons/DeleteCost.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import FixedCostDataInput from './FixedCostDataInput.vue'
 import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
@@ -63,7 +64,7 @@ onUpdated(() => {
         />
         <form-button
           class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
-          btnImage="/src/images/delete-cost.svg"
+          :btnImage="DeleteCost"
           @click="openConfirmModal(fixedCost.id, 'fixed')"
         />
         <form-button

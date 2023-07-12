@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import { onUpdated } from 'vue'
 import variableCostHeadingArray from '@/assets/variableCostHeadings'
 import FormButton from '../FormComponents/FormButton.vue'
+import DeleteCost from '../Icons/DeleteCost.vue'
 import VariableCostDataInput from '../VariableCostsComponents/VariableCostDataInput.vue'
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
@@ -61,7 +62,7 @@ onUpdated(() => {
         />
         <form-button
           class="md:flex md:flex-row hidden basis-3/18 h-full pt-6"
-          btnImage="/src/images/delete-cost.svg"
+          :btnImage="DeleteCost"
           @click="openConfirmModal(variableCost.id, 'variable')"
         />
         <form-button
@@ -80,6 +81,7 @@ onUpdated(() => {
     <form-button
       label="+ Add Variable Cost"
       type="submit"
+      :btn-image="''"
       class="btn-add font-bold"
       @click="openFormModal('add')"
     />

@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import FormButton from '../FormComponents/FormButton.vue'
+import EditCost from '../Icons/EditCost.vue'
+import DeleteCost from '../Icons/DeleteCost.vue'
+
 defineEmits(['menu-event', 'edit-event', 'delete-event'])
 </script>
 
@@ -15,13 +18,13 @@ defineEmits(['menu-event', 'edit-event', 'delete-event'])
       <form-button
         class="flex flex-row p-2"
         label="Edit"
-        btnImage="src/images/edit-cost.svg"
+        :btnImage="EditCost"
         @click="$emit('edit-event')"
       />
       <form-button
         class="flex flex-row p-2"
         label="Delete"
-        btnImage="/src/images/delete-cost.svg"
+        :btnImage="DeleteCost"
         @click="$emit('delete-event')"
       />
     </section>
