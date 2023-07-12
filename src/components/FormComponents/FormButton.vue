@@ -9,12 +9,20 @@ const props = defineProps({
     default: ''
   },
   btnImage: {
-    type: String,
-    default: ''
   }
 })
+
+let currentIcon = 'CurrentIcon' as any
+
+const changeIcon = (icon: any) => {
+  return currentIcon = icon
+}
+
 </script>
 
 <template>
-  <button :class="btnClass"><img :src="btnImage"/>{{ label }}</button>
+  <button :class="btnClass" @="changeIcon(btnImage)">
+    <current-icon />
+    {{ label }}
+  </button>
 </template>

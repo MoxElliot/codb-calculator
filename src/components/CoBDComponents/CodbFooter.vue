@@ -2,6 +2,8 @@
 import { useStepStore } from '../../stores/stepStore'
 import { storeToRefs } from 'pinia'
 import FormButton from '../FormComponents/FormButton.vue'
+import BtnArrowLeft from '../Icons/BtnArrowLeft.vue'
+import BtnArrowRight from '../Icons/BtnArrowRight.vue'
 
 const stepStore = useStepStore()
 const { stepCurrent } = storeToRefs(stepStore)
@@ -21,14 +23,14 @@ const { backStepAction, nextStepAction } = stepStore
         label="Back"
         @click="backStepAction()"
         btnClass="btn-back md:mb-2 flex justify-center items-center"
-        btnImage="/src/images/btn-arrow-left.svg"
+        :btnImage="BtnArrowLeft"
         v-if="stepCurrent !== '/' && stepCurrent !== '/company-name-step'"
       />
       <form-button
         :label="stepCurrent === '/' ? 'Let\'s Go!' : 'Next'"
         @click="nextStepAction()"
         btnClass="btn-next md:mb-2 flex flex-row-reverse justify-center items-center"
-        btnImage="/src/images/btn-arrow-right.svg"
+        :btnImage="BtnArrowRight"
         type="submit"
       />
     </div>
