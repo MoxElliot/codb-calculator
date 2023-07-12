@@ -30,6 +30,7 @@ const props = defineProps<{
   individualTotal?: number
 }>()
 
+
 const schema = Yup.object({
   name: Yup.string().required(' '),
   category: Yup.string().required(' '),
@@ -44,14 +45,17 @@ const { resetForm, meta } = useForm({
 
 const { value: fixedCostName, errorMessage: nameError } = useField('name', undefined, {
   initialValue: props.name
+  // initialValue:'hi'
 })
 
 const { value: fixedCostCategory, errorMessage: categoryError } = useField('category', undefined, {
   initialValue: props.category
+  // initialValue: 'Other'
 })
 
 const { value: fixedCostAmount, errorMessage: amountError } = useField('amount', undefined, {
   initialValue: props.amount
+  // initialValue: 10
 })
 
 const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
@@ -59,6 +63,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
   undefined,
   {
     initialValue: props.frequency
+    // initialValue: 'Weekly'
   }
 )
 </script>
@@ -83,7 +88,7 @@ const { value: fixedCostFrequency, errorMessage: frequencyError } = useField(
             totalFixedCosts
           )
         : handleAddCost(meta.valid, setFixedFormValidAction, resetForm, addFixedCostAction, {
-            id: uniqueId().toString(),
+            id: uniqueId('fixedCost_').toString(),
             name: fixedCostName,
             category: fixedCostCategory,
             amount: fixedCostAmount,

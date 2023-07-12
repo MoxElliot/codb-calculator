@@ -8,7 +8,7 @@ import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import FixedCostDataInput from './FixedCostDataInput.vue'
 import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
-import FixedCostRow from '../FormComponents/FixedCostRow.vue'
+import FixedCostRow from './FixedCostRow.vue'
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
@@ -16,10 +16,14 @@ const { openOptionsMenu, openFormModal, openEditFormModal, openConfirmModal, clo
   modalStore
 
 const reportStore = useReportStore()
-const { fixedCosts, selectedId } = storeToRefs(reportStore)
+const { fixedCosts, selectedId, selectedCost, replaceIndex } = storeToRefs(reportStore)
 
 onUpdated(() => {
-  scrollToNewCost(fixedCosts.value[0].id)
+  if (selectedId.value === '') {
+    scrollToNewCost(fixedCosts.value[0].id)
+  } else {
+    scrollToNewCost(fixedCosts.value[replaceIndex.value].id)
+  }
 })
 </script>
 
@@ -52,11 +56,11 @@ onUpdated(() => {
           :individual-total="fixedCost.individualTotal"
         />
         <options-menu
-            v-if="optionsMenuIsOpen && selectedId === fixedCost.id"
-            @edit-event="openEditFormModal(selectedId, 'fixed')"
-            @delete-event="openConfirmModal(selectedId, 'fixed')"
-            @menu-event="closeOptionsMenu()"
-          />
+          v-if="optionsMenuIsOpen && selectedId === fixedCost.id"
+          @edit-event="openEditFormModal(selectedId, 'fixed')"
+          @delete-event="openConfirmModal(selectedId, 'fixed')"
+          @menu-event="closeOptionsMenu()"
+        />
         <form-button
           class="md:flex md:flex-row hidden basis-3/24 h-full pt-6"
           btnImage="/src/images/delete-cost.svg"

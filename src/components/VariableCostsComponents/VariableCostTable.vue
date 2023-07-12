@@ -8,7 +8,7 @@ import VariableCostDataInput from '../VariableCostsComponents/VariableCostDataIn
 import scrollToNewCost from '../../assets/utility_functions/scrollToNewCost'
 import OptionsMenu from '../ModalComponents/OptionsMenu.vue'
 import { useModalStore } from '../../stores/modalStore'
-import VariableCostRow from '../FormComponents/VariableCostRow.vue'
+import VariableCostRow from './VariableCostRow.vue'
 
 const modalStore = useModalStore()
 const { optionsMenuIsOpen } = storeToRefs(modalStore)
@@ -16,10 +16,15 @@ const { openOptionsMenu, openFormModal, openEditFormModal, openConfirmModal, clo
   modalStore
 
 const reportStore = useReportStore()
-const { variableCosts, selectedId } = storeToRefs(reportStore)
+const { variableCosts, selectedId, replaceIndex } = storeToRefs(reportStore)
+
 
 onUpdated(() => {
-  scrollToNewCost(variableCosts.value[0].id)
+  if (selectedId.value === '') {
+    scrollToNewCost(variableCosts.value[0].id)
+  } else {
+    scrollToNewCost(variableCosts.value[replaceIndex.value].id)
+  }
 })
 </script>
 

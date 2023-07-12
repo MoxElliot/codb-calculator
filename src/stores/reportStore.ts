@@ -35,7 +35,8 @@ export const useReportStore = defineStore('reportStore', {
       frequency: 'Monthly'
     } as CostItem,
     selectedId: '',
-    selectedName: ''
+    selectedName: '',
+    replaceIndex: 0,
     // companyName: '',
     // bookingsPerMonth: 0,
     // priceAveragePerBooking: 0,
@@ -73,6 +74,7 @@ export const useReportStore = defineStore('reportStore', {
       })
       const totalNum: number = totalArr.reduce((a, b) => a + b, 0)
       this.totalCosts = formatMoney(totalNum)
+
     },
     addFixedCostAction(fixedCost: CostItem) {
       const payPeriodMultiplierElement = payPeriodOptionsArray.find(
@@ -80,13 +82,24 @@ export const useReportStore = defineStore('reportStore', {
       )
       const payPeriodMultiplier: any = payPeriodMultiplierElement?.multiplier
 
-      const totalNum: number = (fixedCost.amount as number) * payPeriodMultiplier
-      fixedCost.individualTotal = formatMoney(totalNum)
+      const totalNum: number = fixedCost.amount * payPeriodMultiplier
+      fixedCost.individualTotal = totalNum
+      const costToNum = Number(fixedCost.amount) 
+      fixedCost.amount = costToNum
       this.fixedCosts.unshift(fixedCost)
       this.totalCostAction(this.fixedCosts)
       this.totalFixedCosts = this.totalCosts
     },
     addVariableCostAction(variableCost: CostItem) {
+
+      const totalToNum = Number(variableCost.individualTotal)
+
+      variableCost.individualTotal = totalToNum
+
+      const costToNum = Number(variableCost.amount) 
+      variableCost.amount = costToNum
+
+
       this.variableCosts.unshift(variableCost)
       this.totalCostAction(this.variableCosts)
       this.totalVariableCosts = this.totalCosts
@@ -155,8 +168,8 @@ export const useReportStore = defineStore('reportStore', {
         individualTotal = formatMoney(totalNum)
 
         const newCost = { id, name, category, amount, frequency, individualTotal }
-        const replaceIndex = this.fixedCosts.indexOf(this.selectedCost)
-        this.fixedCosts.splice(replaceIndex, 1, newCost)
+         this.replaceIndex = this.fixedCosts.indexOf(this.selectedCost)
+        this.fixedCosts.splice(this.replaceIndex, 1, newCost)
 
         closeFormModal()
         resetForm()
@@ -181,8 +194,8 @@ export const useReportStore = defineStore('reportStore', {
         formValidAction(true)
 
         const newCost = { id, name, category, amount }
-        const replaceIndex = this.variableCosts.indexOf(this.selectedCost)
-        this.variableCosts.splice(replaceIndex, 1, newCost)
+        this.replaceIndex = this.variableCosts.indexOf(this.selectedCost)
+        this.variableCosts.splice(this.replaceIndex, 1, newCost)
 
         closeFormModal()
         resetForm()
