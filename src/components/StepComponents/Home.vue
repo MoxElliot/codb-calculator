@@ -2,10 +2,6 @@
 import { useReportStore } from '@/stores/reportStore'
 import { onMounted } from 'vue'
 import HomeBackground from '../../images/home_background.svg'
-import HomeBackgroundTL from '../../images/home_background_tl.svg'
-import HomeBackgroundTR from '../../images/home_background_tr.svg'
-import HomeBackgroundBL from '../../images/home_background_bl.svg'
-import HomeBackgroundBR from '../../images/home_background_br.svg'
 
 const reportStore = useReportStore()
 const { updateInputValidAction } = reportStore
@@ -16,18 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- <BackgroundImage
-    :tl-image="HomeBackgroundTL"
-    tl-class="absolute top-4% left-0 h-40/100"
-    :tr-image="HomeBackgroundTR"
-    tr-class="absolute top-4% right-0 h-40/100"
-    :bl-image="HomeBackgroundBL"
-    bl-class="absolute bottom-9% left-7% h-40/100"
-    :br-image="HomeBackgroundBR"
-    br-class="absolute bottom-4% right-7% h-40/100"
-    component-class=""
-  /> -->
-  <!-- <HomeBackground class="absolute top-0 left-0 bottom-0 right-0 bg-homeBackground bg-no-repeat bg-contain bg-center h-100 w-100 "/> -->
+
   <img
     :src="HomeBackground"
     alt=""
