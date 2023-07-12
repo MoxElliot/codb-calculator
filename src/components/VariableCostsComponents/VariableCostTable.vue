@@ -81,7 +81,6 @@ onUpdated(() => {
     <form-button
       label="+ Add Variable Cost"
       type="submit"
-      :btn-image="''"
       class="btn-add font-bold"
       @click="openFormModal('add')"
     />
