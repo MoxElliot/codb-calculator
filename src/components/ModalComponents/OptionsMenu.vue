@@ -8,7 +8,7 @@ defineEmits(['menu-event', 'edit-event', 'delete-event'])
     class="fixed top-0 bottom-0 left-0 right-0 z-10 h-full w-full"
     @click="$emit('menu-event')"
   ></div>
-  <div class="absolute top-0 right-0 options-menu h-[85px] w-[85px] z-20">
+  <div class="absolute top-0 right-0 options-menu h-[85px] w-[85px] z-50">
     <section
       class="bg-primary-white flex flex-col justify-center items-center max-w-[100px] max-h-[100px]"
     >
