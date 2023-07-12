@@ -2,7 +2,7 @@
 import steps from '../../assets/stepsObject'
 import { useStepStore } from '../../stores/stepStore'
 import { storeToRefs } from 'pinia'
-import CloudspotLogo from '../Icons/CloudspotLogo.vue'
+import CloudspotLogo from '../IconComponents/CloudspotLogo.vue'
 
 const stepStore = useStepStore()
 const { stepCurrent } = storeToRefs(stepStore)

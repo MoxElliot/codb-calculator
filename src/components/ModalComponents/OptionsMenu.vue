@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import FormButton from '../FormComponents/FormButton.vue'
-import EditCost from '../Icons/EditCost.vue'
-import DeleteCost from '../Icons/DeleteCost.vue'
+import EditCost from '../IconComponents/EditCost.vue'
+import DeleteCost from '../IconComponents/DeleteCost.vue'
 
 defineEmits(['menu-event', 'edit-event', 'delete-event'])
 </script>

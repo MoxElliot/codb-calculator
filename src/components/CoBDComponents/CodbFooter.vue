@@ -2,8 +2,8 @@
 import { useStepStore } from '../../stores/stepStore'
 import { storeToRefs } from 'pinia'
 import FormButton from '../FormComponents/FormButton.vue'
-import BtnArrowLeft from '../Icons/BtnArrowLeft.vue'
-import BtnArrowRight from '../Icons/BtnArrowRight.vue'
+import BtnArrowLeft from '../IconComponents/BtnArrowLeft.vue'
+import BtnArrowRight from '../IconComponents/BtnArrowRight.vue'
 
 const stepStore = useStepStore()
 const { stepCurrent } = storeToRefs(stepStore)
