@@ -85,11 +85,7 @@ const { value: hours, errorMessage: hoursError, meta: hoursMeta } = useField('ho
       <p class="">
         Booking Income for <span>{{ companyName }}</span>
       </p>
-      <img
-        src="../../images/fixed-cost-calandar.svg"
-        alt="Calandar"
-        class="hidden sm:inline sm:px-3"
-      />
+      <!-- Icon Component Goes Here -->
     </div>
     <div class="text-body2_xs md:text-body2 text-grey-300 basis-1/6 w-9/10 sm:w-8/10">
       <p>Fantastic work with those costs!</p>

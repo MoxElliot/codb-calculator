@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useReportStore } from '@/stores/reportStore'
 import { storeToRefs } from 'pinia'
+import VariableCostCamera from '../IconComponents/VariableCostCamera.vue'
 
 const reportStore = useReportStore()
 const { companyName } = storeToRefs(reportStore)
@@ -13,11 +14,9 @@ const { companyName } = storeToRefs(reportStore)
       <p class="">
         Variable Costs for <span>{{ companyName }}</span>
       </p>
-      <img
-        src="../../images/variable-cost-camera.svg"
-        alt="Camera"
-        class="hidden sm:inline sm:px-3"
-      />
+      <variable-cost-camera 
+        class="hidden sm:inline mx-2"/>
+     
     </div>
     <div class="text-body2_xs md:text-body2 text-grey-300 basis-1/6 w-9/10 sm:w-8/10 lg:w-6/10">
       <p>

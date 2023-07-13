@@ -10,11 +10,11 @@ const reportStore = useReportStore()
 const { companyName, payPerMonth, savingsPerMonth, blankSubmitError } = storeToRefs(reportStore)
 const { addPayPerMonthAction, addSavingsPerMonthAction, updateInputValidAction } = reportStore
 
-// onMounted(() => {
-//   if (payPerMonth.value === 0 || savingsPerMonth.value === 0) {
-//     updateInputValidAction(false)
-//   }
-// })
+onMounted(() => {
+  if (payPerMonth.value === 0 || savingsPerMonth.value === 0) {
+    updateInputValidAction(false)
+  }
+})
 
 const payPerMonthInput: WritableComputedRef<number> = computed<number>({
   get: () => payPerMonth.value,
@@ -58,11 +58,7 @@ const { value: savings, errorMessage: savingsError, meta: savingsMeta } = useFie
       <p class="">
         Owner's draw for <span>{{ companyName }}</span>
       </p>
-      <img
-        src="../../images/fixed-cost-calandar.svg"
-        alt="Calandar"
-        class="hidden sm:inline sm:px-3"
-      />
+      <!-- Icon Component Goes Here -->
     </div>
     <div class="text-body2_xs md:text-body2 text-grey-300 basis-1/6 w-9/10 ">
       <p>Great job! Your CobD Calculation is Almost Finished!</p>

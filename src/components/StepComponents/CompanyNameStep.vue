@@ -5,6 +5,7 @@ import DataInput from '../FormComponents/DataInput.vue'
 import { computed, onMounted, onUpdated, type WritableComputedRef } from 'vue'
 import { useForm, useField } from 'vee-validate'
 import { storeToRefs } from 'pinia'
+import CompanyNameStars from '../IconComponents/CompanyNameStars.vue'
 
 const reportStore = useReportStore()
 const { addCompanyNameAction, updateInputValidAction, setBlankSubmitErrorAction } = reportStore
@@ -43,11 +44,11 @@ const { value: company, errorMessage: companyError, meta } = useField('company',
   <div  class="flex basis-full justify-center items-center h-full" >
   <div class="flex flex-col items-center justify-center md:basis-3/4 px-4 h-full">
     <div class="flex flex-row mb-4 md:mb-16">
-      <img class="place-self-end" src="../../images/company-name-stars.svg" />
+      <company-name-stars class="place-self-end"/>
       <p class="font-serif text-center text-grey-300 text-heading2_xs md:text-heading2">
         What is the name of your business?
       </p>
-      <img class="place-self-start" src="../../images/company-name-stars.svg" />
+      <company-name-stars class="place-self-start" />
     </div>
     <div class="mb-4 md:mb-16">
       <p class="font-sans text-grey-300 text-body2_xs md:text-body2 text-center px-6">

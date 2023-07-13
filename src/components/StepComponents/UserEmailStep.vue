@@ -26,7 +26,6 @@ onMounted(() => {
   console.log('in onMounted', email.value)
   if (userEmail.value === '') {
     updateInputValidAction(false)
-    console.log('in OnMounted If', inputValid.value)
   }
 })
 
