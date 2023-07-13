@@ -12,6 +12,10 @@ const props = defineProps({
   },
   btnImage: {
     default: '' as any
+  },
+  isActive: {
+    type:Boolean,
+    default:true
   }
 })
 
@@ -24,7 +28,7 @@ const changeIcon = (icon: any) => {
 
 <template>
   <button :class="btnClass" :="changeIcon(btnImage)">
-    <current-icon v-if="currentIcon != ''" />
+    <current-icon v-if="currentIcon != ''" :isActive="isActive"/>
     {{ label }}
   </button>
 </template>

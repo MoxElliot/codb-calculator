@@ -6,7 +6,7 @@ import { storeToRefs } from 'pinia'
 
 export const useStepStore = defineStore('stepStore', {
   state: (): StepStoreState => ({
-    stepCurrent: router.currentRoute.value.path,
+    stepCurrent: router.currentRoute.value.path
   }),
   actions: {
     backStepAction() {

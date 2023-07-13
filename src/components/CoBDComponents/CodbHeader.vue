@@ -8,17 +8,17 @@ import CloudspotLogo from '../IconComponents/CloudspotLogo.vue'
 const stepStore = useStepStore()
 const { stepCurrent } = storeToRefs(stepStore)
 
-const props = defineProps({
-  btnIcon: {
-    default: '' as any
+defineProps({
+  isActive: {
+    type: Boolean
   }
 })
 
-let currentIcon = '' as any
+// let currentIcon = '' as any
 
-const changeIcon = (icon: any) => {
-  currentIcon = icon
-}
+// const changeIcon = (icon: any) => {
+//   currentIcon = icon
+// }
 
 //this is the active/complete color for the icons: #7CC1B5
 // v-if on line 27ish gives an error 'Property 'step' does not exist on type'
@@ -39,19 +39,20 @@ const changeIcon = (icon: any) => {
         "
         v-for="step in steps"
         v-show="step.icon !== ''"
-        :="changeIcon(step.icon)"
       >
         <router-link :to="step.current" class="w-full">
           <div class="flex w-full flex-row items-center justify-center">
             <form-button
-            :class="stepCurrent === step.current
+              :class="
+                stepCurrent === step.current
                   ? 'flex h-9 w-9 items-center justify-center rounded-full bg-aqua-100 md:h-10 md:w-10'
-                  : ''"
-            :btn-image="step.icon"
+                  : ''
+              "
+              :btn-image="step.icon"
+              :isActive="stepCurrent === step.current ? true : false"
             >
-
             </form-button>
-             
+
             <div v-if="stepCurrent === step.current" class="hidden pl-3 sm:block">
               <p class="text-caption-2">{{ step.number }}</p>
               <p class="text-caption-bold">{{ step.name }}</p>
