@@ -1,18 +1,18 @@
-import companyNameIcon from '../images/company-name-step-icon-inactive.svg'
-import fixedCostIcon from '../images/fixed-cost-step-icon-inactive.svg'
-import variableCostIcon from '../images/variable-cost-step-icon-inactive.svg'
-import bookingIncomeIcon from '../images/booking-income-step-icon-inactive.svg'
-import ownersDrawIcon from '../images/owners-draw-step-icon-inactive.svg'
-import finalReportIcon from '../images/final-report-step-icon-inactive.svg'
+import CompanyName from '../components/IconComponents/StepIcons/CompanyName.vue'
+import FixedCost from '../components/IconComponents/StepIcons/FixedCost.vue'
+import VariableCost from '../components/IconComponents/StepIcons/VariableCost.vue'
+import BookingIncome from '../components/IconComponents/StepIcons/BookingIncome.vue'
+import OwnersDraw from '../components/IconComponents/StepIcons/OwnersDraw.vue'
+import FinalReport from '../components/IconComponents/StepIcons/FinalReport.vue'
 
-let steps: {[index: string]: {name?: string, number?:string, next: string, current:string, previous:string, icon:string}}
+let steps: {[index: string]: {name?: string, number?:string, next: string, current:string, previous:string, icon:any}}
 
 steps = {
   'Home': {
     next: '/company-name-step',
     current: '/',
     previous: 'none',
-    icon: 'none'
+    icon: ''
   },
   'CompanyName': {
     name: 'Start Here',
@@ -20,7 +20,7 @@ steps = {
     next: '/fixed-cost-step',
     current: '/company-name-step',
     previous: '/',
-    icon: companyNameIcon
+    icon: CompanyName
   },
   'FixedCost': {
     name: 'Fixed Costs',
@@ -28,7 +28,7 @@ steps = {
     next: '/variable-cost-step',
     current: '/fixed-cost-step',
     previous: '/company-name-step',
-    icon: fixedCostIcon
+    icon: FixedCost
   },
   'VariableCost': {
     name: 'Variable Cost',
@@ -36,7 +36,7 @@ steps = {
     next: '/booking-income-step',
     current: '/variable-cost-step',
     previous: '/fixed-cost-step',
-    icon: variableCostIcon
+    icon: VariableCost
   },
   'BookingIncome': {
     name: 'Booking Income',
@@ -44,7 +44,7 @@ steps = {
     next: '/owner-draw-step',
     current: '/booking-income-step',
     previous: '/variable-cost-step',
-    icon: bookingIncomeIcon
+    icon: BookingIncome
   },
   'OwnerDraw': {
     name: 'Owner\'s Draw',
@@ -52,21 +52,21 @@ steps = {
     next: '/user-email-step',
     current: '/owner-draw-step',
     previous: '/booking-income-step',
-    icon: ownersDrawIcon
+    icon: OwnersDraw
   },
   'UserEmail': {
     next: '/final-report-step',
     number: 'Step 6/6',
     current: '/user-email-step',
     previous: '/owner-draw-step',
-    icon: 'none'
+    icon: ''
   },
   'FinalReport': {
     name: 'Final Report',
     next: 'none',
     current: '/final-report-step',
     previous: '/owner-draw-step',
-    icon: finalReportIcon
+    icon: FinalReport
   }
 }
 

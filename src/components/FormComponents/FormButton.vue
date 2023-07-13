@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 const props = defineProps({
   label: {
     type: String,
@@ -9,7 +11,7 @@ const props = defineProps({
     default: ''
   },
   btnImage: {
-    default:'' as any
+    default: '' as any
   }
 })
 
@@ -18,12 +20,11 @@ let currentIcon = '' as any
 const changeIcon = (icon: any) => {
   currentIcon = icon
 }
-
 </script>
 
 <template>
-  <button :class="btnClass" :=changeIcon(btnImage)>
-    <current-icon v-if="currentIcon != ''"/>
+  <button :class="btnClass" :="changeIcon(btnImage)">
+    <current-icon v-if="currentIcon != ''" />
     {{ label }}
   </button>
 </template>
