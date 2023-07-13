@@ -1,36 +1,50 @@
+import ClientManagement from '../components/IconComponents/CostCategoryIcons/ClientManagement.vue'
+import CoursesEducation from '../components/IconComponents/CostCategoryIcons/CoursesEducation.vue'
+import EditingDesignSoftware from '../components/IconComponents/CostCategoryIcons/EditingDesignSoftware.vue'
+import Email from '../components/IconComponents/CostCategoryIcons/Email.vue'
+import GalleryImageDelivery from '../components/IconComponents/CostCategoryIcons/GalleryImageDelivery.vue'
+import Insurance from '../components/IconComponents/CostCategoryIcons/Insurance.vue'
+import Other from '../components/IconComponents/CostCategoryIcons/Other.vue'
+import StudioRent from '../components/IconComponents/CostCategoryIcons/StudioRent.vue'
+import WebsiteHosting from '../components/IconComponents/CostCategoryIcons/WebsiteHosting.vue'
+
 const costCategoryOptions: {
-    category: string;
-    image: string;
+  category: string
+  icon: any
 }[] = [
   {
     category: 'Gallery/Image Delivery',
-    image: 'src/images/CostCategoryImages/gallery-image-delivery-category.svg'
+    icon: GalleryImageDelivery
   },
   {
     category: 'Website/Hosting',
-    image: 'src/images/CostCategoryImages/website-hosting-category.svg'
+    icon: WebsiteHosting
   },
-  { category: 'Insurance', image: 'src/images/CostCategoryImages/insurance-category.svg' },
+  { category: 'Insurance', 
+    icon: Insurance
+  },
   {
     category: 'Email Service',
-    image: 'src/images/CostCategoryImages/email-category.svg'
+    icon: Email
   },
   {
     category: 'Client Management',
-    image: 'src/images/CostCategoryImages/client-managment-category.svg'
+    icon: ClientManagement
   },
-  { category: 'Studio Rent', image: 'src/images/CostCategoryImages/studio-rent-category.svg' },
+  { category: 'Studio Rent', 
+    icon: StudioRent
+  },
   {
     category: 'Courses/Educaiton',
-    image: 'src/images/CostCategoryImages/courses-education-category.svg'
+    icon: CoursesEducation
   },
   {
     category: 'Editing/Design Software',
-    image: 'src/images/CostCategoryImages/editing-design-software-category.svg'
+    icon: EditingDesignSoftware
   },
-  { category: 'Other', image: 'src/images/CostCategoryImages/client-managment-category.svg' }
+  { category: 'Other', 
+    icon: Other
+  }
 ]
-
-// const costCategoryOptions: string[] = ['Gallery/Image Delivery','Website/Hosting', 'Insurance',  'Email Service', 'Client Management (CRM)', 'Studio Rent', 'Courses/Educaiton','Editing/Design Software','Other',]
 
 export default costCategoryOptions

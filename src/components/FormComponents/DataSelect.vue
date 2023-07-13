@@ -31,6 +31,12 @@ const handleInputChange = (e: any) => {
   console.log('in handleInputChange', e.target.value)
   return e.target.value
 }
+
+let currentIcon = '' as any
+
+const changeIcon = (icon: any) => {
+  currentIcon = icon
+}
 </script>
 
 <template>
@@ -44,7 +50,8 @@ const handleInputChange = (e: any) => {
       @input="$emit('option:selected', handleInputChange($event))"
     >
       <template #option="option">
-        <span class="flex flex-row h-8"><img :src="option.image" class="pr-2"/>{{ option.category }}</span>
+        <span class="flex flex-row h-8 w-fit" :="changeIcon(option.icon)"> 
+          <current-icon class="mr-2"/>{{ option.category }}</span>
       </template>
     </v-select>
   <!-- </div> -->

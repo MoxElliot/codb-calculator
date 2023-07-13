@@ -1,0 +1,36 @@
+<template>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M14.5 17H9.5C8.119 17 7 15.881 7 14.5V9.5C7 8.119 8.119 7 9.5 7H14.5C15.881 7 17 8.119 17 9.5V14.5C17 15.881 15.881 17 14.5 17Z"
+      stroke="#485654"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M18 21V19C18 18.448 18.448 18 19 18H21"
+      stroke="#485654"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M6 3V5C6 5.552 5.552 6 5 6H3"
+      stroke="#485654"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M3 18H5C5.552 18 6 18.448 6 19V21"
+      stroke="#485654"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M21 6H19C18.448 6 18 5.552 18 5V3"
+      stroke="#485654"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</template>

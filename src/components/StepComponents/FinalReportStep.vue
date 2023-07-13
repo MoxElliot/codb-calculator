@@ -21,17 +21,11 @@ const {
   hourlyRateYearly
 } = reportStore
 
-//put this array in the store
+//Cannot move array to seperate file because the state values from report store used as variables here need to be imported in
 
 const reportOutputsArray: { id: string; class: string; label: string; variable: any }[] = [
-  // {
-  //   id: uniqueId('output-'),
-  //   class: 'text-caption-bold',
-  //   label: 'Final Report',
-  //   variable: ''
-  // },
   {
-    id: 'companyName', //pull out this and use the index or stepname
+    id: 'companyName', 
     class: 'flex',
     label: 'Company Name:',
     variable: companyName
